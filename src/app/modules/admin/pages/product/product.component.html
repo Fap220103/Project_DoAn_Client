@@ -1,0 +1,143 @@
+
+<section class="content-header">
+  <div class="container-fluid">
+      <div class="row mb-2">
+          <div class="col-sm-6">
+              <h1>Quản lý {{pageTitle}}</h1>
+          </div>
+          <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active">{{pageTitle}}</li>
+              </ol>
+          </div>
+      </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <!-- Default box -->
+  <div class="card">
+      <div class="card-header">
+          <h3 class="card-title">Danh sách {{pageTitle}}</h3>
+
+          <div class="card-tools">
+             
+              <a asp-area ="Admin" asp-controller="Product" asp-action="add" class="btn btn-primary">Thêm mới</a>
+              <a href="#" class="btn btn-danger" id="BtnDeleteAll">Xóa</a>
+          </div>
+      </div>
+      <div class="card-body">
+          <!-- @*<div class="row">
+          <div class="col-12">
+          @using (Html.BeginForm("Index", "News", FormMethod.Get, new { }))
+          {
+          <div class="input-group input-group-sm">
+          @Html.TextBox("Searchtext")
+          <span class="input-group-append">
+          <button type="submit" class="btn btn-info btn-flat">Tìm kiếm</button>
+          </span>
+          </div>
+          }
+          </div>
+          </div>*@ -->
+          <table class="table table-hover">
+              <thead>
+                  <tr>
+                      <th><input type="checkbox" id="SelectAll" /></th>
+                      <th>STT</th>
+
+                      <th>Hình ảnh</th>
+                      <th>Tên sản phẩm</th>
+                      <th>Danh mục</th>
+                      <th>Số lượng</th>
+                      <th>Giá</th>
+                      <th>Ngày tạo</th>
+                      <th>Home</th>
+                      <th>Sale</th>
+                      <th>Hiển thị</th>
+                      <th style="width:150px;"></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <!-- @if (Model != null && Model.Any())
+                  {
+                      var i = ((Model.PageNumber - 1) * Model.PageSize) + 1;
+                      foreach (var item in Model)
+                      {
+                          var strCheck = item.IsActive ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
+                          var strCheckHome = item.IsHome ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
+                          var strCheckSale = item.IsSale ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
+                      
+                          var strImg = item.ProductImage.FirstOrDefault(x => x.IsDefault)?.Image ?? "/Content/img/SanPham/h0.png";
+
+                          <tr id="trow_@item.Id">
+                              <td><input type="checkbox" class="chkItem" value="@item.Id" /></td>
+                              <td>@i</td>
+                              <td><img style="cursor:pointer" class="imgproduct" data-id="@item.Id" src="@strImg" width="50" /></td>
+
+                              <td>@item.Title</td>
+                              <td>@item.ProductCategory.Title</td>
+                              <td>@item.Quantity</td>
+                              <td>@item.Price</td>
+                              <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                              <td class="text-center">
+                                  <a href='#' data-id="@item.Id" class="btnHome">@Html.Raw(strCheckHome)</a>
+                              </td>
+                              <td class="text-center">
+                                  <a href='#' data-id="@item.Id" class="btnSale">@Html.Raw(strCheckSale)</a>
+                              </td>
+                              <td class="text-center">
+                                  <a href='#' data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
+                              </td>
+                              <td>
+                                  <a asp-area="Admin" asp-controller="Product" asp-action="edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Sửa</a>
+                                  <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
+                              </td>
+
+                          </tr>
+                          i++;
+                      }
+
+                  }
+                  else
+                  {
+                      <tr>
+                          <td colspan="4">Không có bản ghi nào</td>
+                      </tr>
+                  } -->
+              </tbody>
+          </table>
+          <div class="row">
+              <div class="col-6"></div>
+              <div class="col-6 pagination-controls">
+                  <!-- @if (Model.HasPreviousPage)
+                  {
+                      <a href="?page=@(Model.PageNumber - 1)&pageSize=@Model.PageSize" class="page-link">Previous</a>
+                  }
+
+                  <span class="page-info">Page @Model.PageNumber of @Model.PageCount</span>
+
+                  @if (Model.HasNextPage)
+                  {
+                      <a href="?page=@(Model.PageNumber + 1)&pageSize=@Model.PageSize" class="page-link">Next</a>
+                  } -->
+              </div>
+          </div>
+
+      </div>
+      <!-- /.card-body -->
+      <div class="card-footer">
+      </div>
+      <!-- /.card-footer-->
+  </div>
+  <!-- /.card -->
+
+</section>
+<!-- /.content -->
+<!-- <div id="dialog">
+  <iframe id="myIframe" style="border:0;width:100%;height:100%;">
+  </iframe>
+</div> -->

@@ -1,0 +1,93 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Quản lý {{pageTitle}}</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">{{pageTitle}}</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <!-- Default box -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Danh sách {{pageTitle}}</h3>
+
+      <div class="card-tools">
+        <a asp-area="Admin" asp-controller="ProductCategory" asp-action="add" class="btn btn-primary">Thêm mới</a>
+        <a href="#" class="btn btn-danger" id="BtnDeleteAll">Xóa</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <!-- @*<div class="row">
+          <div class="col-12">
+          @using (Html.BeginForm("Index", "ProductCategory", FormMethod.Get, new { }))
+          {
+          <div class="input-group input-group-sm">
+          @Html.TextBox("Searchtext")
+          <span class="input-group-append">
+          <button type="submit" class="btn btn-info btn-flat">Tìm kiếm</button>
+          </span>
+          </div>
+          }
+          </div>
+          </div>*@ -->
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="SelectAll" /></th>
+            <th>STT</th>
+            <th>Tiêu đề</th>
+            <th>Mô tả</th>
+            <th>Danh mục cha</th>
+            <th>Icon</th>
+            <th style="width:150px;"></th>
+          </tr>
+        </thead>
+        <tbody *ngIf="ListCategory.length > 0; else noData">
+          <tr *ngFor="let item of ListCategory; let i = index">
+            <td><input type="checkbox" class="chkItem" value="@item.Id" /></td> 
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.parentId }}</td>
+            <td><img [src]="item.icon" width="100px" /></td>
+
+            <td>
+              <a [routerLink]="['/admin/product-category/edit', item.id]" class="btn btn-sm btn-primary">Sửa</a>
+              <button (click)="deleteCategory(item.id)" class="btn btn-sm btn-danger">Xóa</button>
+            </td>
+          </tr>
+          <tr *ngIf="ListCategory.length === 0">
+            <td colspan="5">Không có bản ghi nào</td>
+          </tr>
+        </tbody>
+        <!-- Hiển thị khi không có dữ liệu -->
+        <ng-template #noData>
+          <tr>
+            <td colspan="5" class="text-center">Không có bản ghi nào</td>
+          </tr>
+        </ng-template>
+      </table>
+
+
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+    </div>
+    <!-- /.card-footer-->
+  </div>
+  <!-- /.card -->
+
+</section>
+<!-- /.content -->
