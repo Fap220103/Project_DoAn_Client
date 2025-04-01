@@ -12,7 +12,15 @@ export class AccountService {
   baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<User | null>(1);
   currentUser$ = this.currentUserSource.asObservable();
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const user: User = JSON.parse(storedUser);
+      this.setCurrentUser(user);
+    }else {
+      this.currentUserSource.next(null); 
+    }
+   }
 
   // Đăng nhập
   login(model: LoginModel) {
@@ -20,9 +28,10 @@ export class AccountService {
       map((res: User) => {
         const user = res;
         if (user.code == 200) {
-          this.setCurrentUser(user);
-          console.log(this.currentUser$);
+          this.setCurrentUser(user);        
+          return res;
         }
+        throw new Error('Login failed');
       })
     );
   }
@@ -35,13 +44,11 @@ export class AccountService {
   setCurrentUser(user: User) {
     user.content.roles = [];
     const roles = this.getDecodedToken(user.content.accessToken).roles;
-    console.log(roles);
     Array.isArray(roles) ? user.content.roles = roles : user.content.roles.push(roles);
     localStorage.setItem('user', JSON.stringify(user));
-    this.currentUserSource.next(user);
+    this.currentUserSource.next(user);  
   }
   getDecodedToken(token: string){
-    console.log(atob(token.split('.')[1]));
     return JSON.parse(atob(token.split('.')[1]));
   }
 

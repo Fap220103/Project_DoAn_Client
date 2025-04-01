@@ -16,6 +16,7 @@ export interface ProductCategory {
     alias: string
     icon: string
     parentId: any
+    parentName: string
     isActive: boolean
     seoTitle: string
     seoDescription: string
@@ -30,6 +31,7 @@ export interface ProductCategory {
     alias: string
     icon: string
     parentId: string
+    parentName: string
     isActive: boolean
     seoTitle: string
     seoDescription: string
@@ -44,6 +46,7 @@ export interface ProductCategory {
     alias: string
     icon: string
     parentId: string
+    parentName: string
     isActive: boolean
     seoTitle: string
     seoDescription: string

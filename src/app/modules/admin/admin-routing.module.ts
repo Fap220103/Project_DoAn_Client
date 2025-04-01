@@ -13,7 +13,7 @@ const routes: Routes = [
     canActivate: [authGuard],
     children: [
         { path: 'dashboard', component: DashboardComponent, data: { title: 'Tổng quan', alias: 'dashboard' } },
-        { path: 'products', component: ProductComponent, data: { title: 'Sản phẩm', alias: 'products' } },
+        { path: 'product', component: ProductComponent, data: { title: 'Sản phẩm', alias: 'product' } },
         { path: 'productcategory', component: ProductcategoryComponent, data: { title: 'Danh mục sản phẩm', alias: 'productcategory' } },
       ]
   },

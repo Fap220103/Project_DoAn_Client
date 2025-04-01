@@ -15,7 +15,7 @@ export class AdminLoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      rememberMe: [false]
+      // rememberMe: [false]
     });
   }
 
@@ -29,8 +29,6 @@ export class AdminLoginComponent implements OnInit {
       },
       error: (err) => {
         this.toastr.error("Đăng nhập thất bại","Lỗi")
-        console.error('Đăng nhập thất bại', err);
-        // Xử lý lỗi nếu cần
       }
     })
   }
