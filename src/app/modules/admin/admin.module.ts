@@ -9,6 +9,8 @@ import { NavbarComponent } from './component/navbar/navbar.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
+import { ProductcategoryAddComponent } from './pages/productcategory/productcategory-add/productcategory-add.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -20,12 +22,14 @@ import { AdminComponent } from './admin.component';
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
+    ProductcategoryAddComponent,
     AdminComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule 
   ],
   exports: []
 })

@@ -5,6 +5,7 @@ import { ProductComponent } from './pages/product/product.component';
 import { ProductcategoryComponent } from './pages/productcategory/productcategory.component';
 import { AdminComponent } from './admin.component';
 import { authGuard } from '../../core/guards/auth.guard';
+import { ProductcategoryAddComponent } from './pages/productcategory/productcategory-add/productcategory-add.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
         { path: 'dashboard', component: DashboardComponent, data: { title: 'Tổng quan', alias: 'dashboard' } },
         { path: 'product', component: ProductComponent, data: { title: 'Sản phẩm', alias: 'product' } },
         { path: 'productcategory', component: ProductcategoryComponent, data: { title: 'Danh mục sản phẩm', alias: 'productcategory' } },
+        { path: 'productcategory/add', component: ProductcategoryAddComponent, data: { title: 'Thêm mới danh mục', alias: 'productcategory' } },
       ]
   },
 

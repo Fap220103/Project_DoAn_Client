@@ -37,40 +37,16 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
      
-        <!-- <li class="nav-item">
-          <a routerLink="/admin/order" class="nav-link">
+         <li class="nav-item">
+          <a routerLink="/admin/dashboard" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>
-              Đơn hàng
+              Dashboard
             </p>
           </a>
         </li>
 
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Quản lý sản phẩm
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a routerLink="/admin/productcategory" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Danh mục sản phẩm</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/admin/product" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Sản phẩm</p>
-              </a>
-            </li>
-
-          </ul>
-
-        </li> -->
+      
         <ng-container *ngFor="let item of mainNavigations">
           <!-- Hiển thị liên kết trực tiếp nếu chỉ có 1 mục hoặc không có children -->
           <li class="nav-item" *ngIf="isSingleLink(item)">

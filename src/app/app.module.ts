@@ -22,13 +22,13 @@ import { loadingInterceptor } from './core/interceptors/loading.interceptor';
         ModulesModule,
         ReactiveFormsModule,
         ToastrModule.forRoot({
-            positionClass: 'toast-top-right', 
-            timeOut: 3000, 
-            closeButton: true, 
+            positionClass: 'toast-top-right',
+            timeOut: 3000,
+            closeButton: true,
             progressBar: true,
-            toastClass: 'ngx-toastr custom-toast' 
+            toastClass: 'ngx-toastr custom-toast'
         }),
-        BrowserAnimationsModule], 
+        BrowserAnimationsModule],
     providers: [
         provideHttpClient(withInterceptorsFromDi(), withInterceptors([loadingInterceptor]))
     ]

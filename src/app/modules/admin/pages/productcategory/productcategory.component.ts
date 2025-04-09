@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductcategoryService } from '../../../../core/services/productcategory.service';
 import { Category, ChildCategory, ChildCategory2 } from '../../../../core/models/productcategory.model';
+import { AccountService } from '../../../../core/services/account.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-productcategory',
@@ -11,7 +13,12 @@ export class ProductcategoryComponent implements OnInit {
   pageTitle: string = 'Danh mục Sản phẩm';
   categories: Category[] = [];
   ListCategory: Category[] = [];
-  constructor(private categoryService: ProductcategoryService) { }
+  userId: string | null;
+  constructor(private categoryService: ProductcategoryService,
+              private accountService: AccountService,
+              private toastr: ToastrService) {
+    this.userId = this.accountService.getUserId();
+   }
 
   ngOnInit(): void {
     this.categoryService.getCategories().subscribe(response => {
@@ -31,9 +38,27 @@ export class ProductcategoryComponent implements OnInit {
         }
       });
     })
-    console.log(this.ListCategory);
   }
-  deleteCategory(cateId: string){
-    
+  deleteCategory(cateId: string) {
+    // const userId = localStorage.getItem('userId'); // hoặc lấy từ AuthService nếu có
+  
+    // if (!userId) {
+    //   alert('Không tìm thấy userId!');
+    //   return;
+    // }
+
+    if (confirm('Bạn có chắc chắn muốn xóa danh mục này không?')) {
+      this.categoryService.deleteCategory(this.userId, cateId).subscribe({
+        next: () => {
+          this.toastr.success("Xóa danh mục thành công!","Thành công");
+          this.ListCategory = this.ListCategory.filter(c => c.id !== cateId);
+        },
+        error: (err) => {
+          console.error(err);
+          this.toastr.error("Đã xảy ra lỗi khi xóa danh mục!","Lỗi");
+        }
+      });
+    }
   }
+  
 }

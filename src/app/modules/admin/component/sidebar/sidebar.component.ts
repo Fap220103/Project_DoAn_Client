@@ -24,16 +24,14 @@ export class SidebarComponent implements OnInit {
       }
     })
   }
-  // isDropdown(item: NavigationItem): boolean {
-  //   return item.children.length > 1; // Nếu có nhiều hơn 1 con, hiển thị dropdown
-  // }
+
   isDropdown(item: NavigationItem): boolean {
-    return item.children.length > 1 && item.children.some(child => child.isAuthorized);
+    return item.children.length > 1;
   }
 
   isSingleLink(item: NavigationItem): boolean {
-    return (item.children.length === 0 && item.url !== "#" && item.isAuthorized) ||
-           (item.children.length === 1 && item.children[0].url !== "#" && item.children[0].isAuthorized);
+    return (item.children.length === 0 && item.url !== "#") ||
+           (item.children.length === 1 && item.children[0].url !== "#");
   }
 
   getSingleLink(item: NavigationItem): NavigationItem {

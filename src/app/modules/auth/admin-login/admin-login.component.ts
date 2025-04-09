@@ -11,7 +11,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AdminLoginComponent implements OnInit {
   loginForm: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router, private accountService: AccountService, private toastr: ToastrService) {
+  constructor(private fb: FormBuilder, 
+              private router: Router, 
+              private accountService: AccountService, 
+              private toastr: ToastrService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],

@@ -17,10 +17,10 @@ export class AccountService {
     if (storedUser) {
       const user: User = JSON.parse(storedUser);
       this.setCurrentUser(user);
-    }else {
-      this.currentUserSource.next(null); 
+    } else {
+      this.currentUserSource.next(null);
     }
-   }
+  }
 
   // Đăng nhập
   login(model: LoginModel) {
@@ -28,7 +28,7 @@ export class AccountService {
       map((res: User) => {
         const user = res;
         if (user.code == 200) {
-          this.setCurrentUser(user);        
+          this.setCurrentUser(user);
           return res;
         }
         throw new Error('Login failed');
@@ -46,10 +46,19 @@ export class AccountService {
     const roles = this.getDecodedToken(user.content.accessToken).roles;
     Array.isArray(roles) ? user.content.roles = roles : user.content.roles.push(roles);
     localStorage.setItem('user', JSON.stringify(user));
-    this.currentUserSource.next(user);  
+    this.currentUserSource.next(user);
   }
-  getDecodedToken(token: string){
+  getDecodedToken(token: string) {
     return JSON.parse(atob(token.split('.')[1]));
   }
-
+  getUserId() {
+    let userId: string | null = null;
+    this.currentUser$.subscribe(user => {
+      if (user && user.content.accessToken) {
+        const decodedToken = this.getDecodedToken(user.content.accessToken);
+        userId = decodedToken["sub"] || decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"] || null;
+      }
+    });
+    return userId;
+  }
 }
