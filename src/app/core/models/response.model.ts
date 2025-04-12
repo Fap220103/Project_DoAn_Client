@@ -4,8 +4,8 @@ export interface ResponseCreate {
     content: Content
 }
 
-
 export interface Content {
     id: string
     message: string
 }
+

@@ -1,0 +1,149 @@
+  /* Dense */
+  .fuse-mat-dense {
+      .mat-mdc-text-field-wrapper {
+          .mat-mdc-form-field-flex {
+
+              .mat-mdc-form-field-icon-prefix,
+              .mat-mdc-form-field-text-prefix,
+              .mat-mdc-form-field-icon-suffix,
+              .mat-mdc-form-field-text-suffix {
+                  .mat-mdc-icon-button {
+                      width: 32px !important;
+                      min-width: 32px;
+                      height: 32px;
+                      min-height: 32px;
+                  }
+              }
+
+              .mat-mdc-form-field-icon-prefix,
+              .mat-mdc-form-field-text-prefix {
+                  >.mat-mdc-icon-button {
+                      margin-left: -6px;
+                      margin-right: 12px;
+                  }
+              }
+
+              .mat-mdc-form-field-icon-suffix,
+              .mat-mdc-form-field-text-suffix {
+                  >.mat-mdc-icon-button {
+                      margin-left: 12px;
+                      margin-right: -6px;
+                  }
+              }
+
+              .mat-mdc-form-field-infix {
+                  min-height: 40px;
+
+                  /* Textarea */
+                  textarea.mat-mdc-input-element {
+                      margin: 8px 0;
+                  }
+              }
+          }
+      }
+
+      /* Adds better alignment for textarea inputs */
+      &:has(textarea.mat-mdc-input-element) {
+          .mat-mdc-text-field-wrapper {
+              .mat-mdc-form-field-flex {
+
+                  .mat-mdc-form-field-icon-prefix,
+                  .mat-mdc-form-field-text-prefix,
+                  .mat-mdc-form-field-icon-suffix,
+                  .mat-mdc-form-field-text-suffix {
+                      padding-top: 10px !important;
+                  }
+              }
+          }
+      }
+
+      /* Rounded */
+      &.fuse-mat-rounded {
+          .mat-mdc-text-field-wrapper {
+              border-radius: 10px;
+          }
+
+          /* Emphasized affix */
+          &.fuse-mat-emphasized-affix {
+              .mat-mdc-text-field-wrapper {
+                  .mat-mdc-form-field-flex {
+
+                      .mat-mdc-form-field-icon-prefix,
+                      .mat-mdc-form-field-text-prefix {
+                          border-radius: 20px 0 0 20px !important;
+                      }
+
+                      .mat-mdc-form-field-icon-suffix,
+                      .mat-mdc-form-field-text-suffix {
+                          border-radius: 0 20px 20px 0 !important;
+                      }
+                  }
+              }
+          }
+      }
+  }
+
+  /* Rounded */
+  .fuse-mat-rounded {
+      .mat-mdc-text-field-wrapper {
+          border-radius: 10px;
+      }
+
+      /* Emphasized affix */
+      &.fuse-mat-emphasized-affix {
+          .mat-mdc-text-field-wrapper {
+              .mat-mdc-form-field-flex {
+
+                  .mat-mdc-form-field-icon-prefix,
+                  .mat-mdc-form-field-text-prefix {
+                      border-radius: 10px 0 0 10px;
+
+                      >.mat-icon {
+                          margin-right: 12px;
+                      }
+
+                      >.mat-mdc-icon-button {
+                          margin: 0 2px 0 -10px !important;
+                      }
+
+                      >.mat-mdc-select {
+                          margin-right: 8px;
+                      }
+
+                      >.mat-datepicker-toggle {
+                          margin-right: 4px;
+                      }
+
+                      >*:not(.mat-icon):not(.mat-mdc-icon-button):not(.mat-mdc-select):not(.mat-datepicker-toggle) {
+                          margin-right: 12px;
+                      }
+                  }
+
+                  .mat-mdc-form-field-icon-suffix,
+                  .mat-mdc-form-field-text-suffix {
+                      border-radius: 0 10px 10px 0;
+
+                      >.mat-icon {
+                          margin-left: 12px !important;
+                      }
+
+                      >.mat-mdc-icon-button {
+                          margin: 0 -10px 0 2px !important;
+                      }
+
+                      >.mat-mdc-select {
+                          margin-left: 12px !important;
+                      }
+
+                      >.mat-datepicker-toggle {
+                          margin-left: 4px !important;
+                      }
+
+                      >*:not(.mat-icon):not(.mat-mdc-icon-button):not(.mat-mdc-select):not(.mat-datepicker-toggle) {
+                          margin-left: 12px !important;
+                      }
+                  }
+              }
+          }
+      }
+  }

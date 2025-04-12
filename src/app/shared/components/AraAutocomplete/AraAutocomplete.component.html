@@ -1,0 +1,45 @@
+<mat-form-field class="w-full form-control"
+  [ngClass]="{
+    'fuse-mat-dense fuse-mat-rounded': false, 
+    'no-hint': false,
+    'highlight-form': false
+  }">
+  <!-- Nếu muốn hiển thị label bên trong form field -->
+  <mat-label *ngIf="placeholder">{{ placeholder }}</mat-label>
+
+  <input type="text"
+         matInput
+         [placeholder]="displayPlaceholder()"
+         [formControl]="mainControl"
+         [matAutocomplete]="auto" />
+
+  <mat-autocomplete #auto="matAutocomplete"
+                    [displayWith]="displayWith"
+                    (optionSelected)="optionSelected($event)">
+    <mat-option *ngFor="let item of items" [value]="item">
+      <ng-template #defaultOptionTemplate>
+        <div *ngIf="displayField.length > 1">
+          <p>{{ item[displayField[0]] }}</p>
+          <small><i>{{ item[displayField[1]] }}</i></small>
+        </div>
+        <div *ngIf="displayField.length === 1">
+          <p>{{ item[displayField[0]] }}</p>
+        </div>
+      </ng-template>
+      <ng-container
+        [ngTemplateOutlet]="dynamicOptionTemplate || defaultOptionTemplate"
+        [ngTemplateOutletContext]="{ $implicit: item }">
+      </ng-container>
+    </mat-option>
+  </mat-autocomplete>
+
+  <!-- Các button bổ trợ nếu cần: refresh, clear, search, … -->
+  <!-- Ví dụ button clear -->
+  <button type="button"
+          mat-icon-button
+          matSuffix
+          *ngIf="mainControl.value"
+          (click)="clear()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>

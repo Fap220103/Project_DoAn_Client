@@ -24,24 +24,12 @@
       <h3 class="card-title">Danh sách {{pageTitle}}</h3>
 
       <div class="card-tools">
-        <a routerLink="/admin/productcategory/add" class="btn btn-primary">Thêm mới</a>
+        <div class="btn btn-primary" (click)="openDeleteDialog()">Thêm mới</div>
         <a href="#" class="btn btn-danger" id="BtnDeleteAll">Xóa</a>
       </div>
     </div>
     <div class="card-body">
-      <!-- @*<div class="row">
-          <div class="col-12">
-          @using (Html.BeginForm("Index", "ProductCategory", FormMethod.Get, new { }))
-          {
-          <div class="input-group input-group-sm">
-          @Html.TextBox("Searchtext")
-          <span class="input-group-append">
-          <button type="submit" class="btn btn-info btn-flat">Tìm kiếm</button>
-          </span>
-          </div>
-          }
-          </div>
-          </div>*@ -->
+     
       <table class="table table-hover">
         <thead>
           <tr>
@@ -79,8 +67,7 @@
           </tr>
         </ng-template>
       </table>
-
-
+      
     </div>
     <!-- /.card-body -->
     <div class="card-footer">

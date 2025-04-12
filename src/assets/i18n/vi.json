@@ -1,0 +1,20 @@
+{
+    "HELLO": "Xin chào",
+    "WELCOME": "Chào mừng đến với ứng dụng của tôi",
+    "Common" : {
+      "Edit": "Sửa",
+      "Delete": "Xóa",
+      "Add": "Thêm",
+      "Cancel": "Hủy",
+      "Save": "Lưu"
+    },
+    "Color" : {
+      "SearchTitle": "Tìm kiếm theo mã màu và tên màu",
+      "AddTitle" : "Thêm mới màu",
+      "EditTitle": "Cập nhật màu",
+      "Title": "Màu sắc",
+      "Name": "Tên màu",
+      "Code": "Mã màu"
+    }
+}
+  

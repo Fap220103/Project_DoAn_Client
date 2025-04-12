@@ -6,6 +6,7 @@ import { CategoryName } from '../../../../../core/models/productcategory.model';
 import { AccountService } from '../../../../../core/services/account.service';
 import { ToastrService } from 'ngx-toastr';
 
+
 @Component({
   selector: 'app-productcategory-add',
   templateUrl: './productcategory-add.component.html',
@@ -16,7 +17,8 @@ export class ProductcategoryAddComponent implements OnInit {
   categoryName: CategoryName[] = []; 
   userId: string | null;
   selectedFile: File | null = null;
-
+  
+  
   constructor(private fb: FormBuilder,
     private categoryService: ProductcategoryService,
     private router: Router,

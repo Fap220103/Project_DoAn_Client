@@ -37,12 +37,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
+              "@angular/material/prebuilt-themes/rose-red.css",
+              "src/styles/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/Content/clients/plugins/fontawesome-free/css/all.min.css",
               "src/assets/Content/clients/dist/css/adminlte.min.css",
               "node_modules/ngx-spinner/animations/ball-clip-rotate-pulse.css",
-              "node_modules/ngx-toastr/toastr.css" 
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "src/assets/Content/clients/plugins/jquery/jquery.min.js",
@@ -115,7 +116,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "@angular/material/prebuilt-themes/rose-red.css",
+              "src/styles/styles.scss"
+              
             ],
             "scripts": []
           }

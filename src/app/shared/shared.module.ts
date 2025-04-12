@@ -6,23 +6,58 @@ import { HeaderAdminComponent } from './components/header-admin/header-admin.com
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
 import { RouterModule } from '@angular/router';
-
-
-
+import { TranslateModule } from '@ngx-translate/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { AraAutocompleteComponent } from './components/AraAutocomplete/AraAutocomplete.component';
+import { MatOptionModule } from '@angular/material/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { IconsModule } from './icon.module';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
     HeaderClientComponent,
     FooterClientComponent,
     HeaderAdminComponent,
     AdminLayoutComponent,
-    ClientLayoutComponent
+    ClientLayoutComponent,
+    AraAutocompleteComponent
   ],
   imports: [
     CommonModule,
-    RouterModule  
+    RouterModule,
+    TranslateModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatOptionModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    IconsModule,
+    MatPaginatorModule
+
   ],
   exports: [
-    
+    TranslateModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatOptionModule,
+    MatAutocompleteModule,
+    AraAutocompleteComponent,
+    IconsModule,
+    MatPaginatorModule
   ]
 })
 export class SharedModule { }

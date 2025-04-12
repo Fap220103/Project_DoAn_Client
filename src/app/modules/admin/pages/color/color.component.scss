@@ -1,0 +1,41 @@
+::ng-deep .custom-dialog-right .mat-mdc-dialog-surface {
+    margin: 0;
+    height: 100%;
+    border-radius: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 60% !important; /* hoặc max-width nếu bạn muốn responsive */
+    max-width: 100%;
+  }
+
+  .table-container-result {
+    display: flex;
+    flex-flow: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100vh - 160px);
+  }
+  ::ng-deep .custom-search-field {
+    background-color: #fbeaec; /* màu nền */
+    border-radius: 8px;
+    padding: 8px;
+  }
+  
+  ::ng-deep .custom-search-field .mat-form-field-wrapper {
+    padding-bottom: 0 !important; /* bỏ khoảng trắng dư bên dưới */
+  }
+  
+  ::ng-deep .custom-search-field .mat-form-field-flex {
+    background-color: transparent; /* tránh đè màu */
+  }
+  
+  ::ng-deep .custom-search-field .mat-form-field-infix {
+    border-bottom: none !important; /* bỏ gạch chân nếu cần */
+  }
+  
+  ::ng-deep .custom-search-field input {
+    font-size: 14px;
+    padding: 6px 8px;
+  }
+  

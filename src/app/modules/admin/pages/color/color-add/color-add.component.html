@@ -1,0 +1,58 @@
+
+<div class="dialog-content-wrapper mt-[50px]">
+  <!-- Header -->
+  <div
+    class="flex flex-row items-center px-6 h-20 min-h-20 text-white bg-primary">
+    <mat-icon
+      class="icon-size-7 text-current"
+      [svgIcon]="
+        isEdit
+          ? 'heroicons_solid:pencil-alt'  
+          : 'heroicons_solid:plus-circle'
+      "></mat-icon>
+    <div class="ml-3 text-2xl font-semibold tracking-tight">
+      {{ data.title | translate }}
+    </div>
+    <button class="ml-auto" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon
+        class="text-current"
+        [svgIcon]="'heroicons_outline:x'"></mat-icon>
+    </button>
+  </div>
+  <div class="container mt-[50px]">
+    <form [formGroup]="form">
+
+      <!-- Màu sắc -->
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>{{'Color.Name' | translate}}</mat-label>
+        <input matInput formControlName="colorName" placeholder="Nhập màu">
+        <mat-error *ngIf="form.controls['colorName'].invalid && form.controls['colorName'].touched">
+          Tiêu đề không được để trống
+        </mat-error>
+      </mat-form-field>
+    
+      <!-- Mã màu -->
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>{{'Color.Code' | translate}}</mat-label>
+        <input matInput formControlName="colorCode" placeholder="Nhập mã màu">
+      </mat-form-field>
+    </form>
+    
+  </div>
+  
+  <!-- Actions -->
+  <div mat-dialog-actions class="pl-5 pr-5 flex items-center justify-center">
+    <button mat-dialog-close mat-stroked-button type="button">
+      {{ 'Common.Cancel' | translate }}
+    </button>
+    <button
+      (click)="save()"
+      [disabled]="!form.valid"
+      class="ml-4"
+      mat-flat-button
+      type="button"
+      [color]="'primary'">
+      {{ 'Common.Save' | translate }}
+    </button>
+  </div>
+</div>

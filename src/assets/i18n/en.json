@@ -1,0 +1,20 @@
+{
+    "HELLO": "Hello",
+    "WELCOME": "Welcome to my application",
+    "Common" : {
+      "Edit": "Edit",
+      "Delete": "Delete",
+      "Add": "Add",
+      "Cancel": "Cancel",
+      "Save": "Save"
+    }
+    ,
+    "Color" : {
+      "SearchTitle": "Search by color code and color name",
+      "AddTitle" : "Add Color",
+      "EditTitle": "Edit Color",
+      "Title": "Color",
+      "Name": "Color Name",
+      "Code": "Color Code"
+    }
+  }

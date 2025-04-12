@@ -11,7 +11,10 @@ import { RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { ProductcategoryAddComponent } from './pages/productcategory/productcategory-add/productcategory-add.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../../shared/shared.module';
+import { ColorComponent } from './pages/color/color.component';
+import { ColorAddComponent } from './pages/color/color-add/color-add.component';
 
 
 @NgModule({
@@ -23,13 +26,18 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavbarComponent,
     SidebarComponent,
     ProductcategoryAddComponent,
-    AdminComponent
+    AdminComponent,
+    ColorComponent,
+    ColorAddComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     RouterModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    FormsModule,
+    SharedModule,
+
   ],
   exports: []
 })
