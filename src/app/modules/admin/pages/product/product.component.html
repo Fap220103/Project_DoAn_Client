@@ -1,36 +1,36 @@
-
 <section class="content-header">
   <div class="container-fluid">
-      <div class="row mb-2">
-          <div class="col-sm-6">
-              <h1>Quản lý {{pageTitle}}</h1>
-          </div>
-          <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">{{pageTitle}}</li>
-              </ol>
-          </div>
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Quản lý {{ pageTitle }}</h1>
       </div>
-  </div><!-- /.container-fluid -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">{{ pageTitle }}</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
 </section>
 
 <!-- Main content -->
 <section class="content">
-
   <!-- Default box -->
   <div class="card">
-      <div class="card-header">
-          <h3 class="card-title">Danh sách {{pageTitle}}</h3>
+    <div class="card-header">
+      <h3 class="card-title">Danh sách {{ pageTitle }}</h3>
 
-          <div class="card-tools">
-             
-              <a asp-area ="Admin" asp-controller="Product" asp-action="add" class="btn btn-primary">Thêm mới</a>
-              <a href="#" class="btn btn-danger" id="BtnDeleteAll">Xóa</a>
-          </div>
+      <div class="card-tools">
+        <a asp-area="Admin" asp-controller="Product" asp-action="add" class="btn btn-primary"
+          >Thêm mới</a
+        >
+        <a href="#" class="btn btn-danger" id="BtnDeleteAll">Xóa</a>
       </div>
-      <div class="card-body">
-          <!-- @*<div class="row">
+    </div>
+    <div class="card-body">
+      <!-- @*<div class="row">
           <div class="col-12">
           @using (Html.BeginForm("Index", "News", FormMethod.Get, new { }))
           {
@@ -43,26 +43,26 @@
           }
           </div>
           </div>*@ -->
-          <table class="table table-hover">
-              <thead>
-                  <tr>
-                      <th><input type="checkbox" id="SelectAll" /></th>
-                      <th>STT</th>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="SelectAll" /></th>
+            <th>STT</th>
 
-                      <th>Hình ảnh</th>
-                      <th>Tên sản phẩm</th>
-                      <th>Danh mục</th>
-                      <th>Số lượng</th>
-                      <th>Giá</th>
-                      <th>Ngày tạo</th>
-                      <th>Home</th>
-                      <th>Sale</th>
-                      <th>Hiển thị</th>
-                      <th style="width:150px;"></th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <!-- @if (Model != null && Model.Any())
+            <th>Hình ảnh</th>
+            <th>Tên sản phẩm</th>
+            <th>Danh mục</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th>Ngày tạo</th>
+            <th>Home</th>
+            <th>Sale</th>
+            <th>Hiển thị</th>
+            <th style="width: 150px"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- @if (Model != null && Model.Any())
                   {
                       var i = ((Model.PageNumber - 1) * Model.PageSize) + 1;
                       foreach (var item in Model)
@@ -108,12 +108,12 @@
                           <td colspan="4">Không có bản ghi nào</td>
                       </tr>
                   } -->
-              </tbody>
-          </table>
-          <div class="row">
-              <div class="col-6"></div>
-              <div class="col-6 pagination-controls">
-                  <!-- @if (Model.HasPreviousPage)
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-6"></div>
+        <div class="col-6 pagination-controls">
+          <!-- @if (Model.HasPreviousPage)
                   {
                       <a href="?page=@(Model.PageNumber - 1)&pageSize=@Model.PageSize" class="page-link">Previous</a>
                   }
@@ -124,17 +124,14 @@
                   {
                       <a href="?page=@(Model.PageNumber + 1)&pageSize=@Model.PageSize" class="page-link">Next</a>
                   } -->
-              </div>
-          </div>
-
+        </div>
       </div>
-      <!-- /.card-body -->
-      <div class="card-footer">
-      </div>
-      <!-- /.card-footer-->
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer"></div>
+    <!-- /.card-footer-->
   </div>
   <!-- /.card -->
-
 </section>
 <!-- /.content -->
 <!-- <div id="dialog">

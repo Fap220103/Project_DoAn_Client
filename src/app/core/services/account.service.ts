@@ -44,7 +44,7 @@ export class AccountService {
   setCurrentUser(user: User) {
     user.content.roles = [];
     const roles = this.getDecodedToken(user.content.accessToken).roles;
-    Array.isArray(roles) ? user.content.roles = roles : user.content.roles.push(roles);
+    Array.isArray(roles) ? (user.content.roles = roles) : user.content.roles.push(roles);
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
   }
@@ -53,10 +53,13 @@ export class AccountService {
   }
   getUserId() {
     let userId: string | null = null;
-    this.currentUser$.subscribe(user => {
+    this.currentUser$.subscribe((user) => {
       if (user && user.content.accessToken) {
         const decodedToken = this.getDecodedToken(user.content.accessToken);
-        userId = decodedToken["sub"] || decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"] || null;
+        userId =
+          decodedToken['sub'] ||
+          decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] ||
+          null;
       }
     });
     return userId;

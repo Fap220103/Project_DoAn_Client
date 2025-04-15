@@ -6,16 +6,15 @@
  *  Made by István Ujj-Mészáros
  *  Under Apache License v2.0 License
  */
-(function(factory) {
+(function (factory) {
   if (typeof define === 'function' && define.amd) {
     define(['jquery'], factory);
   } else if (typeof module === 'object' && module.exports) {
-    module.exports = function(root, jQuery) {
+    module.exports = function (root, jQuery) {
       if (jQuery === undefined) {
         if (typeof window !== 'undefined') {
           jQuery = require('jquery');
-        }
-        else {
+        } else {
           jQuery = require('jquery')(root);
         }
       }
@@ -25,7 +24,7 @@
   } else {
     factory(jQuery);
   }
-}(function($) {
+})(function ($) {
   // Create the defaults once
   var pluginName = 'bootstrapDualListbox',
     defaults = {
@@ -35,30 +34,30 @@
       moveAllLabel: 'Move all',
       removeSelectedLabel: 'Remove selected',
       removeAllLabel: 'Remove all',
-      moveOnSelect: true,                                                                 // true/false (forced true on androids, see the comment later)
-      moveOnDoubleClick: true,                                                            // true/false (forced false on androids, cause moveOnSelect is forced to true)
-      preserveSelectionOnMove: false,                                                     // 'all' / 'moved' / false
-      selectedListLabel: false,                                                           // 'string', false
-      nonSelectedListLabel: false,                                                        // 'string', false
-      helperSelectNamePostfix: '_helper',                                                 // 'string_of_postfix' / false
+      moveOnSelect: true, // true/false (forced true on androids, see the comment later)
+      moveOnDoubleClick: true, // true/false (forced false on androids, cause moveOnSelect is forced to true)
+      preserveSelectionOnMove: false, // 'all' / 'moved' / false
+      selectedListLabel: false, // 'string', false
+      nonSelectedListLabel: false, // 'string', false
+      helperSelectNamePostfix: '_helper', // 'string_of_postfix' / false
       selectorMinimalHeight: 100,
-      showFilterInputs: true,                                                             // whether to show filter inputs
-      nonSelectedFilter: '',                                                              // string, filter the non selected options
-      selectedFilter: '',                                                                 // string, filter the selected options
-      infoText: 'Showing all {0}',                                                        // text when all options are visible / false for no info text
+      showFilterInputs: true, // whether to show filter inputs
+      nonSelectedFilter: '', // string, filter the non selected options
+      selectedFilter: '', // string, filter the selected options
+      infoText: 'Showing all {0}', // text when all options are visible / false for no info text
       infoTextFiltered: '<span class="badge badge-warning">Filtered</span> {0} from {1}', // when not all of the options are visible due to the filter
-      infoTextEmpty: 'Empty list',                                                        // when there are no options present in the list
-      filterOnValues: false,                                                              // filter by selector's values, boolean
+      infoTextEmpty: 'Empty list', // when there are no options present in the list
+      filterOnValues: false, // filter by selector's values, boolean
       sortByInputOrder: false,
-      eventMoveOverride: false,                                                           // boolean, allows user to unbind default event behaviour and run their own instead
-      eventMoveAllOverride: false,                                                        // boolean, allows user to unbind default event behaviour and run their own instead
-      eventRemoveOverride: false,                                                         // boolean, allows user to unbind default event behaviour and run their own instead
-      eventRemoveAllOverride: false,                                                      // boolean, allows user to unbind default event behaviour and run their own instead
-      btnClass: 'btn-outline-secondary',                                                  // sets the button style class for all the buttons
-      btnMoveText: '&gt;',                                                                // string, sets the text for the "Move" button
-      btnRemoveText: '&lt;',                                                              // string, sets the text for the "Remove" button
-      btnMoveAllText: '&gt;&gt;',                                                         // string, sets the text for the "Move All" button
-      btnRemoveAllText: '&lt;&lt;'                                                        // string, sets the text for the "Remove All" button
+      eventMoveOverride: false, // boolean, allows user to unbind default event behaviour and run their own instead
+      eventMoveAllOverride: false, // boolean, allows user to unbind default event behaviour and run their own instead
+      eventRemoveOverride: false, // boolean, allows user to unbind default event behaviour and run their own instead
+      eventRemoveAllOverride: false, // boolean, allows user to unbind default event behaviour and run their own instead
+      btnClass: 'btn-outline-secondary', // sets the button style class for all the buttons
+      btnMoveText: '&gt;', // string, sets the text for the "Move" button
+      btnRemoveText: '&lt;', // string, sets the text for the "Remove" button
+      btnMoveAllText: '&gt;&gt;', // string, sets the text for the "Move All" button
+      btnRemoveAllText: '&lt;&lt;' // string, sets the text for the "Remove All" button
     },
     // Selections are invisible on android if the containing select is styled with CSS
     // http://code.google.com/p/android/issues/detail?id=16922
@@ -82,23 +81,23 @@
   }
 
   function updateSelectionStates(dualListbox) {
-    dualListbox.element.find('option').each(function(index, item) {
+    dualListbox.element.find('option').each(function (index, item) {
       var $item = $(item);
-      if (typeof($item.data('original-index')) === 'undefined') {
+      if (typeof $item.data('original-index') === 'undefined') {
         $item.data('original-index', dualListbox.elementCount++);
       }
-      if (typeof($item.data('_selected')) === 'undefined') {
+      if (typeof $item.data('_selected') === 'undefined') {
         $item.data('_selected', false);
       }
     });
   }
 
   function changeSelectionState(dualListbox, original_index, selected) {
-    dualListbox.element.find('option').each(function(index, item) {
+    dualListbox.element.find('option').each(function (index, item) {
       var $item = $(item);
       if ($item.data('original-index') === original_index) {
         $item.prop('selected', selected);
-        if(selected){
+        if (selected) {
           $item.attr('data-sortindex', dualListbox.sortIndex);
           dualListbox.sortIndex++;
         } else {
@@ -110,7 +109,7 @@
 
   function formatString(s, args) {
     console.log(s, args);
-    return s.replace(/{(\d+)}/g, function(match, number) {
+    return s.replace(/{(\d+)}/g, function (match, number) {
       return typeof args[number] !== 'undefined' ? args[number] : match;
     });
   }
@@ -155,13 +154,17 @@
     dualListbox.elements.select1.empty();
     dualListbox.elements.select2.empty();
 
-    dualListbox.element.find('option').each(function(index, item) {
+    dualListbox.element.find('option').each(function (index, item) {
       var $item = $(item);
       if ($item.prop('selected')) {
         dualListbox.selectedElements++;
-        dualListbox.elements.select2.append($item.clone(true).prop('selected', $item.data('_selected')));
+        dualListbox.elements.select2.append(
+          $item.clone(true).prop('selected', $item.data('_selected'))
+        );
       } else {
-        dualListbox.elements.select1.append($item.clone(true).prop('selected', $item.data('_selected')));
+        dualListbox.elements.select1.append(
+          $item.clone(true).prop('selected', $item.data('_selected'))
+        );
       }
     });
 
@@ -179,33 +182,37 @@
 
     saveSelections(dualListbox, selectIndex);
 
-    dualListbox.elements['select'+selectIndex].empty().scrollTop(0);
+    dualListbox.elements['select' + selectIndex].empty().scrollTop(0);
     var regex,
       allOptions = dualListbox.element.find('option'),
       options = dualListbox.element;
 
     if (selectIndex === 1) {
       options = allOptions.not(':selected');
-    } else  {
+    } else {
       options = options.find('option:selected');
     }
 
     try {
-      regex = new RegExp($.trim(dualListbox.elements['filterInput'+selectIndex].val()), 'gi');
-    }
-    catch(e) {
+      regex = new RegExp($.trim(dualListbox.elements['filterInput' + selectIndex].val()), 'gi');
+    } catch (e) {
       // a regex to match nothing
       regex = new RegExp('/a^/', 'gi');
     }
 
-    options.each(function(index, item) {
+    options.each(function (index, item) {
       var $item = $(item),
         isFiltered = true;
-      if (item.text.match(regex) || (dualListbox.settings.filterOnValues && $item.attr('value').match(regex) ) ) {
+      if (
+        item.text.match(regex) ||
+        (dualListbox.settings.filterOnValues && $item.attr('value').match(regex))
+      ) {
         isFiltered = false;
-        dualListbox.elements['select'+selectIndex].append($item.clone(true).prop('selected', $item.data('_selected')));
+        dualListbox.elements['select' + selectIndex].append(
+          $item.clone(true).prop('selected', $item.data('_selected'))
+        );
       }
-      allOptions.eq($item.data('original-index')).data('filtered'+selectIndex, isFiltered);
+      allOptions.eq($item.data('original-index')).data('filtered' + selectIndex, isFiltered);
     });
 
     refreshInfo(dualListbox);
@@ -213,55 +220,64 @@
 
   function saveSelections(dualListbox, selectIndex) {
     var options = dualListbox.element.find('option');
-    dualListbox.elements['select'+selectIndex].find('option').each(function(index, item) {
+    dualListbox.elements['select' + selectIndex].find('option').each(function (index, item) {
       var $item = $(item);
       options.eq($item.data('original-index')).data('_selected', $item.prop('selected'));
     });
   }
 
-  function sortOptionsByInputOrder(select){
+  function sortOptionsByInputOrder(select) {
     var selectopt = select.children('option');
 
-    selectopt.sort(function(a,b){
+    selectopt.sort(function (a, b) {
       var an = parseInt(a.getAttribute('data-sortindex')),
-          bn = parseInt(b.getAttribute('data-sortindex'));
+        bn = parseInt(b.getAttribute('data-sortindex'));
 
-          if(an > bn) {
-             return 1;
-          }
-          if(an < bn) {
-            return -1;
-          }
-          return 0;
+      if (an > bn) {
+        return 1;
+      }
+      if (an < bn) {
+        return -1;
+      }
+      return 0;
     });
 
     selectopt.detach().appendTo(select);
   }
 
   function sortOptions(select, dualListbox) {
-    select.find('option').sort(function(a, b) {
-      return ($(a).data('original-index') > $(b).data('original-index')) ? 1 : -1;
-    }).appendTo(select);
+    select
+      .find('option')
+      .sort(function (a, b) {
+        return $(a).data('original-index') > $(b).data('original-index') ? 1 : -1;
+      })
+      .appendTo(select);
 
     // workaround for chromium bug: https://bugs.chromium.org/p/chromium/issues/detail?id=1072475
     refreshSelects(dualListbox);
   }
 
   function clearSelections(dualListbox) {
-    dualListbox.elements.select1.find('option').each(function() {
+    dualListbox.elements.select1.find('option').each(function () {
       dualListbox.element.find('option').data('_selected', false);
     });
   }
 
   function move(dualListbox) {
-    if (dualListbox.settings.preserveSelectionOnMove === 'all' && !dualListbox.settings.moveOnSelect) {
+    if (
+      dualListbox.settings.preserveSelectionOnMove === 'all' &&
+      !dualListbox.settings.moveOnSelect
+    ) {
       saveSelections(dualListbox, 1);
       saveSelections(dualListbox, 2);
-    } else if (dualListbox.settings.preserveSelectionOnMove === 'moved' && !dualListbox.settings.moveOnSelect) {
+    } else if (
+      dualListbox.settings.preserveSelectionOnMove === 'moved' &&
+      !dualListbox.settings.moveOnSelect
+    ) {
       saveSelections(dualListbox, 1);
     }
 
-    dualListbox.elements.select1.find('option:selected').each(function(index, item) {
+    dualListbox.elements.select1.find('option:selected').each(function (index, item) {
       var $item = $(item);
       if (!$item.data('filtered1')) {
         changeSelectionState(dualListbox, $item.data('original-index'), true);
@@ -270,22 +286,28 @@
 
     refreshSelects(dualListbox);
     triggerChangeEvent(dualListbox);
-    if(dualListbox.settings.sortByInputOrder){
-        sortOptionsByInputOrder(dualListbox.elements.select2);
+    if (dualListbox.settings.sortByInputOrder) {
+      sortOptionsByInputOrder(dualListbox.elements.select2);
     } else {
-        sortOptions(dualListbox.elements.select2, dualListbox);
+      sortOptions(dualListbox.elements.select2, dualListbox);
     }
   }
 
   function remove(dualListbox) {
-    if (dualListbox.settings.preserveSelectionOnMove === 'all' && !dualListbox.settings.moveOnSelect) {
+    if (
+      dualListbox.settings.preserveSelectionOnMove === 'all' &&
+      !dualListbox.settings.moveOnSelect
+    ) {
       saveSelections(dualListbox, 1);
       saveSelections(dualListbox, 2);
-    } else if (dualListbox.settings.preserveSelectionOnMove === 'moved' && !dualListbox.settings.moveOnSelect) {
+    } else if (
+      dualListbox.settings.preserveSelectionOnMove === 'moved' &&
+      !dualListbox.settings.moveOnSelect
+    ) {
       saveSelections(dualListbox, 2);
     }
 
-    dualListbox.elements.select2.find('option:selected').each(function(index, item) {
+    dualListbox.elements.select2.find('option:selected').each(function (index, item) {
       var $item = $(item);
       if (!$item.data('filtered2')) {
         changeSelectionState(dualListbox, $item.data('original-index'), false);
@@ -295,20 +317,26 @@
     refreshSelects(dualListbox);
     triggerChangeEvent(dualListbox);
     sortOptions(dualListbox.elements.select1, dualListbox);
-    if(dualListbox.settings.sortByInputOrder){
-        sortOptionsByInputOrder(dualListbox.elements.select2);
+    if (dualListbox.settings.sortByInputOrder) {
+      sortOptionsByInputOrder(dualListbox.elements.select2);
     }
   }
 
   function moveAll(dualListbox) {
-    if (dualListbox.settings.preserveSelectionOnMove === 'all' && !dualListbox.settings.moveOnSelect) {
+    if (
+      dualListbox.settings.preserveSelectionOnMove === 'all' &&
+      !dualListbox.settings.moveOnSelect
+    ) {
       saveSelections(dualListbox, 1);
       saveSelections(dualListbox, 2);
-    } else if (dualListbox.settings.preserveSelectionOnMove === 'moved' && !dualListbox.settings.moveOnSelect) {
+    } else if (
+      dualListbox.settings.preserveSelectionOnMove === 'moved' &&
+      !dualListbox.settings.moveOnSelect
+    ) {
       saveSelections(dualListbox, 1);
     }
 
-    dualListbox.element.find('option').each(function(index, item) {
+    dualListbox.element.find('option').each(function (index, item) {
       var $item = $(item);
       if (!$item.data('filtered1')) {
         $item.prop('selected', true);
@@ -322,14 +350,20 @@
   }
 
   function removeAll(dualListbox) {
-    if (dualListbox.settings.preserveSelectionOnMove === 'all' && !dualListbox.settings.moveOnSelect) {
+    if (
+      dualListbox.settings.preserveSelectionOnMove === 'all' &&
+      !dualListbox.settings.moveOnSelect
+    ) {
       saveSelections(dualListbox, 1);
       saveSelections(dualListbox, 2);
-    } else if (dualListbox.settings.preserveSelectionOnMove === 'moved' && !dualListbox.settings.moveOnSelect) {
+    } else if (
+      dualListbox.settings.preserveSelectionOnMove === 'moved' &&
+      !dualListbox.settings.moveOnSelect
+    ) {
       saveSelections(dualListbox, 2);
     }
 
-    dualListbox.element.find('option').each(function(index, item) {
+    dualListbox.element.find('option').each(function (index, item) {
       var $item = $(item);
       if (!$item.data('filtered2')) {
         $item.prop('selected', false);
@@ -342,7 +376,7 @@
   }
 
   function bindEvents(dualListbox) {
-    dualListbox.elements.form.submit(function(e) {
+    dualListbox.elements.form.submit(function (e) {
       if (dualListbox.elements.filterInput1.is(':focus')) {
         e.preventDefault();
         dualListbox.elements.filterInput1.focusout();
@@ -352,47 +386,47 @@
       }
     });
 
-    dualListbox.element.on('bootstrapDualListbox.refresh', function(e, mustClearSelections){
+    dualListbox.element.on('bootstrapDualListbox.refresh', function (e, mustClearSelections) {
       dualListbox.refresh(mustClearSelections);
     });
 
-    dualListbox.elements.filterClear1.on('click', function() {
+    dualListbox.elements.filterClear1.on('click', function () {
       dualListbox.setNonSelectedFilter('', true);
     });
 
-    dualListbox.elements.filterClear2.on('click', function() {
+    dualListbox.elements.filterClear2.on('click', function () {
       dualListbox.setSelectedFilter('', true);
     });
 
     if (dualListbox.settings.eventMoveOverride === false) {
-      dualListbox.elements.moveButton.on('click', function() {
+      dualListbox.elements.moveButton.on('click', function () {
         move(dualListbox);
       });
     }
 
     if (dualListbox.settings.eventMoveAllOverride === false) {
-      dualListbox.elements.moveAllButton.on('click', function() {
+      dualListbox.elements.moveAllButton.on('click', function () {
         moveAll(dualListbox);
       });
     }
 
     if (dualListbox.settings.eventRemoveOverride === false) {
-      dualListbox.elements.removeButton.on('click', function() {
+      dualListbox.elements.removeButton.on('click', function () {
         remove(dualListbox);
       });
     }
 
     if (dualListbox.settings.eventRemoveAllOverride === false) {
-      dualListbox.elements.removeAllButton.on('click', function() {
+      dualListbox.elements.removeAllButton.on('click', function () {
         removeAll(dualListbox);
       });
     }
 
-    dualListbox.elements.filterInput1.on('change keyup', function() {
+    dualListbox.elements.filterInput1.on('change keyup', function () {
       filter(dualListbox, 1);
     });
 
-    dualListbox.elements.filterInput2.on('change keyup', function() {
+    dualListbox.elements.filterInput2.on('change keyup', function () {
       filter(dualListbox, 2);
     });
   }
@@ -400,36 +434,37 @@
   BootstrapDualListbox.prototype = {
     init: function () {
       // Add the custom HTML template
-      this.container = $('' +
-        '<div class="bootstrap-duallistbox-container row">' +
-        ' <div class="box1 col-md-6">' +
-        '   <label></label>' +
-        '   <span class="info-container">' +
-        '     <span class="info"></span>' +
-        '     <button type="button" class="btn btn-sm clear1" style="float:right!important;"></button>' +
-        '   </span>' +
-        '   <input class="form-control filter" type="text">' +
-        '   <div class="btn-group buttons">' +
-        '     <button type="button" class="btn moveall"></button>' +
-        '     <button type="button" class="btn move"></button>' +
-        '   </div>' +
-        '   <select multiple="multiple"></select>' +
-        ' </div>' +
-        ' <div class="box2 col-md-6">' +
-        '   <label></label>' +
-        '   <span class="info-container">' +
-        '     <span class="info"></span>' +
-        '     <button type="button" class="btn btn-sm clear2" style="float:right!important;"></button>' +
-        '   </span>' +
-        '   <input class="form-control filter" type="text">' +
-        '   <div class="btn-group buttons">' +
-        '     <button type="button" class="btn remove"></button>' +
-        '     <button type="button" class="btn removeall"></button>' +
-        '   </div>' +
-        '   <select multiple="multiple"></select>' +
-        ' </div>' +
-        '</div>')
-        .insertBefore(this.element);
+      this.container = $(
+        '' +
+          '<div class="bootstrap-duallistbox-container row">' +
+          ' <div class="box1 col-md-6">' +
+          '   <label></label>' +
+          '   <span class="info-container">' +
+          '     <span class="info"></span>' +
+          '     <button type="button" class="btn btn-sm clear1" style="float:right!important;"></button>' +
+          '   </span>' +
+          '   <input class="form-control filter" type="text">' +
+          '   <div class="btn-group buttons">' +
+          '     <button type="button" class="btn moveall"></button>' +
+          '     <button type="button" class="btn move"></button>' +
+          '   </div>' +
+          '   <select multiple="multiple"></select>' +
+          ' </div>' +
+          ' <div class="box2 col-md-6">' +
+          '   <label></label>' +
+          '   <span class="info-container">' +
+          '     <span class="info"></span>' +
+          '     <button type="button" class="btn btn-sm clear2" style="float:right!important;"></button>' +
+          '   </span>' +
+          '   <input class="form-control filter" type="text">' +
+          '   <div class="btn-group buttons">' +
+          '     <button type="button" class="btn remove"></button>' +
+          '     <button type="button" class="btn removeall"></button>' +
+          '   </div>' +
+          '   <select multiple="multiple"></select>' +
+          ' </div>' +
+          '</div>'
+      ).insertBefore(this.element);
 
       // Cache the inner elements
       this.elements = {
@@ -508,7 +543,7 @@
 
       return this.element;
     },
-    setFilterTextClear: function(value, refresh) {
+    setFilterTextClear: function (value, refresh) {
       this.settings.filterTextClear = value;
       this.elements.filterClear1.html(value);
       this.elements.filterClear2.html(value);
@@ -517,7 +552,7 @@
       }
       return this.element;
     },
-    setFilterPlaceHolder: function(value, refresh) {
+    setFilterPlaceHolder: function (value, refresh) {
       this.settings.filterPlaceHolder = value;
       this.elements.filterInput1.attr('placeholder', value);
       this.elements.filterInput2.attr('placeholder', value);
@@ -526,7 +561,7 @@
       }
       return this.element;
     },
-    setMoveSelectedLabel: function(value, refresh) {
+    setMoveSelectedLabel: function (value, refresh) {
       this.settings.moveSelectedLabel = value;
       this.elements.moveButton.attr('title', value);
       if (refresh) {
@@ -534,7 +569,7 @@
       }
       return this.element;
     },
-    setMoveAllLabel: function(value, refresh) {
+    setMoveAllLabel: function (value, refresh) {
       this.settings.moveAllLabel = value;
       this.elements.moveAllButton.attr('title', value);
       if (refresh) {
@@ -542,7 +577,7 @@
       }
       return this.element;
     },
-    setRemoveSelectedLabel: function(value, refresh) {
+    setRemoveSelectedLabel: function (value, refresh) {
       this.settings.removeSelectedLabel = value;
       this.elements.removeButton.attr('title', value);
       if (refresh) {
@@ -550,7 +585,7 @@
       }
       return this.element;
     },
-    setRemoveAllLabel: function(value, refresh) {
+    setRemoveAllLabel: function (value, refresh) {
       this.settings.removeAllLabel = value;
       this.elements.removeAllButton.attr('title', value);
       if (refresh) {
@@ -558,7 +593,7 @@
       }
       return this.element;
     },
-    setMoveOnSelect: function(value, refresh) {
+    setMoveOnSelect: function (value, refresh) {
       if (isBuggyAndroid) {
         value = true;
       }
@@ -566,10 +601,10 @@
       if (this.settings.moveOnSelect) {
         this.container.addClass('moveonselect');
         var self = this;
-        this.elements.select1.on('change', function() {
+        this.elements.select1.on('change', function () {
           move(self);
         });
-        this.elements.select2.on('change', function() {
+        this.elements.select2.on('change', function () {
           remove(self);
         });
         this.elements.moveButton.detach();
@@ -586,7 +621,7 @@
       }
       return this.element;
     },
-    setMoveOnDoubleClick: function(value, refresh) {
+    setMoveOnDoubleClick: function (value, refresh) {
       if (isBuggyAndroid) {
         value = false;
       }
@@ -594,10 +629,10 @@
       if (this.settings.moveOnDoubleClick) {
         this.container.addClass('moveondoubleclick');
         var self = this;
-        this.elements.select1.on('dblclick', function() {
+        this.elements.select1.on('dblclick', function () {
           move(self);
         });
-        this.elements.select2.on('dblclick', function() {
+        this.elements.select2.on('dblclick', function () {
           remove(self);
         });
       } else {
@@ -610,7 +645,7 @@
       }
       return this.element;
     },
-    setPreserveSelectionOnMove: function(value, refresh) {
+    setPreserveSelectionOnMove: function (value, refresh) {
       // We are forcing to move on select and disabling preserveSelectionOnMove on Android
       if (isBuggyAndroid) {
         value = false;
@@ -621,7 +656,7 @@
       }
       return this.element;
     },
-    setSelectedListLabel: function(value, refresh) {
+    setSelectedListLabel: function (value, refresh) {
       this.settings.selectedListLabel = value;
       if (value) {
         this.elements.label2.show().html(value);
@@ -633,7 +668,7 @@
       }
       return this.element;
     },
-    setNonSelectedListLabel: function(value, refresh) {
+    setNonSelectedListLabel: function (value, refresh) {
       this.settings.nonSelectedListLabel = value;
       if (value) {
         this.elements.label1.show().html(value);
@@ -645,7 +680,7 @@
       }
       return this.element;
     },
-    setHelperSelectNamePostfix: function(value, refresh) {
+    setHelperSelectNamePostfix: function (value, refresh) {
       this.settings.helperSelectNamePostfix = value;
       if (value) {
         this.elements.select1.attr('name', this.originalSelectName + value + '1');
@@ -659,7 +694,7 @@
       }
       return this.element;
     },
-    setSelectOrMinimalHeight: function(value, refresh) {
+    setSelectOrMinimalHeight: function (value, refresh) {
       this.settings.selectorMinimalHeight = value;
       var height = this.element.height();
       if (this.element.height() < value) {
@@ -672,7 +707,7 @@
       }
       return this.element;
     },
-    setShowFilterInputs: function(value, refresh) {
+    setShowFilterInputs: function (value, refresh) {
       if (!value) {
         this.setNonSelectedFilter('');
         this.setSelectedFilter('');
@@ -689,7 +724,7 @@
       }
       return this.element;
     },
-    setNonSelectedFilter: function(value, refresh) {
+    setNonSelectedFilter: function (value, refresh) {
       if (this.settings.showFilterInputs) {
         this.settings.nonSelectedFilter = value;
         this.elements.filterInput1.val(value);
@@ -699,7 +734,7 @@
         return this.element;
       }
     },
-    setSelectedFilter: function(value, refresh) {
+    setSelectedFilter: function (value, refresh) {
       if (this.settings.showFilterInputs) {
         this.settings.selectedFilter = value;
         this.elements.filterInput2.val(value);
@@ -709,7 +744,7 @@
         return this.element;
       }
     },
-    setInfoText: function(value, refresh) {
+    setInfoText: function (value, refresh) {
       this.settings.infoText = value;
       if (value) {
         this.elements.info1.show();
@@ -723,63 +758,63 @@
       }
       return this.element;
     },
-    setInfoTextFiltered: function(value, refresh) {
+    setInfoTextFiltered: function (value, refresh) {
       this.settings.infoTextFiltered = value;
       if (refresh) {
         refreshSelects(this);
       }
       return this.element;
     },
-    setInfoTextEmpty: function(value, refresh) {
+    setInfoTextEmpty: function (value, refresh) {
       this.settings.infoTextEmpty = value;
       if (refresh) {
         refreshSelects(this);
       }
       return this.element;
     },
-    setFilterOnValues: function(value, refresh) {
+    setFilterOnValues: function (value, refresh) {
       this.settings.filterOnValues = value;
       if (refresh) {
         refreshSelects(this);
       }
       return this.element;
     },
-    setSortByInputOrder: function(value, refresh){
-        this.settings.sortByInputOrder = value;
-        if (refresh) {
-          refreshSelects(this);
-        }
-        return this.element;
+    setSortByInputOrder: function (value, refresh) {
+      this.settings.sortByInputOrder = value;
+      if (refresh) {
+        refreshSelects(this);
+      }
+      return this.element;
     },
-    setEventMoveOverride: function(value, refresh) {
-        this.settings.eventMoveOverride = value;
-        if (refresh) {
-          refreshSelects(this);
-        }
-        return this.element;
+    setEventMoveOverride: function (value, refresh) {
+      this.settings.eventMoveOverride = value;
+      if (refresh) {
+        refreshSelects(this);
+      }
+      return this.element;
     },
-    setEventMoveAllOverride: function(value, refresh) {
-        this.settings.eventMoveAllOverride = value;
-        if (refresh) {
-          refreshSelects(this);
-        }
-        return this.element;
+    setEventMoveAllOverride: function (value, refresh) {
+      this.settings.eventMoveAllOverride = value;
+      if (refresh) {
+        refreshSelects(this);
+      }
+      return this.element;
     },
-    setEventRemoveOverride: function(value, refresh) {
-        this.settings.eventRemoveOverride = value;
-        if (refresh) {
-          refreshSelects(this);
-        }
-        return this.element;
+    setEventRemoveOverride: function (value, refresh) {
+      this.settings.eventRemoveOverride = value;
+      if (refresh) {
+        refreshSelects(this);
+      }
+      return this.element;
     },
-    setEventRemoveAllOverride: function(value, refresh) {
-        this.settings.eventRemoveAllOverride = value;
-        if (refresh) {
-          refreshSelects(this);
-        }
-        return this.element;
+    setEventRemoveAllOverride: function (value, refresh) {
+      this.settings.eventRemoveAllOverride = value;
+      if (refresh) {
+        refreshSelects(this);
+      }
+      return this.element;
     },
-    setBtnClass: function(value, refresh) {
+    setBtnClass: function (value, refresh) {
       this.settings.btnClass = value;
       this.elements.moveButton.attr('class', 'btn move').addClass(value);
       this.elements.removeButton.attr('class', 'btn remove').addClass(value);
@@ -790,7 +825,7 @@
       }
       return this.element;
     },
-    setBtnMoveText: function(value, refresh) {
+    setBtnMoveText: function (value, refresh) {
       this.settings.btnMoveText = value;
       this.elements.moveButton.html(value);
       if (refresh) {
@@ -798,7 +833,7 @@
       }
       return this.element;
     },
-    setBtnRemoveText: function(value, refresh) {
+    setBtnRemoveText: function (value, refresh) {
       this.settings.btnMoveText = value;
       this.elements.removeButton.html(value);
       if (refresh) {
@@ -806,7 +841,7 @@
       }
       return this.element;
     },
-    setBtnMoveAllText: function(value, refresh) {
+    setBtnMoveAllText: function (value, refresh) {
       this.settings.btnMoveText = value;
       this.elements.moveAllButton.html(value);
       if (refresh) {
@@ -814,7 +849,7 @@
       }
       return this.element;
     },
-    setBtnRemoveAllText: function(value, refresh) {
+    setBtnRemoveAllText: function (value, refresh) {
       this.settings.btnMoveText = value;
       this.elements.removeAllButton.html(value);
       if (refresh) {
@@ -822,10 +857,10 @@
       }
       return this.element;
     },
-    getContainer: function() {
+    getContainer: function () {
       return this.container;
     },
-    refresh: function(mustClearSelections) {
+    refresh: function (mustClearSelections) {
       updateSelectionStates(this);
 
       if (!mustClearSelections) {
@@ -837,7 +872,7 @@
 
       refreshSelects(this);
     },
-    destroy: function() {
+    destroy: function () {
       this.container.remove();
       this.element.show();
       $.data(this, 'plugin_' + pluginName, null);
@@ -847,7 +882,7 @@
 
   // A really lightweight plugin wrapper around the constructor,
   // preventing against multiple instantiations
-  $.fn[ pluginName ] = function (options) {
+  $.fn[pluginName] = function (options) {
     var args = arguments;
 
     // Is the first parameter an object (options), or was omitted, instantiate a new instance of the plugin.
@@ -855,10 +890,12 @@
       return this.each(function () {
         // If this is not a select
         if (!$(this).is('select')) {
-          $(this).find('select').each(function(index, item) {
-            // For each nested select, instantiate the Dual List Box
-            $(item).bootstrapDualListbox(options);
-          });
+          $(this)
+            .find('select')
+            .each(function (index, item) {
+              // For each nested select, instantiate the Dual List Box
+              $(item).bootstrapDualListbox(options);
+            });
         } else if (!$.data(this, 'plugin_' + pluginName)) {
           // Only allow the plugin to be instantiated once so we check that the element has no plugin instantiation yet
 
@@ -870,7 +907,6 @@
       // If the first parameter is a string and it doesn't start with an underscore or "contains" the `init`-function,
       // treat this as a call to a public method.
     } else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
-
       // Cache the method call to make it possible to return a value
       var returns;
 
@@ -887,7 +923,5 @@
       // otherwise return this to preserve chainability.
       return returns !== undefined ? returns : this;
     }
-
   };
-
-}));
+});

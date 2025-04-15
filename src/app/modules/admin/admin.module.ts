@@ -18,7 +18,6 @@ import { ColorAddComponent } from './pages/color/color-add/color-add.component';
 import { SizeComponent } from './pages/size/size.component';
 import { SizeAddComponent } from './pages/size/size-add/size-add.component';
 
-
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -40,9 +39,8 @@ import { SizeAddComponent } from './pages/size/size-add/size-add.component';
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
-    SharedModule,
-
+    SharedModule
   ],
   exports: []
 })
-export class AdminModule { }
+export class AdminModule {}

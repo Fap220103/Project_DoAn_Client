@@ -3,25 +3,25 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Quản lý {{pageTitle}}</h1>
+        <h1>Quản lý {{ pageTitle }}</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">{{pageTitle}}</li>
+          <li class="breadcrumb-item active">{{ pageTitle }}</li>
         </ol>
       </div>
     </div>
-  </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.container-fluid -->
 </section>
 
 <!-- Main content -->
 <section class="content">
-
   <!-- Default box -->
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Danh sách {{pageTitle}}</h3>
+      <h3 class="card-title">Danh sách {{ pageTitle }}</h3>
 
       <div class="card-tools">
         <div class="btn btn-primary" (click)="openDeleteDialog()">Thêm mới</div>
@@ -29,7 +29,6 @@
       </div>
     </div>
     <div class="card-body">
-     
       <table class="table table-hover">
         <thead>
           <tr>
@@ -39,12 +38,12 @@
             <th>Mô tả</th>
             <th>Danh mục cha</th>
             <th>Icon</th>
-            <th style="width:150px;"></th>
+            <th style="width: 150px"></th>
           </tr>
         </thead>
         <tbody *ngIf="ListCategory.length > 0; else noData">
           <tr *ngFor="let item of ListCategory; let i = index">
-            <td><input type="checkbox" class="chkItem" value="@item.Id" /></td> 
+            <td><input type="checkbox" class="chkItem" value="@item.Id" /></td>
             <td>{{ i + 1 }}</td>
             <td>{{ item.title }}</td>
             <td>{{ item.description }}</td>
@@ -52,7 +51,11 @@
             <td><img [src]="item.icon" width="100px" /></td>
 
             <td>
-              <a [routerLink]="['/admin/product-category/edit', item.id]" class="btn btn-sm btn-primary">Sửa</a>
+              <a
+                [routerLink]="['/admin/product-category/edit', item.id]"
+                class="btn btn-sm btn-primary"
+                >Sửa</a
+              >
               <button (click)="deleteCategory(item.id)" class="btn btn-sm btn-danger">Xóa</button>
             </td>
           </tr>
@@ -67,14 +70,11 @@
           </tr>
         </ng-template>
       </table>
-      
     </div>
     <!-- /.card-body -->
-    <div class="card-footer">
-    </div>
+    <div class="card-footer"></div>
     <!-- /.card-footer-->
   </div>
   <!-- /.card -->
-
 </section>
 <!-- /.content -->

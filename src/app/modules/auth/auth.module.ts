@@ -4,16 +4,8 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
-
 @NgModule({
-  declarations: [
-    AdminLoginComponent
-  ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    ReactiveFormsModule
-  ]
+  declarations: [AdminLoginComponent],
+  imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule]
 })
-export class AuthModule { }
+export class AuthModule {}

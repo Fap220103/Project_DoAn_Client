@@ -4,25 +4,30 @@
  * Licensed under MIT (https://github.com/Johann-S/bs-stepper/blob/master/LICENSE)
  */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.Stepper = factory());
-}(this, function () { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined'
+    ? (module.exports = factory())
+    : typeof define === 'function' && define.amd
+      ? define(factory)
+      : ((global = global || self), (global.Stepper = factory()));
+})(this, function () {
+  'use strict';
 
   function _extends() {
-    _extends = Object.assign || function (target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
+    _extends =
+      Object.assign ||
+      function (target) {
+        for (var i = 1; i < arguments.length; i++) {
+          var source = arguments[i];
 
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
+          for (var key in source) {
+            if (Object.prototype.hasOwnProperty.call(source, key)) {
+              target[key] = source[key];
+            }
           }
         }
-      }
 
-      return target;
-    };
+        return target;
+      };
 
     return _extends.apply(this, arguments);
   }
@@ -43,10 +48,11 @@
   };
   /* istanbul ignore next */
 
-
   function polyfill() {
     if (!window.Element.prototype.matches) {
-      matches = window.Element.prototype.msMatchesSelector || window.Element.prototype.webkitMatchesSelector;
+      matches =
+        window.Element.prototype.msMatchesSelector ||
+        window.Element.prototype.webkitMatchesSelector;
     }
 
     if (!window.Element.prototype.closest) {
@@ -123,7 +129,10 @@
   var show = function show(stepperNode, indexStep, options, done) {
     var stepper = stepperNode[customProperty];
 
-    if (stepper._steps[indexStep].classList.contains(ClassName.ACTIVE) || stepper._stepsContents[indexStep].classList.contains(ClassName.ACTIVE)) {
+    if (
+      stepper._steps[indexStep].classList.contains(ClassName.ACTIVE) ||
+      stepper._stepsContents[indexStep].classList.contains(ClassName.ACTIVE)
+    ) {
       return;
     }
 
@@ -162,7 +171,13 @@
     }
 
     showStep(stepperNode, stepper._steps[indexStep], stepper._steps, options);
-    showContent(stepperNode, stepper._stepsContents[indexStep], stepper._stepsContents, activeContent, done);
+    showContent(
+      stepperNode,
+      stepper._stepsContents[indexStep],
+      stepper._stepsContents,
+      activeContent,
+      done
+    );
   };
 
   var showStep = function showStep(stepperNode, step, stepList, options) {
@@ -226,14 +241,12 @@
       return 0;
     } // Get transition-duration of the element
 
-
     var transitionDuration = window.getComputedStyle(element).transitionDuration;
     var floatTransitionDuration = parseFloat(transitionDuration); // Return 0 if element or transition duration is not found
 
     if (!floatTransitionDuration) {
       return 0;
     } // If multiple durations are defined, take the first
-
 
     transitionDuration = transitionDuration.split(',')[0];
     return parseFloat(transitionDuration) * MILLISECONDS_MULTIPLIER;
@@ -300,129 +313,138 @@
   };
 
   var Stepper =
-  /*#__PURE__*/
-  function () {
-    function Stepper(element, _options) {
-      var _this = this;
+    /*#__PURE__*/
+    (function () {
+      function Stepper(element, _options) {
+        var _this = this;
 
-      if (_options === void 0) {
-        _options = {};
-      }
-
-      this._element = element;
-      this._currentIndex = 0;
-      this._stepsContents = [];
-      this.options = _extends({}, DEFAULT_OPTIONS, {}, _options);
-      this.options.selectors = _extends({}, DEFAULT_OPTIONS.selectors, {}, this.options.selectors);
-
-      if (this.options.linear) {
-        this._element.classList.add(ClassName.LINEAR);
-      }
-
-      this._steps = [].slice.call(this._element.querySelectorAll(this.options.selectors.steps));
-
-      this._steps.filter(function (step) {
-        return step.hasAttribute('data-target');
-      }).forEach(function (step) {
-        _this._stepsContents.push(_this._element.querySelector(step.getAttribute('data-target')));
-      });
-
-      detectAnimation(this._stepsContents, this.options);
-
-      this._setLinkListeners();
-
-      Object.defineProperty(this._element, customProperty, {
-        value: this,
-        writable: true
-      });
-
-      if (this._steps.length) {
-        show(this._element, this._currentIndex, this.options, function () {});
-      }
-    } // Private
-
-
-    var _proto = Stepper.prototype;
-
-    _proto._setLinkListeners = function _setLinkListeners() {
-      var _this2 = this;
-
-      this._steps.forEach(function (step) {
-        var trigger = step.querySelector(_this2.options.selectors.trigger);
-
-        if (_this2.options.linear) {
-          _this2._clickStepLinearListener = buildClickStepLinearListener(_this2.options);
-          trigger.addEventListener('click', _this2._clickStepLinearListener);
-        } else {
-          _this2._clickStepNonLinearListener = buildClickStepNonLinearListener(_this2.options);
-          trigger.addEventListener('click', _this2._clickStepNonLinearListener);
+        if (_options === void 0) {
+          _options = {};
         }
-      });
-    } // Public
-    ;
 
-    _proto.next = function next() {
-      var _this3 = this;
+        this._element = element;
+        this._currentIndex = 0;
+        this._stepsContents = [];
+        this.options = _extends({}, DEFAULT_OPTIONS, {}, _options);
+        this.options.selectors = _extends(
+          {},
+          DEFAULT_OPTIONS.selectors,
+          {},
+          this.options.selectors
+        );
 
-      var nextStep = this._currentIndex + 1 <= this._steps.length - 1 ? this._currentIndex + 1 : this._steps.length - 1;
-      show(this._element, nextStep, this.options, function () {
-        _this3._currentIndex = nextStep;
-      });
-    };
-
-    _proto.previous = function previous() {
-      var _this4 = this;
-
-      var previousStep = this._currentIndex - 1 >= 0 ? this._currentIndex - 1 : 0;
-      show(this._element, previousStep, this.options, function () {
-        _this4._currentIndex = previousStep;
-      });
-    };
-
-    _proto.to = function to(stepNumber) {
-      var _this5 = this;
-
-      var tempIndex = stepNumber - 1;
-      var nextStep = tempIndex >= 0 && tempIndex < this._steps.length ? tempIndex : 0;
-      show(this._element, nextStep, this.options, function () {
-        _this5._currentIndex = nextStep;
-      });
-    };
-
-    _proto.reset = function reset() {
-      var _this6 = this;
-
-      show(this._element, 0, this.options, function () {
-        _this6._currentIndex = 0;
-      });
-    };
-
-    _proto.destroy = function destroy() {
-      var _this7 = this;
-
-      this._steps.forEach(function (step) {
-        var trigger = step.querySelector(_this7.options.selectors.trigger);
-
-        if (_this7.options.linear) {
-          trigger.removeEventListener('click', _this7._clickStepLinearListener);
-        } else {
-          trigger.removeEventListener('click', _this7._clickStepNonLinearListener);
+        if (this.options.linear) {
+          this._element.classList.add(ClassName.LINEAR);
         }
-      });
 
-      this._element[customProperty] = undefined;
-      this._element = undefined;
-      this._currentIndex = undefined;
-      this._steps = undefined;
-      this._stepsContents = undefined;
-      this._clickStepLinearListener = undefined;
-      this._clickStepNonLinearListener = undefined;
-    };
+        this._steps = [].slice.call(this._element.querySelectorAll(this.options.selectors.steps));
 
-    return Stepper;
-  }();
+        this._steps
+          .filter(function (step) {
+            return step.hasAttribute('data-target');
+          })
+          .forEach(function (step) {
+            _this._stepsContents.push(
+              _this._element.querySelector(step.getAttribute('data-target'))
+            );
+          });
+
+        detectAnimation(this._stepsContents, this.options);
+
+        this._setLinkListeners();
+
+        Object.defineProperty(this._element, customProperty, {
+          value: this,
+          writable: true
+        });
+
+        if (this._steps.length) {
+          show(this._element, this._currentIndex, this.options, function () {});
+        }
+      } // Private
+
+      var _proto = Stepper.prototype;
+
+      _proto._setLinkListeners = function _setLinkListeners() {
+        var _this2 = this;
+
+        this._steps.forEach(function (step) {
+          var trigger = step.querySelector(_this2.options.selectors.trigger);
+
+          if (_this2.options.linear) {
+            _this2._clickStepLinearListener = buildClickStepLinearListener(_this2.options);
+            trigger.addEventListener('click', _this2._clickStepLinearListener);
+          } else {
+            _this2._clickStepNonLinearListener = buildClickStepNonLinearListener(_this2.options);
+            trigger.addEventListener('click', _this2._clickStepNonLinearListener);
+          }
+        });
+      }; // Public
+
+      _proto.next = function next() {
+        var _this3 = this;
+
+        var nextStep =
+          this._currentIndex + 1 <= this._steps.length - 1
+            ? this._currentIndex + 1
+            : this._steps.length - 1;
+        show(this._element, nextStep, this.options, function () {
+          _this3._currentIndex = nextStep;
+        });
+      };
+
+      _proto.previous = function previous() {
+        var _this4 = this;
+
+        var previousStep = this._currentIndex - 1 >= 0 ? this._currentIndex - 1 : 0;
+        show(this._element, previousStep, this.options, function () {
+          _this4._currentIndex = previousStep;
+        });
+      };
+
+      _proto.to = function to(stepNumber) {
+        var _this5 = this;
+
+        var tempIndex = stepNumber - 1;
+        var nextStep = tempIndex >= 0 && tempIndex < this._steps.length ? tempIndex : 0;
+        show(this._element, nextStep, this.options, function () {
+          _this5._currentIndex = nextStep;
+        });
+      };
+
+      _proto.reset = function reset() {
+        var _this6 = this;
+
+        show(this._element, 0, this.options, function () {
+          _this6._currentIndex = 0;
+        });
+      };
+
+      _proto.destroy = function destroy() {
+        var _this7 = this;
+
+        this._steps.forEach(function (step) {
+          var trigger = step.querySelector(_this7.options.selectors.trigger);
+
+          if (_this7.options.linear) {
+            trigger.removeEventListener('click', _this7._clickStepLinearListener);
+          } else {
+            trigger.removeEventListener('click', _this7._clickStepNonLinearListener);
+          }
+        });
+
+        this._element[customProperty] = undefined;
+        this._element = undefined;
+        this._currentIndex = undefined;
+        this._steps = undefined;
+        this._stepsContents = undefined;
+        this._clickStepLinearListener = undefined;
+        this._clickStepNonLinearListener = undefined;
+      };
+
+      return Stepper;
+    })();
 
   return Stepper;
-
-}));
+});
 //# sourceMappingURL=bs-stepper.js.map

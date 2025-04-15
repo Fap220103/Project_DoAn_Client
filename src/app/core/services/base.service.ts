@@ -4,25 +4,22 @@ import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { Constants } from '../constants/constants';
 
-
-
 export class BaseService<T> {
   svUrl: string;
   injector: Injector;
   http: HttpClient;
   ignoreAuthorization = false;
   apiDomain = Constants.ApiResources;
-  constructor(private _http: HttpClient, endpoint: string, _injector: Injector) {
+  constructor(
+    private _http: HttpClient,
+    endpoint: string,
+    _injector: Injector
+  ) {
     this.svUrl = this.apiDomain + endpoint;
     this.injector = _injector;
     this.http = _http;
   }
-  get(
-    params?: any,
-    page?: number,
-    limit?: number,
-    orderby?: any
-  ): Observable<any> {
+  get(params?: any, page?: number, limit?: number, orderby?: any): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders();
     let url = this.svUrl;
     const xLimit = limit ? limit : 10;

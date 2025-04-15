@@ -21,40 +21,39 @@
   <div class="card">
     <div class="flex justify-between">
       <div class="flex justify-start items-center"></div>
-      <div
-        class="relative hedear flex flex-col sm:flex-row flex-0 sm:items-center sm:px-6 xs:py-4">
+      <div class="relative hedear flex flex-col sm:flex-row flex-0 sm:items-center sm:px-6 xs:py-4">
         <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
-          <mat-form-field class="fuse-mat-dense fuse-mat-rounded 
-          w-[500px] pr-2 md:min-w-64 xs:min-w-50 md:mr-[10px] sm:mr-[10px] xs:mr-[5px] md:text-base sm:text-base xs:text-xs"
-           [subscriptSizing]="'dynamic'">
+          <mat-form-field
+            class="fuse-mat-dense fuse-mat-rounded w-[500px] pr-2 md:min-w-64 xs:min-w-50 md:mr-[10px] sm:mr-[10px] xs:mr-[5px] md:text-base sm:text-base xs:text-xs"
+            [subscriptSizing]="'dynamic'"
+          >
             <input
               matInput
               #inputSearch
               [value]="searchString"
               placeholder="{{ 'Color.SearchTitle' | translate }}"
               (keyup)="handleChangeSearchInput($event)"
-              trim>
-              <button
-                class="btn-close !w-6 !h-6 min-w-0 p-0 mr-3"
-                *ngIf="inputSearch.value !== ''"
-                matSuffix
-                mat-icon-button
-                type="button"
-                (click)="handleClearSearchInput()">
-                <mat-icon
-                  class="w-4 h-4 text-gray-500"
-                  [svgIcon]="'heroicons_solid:x'">
-                </mat-icon>
+              trim
+            />
+            <button
+              class="btn-close !w-6 !h-6 min-w-0 p-0 mr-3"
+              *ngIf="inputSearch.value !== ''"
+              matSuffix
+              mat-icon-button
+              type="button"
+              (click)="handleClearSearchInput()"
+            >
+              <mat-icon class="w-4 h-4 text-gray-500" [svgIcon]="'heroicons_solid:x'"> </mat-icon>
             </button>
           </mat-form-field>
-            <button
-              mat-flat-button
-              [color]="'primary'"
-              class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
-              (click)="add()">
-              <mat-icon
-                class="md:text-base sm:text-base xs:text-xs">add</mat-icon>
-              <span>{{ 'Common.Add' | translate }}</span>
+          <button
+            mat-flat-button
+            [color]="'primary'"
+            class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
+            (click)="add()"
+          >
+            <mat-icon class="md:text-base sm:text-base xs:text-xs">add</mat-icon>
+            <span>{{ 'Common.Add' | translate }}</span>
           </button>
         </div>
       </div>
@@ -63,37 +62,43 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>{{ 'Common.No' | translate}}</th>
-            <th>{{ 'Color.Name' | translate}}</th>
-            <th>{{ 'Color.Code' | translate}}</th>
-            <th style="width:200px;">{{ 'Common.Action'| translate}}</th>
+            <th>{{ 'Common.No' | translate }}</th>
+            <th>{{ 'Color.Name' | translate }}</th>
+            <th>{{ 'Color.Code' | translate }}</th>
+            <th style="width: 200px">{{ 'Common.Action' | translate }}</th>
           </tr>
         </thead>
         <tbody *ngIf="lstColor.length > 0; else noData">
           <tr *ngFor="let item of lstColor; let i = index">
             <td>{{ item.position }}</td>
-            <td><span matTooltip="{{ item.colorName }}">{{ item.colorName }}</span></td>
-            <td> 
-              <div matTooltip="{{ item.colorCode }}" [ngStyle]="{ 'background-color': item.colorCode }" 
-              style="width: 30px; height: 30px; border: 1px solid #ccc;"
-              class="rounded-full ml-3">
-              </div>
+            <td>
+              <span matTooltip="{{ item.colorName }}">{{ item.colorName }}</span>
+            </td>
+            <td>
+              <div
+                matTooltip="{{ item.colorCode }}"
+                [ngStyle]="{ 'background-color': item.colorCode }"
+                style="width: 30px; height: 30px; border: 1px solid #ccc"
+                class="rounded-full ml-3"
+              ></div>
             </td>
             <td>
               <button
-              mat-icon-button
-              color="primary"
-              (click)="edit(item)"
-              matTooltip="{{ 'Common.Edit' | translate }}">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button
-              mat-icon-button
-              color="warn"
-              (click)="delete(item.id)"
-              matTooltip="{{ 'Common.Delete' | translate }}">
-              <mat-icon>delete</mat-icon>
-            </button>
+                mat-icon-button
+                color="primary"
+                (click)="edit(item)"
+                matTooltip="{{ 'Common.Edit' | translate }}"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="delete(item.id)"
+                matTooltip="{{ 'Common.Delete' | translate }}"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
             </td>
           </tr>
           <tr *ngIf="lstColor.length === 0">
@@ -109,15 +114,15 @@
       </table>
     </div>
   </div>
-
 </section>
 <!-- /.content -->
 <mat-paginator
-      class="absolute inset-x-0 bottom-0 border-b border-t z-10 bg-gray-50 dark:bg-transparent md:text-base sm:text-base xs:text-xs"
-      [pageSizeOptions]="pageSizeOptions"
-      [length]="totalCount"
-      [pageIndex]="pageIndex"
-      [pageSize]="pageSize"
-      (page)="onChangePage($event)"
-      showFirstLastButtons>
-    </mat-paginator>   
+  class="absolute inset-x-0 bottom-0 border-b border-t z-10 bg-gray-50 dark:bg-transparent md:text-base sm:text-base xs:text-xs"
+  [pageSizeOptions]="pageSizeOptions"
+  [length]="totalCount"
+  [pageIndex]="pageIndex"
+  [pageSize]="pageSize"
+  (page)="onChangePage($event)"
+  showFirstLastButtons
+>
+</mat-paginator>

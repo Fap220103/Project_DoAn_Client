@@ -12,12 +12,14 @@ export class NavbarComponent implements OnInit {
   pageTitle: string = '';
   pageAlias: string = '';
   currentLang = 'vi';
-  constructor(private router: Router, 
+  constructor(
+    private router: Router,
     private route: ActivatedRoute,
-    private translate: TranslateService) {
+    private translate: TranslateService
+  ) {
     this.router.events
       .pipe(
-        filter(event => event instanceof NavigationEnd), // Chỉ lấy sự kiện khi điều hướng kết thúc
+        filter((event) => event instanceof NavigationEnd), // Chỉ lấy sự kiện khi điều hướng kết thúc
         map(() => {
           let child = this.route.firstChild;
           while (child?.firstChild) {
@@ -26,10 +28,9 @@ export class NavbarComponent implements OnInit {
           return child?.snapshot.data || {};
         })
       )
-      .subscribe(data => {
+      .subscribe((data) => {
         this.pageTitle = data['title'] || 'Tổng quan';
         this.pageAlias = data['alias'] || 'dashboard';
-
       });
 
     translate.addLangs(['en', 'vi']);
@@ -40,14 +41,10 @@ export class NavbarComponent implements OnInit {
     translate.use(/en|vi/.test(lang) ? lang : 'vi');
   }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
   switchLang(lang: string) {
     this.translate.use(lang);
     this.currentLang = lang;
     localStorage.setItem('lang', lang);
   }
-
-  
 }

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductcategoryService } from '../../../../core/services/productcategory.service';
-import { Category, ChildCategory, ChildCategory2 } from '../../../../core/models/productcategory.model';
+import {
+  Category,
+  ChildCategory,
+  ChildCategory2
+} from '../../../../core/models/productcategory.model';
 import { AccountService } from '../../../../core/services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,15 +20,17 @@ export class ProductcategoryComponent implements OnInit {
   categories: Category[] = [];
   ListCategory: Category[] = [];
   userId: string | null;
-  constructor(private categoryService: ProductcategoryService,
+  constructor(
+    private categoryService: ProductcategoryService,
     private accountService: AccountService,
     private toastr: ToastrService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog
+  ) {
     this.userId = this.accountService.getUserId();
   }
-  
+
   ngOnInit(): void {
-    this.categoryService.getCategories().subscribe(response => {
+    this.categoryService.getCategories().subscribe((response) => {
       this.categories = response.content.data; // Đảm bảo response có dữ liệu hợp lệ
 
       this.categories.forEach((childCate: Category) => {
@@ -40,7 +46,7 @@ export class ProductcategoryComponent implements OnInit {
           });
         }
       });
-    })
+    });
   }
   deleteCategory(cateId: string) {
     // const userId = localStorage.getItem('userId'); // hoặc lấy từ AuthService nếu có
@@ -53,12 +59,12 @@ export class ProductcategoryComponent implements OnInit {
     if (confirm('Bạn có chắc chắn muốn xóa danh mục này không?')) {
       this.categoryService.deleteCategory(this.userId, cateId).subscribe({
         next: () => {
-          this.toastr.success("Xóa danh mục thành công!", "Thành công");
-          this.ListCategory = this.ListCategory.filter(c => c.id !== cateId);
+          this.toastr.success('Xóa danh mục thành công!', 'Thành công');
+          this.ListCategory = this.ListCategory.filter((c) => c.id !== cateId);
         },
         error: (err) => {
           console.error(err);
-          this.toastr.error("Đã xảy ra lỗi khi xóa danh mục!", "Lỗi");
+          this.toastr.error('Đã xảy ra lỗi khi xóa danh mục!', 'Lỗi');
         }
       });
     }
@@ -70,15 +76,15 @@ export class ProductcategoryComponent implements OnInit {
       height: '100%',
       panelClass: 'mat-mdc-dialog-container-right',
       position: {
-        right: '0',
+        right: '0'
       },
       data: {
         title: 'Xác nhận xóa',
         message: 'Bạn có chắc chắn muốn xóa sản phẩm này không?'
       }
     });
-  
-    dialogRef.afterClosed().subscribe(result => {
+
+    dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
         // gọi API xóa
         console.log('delete');

@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 
@@ -8,7 +16,6 @@ import { MatAutocomplete } from '@angular/material/autocomplete';
   styleUrls: ['./AraAutocomplete.component.css']
 })
 export class AraAutocompleteComponent implements OnInit {
-
   @Input() placeholder: string = '';
   @Input() displayField: string[] = []; // Mảng các key muốn hiển thị
   @Input() valueField: string = ''; // Key của giá trị (hoặc có thể là mảng nếu cần)
@@ -24,7 +31,7 @@ export class AraAutocompleteComponent implements OnInit {
   @Output() onChange: EventEmitter<any> = new EventEmitter<any>();
 
   mainControl: FormControl = new FormControl();
-  
+
   @ViewChild('auto') auto!: MatAutocomplete;
 
   constructor() {}
@@ -34,9 +41,9 @@ export class AraAutocompleteComponent implements OnInit {
     if (this.value) {
       this.mainControl.setValue(this.value);
     }
-    
+
     // Lắng nghe thay đổi của form control
-    this.mainControl.valueChanges.subscribe(val => {
+    this.mainControl.valueChanges.subscribe((val) => {
       // Ở đây, bạn có thể thực hiện lọc dữ liệu, valid hay đơn giản chỉ là emit ra ngoài
       this.onChange.emit(val);
     });
@@ -46,7 +53,7 @@ export class AraAutocompleteComponent implements OnInit {
   displayWith = (option: any) => {
     if (!option) return '';
     // Nếu có nhiều trường hiển thị, nối chúng lại (có thể tùy chỉnh theo yêu cầu)
-    return this.displayField.map(field => option[field]).join(' ');
+    return this.displayField.map((field) => option[field]).join(' ');
   };
 
   // Trả về placeholder xử lý theo logic nếu cần (có thể bổ sung thêm logic)
@@ -70,5 +77,4 @@ export class AraAutocompleteComponent implements OnInit {
     this.mainControl.setValue(null);
     this.onChange.emit(null);
   }
-
 }

@@ -43,7 +43,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatAutocompleteModule,
     IconsModule,
     MatPaginatorModule
-
   ],
   exports: [
     TranslateModule,
@@ -60,4 +59,4 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatPaginatorModule
   ]
 })
-export class SharedModule { }
+export class SharedModule {}

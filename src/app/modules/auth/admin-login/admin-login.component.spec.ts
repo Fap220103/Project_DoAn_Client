@@ -11,9 +11,8 @@ describe('AdminLoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminLoginComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminLoginComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

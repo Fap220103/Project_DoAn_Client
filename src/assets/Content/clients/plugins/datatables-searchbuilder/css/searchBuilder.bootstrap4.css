@@ -38,7 +38,9 @@ div.dtsb-searchBuilder div.dtsb-titleRow button.dtsb-clearAll {
   float: right;
   margin-bottom: 0.333em;
 }
-div.dtsb-searchBuilder div.dtsb-vertical .dtsb-value, div.dtsb-searchBuilder div.dtsb-vertical .dtsb-data, div.dtsb-searchBuilder div.dtsb-vertical .dtsb-condition {
+div.dtsb-searchBuilder div.dtsb-vertical .dtsb-value,
+div.dtsb-searchBuilder div.dtsb-vertical .dtsb-data,
+div.dtsb-searchBuilder div.dtsb-vertical .dtsb-condition {
   display: block;
 }
 div.dtsb-searchBuilder div.dtsb-group {
@@ -82,10 +84,26 @@ div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria div.dtsb-buttonContainer
   float: right;
   display: inline-block;
 }
-div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria div.dtsb-buttonContainer button.dtsb-delete, div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria div.dtsb-buttonContainer button.dtsb-right, div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria div.dtsb-buttonContainer button.dtsb-left {
+div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria div.dtsb-buttonContainer button.dtsb-delete,
+div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria div.dtsb-buttonContainer button.dtsb-right,
+div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria div.dtsb-buttonContainer button.dtsb-left {
   margin-right: 0.8em;
 }
-div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria div.dtsb-buttonContainer button.dtsb-delete:last-child, div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria div.dtsb-buttonContainer button.dtsb-right:last-child, div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria div.dtsb-buttonContainer button.dtsb-left:last-child {
+div.dtsb-searchBuilder
+  div.dtsb-group
+  div.dtsb-criteria
+  div.dtsb-buttonContainer
+  button.dtsb-delete:last-child,
+div.dtsb-searchBuilder
+  div.dtsb-group
+  div.dtsb-criteria
+  div.dtsb-buttonContainer
+  button.dtsb-right:last-child,
+div.dtsb-searchBuilder
+  div.dtsb-group
+  div.dtsb-criteria
+  div.dtsb-buttonContainer
+  button.dtsb-left:last-child {
   margin-right: 0;
 }
 div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria span.dtsp-joiner {
@@ -111,7 +129,8 @@ div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-condition {
 div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-data {
   border-color: #dc3545;
 }
-div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-value, div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria input.dtsb-value {
+div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-value,
+div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria input.dtsb-value {
   border-color: #007bff;
 }
 div.dtsb-searchBuilder div.dtsb-group div.dtsb-logicContainer {

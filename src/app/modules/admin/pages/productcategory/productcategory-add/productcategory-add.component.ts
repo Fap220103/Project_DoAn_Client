@@ -6,7 +6,6 @@ import { CategoryName } from '../../../../../core/models/productcategory.model';
 import { AccountService } from '../../../../../core/services/account.service';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
   selector: 'app-productcategory-add',
   templateUrl: './productcategory-add.component.html',
@@ -14,17 +13,18 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductcategoryAddComponent implements OnInit {
   categoryForm!: FormGroup;
-  categoryName: CategoryName[] = []; 
+  categoryName: CategoryName[] = [];
   userId: string | null;
   selectedFile: File | null = null;
-  
-  
-  constructor(private fb: FormBuilder,
+
+  constructor(
+    private fb: FormBuilder,
     private categoryService: ProductcategoryService,
     private router: Router,
     private accountService: AccountService,
-    private toastr: ToastrService) {
-      this.userId = this.accountService.getUserId();
+    private toastr: ToastrService
+  ) {
+    this.userId = this.accountService.getUserId();
   }
 
   ngOnInit() {
@@ -37,7 +37,7 @@ export class ProductcategoryAddComponent implements OnInit {
       seoTitle: [''],
       seoDescription: [''],
       seoKeywords: [''],
-      parentId: [''] 
+      parentId: ['']
     });
 
     this.categoryService.getCategoriesName().subscribe((data) => {
@@ -54,7 +54,7 @@ export class ProductcategoryAddComponent implements OnInit {
   onSubmit() {
     if (this.categoryForm.valid && this.selectedFile) {
       const formData = new FormData();
-  
+
       formData.append('userId', this.categoryForm.get('userId')?.value);
       formData.append('title', this.categoryForm.get('title')?.value);
       formData.append('alias', this.categoryForm.get('alias')?.value);
@@ -65,10 +65,10 @@ export class ProductcategoryAddComponent implements OnInit {
       const parentId = this.categoryForm.get('parentId')?.value;
       formData.append('parentId', parentId ? parentId : ''); // hoặc 'null'
       formData.append('image', this.selectedFile); // ảnh kiểu IFormFile
-  
+
       this.categoryService.createCategory(formData).subscribe({
         next: () => {
-          this.toastr.success("Thêm danh mục thành công!","Thành công");
+          this.toastr.success('Thêm danh mục thành công!', 'Thành công');
           this.router.navigate(['/admin/productcategory']);
         },
         error: (error) => {
@@ -76,8 +76,7 @@ export class ProductcategoryAddComponent implements OnInit {
         }
       });
     } else {
-      this.toastr.error("Form không hợp lệ hoặc chưa chọn ảnh!","Lỗi");
+      this.toastr.error('Form không hợp lệ hoặc chưa chọn ảnh!', 'Lỗi');
     }
   }
-  
 }

@@ -11,9 +11,8 @@ describe('HeaderAdminComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderAdminComponent ]
-    })
-    .compileComponents();
+      declarations: [HeaderAdminComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

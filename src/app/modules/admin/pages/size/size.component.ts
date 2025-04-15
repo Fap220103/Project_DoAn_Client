@@ -27,23 +27,21 @@ export class SizeComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private sizeService: SizeService,
-    public dialog: MatDialog,) {
-
-  }
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.getData();
   }
   getData() {
-    this.sizeService.get(this.params, this.pageIndex + 1, this.pageSize).subscribe(
-      rs => {
-        this.lstSize = rs.content.data;
-        this.lstSize = this.lstSize.map((x, index) => {
-          x.position = this.pageIndex * this.pageSize + index + 1;
-          return x;
-        });
-        this.totalCount = rs.content.data.totalRecords;
-      })
+    this.sizeService.get(this.params, this.pageIndex + 1, this.pageSize).subscribe((rs) => {
+      this.lstSize = rs.content.data;
+      this.lstSize = this.lstSize.map((x, index) => {
+        x.position = this.pageIndex * this.pageSize + index + 1;
+        return x;
+      });
+      this.totalCount = rs.content.data.totalRecords;
+    });
   }
   onChangePage(event: any) {
     this.pageIndex = event.pageIndex;
@@ -58,15 +56,15 @@ export class SizeComponent implements OnInit {
       height: '100%',
       panelClass: 'custom-dialog-right',
       position: {
-        right: '0',
+        right: '0'
       },
       data: {
         title: 'Size.EditTitle',
         item: this.selectedItem,
-        isEdit: true,
-      },
+        isEdit: true
+      }
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.getData();
       }
@@ -79,17 +77,16 @@ export class SizeComponent implements OnInit {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy',
+      cancelButtonText: 'Hủy'
     }).then((result) => {
       if (result.isConfirmed) {
         this.sizeService.delete(id).subscribe({
           next: () => {
             this.getData();
-            this.toastr.success("Xóa thành công!", "Thành công");
-            
+            this.toastr.success('Xóa thành công!', 'Thành công');
           },
           error: (err) => {
-            this.toastr.error("Đã xảy ra lỗi khi xóa!", "Lỗi");
+            this.toastr.error('Đã xảy ra lỗi khi xóa!', 'Lỗi');
           }
         });
       }
@@ -101,18 +98,17 @@ export class SizeComponent implements OnInit {
       height: '100%',
       panelClass: 'custom-dialog-right',
       position: {
-        right: '0',
+        right: '0'
       },
       data: {
         title: 'Size.AddTitle',
-        isEdit: false,
-      },
+        isEdit: false
+      }
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.getData();
       }
     });
   }
-
 }

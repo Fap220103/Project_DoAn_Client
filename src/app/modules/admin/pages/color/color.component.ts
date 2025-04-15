@@ -29,23 +29,21 @@ export class ColorComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private colorService: ColorService,
-    public dialog: MatDialog,) {
-
-  }
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.getData();
   }
   getData() {
-    this.colorService.get(this.params, this.pageIndex + 1, this.pageSize).subscribe(
-      rs => {
-        this.lstColor = rs.content.data.items;
-        this.lstColor = this.lstColor.map((x, index) => {
-          x.position = this.pageIndex * this.pageSize + index + 1;
-          return x;
-        });
-        this.totalCount = rs.content.data.totalRecords;
-      })
+    this.colorService.get(this.params, this.pageIndex + 1, this.pageSize).subscribe((rs) => {
+      this.lstColor = rs.content.data.items;
+      this.lstColor = this.lstColor.map((x, index) => {
+        x.position = this.pageIndex * this.pageSize + index + 1;
+        return x;
+      });
+      this.totalCount = rs.content.data.totalRecords;
+    });
   }
   onChangePage(event: any) {
     this.pageIndex = event.pageIndex;
@@ -60,15 +58,15 @@ export class ColorComponent implements OnInit {
       height: '100%',
       panelClass: 'custom-dialog-right',
       position: {
-        right: '0',
+        right: '0'
       },
       data: {
         title: 'Color.EditTitle',
         item: this.selectedItem,
-        isEdit: true,
-      },
+        isEdit: true
+      }
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.getData();
       }
@@ -81,17 +79,16 @@ export class ColorComponent implements OnInit {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy',
+      cancelButtonText: 'Hủy'
     }).then((result) => {
       if (result.isConfirmed) {
         this.colorService.delete(colorId).subscribe({
           next: () => {
             this.getData();
-            this.toastr.success("Xóa thành công!", "Thành công");
-            
+            this.toastr.success('Xóa thành công!', 'Thành công');
           },
           error: (err) => {
-            this.toastr.error("Đã xảy ra lỗi khi xóa!", "Lỗi");
+            this.toastr.error('Đã xảy ra lỗi khi xóa!', 'Lỗi');
           }
         });
       }
@@ -103,14 +100,14 @@ export class ColorComponent implements OnInit {
       height: '100%',
       panelClass: 'custom-dialog-right',
       position: {
-        right: '0',
+        right: '0'
       },
       data: {
         title: 'Color.AddTitle',
-        isEdit: false,
-      },
+        isEdit: false
+      }
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.getData();
       }
@@ -119,7 +116,7 @@ export class ColorComponent implements OnInit {
   handleChangeSearchInput(event: any) {
     if (event.key === 'Enter') {
       this.params = {
-        search: this.searchString,
+        search: this.searchString
       };
       this.getData();
     } else {
@@ -129,9 +126,8 @@ export class ColorComponent implements OnInit {
   handleClearSearchInput() {
     this.searchString = '';
     this.params = {
-      search: this.searchString,
+      search: this.searchString
     };
     this.getData();
   }
-
 }

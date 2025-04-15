@@ -11,9 +11,8 @@ describe('HeaderClientComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderClientComponent ]
-    })
-    .compileComponents();
+      declarations: [HeaderClientComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

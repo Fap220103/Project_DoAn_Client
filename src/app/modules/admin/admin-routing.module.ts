@@ -11,23 +11,38 @@ import { SizeComponent } from './pages/size/size.component';
 
 const routes: Routes = [
   {
-    path: '', 
-    component: AdminComponent, 
+    path: '',
+    component: AdminComponent,
     canActivate: [authGuard],
     children: [
-        { path: 'dashboard', component: DashboardComponent, data: { title: 'Tổng quan', alias: 'dashboard' } },
-        { path: 'product', component: ProductComponent, data: { title: 'Sản phẩm', alias: 'product' } },
-        { path: 'productcategory', component: ProductcategoryComponent, data: { title: 'Danh mục sản phẩm', alias: 'productcategory' } },
-        { path: 'productcategory/add', component: ProductcategoryAddComponent, data: { title: 'Thêm mới danh mục', alias: 'productcategory' } },
-        { path: 'color', component: ColorComponent, data: { title: 'Màu sắc', alias: 'color' } },
-        { path: 'size', component: SizeComponent, data: { title: 'kích cỡ', alias: 'size' } },
-      ]
-  },
-
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        data: { title: 'Tổng quan', alias: 'dashboard' }
+      },
+      {
+        path: 'product',
+        component: ProductComponent,
+        data: { title: 'Sản phẩm', alias: 'product' }
+      },
+      {
+        path: 'productcategory',
+        component: ProductcategoryComponent,
+        data: { title: 'Danh mục sản phẩm', alias: 'productcategory' }
+      },
+      {
+        path: 'productcategory/add',
+        component: ProductcategoryAddComponent,
+        data: { title: 'Thêm mới danh mục', alias: 'productcategory' }
+      },
+      { path: 'color', component: ColorComponent, data: { title: 'Màu sắc', alias: 'color' } },
+      { path: 'size', component: SizeComponent, data: { title: 'kích cỡ', alias: 'size' } }
+    ]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}
