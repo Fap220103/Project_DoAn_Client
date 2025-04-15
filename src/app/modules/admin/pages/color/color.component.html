@@ -63,10 +63,10 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>STT</th>
-            <th>Màu</th>
-            <th>Hiển thị</th>
-            <th style="width:200px;">Thao tác</th>
+            <th>{{ 'Common.No' | translate}}</th>
+            <th>{{ 'Color.Name' | translate}}</th>
+            <th>{{ 'Color.Code' | translate}}</th>
+            <th style="width:200px;">{{ 'Common.Action'| translate}}</th>
           </tr>
         </thead>
         <tbody *ngIf="lstColor.length > 0; else noData">
@@ -90,7 +90,7 @@
             <button
               mat-icon-button
               color="warn"
-              (click)="delete(item)"
+              (click)="delete(item.id)"
               matTooltip="{{ 'Common.Delete' | translate }}">
               <mat-icon>delete</mat-icon>
             </button>

@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
   title = 'client';
-  currentLang = 'vi';
+ 
   constructor(private translate: TranslateService) {
     translate.addLangs(['en', 'vi']);
     translate.setDefaultLang('vi');
@@ -18,11 +18,7 @@ export class AppComponent {
     translate.use(/en|vi/.test(lang) ? lang : 'vi');
 
   }
-  switchLang(lang: string) {
-    this.translate.use(lang);
-    this.currentLang = lang;
-    localStorage.setItem('lang', lang);
-  }
+ 
   
   
 }

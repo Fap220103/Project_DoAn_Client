@@ -15,6 +15,8 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { ColorComponent } from './pages/color/color.component';
 import { ColorAddComponent } from './pages/color/color-add/color-add.component';
+import { SizeComponent } from './pages/size/size.component';
+import { SizeAddComponent } from './pages/size/size-add/size-add.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { ColorAddComponent } from './pages/color/color-add/color-add.component';
     ProductcategoryAddComponent,
     AdminComponent,
     ColorComponent,
-    ColorAddComponent
+    ColorAddComponent,
+    SizeComponent,
+    SizeAddComponent
   ],
   imports: [
     CommonModule,

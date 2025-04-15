@@ -3,6 +3,9 @@ export const Constants = {
     Color: {
       Resource: 'api/Color',
     },
+    Size: {
+      Resource: 'api/Size',
+    },
     Product: {
       LIST: '/products',
       DETAIL: (id: number | string) => `/products/${id}`,

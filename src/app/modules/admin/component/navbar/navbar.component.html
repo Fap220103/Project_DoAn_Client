@@ -13,6 +13,31 @@
   </ul>
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
+   <div class="flex justify-end p-2 space-x-2">
+    <button
+      class="px-3 py-1 rounded border border-gray-300 hover:bg-gray-100"
+      (click)="switchLang('vi')"
+      [class.bg-blue-500]="currentLang === 'vi'"
+      [class.text-white]="currentLang === 'vi'"
+    >
+    <img
+    class="w-5 h-5"
+    [src]="'assets/images/flags/VI.svg'"
+    [alt]="'Flag image for Việt Nam'" /> 
+    </button>
+  
+    <button
+      class="px-3 py-1 rounded border border-gray-300 hover:bg-gray-100"
+      (click)="switchLang('en')"
+      [class.bg-blue-500]="currentLang === 'en'"
+      [class.text-white]="currentLang === 'en'"
+    >
+    <img
+    class="w-5 h-5"
+    [src]="'assets/images/flags/UK.svg'"
+    [alt]="'Flag image for English'" />
+    </button>
+  </div>
       <!-- Navbar Search -->
       <li class="nav-item">
           <a class="nav-link" data-widget="navbar-search" href="#" role="button">

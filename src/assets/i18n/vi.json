@@ -6,7 +6,9 @@
       "Delete": "Xóa",
       "Add": "Thêm",
       "Cancel": "Hủy",
-      "Save": "Lưu"
+      "Save": "Lưu",
+      "Action": "Thao tác",
+      "No": "STT"
     },
     "Color" : {
       "SearchTitle": "Tìm kiếm theo mã màu và tên màu",
@@ -14,7 +16,16 @@
       "EditTitle": "Cập nhật màu",
       "Title": "Màu sắc",
       "Name": "Tên màu",
-      "Code": "Mã màu"
+      "Code": "Mã màu",
+      "GuideName": "Nhập tên màu",
+      "GuideCode": "Nhập mã màu"
+    },
+    "Size" : {
+      "AddTitle" : "Thêm mới kích cỡ",
+      "EditTitle": "Cập nhật kích cỡ",
+      "Title": "Kích cỡ",
+      "Name": "Kích cỡ",
+      "GuideName": "Nhập kích cỡ"
     }
 }
   

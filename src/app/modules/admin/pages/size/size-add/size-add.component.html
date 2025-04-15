@@ -22,20 +22,15 @@
   <div class="container mt-[50px]">
     <form [formGroup]="form">
 
-      <!-- Màu sắc -->
+      <!-- Size -->
       <mat-form-field appearance="fill" class="w-100">
-        <mat-label>{{'Color.Name' | translate}}</mat-label>
-        <input matInput formControlName="colorName" placeholder="{{'Color.GuideName'| translate}}">
-        <mat-error *ngIf="form.controls['colorName'].invalid && form.controls['colorName'].touched">
-          Tiêu đề không được để trống
+        <mat-label>{{'Size.Name' | translate}}</mat-label>
+        <input matInput formControlName="sizeName" placeholder="{{'Size.GuideName'| translate}}">
+        <mat-error *ngIf="form.controls['sizeName'].invalid && form.controls['sizeName'].touched">
+          Không được để trống
         </mat-error>
       </mat-form-field>
-    
-      <!-- Mã màu -->
-      <mat-form-field appearance="fill" class="w-100">
-        <mat-label>{{'Color.Code' | translate}}</mat-label>
-        <input matInput formControlName="colorCode" placeholder="{{'Color.GuideCode'| translate}}">
-      </mat-form-field>
+
     </form>
     
   </div>

@@ -1,0 +1,69 @@
+
+<!-- Main content -->
+<section class="content mt-3">
+  <!-- Default box -->
+  <div class="card">
+    <div class="flex justify-between">
+      <div class="flex justify-start items-center"></div>
+      <div
+        class="relative hedear flex flex-col sm:flex-row flex-0 sm:items-center sm:px-6 xs:py-4">
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+      
+            <button
+              mat-flat-button
+              [color]="'primary'"
+              class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
+              (click)="add()">
+              <mat-icon
+                class="md:text-base sm:text-base xs:text-xs">add</mat-icon>
+              <span>{{ 'Common.Add' | translate }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>{{'Common.No' | translate }}</th>
+            <th>{{'Size.Name' | translate }}</th>
+            <th style="width:200px;">{{'Common.Action' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="lstSize.length > 0; else noData">
+          <tr *ngFor="let item of lstSize; let i = index">
+            <td>{{ item.position }}</td>
+            <td><span matTooltip="{{ item.sizeName }}">{{ item.sizeName }}</span></td>   
+            <td>
+              <button
+              mat-icon-button
+              color="primary"
+              (click)="edit(item)"
+              matTooltip="{{ 'Common.Edit' | translate }}">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="delete(item.id)"
+              matTooltip="{{ 'Common.Delete' | translate }}">
+              <mat-icon>delete</mat-icon>
+            </button>
+            </td>
+          </tr>
+          <tr *ngIf="lstSize.length === 0">
+            <td colspan="5">Không có bản ghi nào</td>
+          </tr>
+        </tbody>
+        <!-- Hiển thị khi không có dữ liệu -->
+        <ng-template #noData>
+          <tr>
+            <td colspan="5" class="text-center">Không có bản ghi nào</td>
+          </tr>
+        </ng-template>
+      </table>
+    </div>
+  </div>
+
+</section>
+<!-- /.content -->

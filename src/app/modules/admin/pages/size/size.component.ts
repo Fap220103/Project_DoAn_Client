@@ -1,24 +1,22 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AccountService } from '../../../../core/services/account.service';
-import { ToastrService } from 'ngx-toastr';
-import { ColorService } from '../../../../core/services/color.service';
-import { MatDialog } from '@angular/material/dialog';
-import { ColorAddComponent } from './color-add/color-add.component';
 import { MatPaginator } from '@angular/material/paginator';
+import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { SizeService } from '../../../../core/services/size.service';
+import { SizeAddComponent } from './size-add/size-add.component';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-color',
-  templateUrl: './color.component.html',
-  styleUrls: ['./color.component.scss']
+  selector: 'app-size',
+  templateUrl: './size.component.html',
+  styleUrls: ['./size.component.css']
 })
-export class ColorComponent implements OnInit {
+export class SizeComponent implements OnInit {
   pageTitle: string = 'Màu sắc';
-  lstColor: any[] = [];
+  lstSize: any[] = [];
   searchString: string = '';
   selectedItem: any = {};
   params: any = {};
-
   totalCount = 0;
   pageIndex = 0;
   pageSize = 10;
@@ -28,7 +26,7 @@ export class ColorComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
-    private colorService: ColorService,
+    private sizeService: SizeService,
     public dialog: MatDialog,) {
 
   }
@@ -37,10 +35,10 @@ export class ColorComponent implements OnInit {
     this.getData();
   }
   getData() {
-    this.colorService.get(this.params, this.pageIndex + 1, this.pageSize).subscribe(
+    this.sizeService.get(this.params, this.pageIndex + 1, this.pageSize).subscribe(
       rs => {
-        this.lstColor = rs.content.data.items;
-        this.lstColor = this.lstColor.map((x, index) => {
+        this.lstSize = rs.content.data;
+        this.lstSize = this.lstSize.map((x, index) => {
           x.position = this.pageIndex * this.pageSize + index + 1;
           return x;
         });
@@ -55,7 +53,7 @@ export class ColorComponent implements OnInit {
   edit(item: any) {
     console.log(item);
     this.selectedItem = item;
-    const dialogRef = this.dialog.open(ColorAddComponent, {
+    const dialogRef = this.dialog.open(SizeAddComponent, {
       minWidth: '70%',
       height: '100%',
       panelClass: 'custom-dialog-right',
@@ -63,7 +61,7 @@ export class ColorComponent implements OnInit {
         right: '0',
       },
       data: {
-        title: 'Color.EditTitle',
+        title: 'Size.EditTitle',
         item: this.selectedItem,
         isEdit: true,
       },
@@ -74,7 +72,7 @@ export class ColorComponent implements OnInit {
       }
     });
   }
-  delete(colorId: string) {
+  delete(id: string) {
     Swal.fire({
       title: 'Bạn có chắc chắn?',
       text: 'Hành động này sẽ không thể hoàn tác!',
@@ -84,7 +82,7 @@ export class ColorComponent implements OnInit {
       cancelButtonText: 'Hủy',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.colorService.delete(colorId).subscribe({
+        this.sizeService.delete(id).subscribe({
           next: () => {
             this.getData();
             this.toastr.success("Xóa thành công!", "Thành công");
@@ -98,7 +96,7 @@ export class ColorComponent implements OnInit {
     });
   }
   add() {
-    const dialogRef = this.dialog.open(ColorAddComponent, {
+    const dialogRef = this.dialog.open(SizeAddComponent, {
       minWidth: '70%',
       height: '100%',
       panelClass: 'custom-dialog-right',
@@ -106,7 +104,7 @@ export class ColorComponent implements OnInit {
         right: '0',
       },
       data: {
-        title: 'Color.AddTitle',
+        title: 'Size.AddTitle',
         isEdit: false,
       },
     });
@@ -115,23 +113,6 @@ export class ColorComponent implements OnInit {
         this.getData();
       }
     });
-  }
-  handleChangeSearchInput(event: any) {
-    if (event.key === 'Enter') {
-      this.params = {
-        search: this.searchString,
-      };
-      this.getData();
-    } else {
-      this.searchString = (event.target.value ?? '').trim();
-    }
-  }
-  handleClearSearchInput() {
-    this.searchString = '';
-    this.params = {
-      search: this.searchString,
-    };
-    this.getData();
   }
 
 }

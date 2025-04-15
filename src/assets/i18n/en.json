@@ -6,15 +6,25 @@
       "Delete": "Delete",
       "Add": "Add",
       "Cancel": "Cancel",
-      "Save": "Save"
-    }
-    ,
+      "Save": "Save",
+      "Action": "Action",
+      "No": "No"
+    },
     "Color" : {
       "SearchTitle": "Search by color code and color name",
       "AddTitle" : "Add Color",
       "EditTitle": "Edit Color",
       "Title": "Color",
       "Name": "Color Name",
-      "Code": "Color Code"
+      "Code": "Color Code",
+      "GuideName": "Enter Color Name",
+      "GuideCode": "Enter Color Code"
+    },
+    "Size" : {
+      "AddTitle" : "Add Size",
+      "EditTitle": "Edit Size",
+      "Title": "Size",
+      "Name": "Size",
+      "GuideName": "Enter Size"
     }
   }

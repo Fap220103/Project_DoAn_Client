@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { filter, map } from 'rxjs';
 
 @Component({
@@ -10,7 +11,10 @@ import { filter, map } from 'rxjs';
 export class NavbarComponent implements OnInit {
   pageTitle: string = '';
   pageAlias: string = '';
-  constructor(private router: Router, private route: ActivatedRoute) {
+  currentLang = 'vi';
+  constructor(private router: Router, 
+    private route: ActivatedRoute,
+    private translate: TranslateService) {
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd), // Chỉ lấy sự kiện khi điều hướng kết thúc
@@ -27,12 +31,23 @@ export class NavbarComponent implements OnInit {
         this.pageAlias = data['alias'] || 'dashboard';
 
       });
+
+    translate.addLangs(['en', 'vi']);
+    translate.setDefaultLang('vi');
+
+    const browserLang = translate.getBrowserLang() ?? 'vi';
+    const lang = localStorage.getItem('lang') ?? browserLang;
+    translate.use(/en|vi/.test(lang) ? lang : 'vi');
   }
 
   ngOnInit() {
     
   }
-  
+  switchLang(lang: string) {
+    this.translate.use(lang);
+    this.currentLang = lang;
+    localStorage.setItem('lang', lang);
+  }
 
   
 }

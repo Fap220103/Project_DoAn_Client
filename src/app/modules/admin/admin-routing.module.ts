@@ -7,6 +7,7 @@ import { AdminComponent } from './admin.component';
 import { authGuard } from '../../core/guards/auth.guard';
 import { ProductcategoryAddComponent } from './pages/productcategory/productcategory-add/productcategory-add.component';
 import { ColorComponent } from './pages/color/color.component';
+import { SizeComponent } from './pages/size/size.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
         { path: 'productcategory', component: ProductcategoryComponent, data: { title: 'Danh mục sản phẩm', alias: 'productcategory' } },
         { path: 'productcategory/add', component: ProductcategoryAddComponent, data: { title: 'Thêm mới danh mục', alias: 'productcategory' } },
         { path: 'color', component: ColorComponent, data: { title: 'Màu sắc', alias: 'color' } },
+        { path: 'size', component: SizeComponent, data: { title: 'kích cỡ', alias: 'size' } },
       ]
   },
 
