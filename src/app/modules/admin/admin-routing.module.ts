@@ -5,7 +5,6 @@ import { ProductComponent } from './pages/product/product.component';
 import { ProductcategoryComponent } from './pages/productcategory/productcategory.component';
 import { AdminComponent } from './admin.component';
 import { authGuard } from '../../core/guards/auth.guard';
-import { ProductcategoryAddComponent } from './pages/productcategory/productcategory-add/productcategory-add.component';
 import { ColorComponent } from './pages/color/color.component';
 import { SizeComponent } from './pages/size/size.component';
 import { SettingComponent } from './pages/setting/setting.component';

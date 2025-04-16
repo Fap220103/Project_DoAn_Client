@@ -42,7 +42,7 @@ export class BaseService<T> {
   }
 
   post(data: T, endpoint?: any): Observable<any> {
-    const url = endpoint ? this.apiDomain + endpoint : this.svUrl;
+    const url = endpoint ?? this.svUrl;
     return this.http.post(url, data);
   }
 

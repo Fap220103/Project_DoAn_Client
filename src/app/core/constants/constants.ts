@@ -9,17 +9,7 @@ export const Constants = {
   Setting: {
     Resource: 'api/Setting'
   },
-  Product: {
-    LIST: '/products',
-    DETAIL: (id: number | string) => `/products/${id}`
-  },
-  Cart: {
-    GET: '/cart',
-    ADD: '/cart/add',
-    REMOVE: '/cart/remove'
-  },
-  Order: {
-    CREATE: '/order/create',
-    HISTORY: '/order/history'
+  ProductCategory: {
+    Resource: 'api/ProductCategory'
   }
 };

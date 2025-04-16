@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class SidebarComponent implements OnInit {
   mainNavigations: NavigationItem[] = [];
   currentUser$!: Observable<User | null>;
+  expanded: boolean = false;
   constructor(
     private accountService: AccountService,
     private router: Router
@@ -44,5 +45,9 @@ export class SidebarComponent implements OnInit {
   logout() {
     this.accountService.logout();
     this.router.navigate(['/auth/login-admin']);
+  }
+  toggleDropdown(event: Event) {
+    event.preventDefault();
+    this.expanded = !this.expanded;
   }
 }

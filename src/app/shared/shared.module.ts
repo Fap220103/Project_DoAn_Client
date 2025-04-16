@@ -19,6 +19,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { IconsModule } from './icon.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { AngularSplitModule } from 'angular-split';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 @NgModule({
   declarations: [
     HeaderClientComponent,
@@ -42,7 +45,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ReactiveFormsModule,
     MatAutocompleteModule,
     IconsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    AngularSplitModule,
+    MatCheckboxModule
   ],
   exports: [
     TranslateModule,
@@ -56,7 +61,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatAutocompleteModule,
     AraAutocompleteComponent,
     IconsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    AngularSplitModule,
+    MatCheckboxModule
   ]
 })
 export class SharedModule {}

@@ -1,0 +1,7 @@
+.table-container-result {
+  display: flex;
+  flex-flow: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(100vh - 110px);
+}

@@ -17,15 +17,15 @@
       "Title": "Màu sắc",
       "Name": "Tên màu",
       "Code": "Mã màu",
-      "GuideName": "Nhập tên màu",
-      "GuideCode": "Nhập mã màu"
+      "GuideName": "Tên màu",
+      "GuideCode": "Mã màu"
     },
     "Size" : {
       "AddTitle" : "Thêm mới kích cỡ",
       "EditTitle": "Cập nhật kích cỡ",
       "Title": "Kích cỡ",
       "Name": "Kích cỡ",
-      "GuideName": "Nhập kích cỡ"
+      "GuideName": "Kích cỡ"
     },
     "Setting" : {
       "AddTitle" : "Thêm mới cài đặt",
@@ -33,8 +33,19 @@
       "Title": "Cài đặt",
       "Key": "Khóa",
       "Value": "Giá trị",
-      "GuideKey": "Nhập khóa",
-      "GuideValue": "Nhập giá trị"
+      "GuideKey": "Khóa",
+      "GuideValue": "Giá trị"
+    },
+    "Category" : {
+      "AddTitle" : "Thêm mới danh mục",
+      "EditTitle": "Cập nhật danh mục",
+      "Title": "Danh mục",
+      "Alias": "Bí danh",
+      "Description": "Mô tả",
+      "GuideTitle": "Tên danh mục",
+      "GuideAlias": "Bí danh",
+      "GuideDescription": "Mô tả",
+      "IsActive": "Kích hoạt"
     }
 }
   
