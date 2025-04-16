@@ -26,6 +26,15 @@
       "Title": "Kích cỡ",
       "Name": "Kích cỡ",
       "GuideName": "Nhập kích cỡ"
+    },
+    "Setting" : {
+      "AddTitle" : "Thêm mới cài đặt",
+      "EditTitle": "Cập nhật cài đặt",
+      "Title": "Cài đặt",
+      "Key": "Khóa",
+      "Value": "Giá trị",
+      "GuideKey": "Nhập khóa",
+      "GuideValue": "Nhập giá trị"
     }
 }
   

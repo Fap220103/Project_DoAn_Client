@@ -17,6 +17,8 @@ import { ColorComponent } from './pages/color/color.component';
 import { ColorAddComponent } from './pages/color/color-add/color-add.component';
 import { SizeComponent } from './pages/size/size.component';
 import { SizeAddComponent } from './pages/size/size-add/size-add.component';
+import { SettingComponent } from './pages/setting/setting.component';
+import { AddSettingComponent } from './pages/setting/addSetting/addSetting.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { SizeAddComponent } from './pages/size/size-add/size-add.component';
     ColorComponent,
     ColorAddComponent,
     SizeComponent,
-    SizeAddComponent
+    SizeAddComponent,
+    SettingComponent,
+    AddSettingComponent
   ],
   imports: [
     CommonModule,

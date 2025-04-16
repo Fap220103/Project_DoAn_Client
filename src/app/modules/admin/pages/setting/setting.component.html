@@ -1,20 +1,3 @@
-<!-- Content Header (Page header) -->
-<!-- <section class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1>Quản lý {{pageTitle}}</h1>
-      </div>
-      <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">{{pageTitle}}</li>
-        </ol>
-      </div>
-    </div>
-  </div>
-</section> -->
-
 <!-- Main content -->
 <section class="content mt-3">
   <!-- Default box -->
@@ -23,29 +6,6 @@
       <div class="flex justify-start items-center"></div>
       <div class="relative hedear flex flex-col sm:flex-row flex-0 sm:items-center sm:px-6 xs:py-4">
         <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
-          <mat-form-field
-            class="fuse-mat-dense fuse-mat-rounded w-[500px] pr-2 md:min-w-64 xs:min-w-50 md:mr-[10px] sm:mr-[10px] xs:mr-[5px] md:text-base sm:text-base xs:text-xs"
-            [subscriptSizing]="'dynamic'"
-          >
-            <input
-              matInput
-              #inputSearch
-              [value]="searchString"
-              placeholder="{{ 'Color.SearchTitle' | translate }}"
-              (keyup)="handleChangeSearchInput($event)"
-              trim
-            />
-            <button
-              class="btn-close !w-6 !h-6 min-w-0 p-0 mr-3"
-              *ngIf="inputSearch.value !== ''"
-              matSuffix
-              mat-icon-button
-              type="button"
-              (click)="handleClearSearchInput()"
-            >
-              <mat-icon class="w-4 h-4 text-gray-500" [svgIcon]="'heroicons_solid:x'"> </mat-icon>
-            </button>
-          </mat-form-field>
           <button
             mat-flat-button
             [color]="'primary'"
@@ -63,29 +23,23 @@
         <thead>
           <tr>
             <th>{{ 'Common.No' | translate }}</th>
-            <th>{{ 'Color.Name' | translate }}</th>
-            <th>{{ 'Color.Code' | translate }}</th>
+            <th>{{ 'Setting.Key' | translate }}</th>
+            <th>{{ 'Setting.Value' | translate }}</th>
             <th style="width: 200px">{{ 'Common.Action' | translate }}</th>
           </tr>
         </thead>
-        <tbody *ngIf="lstColor.length > 0; else noData">
-          <tr *ngFor="let item of lstColor; let i = index">
+        <tbody *ngIf="lstSetting.length > 0; else noData">
+          <tr *ngFor="let item of lstSetting; let i = index">
             <td>{{ item.position }}</td>
             <td>
-              <span matTooltip="{{ item.name }}">{{ item.name }}</span>
+              <span matTooltip="{{ item.key }}">{{ item.key }}</span>
             </td>
             <td>
-              <div
-                matTooltip="{{ item.HexCode }}"
-                [ngStyle]="{ 'background-color': item.HexCode }"
-                style="width: 30px; height: 30px; border: 1px solid #ccc"
-                class="rounded-full ml-3"
-              ></div>
+              <span matTooltip="{{ item.value }}">{{ item.value }}</span>
             </td>
             <td>
               <button
                 mat-icon-button
-                color="primary"
                 (click)="edit(item)"
                 matTooltip="{{ 'Common.Edit' | translate }}"
               >
@@ -93,7 +47,6 @@
               </button>
               <button
                 mat-icon-button
-                color="warn"
                 (click)="delete(item.id)"
                 matTooltip="{{ 'Common.Delete' | translate }}"
               >
@@ -101,7 +54,7 @@
               </button>
             </td>
           </tr>
-          <tr *ngIf="lstColor.length === 0">
+          <tr *ngIf="lstSetting.length === 0">
             <td colspan="5">Không có bản ghi nào</td>
           </tr>
         </tbody>

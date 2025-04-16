@@ -13,7 +13,7 @@ import { ProductcategoryAddComponent } from './productcategory-add/productcatego
 @Component({
   selector: 'app-productcategory',
   templateUrl: './productcategory.component.html',
-  styleUrls: ['./productcategory.component.css']
+  styleUrls: ['./productcategory.component.scss']
 })
 export class ProductcategoryComponent implements OnInit {
   pageTitle: string = 'Danh mục Sản phẩm';

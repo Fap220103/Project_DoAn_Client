@@ -6,6 +6,9 @@ export const Constants = {
   Size: {
     Resource: 'api/Size'
   },
+  Setting: {
+    Resource: 'api/Setting'
+  },
   Product: {
     LIST: '/products',
     DETAIL: (id: number | string) => `/products/${id}`
