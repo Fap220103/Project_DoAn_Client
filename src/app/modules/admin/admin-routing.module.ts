@@ -8,6 +8,7 @@ import { authGuard } from '../../core/guards/auth.guard';
 import { ColorComponent } from './pages/color/color.component';
 import { SizeComponent } from './pages/size/size.component';
 import { SettingComponent } from './pages/setting/setting.component';
+import { adminGuard } from '../../core/guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -32,7 +33,12 @@ const routes: Routes = [
       },
       { path: 'color', component: ColorComponent, data: { title: 'Màu sắc', alias: 'color' } },
       { path: 'size', component: SizeComponent, data: { title: 'kích cỡ', alias: 'size' } },
-      { path: 'setting', component: SettingComponent, data: { title: 'Cài đặt', alias: 'setting' } }
+      {
+        path: 'setting',
+        component: SettingComponent,
+        canActivate: [adminGuard],
+        data: { title: 'Cài đặt', alias: 'setting' }
+      }
     ]
   }
 ];

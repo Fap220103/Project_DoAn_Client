@@ -49,12 +49,15 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-      
     })
   ],
 
   providers: [
-    provideHttpClient(withInterceptorsFromDi(), withInterceptors([loadingInterceptor]), withInterceptors([tokenInterceptor])),
+    provideHttpClient(
+      withInterceptorsFromDi(),
+      withInterceptors([loadingInterceptor]),
+      withInterceptors([tokenInterceptor])
+    ),
     provideAnimationsAsync()
   ]
 })

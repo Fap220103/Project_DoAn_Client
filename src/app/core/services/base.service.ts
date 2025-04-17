@@ -38,7 +38,7 @@ export class BaseService<T> {
           url += '&ORDER=' + key + '|' + encodeURIComponent(orderby[key]);
       }
     }
-    return this.http.get(url, { headers: headers });
+    return this.http.get(url, { headers: headers, withCredentials: true });
   }
 
   post(data: T, endpoint?: any): Observable<any> {
