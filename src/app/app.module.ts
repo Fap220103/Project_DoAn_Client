@@ -19,6 +19,7 @@ import { loadingInterceptor } from './core/interceptors/loading.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { tokenInterceptor } from './core/interceptors/token.interceptor';
 
 // Hàm tải file JSON từ thư mục assets/i18n
 export function HttpLoaderFactory(http: HttpClient) {
@@ -48,11 +49,12 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
+      
     })
   ],
 
   providers: [
-    provideHttpClient(withInterceptorsFromDi(), withInterceptors([loadingInterceptor])),
+    provideHttpClient(withInterceptorsFromDi(), withInterceptors([loadingInterceptor]), withInterceptors([tokenInterceptor])),
     provideAnimationsAsync()
   ]
 })

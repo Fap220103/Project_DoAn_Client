@@ -46,6 +46,7 @@ export class AccountService {
     const roles = this.getDecodedToken(user.content.accessToken).roles;
     Array.isArray(roles) ? (user.content.roles = roles) : user.content.roles.push(roles);
     localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('accessToken', user.content.accessToken);
     this.currentUserSource.next(user);
   }
   getDecodedToken(token: string) {
