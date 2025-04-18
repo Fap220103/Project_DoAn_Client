@@ -6,28 +6,37 @@ import { UserService } from '../../../../../core/services/user.service';
 import { RolesObj, RoleType } from '../../../../../core/constants/roles';
 
 @Component({
-  selector: 'app-adduser',
-  templateUrl: './adduser.component.html',
-  styleUrls: ['./adduser.component.scss']
+  selector: 'app-edituser',
+  templateUrl: './edituser.component.html',
+  styleUrls: ['./edituser.component.scss']
 })
-export class AddUserComponent implements OnInit {
+export class EditUserComponent implements OnInit {
   form!: FormGroup;
   lstRole = RolesObj;
+  item: any = {};
+  isEdit: boolean;
+  selectedFile!: File;
   constructor(
     public snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<AddUserComponent>,
+    public dialogRef: MatDialogRef<EditUserComponent>,
     private formBuilder: FormBuilder,
     public userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     dialogRef.disableClose = true;
 
+    if (data.isEdit) {
+      this.item = { ...data.item };
+    }
+    data.isEdit ? (this.isEdit = true) : (this.isEdit = false);
+
     this.form = this.formBuilder.group(
       {
         email: ['', [Validators.required, Validators.email]],
-        password: ['', Validators.required, Validators.minLength(6)],
-        confirmPassword: ['', Validators.required],
-        roles: [[]]
+        userName: ['', Validators.required],
+        phoneNumber: ['', Validators.required],
+        image: ['', Validators.required],
+        roles: [[], Validators.required]
       },
       {
         validators: this.passwordMatchValidator
@@ -62,19 +71,30 @@ export class AddUserComponent implements OnInit {
     }
     this.form.get('roles')?.setValue(roles);
   }
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+
   save() {
     const formValue = this.form.value;
-    const addItem = {
-      email: formValue.email,
-      password: formValue.password,
-      confirmPassword: formValue.confirmPassword,
-      roles: formValue.roles
-    };
-    console.log('add: ', addItem);
-    this.userService.post(addItem).subscribe({
-      next: (res) => this.processResponse(res),
-      error: () => this.processResponse(false)
-    });
+    const formData = new FormData();
+
+    formData.append('email', formValue.email);
+    formData.append('userName', formValue.userName);
+    formData.append('phoneNumber', formValue.phoneNumber);
+    formData.append('roles', JSON.stringify(formValue.roles));
+
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile, this.selectedFile.name);
+    }
+    console.log('form data: ', formData);
+    // this.userService.put(formData).subscribe({
+    //   next: (res) => this.processResponse(res),
+    //   error: () => this.processResponse(false)
+    // });
   }
 
   processResponse(res: any, msg?: string, isClose?: boolean) {

@@ -20,32 +20,29 @@
           </mat-error>
         </mat-form-field>
 
-        <!-- Password -->
         <mat-form-field appearance="fill" class="w-100">
-          <mat-label>Mật khẩu</mat-label>
-          <input matInput type="password" formControlName="password" placeholder="Nhập mật khẩu" />
-          <mat-error
-            *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched"
-          >
-            Mật khẩu là bắt buộc
+          <mat-label>UserName</mat-label>
+          <input matInput formControlName="userName" placeholder="Nhập userName" />
+          <mat-error *ngIf="form.get('userName')?.invalid && form.get('userName')?.touched">
+            UserName không hợp lệ
           </mat-error>
         </mat-form-field>
 
-        <!-- Confirm Password -->
         <mat-form-field appearance="fill" class="w-100">
-          <mat-label>Nhập lại mật khẩu</mat-label>
-          <input
-            matInput
-            type="password"
-            formControlName="confirmPassword"
-            placeholder="Nhập lại mật khẩu"
-          />
-          <mat-error
-            *ngIf="form.hasError('passwordMismatch') && form.get('confirmPassword')?.touched"
-          >
-            Mật khẩu không khớp
+          <mat-label>PhoneNumber</mat-label>
+          <input matInput formControlName="phoneNumber" placeholder="Nhập phoneNumber" />
+          <mat-error *ngIf="form.get('phoneNumber')?.invalid && form.get('phoneNumber')?.touched">
+            PhoneNumber không hợp lệ
           </mat-error>
         </mat-form-field>
+        <div class="mb-4">
+          <label class="block font-medium mb-2">Chọn ảnh đại diện</label>
+          <input
+            type="file"
+            (change)="onFileSelected($event)"
+            class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+          />
+        </div>
 
         <!-- Roles -->
         <label class="font-medium mb-2">Phân quyền</label>

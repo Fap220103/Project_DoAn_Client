@@ -63,7 +63,8 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    return this.getUserRole() === 'Admin';
+    const roles = this.getUserRole(); // trả về mảng string[]
+    return roles.includes('Admin');
   }
 
   saveTokens(accessToken: string, expiresInSeconds: number): void {

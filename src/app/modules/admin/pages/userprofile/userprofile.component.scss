@@ -6,7 +6,10 @@
   right: 0;
   top: 0;
 }
-
+.wrap-body {
+  max-height: 100vh;
+  height: calc(100vh - 205px);
+}
 .table-container-result {
   display: flex;
   flex-flow: column;

@@ -24,6 +24,7 @@ import { ProductCategoryLv2Component } from './pages/productcategory/productcate
 import { ProductCategoryLv3Component } from './pages/productcategory/productcategory-lv3/productcategory-lv3.component';
 import { UserProfileComponent } from './pages/userprofile/userprofile.component';
 import { AddUserComponent } from './pages/userprofile/adduser/adduser.component';
+import { EditUserComponent } from './pages/userprofile/edituser/edituser.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { AddUserComponent } from './pages/userprofile/adduser/adduser.component'
     SettingComponent,
     AddSettingComponent,
     UserProfileComponent,
-    AddUserComponent
+    AddUserComponent,
+    EditUserComponent
   ],
   imports: [
     CommonModule,

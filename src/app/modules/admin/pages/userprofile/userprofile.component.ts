@@ -6,6 +6,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
 import { AddUserComponent } from './adduser/adduser.component';
 import { UserService } from '../../../../core/services/user.service';
+import { RoleType } from '../../../../core/constants/roles';
+import { EditUserComponent } from './edituser/edituser.component';
 
 @Component({
   selector: 'app-userprofile',
@@ -23,11 +25,7 @@ export class UserProfileComponent implements OnInit {
   pageIndex = 0;
   pageSize = 10;
   pageSizeOptions = [5, 10, 25, 100];
-  lstStatus = [
-    { value: 'admin', display: 'Admin' },
-    { value: 'staff', display: 'Staff' },
-    { value: 'basic', display: 'Basic' }
-  ];
+  lstStatus = RoleType;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
@@ -59,8 +57,8 @@ export class UserProfileComponent implements OnInit {
   edit(item: any) {
     console.log(item);
     this.selectedItem = item;
-    const dialogRef = this.dialog.open(AddUserComponent, {
-      minWidth: '70%',
+    const dialogRef = this.dialog.open(EditUserComponent, {
+      minWidth: '50%',
       height: '100%',
       panelClass: 'custom-dialog-right',
       position: {
@@ -102,7 +100,7 @@ export class UserProfileComponent implements OnInit {
   }
   add() {
     const dialogRef = this.dialog.open(AddUserComponent, {
-      minWidth: '70%',
+      minWidth: '30%',
       height: '100%',
       panelClass: 'custom-dialog-right',
       position: {

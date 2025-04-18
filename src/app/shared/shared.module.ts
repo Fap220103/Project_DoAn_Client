@@ -14,7 +14,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AraAutocompleteComponent } from './components/AraAutocomplete/AraAutocomplete.component';
-import { MatOptionModule } from '@angular/material/core';
+import { MatOptionModule, MatPseudoCheckboxModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { IconsModule } from './icon.module';
@@ -49,7 +49,8 @@ import { MatTableModule } from '@angular/material/table';
     MatPaginatorModule,
     AngularSplitModule,
     MatCheckboxModule,
-    MatTableModule
+    MatTableModule,
+    MatPseudoCheckboxModule
   ],
   exports: [
     TranslateModule,
@@ -66,7 +67,8 @@ import { MatTableModule } from '@angular/material/table';
     MatPaginatorModule,
     AngularSplitModule,
     MatCheckboxModule,
-    MatTableModule
+    MatTableModule,
+    MatPseudoCheckboxModule
   ]
 })
 export class SharedModule {}

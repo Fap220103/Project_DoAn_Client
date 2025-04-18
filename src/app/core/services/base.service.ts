@@ -52,4 +52,11 @@ export class BaseService<T> {
     const url = endpoint ? this.apiDomain + endpoint : `${this.svUrl}/${id}`;
     return this.http.delete(url, { headers: headers, withCredentials: true });
   }
+
+  put(data: any, endpoint?: string): Observable<any> {
+    const url = endpoint ?? this.svUrl;
+    return this.http.put(url, data, {
+      withCredentials: true
+    });
+  }
 }
