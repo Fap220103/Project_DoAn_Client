@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductcategoryService } from '../../../../core/services/productcategory.service';
 import {
   Category,
   ChildCategory,
   ChildCategory2
 } from '../../../../core/models/productcategory.model';
-import { AccountService } from '../../../../core/services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 

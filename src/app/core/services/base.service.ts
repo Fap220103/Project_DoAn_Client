@@ -42,12 +42,14 @@ export class BaseService<T> {
   }
 
   post(data: T, endpoint?: any): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders();
     const url = endpoint ?? this.svUrl;
-    return this.http.post(url, data);
+    return this.http.post(url, data, { headers: headers, withCredentials: true });
   }
 
   delete(id: string, endpoint?: any): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders();
     const url = endpoint ? this.apiDomain + endpoint : `${this.svUrl}/${id}`;
-    return this.http.delete(url);
+    return this.http.delete(url, { headers: headers, withCredentials: true });
   }
 }

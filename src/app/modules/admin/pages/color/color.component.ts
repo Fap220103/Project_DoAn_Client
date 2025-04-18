@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AccountService } from '../../../../core/services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { ColorService } from '../../../../core/services/color.service';
 import { MatDialog } from '@angular/material/dialog';

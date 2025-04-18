@@ -1,12 +1,12 @@
 import { HttpHeaders, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { TokenService } from '../services/token.service';
-import { AccountService } from '../services/account.service';
+import { AuthService } from '../services/auth.service';
 import { catchError, from, switchMap, throwError } from 'rxjs';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
-  const accountService = inject(AccountService);
-  const accessToken = accountService.getAccessToken();
+  const authService = inject(AuthService);
+  const accessToken = authService.getAccessToken();
 
   if (
     !accessToken ||
@@ -16,11 +16,11 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   ) {
     return next(req);
   }
-  if (accountService.isTokenExpired()) {
-    return from(accountService.refreshToken()).pipe(
+  if (authService.isTokenExpired()) {
+    return from(authService.refreshToken()).pipe(
       switchMap(() => {
-        const newToken = accountService.getAccessToken();
-        if (!newToken) return throwError(() => new Error('Token refresh failed'));
+        const newToken = authService.getAccessToken();
+        if (!newToken) authService.logout();
         const authReq = req.clone({
           setHeaders: {
             Authorization: `Bearer ${newToken}`

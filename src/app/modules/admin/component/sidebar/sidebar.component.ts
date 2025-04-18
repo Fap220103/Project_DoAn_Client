@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NavigationItem } from '../../../../core/models/navigation.model';
 import { Observable, take } from 'rxjs';
 import { User } from '../../../../core/models/user.model';
-import { AccountService } from '../../../../core/services/account.service';
+import { AuthService } from '../../../../core/services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,19 +13,15 @@ import { Router } from '@angular/router';
 export class SidebarComponent implements OnInit {
   mainNavigations: NavigationItem[] = [];
   currentUser$!: Observable<User | null>;
+  isLoggedIn: boolean = false;
   expanded: boolean = false;
   constructor(
-    private accountService: AccountService,
-    private router: Router
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
-    this.currentUser$ = this.accountService.currentUser$;
-    this.currentUser$.pipe(take(1)).subscribe((user) => {
-      if (user) {
-        this.mainNavigations = user.content.mainNavigations;
-      }
-    });
+    this.mainNavigations = this.authService.getMenu();
+    this.isLoggedIn= this.authService.isLoggedIn()
   }
 
   isDropdown(item: NavigationItem): boolean {
@@ -43,8 +39,8 @@ export class SidebarComponent implements OnInit {
     return item.children.length === 1 ? item.children[0] : item;
   }
   logout() {
-    this.accountService.logout();
-    this.router.navigate(['/auth/login-admin']);
+    this.authService.logout();
+  
   }
   toggleDropdown(event: Event) {
     event.preventDefault();

@@ -93,7 +93,7 @@
             </ul>
           </li>
         </ng-container>
-        <li class="nav-item" *ngIf="(currentUser$ | async) != null">
+        <li class="nav-item" *ngIf="isLoggedIn">
           <a (click)="logout()" class="nav-link point-click">
             <i class="nav-icon fas fa-th"></i>
             <p>Đăng xuất</p>
