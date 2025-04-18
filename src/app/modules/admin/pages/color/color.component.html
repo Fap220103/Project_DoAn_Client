@@ -1,20 +1,3 @@
-<!-- Content Header (Page header) -->
-<!-- <section class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1>Quản lý {{pageTitle}}</h1>
-      </div>
-      <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">{{pageTitle}}</li>
-        </ol>
-      </div>
-    </div>
-  </div>
-</section> -->
-
 <!-- Main content -->
 <section class="content mt-3">
   <!-- Default box -->
@@ -58,7 +41,7 @@
         </div>
       </div>
     </div>
-    <div class="card-body">
+    <!-- <div class="card-body">
       <table class="table table-hover">
         <thead>
           <tr>
@@ -105,12 +88,77 @@
             <td colspan="5">Không có bản ghi nào</td>
           </tr>
         </tbody>
-        <!-- Hiển thị khi không có dữ liệu -->
         <ng-template #noData>
           <tr>
             <td colspan="5" class="text-center">Không có bản ghi nào</td>
           </tr>
         </ng-template>
+      </table>
+    </div> -->
+    <div class="mat-elevation-z2">
+      <table mat-table [dataSource]="dataSource" class="mat-table">
+        <!-- Cột Số thứ tự -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>{{ 'Common.No' | translate }}</th>
+          <td mat-cell *matCellDef="let item">{{ item.position }}</td>
+        </ng-container>
+
+        <!-- Cột Tên -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>{{ 'Color.Name' | translate }}</th>
+          <td mat-cell *matCellDef="let item">
+            <span matTooltip="{{ item.name }}">{{ item.name }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Cột Mã màu (HexCode) -->
+        <ng-container matColumnDef="hexCode">
+          <th mat-header-cell *matHeaderCellDef>{{ 'Color.Code' | translate }}</th>
+          <td mat-cell *matCellDef="let item">
+            <div
+              matTooltip="{{ item.HexCode }}"
+              [ngStyle]="{ 'background-color': item.HexCode }"
+              style="width: 30px; height: 30px; border: 1px solid #ccc"
+              class="rounded-full ml-3"
+            ></div>
+          </td>
+        </ng-container>
+
+        <!-- Cột Hành động -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef style="width: 200px">
+            {{ 'Common.Action' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let item">
+            <button
+              mat-icon-button
+              color="primary"
+              (click)="edit(item)"
+              matTooltip="{{ 'Common.Edit' | translate }}"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="delete(item.id)"
+              matTooltip="{{ 'Common.Delete' | translate }}"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <!-- Header và Row -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <!-- Hiển thị khi không có dữ liệu -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4" style="text-align: center">
+            {{ 'Common.NoData' | translate }}
+          </td>
+        </tr>
       </table>
     </div>
   </div>

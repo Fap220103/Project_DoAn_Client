@@ -11,5 +11,8 @@ export const Constants = {
   },
   ProductCategory: {
     Resource: 'api/ProductCategory'
+  },
+  UserProfile: {
+    Resource: 'api/UserProfile'
   }
 };

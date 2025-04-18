@@ -18,8 +18,10 @@ export class AuthService {
   private readonly USER_KEY = 'userId';
   private readonly NAVIGATION = 'menu';
 
-  constructor(private http: HttpClient, private router: Router) {
-  }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   // Đăng nhập
   login(credentials: { username: string; password: string }): Observable<any> {
@@ -46,14 +48,14 @@ export class AuthService {
     localStorage.removeItem(this.USER_KEY);
     localStorage.removeItem(this.ROLE_KEY);
     localStorage.removeItem(this.NAVIGATION);
-    
+
     this.http
-    .post(`${this.baseUrl}Account/Logout?userId=${userId}`, {}, { withCredentials: true })
-    .subscribe({
-      complete: () => {
-        this.router.navigate(['/auth/login-admin']);
-      },
-    });
+      .post(`${this.baseUrl}Account/Logout?userId=${userId}`, {}, { withCredentials: true })
+      .subscribe({
+        complete: () => {
+          this.router.navigate(['/auth/login-admin']);
+        }
+      });
   }
 
   getUserRole(): string {
@@ -65,7 +67,7 @@ export class AuthService {
   }
 
   saveTokens(accessToken: string, expiresInSeconds: number): void {
-    const expiresAt = Date.now() + expiresInSeconds * 1000; 
+    const expiresAt = Date.now() + expiresInSeconds * 1000;
     //const expiresAt = Date.now() - 1000; // test refresh token
     localStorage.setItem(this.TOKEN_KEY, accessToken);
     localStorage.setItem(this.EXPIRES_AT_KEY, expiresAt.toString());
@@ -76,12 +78,12 @@ export class AuthService {
     return localStorage.getItem(this.TOKEN_KEY);
   }
 
-  getUserId(): any{
+  getUserId(): any {
     return localStorage.getItem(this.USER_KEY);
   }
   getMenu(): any {
     const value = localStorage.getItem(this.NAVIGATION);
-   return value ? JSON.parse(value) : null;
+    return value ? JSON.parse(value) : null;
   }
 
   isTokenExpired(): boolean {
@@ -93,10 +95,10 @@ export class AuthService {
   isLoggedIn(): boolean {
     const token = this.getAccessToken();
     if (!token) return false;
-  
+
     return !this.isTokenExpired();
   }
-  
+
   refreshToken(): Observable<any> {
     return this.http
       .post<any>(`${this.baseUrl}Account/RefreshToken`, {}, { withCredentials: true })
@@ -110,13 +112,16 @@ export class AuthService {
         })
       );
   }
-  
+
   setCurrentUser(user: any) {
     user.content.roles = [];
     const decodedToken = this.getDecodedToken(user.content.accessToken);
     const roles = decodedToken.roles;
     Array.isArray(roles) ? (user.content.roles = roles) : user.content.roles.push(roles);
-    const userId = decodedToken['sub'] || decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] || null;
+    const userId =
+      decodedToken['sub'] ||
+      decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] ||
+      null;
     const menu = user.content.mainNavigations;
     //localStorage.setItem(this.USER_KEY, JSON.stringify(user));
     localStorage.setItem(this.USER_KEY, userId);
@@ -127,5 +132,4 @@ export class AuthService {
   getDecodedToken(token: string) {
     return JSON.parse(atob(token.split('.')[1]));
   }
- 
 }

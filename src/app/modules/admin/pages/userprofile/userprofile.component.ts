@@ -2,18 +2,19 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ColorService } from '../../../../core/services/color.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ColorAddComponent } from './color-add/color-add.component';
 import { MatPaginator } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
-import { MatTableDataSource } from '@angular/material/table';
+import { AddUserComponent } from './adduser/adduser.component';
+import { UserService } from '../../../../core/services/user.service';
+
 @Component({
-  selector: 'app-color',
-  templateUrl: './color.component.html',
-  styleUrls: ['./color.component.scss']
+  selector: 'app-userprofile',
+  templateUrl: './userprofile.component.html',
+  styleUrls: ['./userprofile.component.scss']
 })
-export class ColorComponent implements OnInit {
+export class UserProfileComponent implements OnInit {
   pageTitle: string = 'Màu sắc';
-  lstColor: any[] = [];
+  lstUser: any[] = [];
   searchString: string = '';
   selectedItem: any = {};
   params: any = {};
@@ -22,13 +23,16 @@ export class ColorComponent implements OnInit {
   pageIndex = 0;
   pageSize = 10;
   pageSizeOptions = [5, 10, 25, 100];
-  displayedColumns: string[] = ['position', 'name', 'hexCode', 'actions'];
-  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
+  lstStatus = [
+    { value: 'admin', display: 'Admin' },
+    { value: 'staff', display: 'Staff' },
+    { value: 'basic', display: 'Basic' }
+  ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private toastr: ToastrService,
-    private colorService: ColorService,
+    private userService: UserService,
     public dialog: MatDialog
   ) {}
 
@@ -36,15 +40,16 @@ export class ColorComponent implements OnInit {
     this.getData();
   }
   getData() {
-    this.colorService.get(this.params, this.pageIndex + 1, this.pageSize).subscribe((rs) => {
-      this.lstColor = rs.content.data.items;
-      this.lstColor = this.lstColor.map((x, index) => {
+    this.userService.get(this.params, this.pageIndex + 1, this.pageSize).subscribe((rs) => {
+      console.log(rs);
+      this.lstUser = rs.content.data.items;
+      this.lstUser = this.lstUser.map((x, index) => {
         x.position = this.pageIndex * this.pageSize + index + 1;
         return x;
       });
       this.totalCount = rs.content.data.totalRecords;
-      this.dataSource.data = this.lstColor;
     });
+    console.log('list user: ', this.lstUser);
   }
   onChangePage(event: any) {
     this.pageIndex = event.pageIndex;
@@ -54,7 +59,7 @@ export class ColorComponent implements OnInit {
   edit(item: any) {
     console.log(item);
     this.selectedItem = item;
-    const dialogRef = this.dialog.open(ColorAddComponent, {
+    const dialogRef = this.dialog.open(AddUserComponent, {
       minWidth: '70%',
       height: '100%',
       panelClass: 'custom-dialog-right',
@@ -83,7 +88,7 @@ export class ColorComponent implements OnInit {
       cancelButtonText: 'Hủy'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.colorService.delete(colorId).subscribe({
+        this.userService.delete(colorId).subscribe({
           next: () => {
             this.getData();
             this.toastr.success('Xóa thành công!', 'Thành công');
@@ -96,7 +101,7 @@ export class ColorComponent implements OnInit {
     });
   }
   add() {
-    const dialogRef = this.dialog.open(ColorAddComponent, {
+    const dialogRef = this.dialog.open(AddUserComponent, {
       minWidth: '70%',
       height: '100%',
       panelClass: 'custom-dialog-right',
@@ -128,6 +133,12 @@ export class ColorComponent implements OnInit {
     this.searchString = '';
     this.params = {
       search: this.searchString
+    };
+    this.getData();
+  }
+  handleChangeRole(event: any) {
+    this.params = {
+      role: event
     };
     this.getData();
   }

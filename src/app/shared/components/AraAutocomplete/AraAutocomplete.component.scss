@@ -1,0 +1,48 @@
+::ng-deep .form-control.mat-form-field {
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+::ng-deep .form-control.mat-form-field-appearance-fill .mat-form-field-flex {
+  border-radius: 12px;
+  background: #f9fafb;
+  padding: 0 12px;
+}
+
+::ng-deep .form-control.mat-form-field-appearance-fill.mat-focused .mat-form-field-flex {
+  background: #fff;
+  border: 2px solid #3f51b5;
+}
+
+::ng-deep .form-control .mat-input-element {
+  padding: 12px 0;
+  font-size: 16px;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .mat-autocomplete-panel {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+::ng-deep .mat-option {
+  padding: 8px 16px;
+}
+
+::ng-deep .mat-option:hover,
+::ng-deep .mat-option.mat-active {
+  background-color: #e3f2fd;
+}
+
+::ng-deep .mat-icon-button {
+  color: #666;
+}
+
+::ng-deep .mat-icon-button:hover {
+  color: #000;
+}

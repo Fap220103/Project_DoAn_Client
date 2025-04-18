@@ -1,14 +1,3 @@
-::ng-deep .custom-dialog-right .mat-mdc-dialog-surface {
-  margin: 0;
-  height: 100%;
-  border-radius: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 60% !important; /* hoặc max-width nếu bạn muốn responsive */
-  max-width: 100%;
-}
-
 .table-container-result {
   display: flex;
   flex-flow: column;
@@ -16,25 +5,58 @@
   overflow-x: hidden;
   height: calc(100vh - 160px);
 }
-::ng-deep .custom-search-field {
-  background-color: #fbeaec; /* màu nền */
-  border-radius: 8px;
-  padding: 8px;
-}
 
-::ng-deep .custom-search-field .mat-form-field-wrapper {
-  padding-bottom: 0 !important; /* bỏ khoảng trắng dư bên dưới */
-}
+:host {
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 0.5rem /* 8px */ !important;
+  margin-bottom: 0.5rem /* 8px */ !important;
 
-::ng-deep .custom-search-field .mat-form-field-flex {
-  background-color: transparent; /* tránh đè màu */
-}
+  .detail-table {
+    // border-radius: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    overflow: auto;
+    width: 100%;
 
-::ng-deep .custom-search-field .mat-form-field-infix {
-  border-bottom: none !important; /* bỏ gạch chân nếu cần */
-}
+    .mat-row {
+      height: auto;
+      min-height: 60px;
 
-::ng-deep .custom-search-field input {
-  font-size: 14px;
-  padding: 6px 8px;
+      .mat-cell {
+        min-height: inherit;
+      }
+    }
+
+    .mat-column-position {
+      flex: 0 1 70px;
+    }
+    .mat-column-name {
+      flex: 0 1 200px;
+    }
+    .mat-column-address {
+      flex: 0 1 320px;
+    }
+    .mat-column-status {
+      flex: 0 1 160px;
+    }
+    .mat-column-assessmentScore {
+      flex: 0 1 120px;
+    }
+    .mat-column-actions {
+      flex: 0 1 100px;
+    }
+
+    .selected {
+      background-color: #e0e0e0 !important; /* Màu nền khi row được chọn */
+    }
+  }
+
+  .mat-mdc-paginator {
+    ::ng-deep {
+      .mat-mdc-paginator-container {
+        justify-content: flex-end;
+        padding-right: 60px;
+      }
+    }
+  }
 }

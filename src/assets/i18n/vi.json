@@ -46,6 +46,16 @@
       "GuideAlias": "Bí danh",
       "GuideDescription": "Mô tả",
       "IsActive": "Kích hoạt"
+    },
+    "User" : {
+      "AddTitle" : "Thêm mới người dùng",
+      "EditTitle": "Cập nhật người dùng",
+      "Name": "Tên người dùng",
+      "Email": "Email",
+      "Image": "Ảnh",
+      "PhoneNumber": "Số điện thoại",
+      "Status": "Trạng thái hoạt động",
+      "TypeSearch": "--Vai trò--"
     }
 }
   

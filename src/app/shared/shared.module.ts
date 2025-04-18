@@ -21,6 +21,7 @@ import { IconsModule } from './icon.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AngularSplitModule } from 'angular-split';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     IconsModule,
     MatPaginatorModule,
     AngularSplitModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTableModule
   ],
   exports: [
     TranslateModule,
@@ -63,7 +65,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     IconsModule,
     MatPaginatorModule,
     AngularSplitModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTableModule
   ]
 })
 export class SharedModule {}

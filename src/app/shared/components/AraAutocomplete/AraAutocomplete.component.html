@@ -1,12 +1,11 @@
 <mat-form-field
-  class="w-full form-control"
+  class="w-full form-control h-[50px]"
   [ngClass]="{
     'fuse-mat-dense fuse-mat-rounded': false,
     'no-hint': false,
     'highlight-form': false
   }"
 >
-  <!-- Nếu muốn hiển thị label bên trong form field -->
   <mat-label *ngIf="placeholder">{{ placeholder }}</mat-label>
 
   <input

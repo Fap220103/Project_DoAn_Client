@@ -13,7 +13,7 @@ import { MatAutocomplete } from '@angular/material/autocomplete';
 @Component({
   selector: 'app-AraAutocomplete',
   templateUrl: './AraAutocomplete.component.html',
-  styleUrls: ['./AraAutocomplete.component.css']
+  styleUrls: ['./AraAutocomplete.component.scss']
 })
 export class AraAutocompleteComponent implements OnInit {
   @Input() placeholder: string = '';

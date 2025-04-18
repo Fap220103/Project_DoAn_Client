@@ -22,6 +22,8 @@ import { ProductCategoryLv1Component } from './pages/productcategory/productcate
 import { AddProductCategoryLv1Component } from './pages/productcategory/productcategory-lv1/addProductCategory-lv1/addProductCategory-lv1.component';
 import { ProductCategoryLv2Component } from './pages/productcategory/productcategory-lv2/productcategory-lv2.component';
 import { ProductCategoryLv3Component } from './pages/productcategory/productcategory-lv3/productcategory-lv3.component';
+import { UserProfileComponent } from './pages/userprofile/userprofile.component';
+import { AddUserComponent } from './pages/userprofile/adduser/adduser.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { ProductCategoryLv3Component } from './pages/productcategory/productcate
     SizeComponent,
     SizeAddComponent,
     SettingComponent,
-    AddSettingComponent
+    AddSettingComponent,
+    UserProfileComponent,
+    AddUserComponent
   ],
   imports: [
     CommonModule,

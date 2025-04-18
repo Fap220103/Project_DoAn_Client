@@ -1,6 +1,5 @@
 import { HttpHeaders, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { TokenService } from '../services/token.service';
 import { AuthService } from '../services/auth.service';
 import { catchError, from, switchMap, throwError } from 'rxjs';
 

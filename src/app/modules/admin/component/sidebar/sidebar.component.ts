@@ -15,13 +15,11 @@ export class SidebarComponent implements OnInit {
   currentUser$!: Observable<User | null>;
   isLoggedIn: boolean = false;
   expanded: boolean = false;
-  constructor(
-    private authService: AuthService
-  ) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.mainNavigations = this.authService.getMenu();
-    this.isLoggedIn= this.authService.isLoggedIn()
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
 
   isDropdown(item: NavigationItem): boolean {
@@ -40,7 +38,6 @@ export class SidebarComponent implements OnInit {
   }
   logout() {
     this.authService.logout();
-  
   }
   toggleDropdown(event: Event) {
     event.preventDefault();

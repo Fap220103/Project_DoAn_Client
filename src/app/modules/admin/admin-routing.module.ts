@@ -9,6 +9,7 @@ import { ColorComponent } from './pages/color/color.component';
 import { SizeComponent } from './pages/size/size.component';
 import { SettingComponent } from './pages/setting/setting.component';
 import { adminGuard } from '../../core/guards/admin.guard';
+import { UserProfileComponent } from './pages/userprofile/userprofile.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,12 @@ const routes: Routes = [
         component: SettingComponent,
         canActivate: [adminGuard],
         data: { title: 'Cài đặt', alias: 'setting' }
+      },
+      {
+        path: 'userprofile',
+        component: UserProfileComponent,
+        canActivate: [adminGuard],
+        data: { title: 'Người dùng', alias: 'userprofile' }
       }
     ]
   }

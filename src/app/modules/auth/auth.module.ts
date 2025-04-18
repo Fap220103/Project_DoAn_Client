@@ -7,11 +7,6 @@ import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [AdminLoginComponent],
-  imports: [
-    CommonModule, 
-    AuthRoutingModule, 
-    ReactiveFormsModule,
-    SharedModule
-  ]
+  imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule, SharedModule]
 })
 export class AuthModule {}
