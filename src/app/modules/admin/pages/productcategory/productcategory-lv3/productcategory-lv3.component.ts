@@ -32,6 +32,7 @@ export class ProductCategoryLv3Component implements OnInit, OnChanges {
   pageSize = 10;
   pageSizeOptions = [5, 10, 25, 100];
   @Input() itemSelected: any = {};
+  @Input() notice: boolean = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -54,11 +55,16 @@ export class ProductCategoryLv3Component implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['itemSelected'] && !changes['itemSelected'].firstChange) {
       this.selectedItem = changes['itemSelected'].currentValue;
-      this.params = {
-        level: this.level,
-        parentId: this.selectedItem.id
-      };
-      this.getData();
+      if (this.selectedItem && this.selectedItem.id) {
+        this.params = {
+          level: this.level,
+          parentId: this.selectedItem.id
+        };
+        this.getData();
+      } else {
+        this.lstCategory1 = []; // <-- xoá dữ liệu cũ khi không có selected
+        this.totalCount = 0;
+      }
     }
   }
 
@@ -76,7 +82,6 @@ export class ProductCategoryLv3Component implements OnInit, OnChanges {
         });
         this.totalCount = rs.content.data.totalRecords;
       });
-    console.log(this.lstCategory1);
   }
   onChangePage(event: any) {
     this.pageIndex = event.pageIndex;
@@ -84,7 +89,6 @@ export class ProductCategoryLv3Component implements OnInit, OnChanges {
     this.getData();
   }
   edit(item: any) {
-    console.log(item);
     this.selectedItem = item;
     const dialogRef = this.dialog.open(AddProductCategoryLv1Component, {
       minWidth: '30%',
@@ -97,7 +101,7 @@ export class ProductCategoryLv3Component implements OnInit, OnChanges {
         title: 'Category.EditTitle',
         item: this.selectedItem,
         level: this.level,
-        parentId: this.selectedItem.parentId,
+        parentId: this.itemSelected.id,
         isEdit: true
       }
     });
@@ -140,7 +144,7 @@ export class ProductCategoryLv3Component implements OnInit, OnChanges {
       data: {
         title: 'Category.AddTitle',
         level: this.level,
-        parentId: this.selectedItem.parentId,
+        parentId: this.itemSelected.id,
         isEdit: false
       }
     });

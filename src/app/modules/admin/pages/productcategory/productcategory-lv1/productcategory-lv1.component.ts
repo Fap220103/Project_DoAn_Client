@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
 import { ProductcategoryService } from '../../../../../core/services/productcategory.service';
 import { AddProductCategoryLv1Component } from './addProductCategory-lv1/addProductCategory-lv1.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-productcategory-lv1',
@@ -29,7 +30,8 @@ export class ProductCategoryLv1Component implements OnInit {
   constructor(
     private toastr: ToastrService,
     private productCategoryService: ProductcategoryService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -46,7 +48,6 @@ export class ProductCategoryLv1Component implements OnInit {
         });
         this.totalCount = rs.content.data.totalRecords;
       });
-    console.log(this.lstCategory1);
   }
   onChangePage(event: any) {
     this.pageIndex = event.pageIndex;
@@ -54,7 +55,6 @@ export class ProductCategoryLv1Component implements OnInit {
     this.getData();
   }
   edit(item: any) {
-    console.log(item);
     this.selectedItem = item;
     const dialogRef = this.dialog.open(AddProductCategoryLv1Component, {
       minWidth: '30%',
@@ -88,12 +88,16 @@ export class ProductCategoryLv1Component implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.productCategoryService.delete(categoryId).subscribe({
-          next: () => {
-            this.getData();
-            this.toastr.success('Xóa thành công!', 'Thành công');
+          next: (res) => {
+            if (res.code === 200) {
+              this.getData();
+              this.processResponse(res);
+            } else {
+              this.processResponse(false);
+            }
           },
           error: (err) => {
-            this.toastr.error('Đã xảy ra lỗi khi xóa!', 'Lỗi');
+            this.processResponse(false);
           }
         });
       }
@@ -123,5 +127,12 @@ export class ProductCategoryLv1Component implements OnInit {
   selectRow(item: any) {
     this.selectedItem = item;
     this.onSelectedLv1.emit(item);
+  }
+  processResponse(res: any, msg?: string) {
+    const transForm = res ? (msg ? msg : 'Xóa thành công') : msg ? msg : 'Xóa thất bại';
+    this.snackBar.open(transForm, 'OK', {
+      verticalPosition: 'bottom',
+      duration: 3000
+    });
   }
 }

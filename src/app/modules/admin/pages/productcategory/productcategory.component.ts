@@ -18,6 +18,7 @@ export class ProductcategoryComponent implements OnInit {
   ListCategory: Category[] = [];
   itemSelectedLv1: any = {};
   itemSelectedLv2: any = {};
+  notice: boolean = true;
   constructor(
     private toastr: ToastrService,
     private dialog: MatDialog
@@ -27,8 +28,8 @@ export class ProductcategoryComponent implements OnInit {
 
   handleSelectedLv1(item: any) {
     this.itemSelectedLv1 = item;
-
-    this.itemSelectedLv2 = null;
+    this.itemSelectedLv2 = {};
+    this.notice = true;
   }
 
   handleSelectedLv2(item: any) {

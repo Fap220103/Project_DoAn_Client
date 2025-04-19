@@ -78,7 +78,6 @@ export class ProductCategoryLv2Component implements OnInit, OnChanges {
         });
         this.totalCount = rs.content.data.totalRecords;
       });
-    console.log(this.lstCategory1);
   }
   onChangePage(event: any) {
     this.pageIndex = event.pageIndex;
@@ -86,7 +85,6 @@ export class ProductCategoryLv2Component implements OnInit, OnChanges {
     this.getData();
   }
   edit(item: any) {
-    console.log(item);
     this.selectedItem = item;
     const dialogRef = this.dialog.open(AddProductCategoryLv1Component, {
       minWidth: '30%',
@@ -99,7 +97,7 @@ export class ProductCategoryLv2Component implements OnInit, OnChanges {
         title: 'Category.EditTitle',
         item: this.selectedItem,
         level: this.level,
-        parentId: this.selectedItem.parentId,
+        parentId: this.itemSelected.id,
         isEdit: true
       }
     });
@@ -141,7 +139,7 @@ export class ProductCategoryLv2Component implements OnInit, OnChanges {
       },
       data: {
         title: 'Category.AddTitle',
-        parentId: this.selectedItem.parentId,
+        parentId: this.itemSelected.id,
         level: this.level,
         isEdit: false
       }

@@ -9,7 +9,7 @@
       <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
     </button>
   </div>
-  <div class="wrap-body">
+  <div class="wrap-body ml-4 mr-4">
     <div class="pt-4 grid w-full">
       <form [formGroup]="form">
         <mat-form-field appearance="fill" class="w-100">
@@ -23,11 +23,32 @@
         <!-- Password -->
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>Mật khẩu</mat-label>
-          <input matInput type="password" formControlName="password" placeholder="Nhập mật khẩu" />
+          <input
+            matInput
+            type="password"
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Nhập mật khẩu"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="togglePasswordVisibility('password')"
+            type="button"
+          >
+            <mat-icon
+              [svgIcon]="showPassword ? 'heroicons_outline:eye-off' : 'heroicons_outline:eye'"
+            ></mat-icon>
+          </button>
           <mat-error
             *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched"
           >
             Mật khẩu là bắt buộc
+          </mat-error>
+          <mat-error
+            *ngIf="form.get('password')?.hasError('minlength') && form.get('password')?.touched"
+          >
+            Mật khẩu phải có ít nhất 6 ký tự
           </mat-error>
         </mat-form-field>
 
@@ -37,9 +58,22 @@
           <input
             matInput
             type="password"
+            [type]="showConfirmPassword ? 'text' : 'password'"
             formControlName="confirmPassword"
             placeholder="Nhập lại mật khẩu"
           />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="togglePasswordVisibility('confirmPassword')"
+            type="button"
+          >
+            <mat-icon
+              [svgIcon]="
+                showConfirmPassword ? 'heroicons_outline:eye-off' : 'heroicons_outline:eye'
+              "
+            ></mat-icon>
+          </button>
           <mat-error
             *ngIf="form.hasError('passwordMismatch') && form.get('confirmPassword')?.touched"
           >

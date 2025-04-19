@@ -24,7 +24,6 @@ export class AraAutocompleteComponent implements OnInit {
   @Input() isUseForm: boolean = true; // Xác định có sử dụng Reactive Form hay ko (theo nhu cầu của bạn)
   @Input() isFirstLoad: boolean = true; // Tùy chọn load lần đầu
 
-  // Nếu muốn dùng template tùy chỉnh cho option thì sử dụng property này
   @Input() dynamicOptionTemplate: TemplateRef<any> | null = null;
 
   // Output cho sự kiện thay đổi
@@ -37,42 +36,36 @@ export class AraAutocompleteComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    // Nếu có value truyền vào, cập nhật FormControl
-    if (this.value) {
-      this.mainControl.setValue(this.value);
+    // if (this.value) {
+    //   const selectedItem = this.items.find(item => item[this.valueField] === this.value);
+    //   this.mainControl.setValue(selectedItem || this.value);
+    //   this.mainControl.setValue(this.value);
+    // }
+    if (this.value !== null && this.value !== undefined) {
+      const selectedItem = this.items.find(item => item[this.valueField] === this.value);
+      this.mainControl.setValue(selectedItem || this.value);
     }
-
-    // Lắng nghe thay đổi của form control
+    
     this.mainControl.valueChanges.subscribe((val) => {
-      // Ở đây, bạn có thể thực hiện lọc dữ liệu, valid hay đơn giản chỉ là emit ra ngoài
       this.onChange.emit(val);
     });
   }
 
-  // Hàm hiển thị text dựa theo displayField
   displayWith = (option: any) => {
     if (!option) return '';
-    // Nếu có nhiều trường hiển thị, nối chúng lại (có thể tùy chỉnh theo yêu cầu)
     return this.displayField.map((field) => option[field]).join(' ');
   };
 
-  // Trả về placeholder xử lý theo logic nếu cần (có thể bổ sung thêm logic)
   displayPlaceholder(): string {
     return this.placeholder;
   }
 
-  // Xử lý khi chọn option từ autocomplete
   optionSelected(event: any) {
-    // Lấy option đã chọn, bạn có thể emit ra ngoài hoặc xử lý giá trị (ví dụ: lấy giá trị của valueField)
     const selected = event.option.value;
-    // Nếu cần, convert sang dạng value chỉ cần trường valueField
     const output = this.valueField ? selected[this.valueField] : selected;
     this.onChange.emit(output);
   }
 
-  // Nếu cần các hàm bổ trợ khác (clear, refresh...) có thể khai báo thêm tại đây
-
-  // Ví dụ hàm clear
   clear() {
     this.mainControl.setValue(null);
     this.onChange.emit(null);

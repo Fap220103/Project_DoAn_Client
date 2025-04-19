@@ -6,8 +6,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
 import { AddUserComponent } from './adduser/adduser.component';
 import { UserService } from '../../../../core/services/user.service';
-import { RoleType } from '../../../../core/constants/roles';
+import { RoleType, StatusUser } from '../../../../core/constants/roles';
 import { EditUserComponent } from './edituser/edituser.component';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-userprofile',
@@ -25,29 +26,33 @@ export class UserProfileComponent implements OnInit {
   pageIndex = 0;
   pageSize = 10;
   pageSizeOptions = [5, 10, 25, 100];
-  lstStatus = RoleType;
+  lstRole = RoleType;
+  lstStatus = StatusUser;
+  currentUserId!: string;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private toastr: ToastrService,
     private userService: UserService,
+    private authService: AuthService,
     public dialog: MatDialog
-  ) {}
+  ) {
+    this.currentUserId = authService.getUserId();
+  }
 
   ngOnInit(): void {
     this.getData();
   }
   getData() {
     this.userService.get(this.params, this.pageIndex + 1, this.pageSize).subscribe((rs) => {
-      console.log(rs);
       this.lstUser = rs.content.data.items;
       this.lstUser = this.lstUser.map((x, index) => {
         x.position = this.pageIndex * this.pageSize + index + 1;
+        x.displayStatus = this.lstStatus.find((item) => item.code === x.status)?.display;
         return x;
       });
       this.totalCount = rs.content.data.totalRecords;
     });
-    console.log('list user: ', this.lstUser);
   }
   onChangePage(event: any) {
     this.pageIndex = event.pageIndex;
@@ -65,7 +70,7 @@ export class UserProfileComponent implements OnInit {
         right: '0'
       },
       data: {
-        title: 'Color.EditTitle',
+        title: 'User.EditTitle',
         item: this.selectedItem,
         isEdit: true
       }
@@ -76,7 +81,7 @@ export class UserProfileComponent implements OnInit {
       }
     });
   }
-  delete(colorId: string) {
+  delete(userId: string) {
     Swal.fire({
       title: 'Bạn có chắc chắn?',
       text: 'Hành động này sẽ không thể hoàn tác!',
@@ -86,10 +91,14 @@ export class UserProfileComponent implements OnInit {
       cancelButtonText: 'Hủy'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.userService.delete(colorId).subscribe({
-          next: () => {
-            this.getData();
-            this.toastr.success('Xóa thành công!', 'Thành công');
+        this.userService.delete(userId).subscribe({
+          next: (res) => {
+            if (res.code === 200) {
+              this.getData();
+              this.toastr.success('Xóa thành công!', 'Thành công');
+            } else {
+              this.toastr.error('Xóa thất bại!', 'Thất bại');
+            }
           },
           error: (err) => {
             this.toastr.error('Đã xảy ra lỗi khi xóa!', 'Lỗi');
@@ -107,7 +116,7 @@ export class UserProfileComponent implements OnInit {
         right: '0'
       },
       data: {
-        title: 'Color.AddTitle',
+        title: 'User.AddTitle',
         isEdit: false
       }
     });
@@ -117,6 +126,7 @@ export class UserProfileComponent implements OnInit {
       }
     });
   }
+
   handleChangeSearchInput(event: any) {
     if (event.key === 'Enter') {
       this.params = {
@@ -127,6 +137,7 @@ export class UserProfileComponent implements OnInit {
       this.searchString = (event.target.value ?? '').trim();
     }
   }
+
   handleClearSearchInput() {
     this.searchString = '';
     this.params = {
@@ -134,7 +145,9 @@ export class UserProfileComponent implements OnInit {
     };
     this.getData();
   }
+
   handleChangeRole(event: any) {
+    console.log(event);
     this.params = {
       role: event
     };

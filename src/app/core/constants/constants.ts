@@ -14,5 +14,8 @@ export const Constants = {
   },
   UserProfile: {
     Resource: 'api/UserProfile'
+  },
+  Product: {
+    Resource: 'api/Product'
   }
 };

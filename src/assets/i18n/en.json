@@ -26,5 +26,37 @@
       "Title": "Size",
       "Name": "Size",
       "GuideName": "Enter Size"
+    },
+    "Setting" : {
+      "AddTitle" : "Add Setting",
+      "EditTitle": "Edit Setting",
+      "Title": "Setting",
+      "Key": "Key",
+      "Value": "Value",
+      "GuideKey": "Key",
+      "GuideValue": "Value"
+    },
+    "Category" : {
+      "AddTitle" : "Add Category",
+      "EditTitle": "Edit Category",
+      "Title": "Category",
+      "Alias": "Alias",
+      "Description": "Description",
+      "GuideTitle": "Category",
+      "GuideAlias": "Alias",
+      "GuideDescription": "Description",
+      "IsActive": "Active"
+    },
+    "User" : {
+      "AddTitle" : "Add User",
+      "EditTitle": "Edit User",
+      "Name": "Username",
+      "Email": "Email",
+      "Image": "Image",
+      "PhoneNumber": "Phone Number",
+      "Status": "Status",
+      "TypeSearchRole": "--Role--",
+      "TypeSearchStatus": "--Status--",
+      "SearchTitle":"Find by username or email"
     }
   }

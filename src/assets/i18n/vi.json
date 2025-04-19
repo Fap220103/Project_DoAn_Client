@@ -55,7 +55,20 @@
       "Image": "Ảnh",
       "PhoneNumber": "Số điện thoại",
       "Status": "Trạng thái hoạt động",
-      "TypeSearch": "--Vai trò--"
+      "TypeSearchRole": "--Vai trò--",
+      "TypeSearchStatus": "--Trạng thái hoạt động--",
+      "SearchTitle":"Tìm kiếm theo tên người dùng hoặc email"
+    },
+    "Product" : {
+      "AddTitle" : "Thêm mới sản phẩm",
+      "EditTitle": "Cập nhật sản phẩm",
+      "Name": "Tên sản phẩm",
+      "Image": "Ảnh",
+      "SearchTitle":"Tìm kiếm theo tên sản phẩm",
+      "CreatedDate": "Ngày tạo",
+      "Price": "Giá",
+      "PriceSale": "Giá khuyến mãi",
+      "Category": "Danh mục"
     }
 }
   

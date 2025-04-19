@@ -30,7 +30,7 @@ import { MatTableModule } from '@angular/material/table';
     HeaderAdminComponent,
     AdminLayoutComponent,
     ClientLayoutComponent,
-    AraAutocompleteComponent
+    AraAutocompleteComponent,
   ],
   imports: [
     CommonModule,

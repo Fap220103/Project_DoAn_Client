@@ -1,11 +1,4 @@
-<mat-form-field
-  class="w-full form-control h-[100px]"
-  [ngClass]="{
-    'fuse-mat-dense fuse-mat-rounded': false,
-    'no-hint': false,
-    'highlight-form': false
-  }"
->
+<mat-form-field class="w-full mt-4">
   <mat-label *ngIf="placeholder">{{ placeholder }}</mat-label>
 
   <input
@@ -43,7 +36,13 @@
 
   <!-- Các button bổ trợ nếu cần: refresh, clear, search, … -->
   <!-- Ví dụ button clear -->
-  <button type="button" mat-icon-button matSuffix *ngIf="mainControl.value" (click)="clear()">
+  <button
+    type="button"
+    mat-icon-button
+    matSuffix
+    (click)="clear()"
+    [style.visibility]="mainControl.value ? 'visible' : 'hidden'"
+  >
     <mat-icon>close</mat-icon>
   </button>
 </mat-form-field>

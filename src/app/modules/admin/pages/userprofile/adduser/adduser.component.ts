@@ -13,6 +13,9 @@ import { RolesObj, RoleType } from '../../../../../core/constants/roles';
 export class AddUserComponent implements OnInit {
   form!: FormGroup;
   lstRole = RolesObj;
+  formError: string | null = null;
+  showPassword: boolean = false; 
+  showConfirmPassword: boolean = false;
   constructor(
     public snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<AddUserComponent>,
@@ -25,9 +28,9 @@ export class AddUserComponent implements OnInit {
     this.form = this.formBuilder.group(
       {
         email: ['', [Validators.required, Validators.email]],
-        password: ['', Validators.required, Validators.minLength(6)],
+        password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', Validators.required],
-        roles: [[]]
+        roles: [[], Validators.required]
       },
       {
         validators: this.passwordMatchValidator
@@ -41,6 +44,13 @@ export class AddUserComponent implements OnInit {
         this.dialogRef.close();
         return;
       }
+    });
+    this.form.get('password')?.valueChanges.subscribe(() => {
+      this.form.updateValueAndValidity({ onlySelf: true });
+    });
+  
+    this.form.get('confirmPassword')?.valueChanges.subscribe(() => {
+      this.form.updateValueAndValidity({ onlySelf: true });
     });
   }
   passwordMatchValidator(form: FormGroup) {
@@ -63,6 +73,18 @@ export class AddUserComponent implements OnInit {
     this.form.get('roles')?.setValue(roles);
   }
   save() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      if (this.form.invalid) {
+        this.form.markAllAsTouched();
+        this.snackBar.open('Vui lòng kiểm tra và điền đầy đủ thông tin hợp lệ.', 'OK', {
+          verticalPosition: 'bottom',
+          duration: 3000
+        });
+        return;
+      }
+      return;
+    }
     const formValue = this.form.value;
     const addItem = {
       email: formValue.email,
@@ -70,9 +92,14 @@ export class AddUserComponent implements OnInit {
       confirmPassword: formValue.confirmPassword,
       roles: formValue.roles
     };
-    console.log('add: ', addItem);
     this.userService.post(addItem).subscribe({
-      next: (res) => this.processResponse(res),
+      next: (res) => {
+        if (res.code === 200) {
+          this.processResponse(res);
+        } else {
+          this.processResponse(false);
+        }
+      },
       error: () => this.processResponse(false)
     });
   }
@@ -85,5 +112,12 @@ export class AddUserComponent implements OnInit {
       duration: 2000
     });
     if (!isClose && res) this.dialogRef.close(res);
+  }
+  togglePasswordVisibility(field: 'password' | 'confirmPassword') {
+    if (field === 'password') {
+      this.showPassword = !this.showPassword;
+    } else {
+      this.showConfirmPassword = !this.showConfirmPassword;
+    }
   }
 }

@@ -9,17 +9,9 @@
       <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
     </button>
   </div>
-  <div class="wrap-body">
+  <div class="wrap-body ml-4 mr-4">
     <div class="pt-4 grid w-full">
       <form [formGroup]="form">
-        <mat-form-field appearance="fill" class="w-100">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" placeholder="Nhập email" />
-          <mat-error *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
-            Email không hợp lệ
-          </mat-error>
-        </mat-form-field>
-
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>UserName</mat-label>
           <input matInput formControlName="userName" placeholder="Nhập userName" />
@@ -35,10 +27,35 @@
             PhoneNumber không hợp lệ
           </mat-error>
         </mat-form-field>
+
+        <!-- <app-AraAutocomplete
+          [placeholder]="'User.TypeSearchStatus' | translate"
+          [displayField]="['display']"
+          [items]="lstStatus"
+          [valueField]="'code'"
+          [isUseForm]="false"
+          [isFirstLoad]="false"
+          formControlName="status"
+          (onChange)="handleChangeStatus($event)"
+        >
+        </app-AraAutocomplete> -->
+        <div class="w-100 flex flex-col">
+          <mat-label>Trạng thái</mat-label>
+          <select matNativeControl formControlName="status">
+            <option *ngFor="let status of lstStatus" [value]="status.code">
+              {{ status.display }}
+            </option>
+          </select>
+        </div>
+
+        <div *ngIf="imagePreview" class="mt-4">
+          <img [src]="imagePreview" class="w-[100px] h-[100px] object-cover mb-2" />
+        </div>
         <div class="mb-4">
           <label class="block font-medium mb-2">Chọn ảnh đại diện</label>
           <input
             type="file"
+            formControlName="image"
             (change)="onFileSelected($event)"
             class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
           />

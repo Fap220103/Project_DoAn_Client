@@ -30,7 +30,6 @@ export class AddProductCategoryLv1Component implements OnInit {
 
     this.level = data.level;
     this.parentId = data.parentId;
-    console.log('item: ', this.item);
     this.form = this.formBuilder.group({
       title: new FormControl(
         this.item?.title,
@@ -53,7 +52,6 @@ export class AddProductCategoryLv1Component implements OnInit {
 
   save() {
     const formValue = this.form.value;
-
     if (this.isEdit) {
       const updateItem = {
         id: this.item.id,
@@ -64,11 +62,16 @@ export class AddProductCategoryLv1Component implements OnInit {
         isActive: formValue.isActive,
         parentId: this.parentId
       };
-      console.log('update:', updateItem);
-      // this.productCategoryService.updateCategory(updateItem).subscribe({
-      //   next: (res) => this.processResponse(res),
-      //   error: () => this.processResponse(false)
-      // });
+      this.productCategoryService.updateCategory(updateItem).subscribe({
+        next: (res) => {
+          if (res.code === 200) {
+            this.processResponse(res);
+          } else {
+            this.processResponse(false);
+          }
+        },
+        error: () => this.processResponse(false)
+      });
     } else {
       const addItem = {
         title: formValue.title,
@@ -78,11 +81,16 @@ export class AddProductCategoryLv1Component implements OnInit {
         isActive: formValue.isActive,
         parentId: this.parentId
       };
-      console.log('add: ', addItem);
-      // this.productCategoryService.createCategory(addItem).subscribe({
-      //   next: (res) => this.processResponse(res),
-      //   error: () => this.processResponse(false)
-      // });
+      this.productCategoryService.createCategory(addItem).subscribe({
+        next: (res) => {
+          if (res.code === 200) {
+            this.processResponse(res);
+          } else {
+            this.processResponse(false);
+          }
+        },
+        error: () => this.processResponse(false)
+      });
     }
   }
 

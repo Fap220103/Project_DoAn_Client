@@ -7,9 +7,9 @@
       <div class="relative hedear flex flex-col sm:flex-row flex-0 sm:items-center sm:px-6 xs:py-4">
         <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
           <app-AraAutocomplete
-            [placeholder]="'User.TypeSearch' | translate"
+            [placeholder]="'User.TypeSearchRole' | translate"
             [displayField]="['display']"
-            [items]="lstStatus"
+            [items]="lstRole"
             [valueField]="'value'"
             [isUseForm]="false"
             [isFirstLoad]="false"
@@ -18,14 +18,14 @@
           </app-AraAutocomplete>
 
           <mat-form-field
-            class="search-input w-[500px] pr-2 md:min-w-64 xs:min-w-50 md:mr-[10px] sm:mr-[10px] xs:mr-[5px] md:text-base sm:text-base xs:text-xs"
+            class="ml-3 mt-1 w-[500px] pr-2 md:min-w-64 xs:min-w-50 md:mr-[10px] sm:mr-[10px] xs:mr-[5px] md:text-base sm:text-base xs:text-xs"
             [subscriptSizing]="'dynamic'"
           >
             <input
               matInput
               #inputSearch
               [value]="searchString"
-              placeholder="{{ 'Color.SearchTitle' | translate }}"
+              placeholder="{{ 'User.SearchTitle' | translate }}"
               (keyup)="handleChangeSearchInput($event)"
               trim
             />
@@ -79,10 +79,15 @@
               <span matTooltip="{{ item.phoneNumber }}">{{ item.phoneNumber }}</span>
             </td>
             <td>
-              <span matTooltip="{{ item.profilePictureName }}">{{ item.profilePictureName }}</span>
+              <span *ngIf="item.profilePictureName">
+                <img
+                  [src]="item.profilePictureName"
+                  class="w-[100px] h-[100px] object-cover mb-2"
+                />
+              </span>
             </td>
             <td>
-              <span matTooltip="{{ item.status }}">{{ item.status }}</span>
+              <span matTooltip="{{ item.displayStatus }}">{{ item.displayStatus }}</span>
             </td>
             <td>
               <button
@@ -94,6 +99,7 @@
               </button>
               <button
                 mat-icon-button
+                *ngIf="this.currentUserId !== item.id"
                 (click)="delete(item.id)"
                 matTooltip="{{ 'Common.Delete' | translate }}"
               >

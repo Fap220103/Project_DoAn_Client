@@ -8,6 +8,7 @@
         <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
           <button
             mat-flat-button
+            *ngIf="itemSelected && itemSelected.id"
             [color]="'primary'"
             class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
             (click)="add()"
