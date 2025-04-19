@@ -35,7 +35,7 @@ export class EditUserComponent implements OnInit {
     }
     data.isEdit ? (this.isEdit = true) : (this.isEdit = false);
 
-    console.log('item: ',this.item);
+    console.log('item: ', this.item);
     this.form = this.formBuilder.group(
       {
         // email: ['', [Validators.required, Validators.email]],
@@ -61,18 +61,18 @@ export class EditUserComponent implements OnInit {
     this.fetchData();
   }
 
-  fetchData(){
-   console.log('fetch data item: ',this.item);
+  fetchData() {
+    console.log('fetch data item: ', this.item);
     this.form.patchValue({
       userName: this.item.userName,
       phoneNumber: this.item.phoneNumber,
       status: this.item.status,
       image: this.item.profilePictureName,
-      roles: this.item.roles 
+      roles: this.item.roles
     });
     this.imagePreview = this.item.profilePictureName;
   }
-  handleChangeStatus(event: any){
+  handleChangeStatus(event: any) {
     this.item.status = event;
   }
   passwordMatchValidator(form: FormGroup) {

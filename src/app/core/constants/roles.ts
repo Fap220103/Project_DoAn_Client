@@ -26,5 +26,5 @@ export const StatusUser = [
   {
     code: 2,
     display: 'Khóa'
-  },
+  }
 ];

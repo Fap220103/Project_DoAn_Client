@@ -14,7 +14,7 @@ export class AddUserComponent implements OnInit {
   form!: FormGroup;
   lstRole = RolesObj;
   formError: string | null = null;
-  showPassword: boolean = false; 
+  showPassword: boolean = false;
   showConfirmPassword: boolean = false;
   constructor(
     public snackBar: MatSnackBar,
@@ -48,7 +48,7 @@ export class AddUserComponent implements OnInit {
     this.form.get('password')?.valueChanges.subscribe(() => {
       this.form.updateValueAndValidity({ onlySelf: true });
     });
-  
+
     this.form.get('confirmPassword')?.valueChanges.subscribe(() => {
       this.form.updateValueAndValidity({ onlySelf: true });
     });

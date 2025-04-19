@@ -12,7 +12,7 @@ export const adminGuard: CanActivateFn = (route, state) => {
     return true;
   } else {
     router.navigate(['/not-found']);
-    toastrService.error("Bạn không có quyền truy cập trang này", "Thông báo");
+    toastrService.error('Bạn không có quyền truy cập trang này', 'Thông báo');
     return false;
   }
 };

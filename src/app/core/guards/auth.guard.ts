@@ -11,13 +11,11 @@ export const authGuard: CanActivateFn = (route, state) => {
     return false;
   }
 
-  
-  // const role = authService.getUserRole(); 
+  // const role = authService.getUserRole();
   // if (role !== 'Admin' && role !== 'Staff') {
   //   router.navigate(['/not-found']);
   //   return false;
   // }
-
 
   return true;
 };

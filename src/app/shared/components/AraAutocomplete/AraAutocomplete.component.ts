@@ -42,10 +42,10 @@ export class AraAutocompleteComponent implements OnInit {
     //   this.mainControl.setValue(this.value);
     // }
     if (this.value !== null && this.value !== undefined) {
-      const selectedItem = this.items.find(item => item[this.valueField] === this.value);
+      const selectedItem = this.items.find((item) => item[this.valueField] === this.value);
       this.mainControl.setValue(selectedItem || this.value);
     }
-    
+
     this.mainControl.valueChanges.subscribe((val) => {
       this.onChange.emit(val);
     });
