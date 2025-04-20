@@ -37,7 +37,8 @@ export class AddProductCategoryLv1Component implements OnInit {
       ),
       alias: new FormControl(this.item?.alias),
       description: new FormControl(this.item?.description),
-      isActive: new FormControl(this.item?.isActive)
+      isActive: new FormControl(this.item?.isActive),
+      link: new FormControl(this.item?.link)
     });
   }
 
@@ -60,7 +61,8 @@ export class AddProductCategoryLv1Component implements OnInit {
         description: formValue.description,
         level: this.level,
         isActive: formValue.isActive,
-        parentId: this.parentId
+        parentId: this.parentId,
+        link: formValue.link
       };
       this.productCategoryService.updateCategory(updateItem).subscribe({
         next: (res) => {
@@ -79,7 +81,8 @@ export class AddProductCategoryLv1Component implements OnInit {
         description: formValue.description,
         level: this.level,
         isActive: formValue.isActive,
-        parentId: this.parentId
+        parentId: this.parentId,
+        link: formValue.link
       };
       this.productCategoryService.createCategory(addItem).subscribe({
         next: (res) => {

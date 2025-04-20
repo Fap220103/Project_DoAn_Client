@@ -28,17 +28,6 @@
           </mat-error>
         </mat-form-field>
 
-        <!-- <app-AraAutocomplete
-          [placeholder]="'User.TypeSearchStatus' | translate"
-          [displayField]="['display']"
-          [items]="lstStatus"
-          [valueField]="'code'"
-          [isUseForm]="false"
-          [isFirstLoad]="false"
-          formControlName="status"
-          (onChange)="handleChangeStatus($event)"
-        >
-        </app-AraAutocomplete> -->
         <div class="w-100 flex flex-col">
           <mat-label>Trạng thái</mat-label>
           <select matNativeControl formControlName="status">
@@ -48,10 +37,17 @@
           </select>
         </div>
 
-        <div *ngIf="imagePreview" class="mt-4">
-          <img [src]="imagePreview" class="w-[100px] h-[100px] object-cover mb-2" />
+        <div class="row mt-3">
+          <div class="col-md-12 text-left">
+            <input type="file" (change)="onFileSelected($event)" multiple hidden #fileInput />
+            <button class="btn btn-primary" (click)="fileInput.click()">Tải Ảnh</button>
+          </div>
+          <div *ngIf="imagePreview" class="mt-4">
+            <img [src]="imagePreview" class="w-[100px] h-[100px] object-cover mb-2" />
+          </div>
         </div>
-        <div class="mb-4">
+
+        <!-- <div class="mb-4">
           <label class="block font-medium mb-2">Chọn ảnh đại diện</label>
           <input
             type="file"
@@ -59,7 +55,7 @@
             (change)="onFileSelected($event)"
             class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
           />
-        </div>
+        </div> -->
 
         <!-- Roles -->
         <label class="font-medium mb-2">Phân quyền</label>

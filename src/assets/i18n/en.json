@@ -8,7 +8,8 @@
       "Cancel": "Cancel",
       "Save": "Save",
       "Action": "Action",
-      "No": "No"
+      "No": "No",
+      "Read": "Xem"
     },
     "Color" : {
       "SearchTitle": "Search by color code and color name",
@@ -58,5 +59,18 @@
       "TypeSearchRole": "--Role--",
       "TypeSearchStatus": "--Status--",
       "SearchTitle":"Find by username or email"
+    },
+    "Product" : {
+      "AddTitle" : "Add Product",
+      "EditTitle": "Edit Product",
+      "ReadTitle": "Read Deatil Product",
+      "Name": "Product Name",
+      "Image": "Image",
+      "SearchTitle":"Find by product name",
+      "CreatedDate": "Created Date",
+      "OriginalPrice": "OriginalPrice",
+      "Price": "Price",
+      "PriceSale": "PriceSale",
+      "Category": "Category"
     }
   }

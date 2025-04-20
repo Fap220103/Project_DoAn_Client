@@ -1,1 +1,211 @@
-<p>addproduct works!</p>
+<section class="content mt-[50px]">
+  <div class="card">
+    <div class="flex flex-row items-center px-6 h-20 min-h-20 text-white bg-primary">
+      <mat-icon
+        class="icon-size-7 text-current"
+        [svgIcon]="'heroicons_solid:plus-circle'"
+      ></mat-icon>
+      <div class="ml-3 text-2xl font-semibold tracking-tight">
+        {{ data.title | translate }}
+      </div>
+      <button class="ml-auto" mat-icon-button (click)="dialogRef.close()">
+        <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+      </button>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header p-2">
+                <ul class="nav nav-pills">
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      [class.active]="activeTab === 'info'"
+                      (click)="activeTab = 'info'"
+                      >Thông tin chung</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      [class.active]="activeTab === 'images'"
+                      (click)="activeTab = 'images'"
+                      >Hình ảnh</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      [class.active]="activeTab === 'seo'"
+                      (click)="activeTab = 'seo'"
+                      >SEO</a
+                    >
+                  </li>
+                </ul>
+              </div>
+
+              <div class="card-body">
+                <div [hidden]="activeTab !== 'info'">
+                  <!-- Thông tin chung -->
+                  <div class="form-group">
+                    <label>Tên sản phẩm</label>
+                    <input
+                      formControlName="title"
+                      class="form-control"
+                      placeholder="Tên sản phẩm"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Alias</label>
+                    <input formControlName="alias" class="form-control" placeholder="Alias" />
+                  </div>
+
+                  <div class="form-group">
+                    <label>CODE</label>
+                    <input formControlName="productCode" class="form-control" placeholder="CODE" />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Danh mục</label>
+                    <select formControlName="productCategoryId" class="form-control">
+                      <option value="">-Chọn danh mục sản phẩm-</option>
+                      <option *ngFor="let c of productCategories" [value]="c.id">
+                        {{ c.title }}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Mô tả</label>
+                    <input formControlName="description" class="form-control" placeholder="Mô tả" />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Chi tiết</label>
+                    <!-- <textarea
+                      formControlName="detail"
+                      class="form-control"
+                      id="txtDetail"
+                    ></textarea> -->
+                    <ckeditor [editor]="Editor" formControlName="detail" [config]="editorConfig">
+                    </ckeditor>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-3" *ngFor="let field of priceFields">
+                      <div class="form-group">
+                        <label>{{ field.label }}</label>
+                        <input type="text" class="form-control" [formControlName]="field.name" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-3" *ngFor="let opt of optionsCheckbox">
+                      <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            [formControlName]="opt.name"
+                            [id]="opt.name"
+                          />
+                          <label [for]="opt.name" class="custom-control-label">{{
+                            opt.label
+                          }}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Hình ảnh -->
+                <div [hidden]="activeTab !== 'images'">
+                  <div class="row">
+                    <div class="col-md-12 text-right">
+                      <input
+                        type="file"
+                        (change)="onFileSelected($event)"
+                        multiple
+                        hidden
+                        #fileInput
+                      />
+                      <button class="btn btn-primary" (click)="fileInput.click()">Tải Ảnh</button>
+                    </div>
+                    <div class="col-md-12">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center">Ảnh</th>
+                            <th class="text-center">Ảnh đại diện</th>
+                            <th class="text-center">Thao tác</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let img of images; let i = index">
+                            <td class="text-center">{{ i + 1 }}</td>
+                            <td class="text-center">
+                              <img [src]="img.url" class="w-[100px] h-[100px] object-cover mb-2" />
+                            </td>
+                            <td class="text-center">
+                              <input
+                                type="radio"
+                                name="defaultImage"
+                                [checked]="img.isDefault"
+                                (change)="setDefaultImage(i)"
+                              />
+                            </td>
+                            <td class="text-center">
+                              <button (click)="removeImage(i)" class="btn btn-danger btn-sm">
+                                Xoá
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SEO -->
+                <div [hidden]="activeTab !== 'seo'">
+                  <div class="form-group">
+                    <label>Seo title</label>
+                    <input formControlName="seoTitle" class="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <label>Seo Description</label>
+                    <input formControlName="seoDescription" class="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <label>Seo Keywords</label>
+                    <input formControlName="seoKeywords" class="form-control" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <button mat-dialog-close mat-stroked-button type="button">
+                  {{ 'Common.Cancel' | translate }}
+                </button>
+                <button
+                  (click)="onSubmit()"
+                  class="ml-4"
+                  mat-flat-button
+                  type="button"
+                  [color]="'primary'"
+                >
+                  {{ 'Common.Save' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

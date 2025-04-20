@@ -34,8 +34,6 @@ export class EditUserComponent implements OnInit {
       this.item = { ...data.item };
     }
     data.isEdit ? (this.isEdit = true) : (this.isEdit = false);
-
-    console.log('item: ', this.item);
     this.form = this.formBuilder.group(
       {
         // email: ['', [Validators.required, Validators.email]],
@@ -138,7 +136,7 @@ export class EditUserComponent implements OnInit {
   }
 
   processResponse(res: any, msg?: string, isClose?: boolean) {
-    const transForm = res ? (msg ? msg : 'Thêm mới thành công') : 'Thêm mới thất bại';
+    const transForm = res ? (msg ? msg : 'Cập nhật thành công') : 'Cập nhật thất bại';
 
     this.snackBar.open(transForm, 'OK', {
       verticalPosition: 'bottom',

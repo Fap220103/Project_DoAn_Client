@@ -44,6 +44,11 @@
         />
       </mat-form-field>
 
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>{{ 'Category.Link' | translate }}</mat-label>
+        <input matInput formControlName="link" placeholder="{{ 'Category.Link' | translate }}" />
+      </mat-form-field>
+
       <mat-checkbox *ngIf="isEdit" formControlName="isActive"
         >{{ 'Category.IsActive' | translate }}
       </mat-checkbox>

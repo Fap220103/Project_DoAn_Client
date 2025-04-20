@@ -8,7 +8,8 @@
       "Cancel": "Hủy",
       "Save": "Lưu",
       "Action": "Thao tác",
-      "No": "STT"
+      "No": "STT",
+      "Read": "Xem"
     },
     "Color" : {
       "SearchTitle": "Tìm kiếm theo mã màu và tên màu",
@@ -62,11 +63,13 @@
     "Product" : {
       "AddTitle" : "Thêm mới sản phẩm",
       "EditTitle": "Cập nhật sản phẩm",
+      "ReadTitle": "Xem chi tiết sản phẩm",
       "Name": "Tên sản phẩm",
       "Image": "Ảnh",
       "SearchTitle":"Tìm kiếm theo tên sản phẩm",
       "CreatedDate": "Ngày tạo",
-      "Price": "Giá",
+      "OriginalPrice": "Giá nhập",
+      "Price": "Giá bán",
       "PriceSale": "Giá khuyến mãi",
       "Category": "Danh mục"
     }

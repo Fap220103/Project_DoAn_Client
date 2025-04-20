@@ -9,6 +9,7 @@ import { UserService } from '../../../../core/services/user.service';
 import { RoleType, StatusUser } from '../../../../core/constants/roles';
 import { EditUserComponent } from './edituser/edituser.component';
 import { AuthService } from '../../../../core/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-userprofile',
@@ -35,6 +36,7 @@ export class UserProfileComponent implements OnInit {
     private toastr: ToastrService,
     private userService: UserService,
     private authService: AuthService,
+    public snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {
     this.currentUserId = authService.getUserId();
@@ -95,16 +97,23 @@ export class UserProfileComponent implements OnInit {
           next: (res) => {
             if (res.code === 200) {
               this.getData();
-              this.toastr.success('Xóa thành công!', 'Thành công');
+              this.processResponse(res);
             } else {
-              this.toastr.error('Xóa thất bại!', 'Thất bại');
+              this.processResponse(false);
             }
           },
           error: (err) => {
-            this.toastr.error('Đã xảy ra lỗi khi xóa!', 'Lỗi');
+            this.processResponse(false);
           }
         });
       }
+    });
+  }
+  processResponse(res: any, msg?: string) {
+    const transForm = res ? (msg ? msg : 'Xóa thành công') : 'Xóa thất bại';
+    this.snackBar.open(transForm, 'OK', {
+      verticalPosition: 'bottom',
+      duration: 2000
     });
   }
   add() {

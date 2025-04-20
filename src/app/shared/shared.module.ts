@@ -22,6 +22,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { AngularSplitModule } from 'angular-split';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { MatTableModule } from '@angular/material/table';
     AngularSplitModule,
     MatCheckboxModule,
     MatTableModule,
-    MatPseudoCheckboxModule
+    MatPseudoCheckboxModule,
+    CKEditorModule
   ],
   exports: [
     TranslateModule,
@@ -68,7 +70,8 @@ import { MatTableModule } from '@angular/material/table';
     AngularSplitModule,
     MatCheckboxModule,
     MatTableModule,
-    MatPseudoCheckboxModule
+    MatPseudoCheckboxModule,
+    CKEditorModule
   ]
 })
 export class SharedModule {}
