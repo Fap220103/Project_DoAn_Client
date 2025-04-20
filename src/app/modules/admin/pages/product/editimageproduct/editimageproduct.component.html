@@ -1,0 +1,47 @@
+<!-- product-image.component.html -->
+<section class="content">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Ảnh sản phẩm</h3>
+      <div class="card-tools">
+        <button type="button" class="btn btn-danger" (click)="deleteAllImages()">Xóa hết</button>
+        <input type="file" #fileInput style="display: none" (change)="onFileSelected($event)" />
+        <input type="button" class="btn btn-primary" value="Tải Ảnh" (click)="fileInput.click()" />
+      </div>
+    </div>
+
+    <div class="card-body body-image">
+      <ul class="glImage">
+        <li *ngFor="let item of images" [id]="'trow_' + item.id">
+          <img [src]="item.image" style="cursor: pointer" />
+          <div class="box-btn">
+            <a href="#" class="btn btn-sm btn-danger" (click)="deleteImage(item.id)">
+              <i class="fa fa-trash"></i>
+            </a>
+            <a
+              *ngIf="item.isDefault"
+              href="#"
+              class="btn btn-sm btn-success btnNoDefault"
+              [attr.data-id]="item.id"
+              id="Default"
+              (click)="changeDefault(item.id)"
+            >
+              <i class="fa fa-check"></i>
+            </a>
+            <a
+              *ngIf="!item.isDefault"
+              href="#"
+              class="btn btn-sm btn-warning btnDefault"
+              [attr.data-id]="item.id"
+              (click)="changeDefault(item.id)"
+            >
+              <i class="fa-solid fa-xmark"></i>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card-footer"></div>
+  </div>
+</section>

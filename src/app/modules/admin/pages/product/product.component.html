@@ -49,6 +49,7 @@
             <th>{{ 'Product.Image' | translate }}</th>
             <th>{{ 'Product.Name' | translate }}</th>
             <th>{{ 'Product.Category' | translate }}</th>
+            <th>{{ 'Product.OriginalPrice' | translate }}</th>
             <th>{{ 'Product.Price' | translate }}</th>
             <th>{{ 'Product.PriceSale' | translate }}</th>
             <th style="width: 200px">{{ 'Common.Action' | translate }}</th>
@@ -59,24 +60,48 @@
             <td>{{ item.position }}</td>
             <td>
               <span *ngIf="item.image">
-                <img [src]="item.image" class="w-[100px] h-[100px] object-cover mb-2" />
+                <img
+                  [src]="item.image"
+                  class="w-[100px] h-[100px] object-cover mb-2"
+                  (click)="editImage(item)"
+                />
               </span>
             </td>
             <td>
-              <span matTooltip="{{ item.name }}">{{ item.name }}</span>
+              <span matTooltip="{{ item.title }}">
+                {{ item.title.length > 50 ? (item.title | slice: 0 : 50) + '...' : item.title }}
+              </span>
             </td>
+
             <td>
               <span matTooltip="{{ item.productCategoryName }}">{{
                 item.productCategoryName
               }}</span>
             </td>
             <td>
-              <span matTooltip="{{ item.price }}">{{ item.price }}</span>
+              <span matTooltip="{{ item.originalPrice | number: '1.0-0' }}"
+                >{{ item.originalPrice | number: '1.0-0' }} VND</span
+              >
             </td>
             <td>
-              <span matTooltip="{{ item.priceSale }}">{{ item.priceSale }}</span>
+              <span matTooltip="{{ item.price | number: '1.0-0' }}"
+                >{{ item.price | number: '1.0-0' }} VND</span
+              >
             </td>
             <td>
+              <span matTooltip="{{ item.priceSale | number: '1.0-0' }}"
+                >{{ item.priceSale | number: '1.0-0' }} VND</span
+              >
+            </td>
+
+            <td>
+              <button
+                mat-icon-button
+                (click)="detail(item)"
+                matTooltip="{{ 'Common.Read' | translate }}"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
               <button
                 mat-icon-button
                 (click)="edit(item)"

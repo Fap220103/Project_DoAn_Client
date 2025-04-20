@@ -9,6 +9,7 @@ import { ProductService } from '../../../../core/services/product.service';
 import Swal from 'sweetalert2';
 import { EditProductComponent } from './editproduct/editproduct.component';
 import { AddProductComponent } from './addproduct/addproduct.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product',
@@ -30,9 +31,9 @@ export class ProductComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private toastr: ToastrService,
     private productService: ProductService,
     private authService: AuthService,
+    public snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {
     this.currentUserId = authService.getUserId();
@@ -50,7 +51,6 @@ export class ProductComponent implements OnInit {
       });
       this.totalCount = rs.content.data.totalRecords;
     });
-    console.log(this.lstProduct);
   }
   onChangePage(event: any) {
     this.pageIndex = event.pageIndex;
@@ -58,17 +58,16 @@ export class ProductComponent implements OnInit {
     this.getData();
   }
   edit(item: any) {
-    console.log(item);
     this.selectedItem = item;
     const dialogRef = this.dialog.open(EditProductComponent, {
-      minWidth: '50%',
+      minWidth: '70%',
       height: '100%',
       panelClass: 'custom-dialog-right',
       position: {
         right: '0'
       },
       data: {
-        title: 'User.EditTitle',
+        title: 'Product.EditTitle',
         item: this.selectedItem,
         isEdit: true
       }
@@ -79,7 +78,7 @@ export class ProductComponent implements OnInit {
       }
     });
   }
-  delete(userId: string) {
+  delete(productId: string) {
     Swal.fire({
       title: 'Bạn có chắc chắn?',
       text: 'Hành động này sẽ không thể hoàn tác!',
@@ -89,32 +88,39 @@ export class ProductComponent implements OnInit {
       cancelButtonText: 'Hủy'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.productService.delete(userId).subscribe({
+        this.productService.deleteProduct(this.currentUserId, productId).subscribe({
           next: (res) => {
             if (res.code === 200) {
               this.getData();
-              this.toastr.success('Xóa thành công!', 'Thành công');
+              this.processResponse(res);
             } else {
-              this.toastr.error('Xóa thất bại!', 'Thất bại');
+              this.processResponse(false);
             }
           },
           error: (err) => {
-            this.toastr.error('Đã xảy ra lỗi khi xóa!', 'Lỗi');
+            this.processResponse(false);
           }
         });
       }
     });
   }
+  processResponse(res: any, msg?: string) {
+    const transForm = res ? (msg ? msg : 'Xóa thành công') : 'Xóa thất bại';
+    this.snackBar.open(transForm, 'OK', {
+      verticalPosition: 'bottom',
+      duration: 2000
+    });
+  }
   add() {
     const dialogRef = this.dialog.open(AddProductComponent, {
-      minWidth: '30%',
+      minWidth: '70%',
       height: '100%',
       panelClass: 'custom-dialog-right',
       position: {
         right: '0'
       },
       data: {
-        title: 'User.AddTitle',
+        title: 'Product.AddTitle',
         isEdit: false
       }
     });
@@ -124,7 +130,30 @@ export class ProductComponent implements OnInit {
       }
     });
   }
+  detail(item: any) {
+    this.selectedItem = item;
+    const dialogRef = this.dialog.open(EditProductComponent, {
+      minWidth: '70%',
+      height: '100%',
+      panelClass: 'custom-dialog-right',
+      position: {
+        right: '0'
+      },
+      data: {
+        title: 'Product.ReadTitle',
+        item: this.selectedItem,
+        isEdit: true,
+        isDetail: true
+      }
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getData();
+      }
+    });
+  }
 
+  editImage(item: any) {}
   handleChangeSearchInput(event: any) {
     if (event.key === 'Enter') {
       this.params = {
