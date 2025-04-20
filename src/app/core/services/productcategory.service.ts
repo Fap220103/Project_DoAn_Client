@@ -28,13 +28,4 @@ export class ProductcategoryService extends BaseService<any> {
     const url = `${this.svUrl}/UpdateProductCategory`;
     return this.post(model, url);
   }
-
-  // deleteCategory(userId: any, categoryId: string) {
-  //   return this.http.delete<any>(`${this.baseUrl}ProductCategory/DeleteProductCategory`, {
-  //     params: {
-  //       UserId: userId,
-  //       ProductCategoryId: categoryId
-  //     }
-  //   });
-  // }
 }

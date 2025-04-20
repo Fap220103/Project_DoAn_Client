@@ -72,19 +72,15 @@
 
           <!-- Hiển thị dropdown nếu có nhiều hơn 1 children -->
           <li class="nav-item" *ngIf="isDropdown(item)">
-            <a class="nav-link" href="#">
+            <a class="nav-link point-click" (click)="toggleDropdown(item, $event)">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 {{ item.caption }}
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li
-                class="nav-item"
-                *ngFor="let child of item.children"
-                [ngClass]="{ 'd-none': !child.isAuthorized }"
-              >
+            <ul class="nav" *ngIf="item.expanded">
+              <li class="nav-item" *ngFor="let child of item.children">
                 <a [routerLink]="child.url" class="nav-link" *ngIf="child.isAuthorized">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{ child.caption }}</p>

@@ -1,6 +1,17 @@
-<!-- product-image.component.html -->
-<section class="content">
+<section class="content mt-[50px]">
   <div class="card">
+    <div class="flex flex-row items-center px-6 h-20 min-h-20 text-white bg-primary">
+      <mat-icon
+        class="icon-size-7 text-current"
+        [svgIcon]="'heroicons_solid:plus-circle'"
+      ></mat-icon>
+      <div class="ml-3 text-2xl font-semibold tracking-tight">
+        {{ data.title | translate }}
+      </div>
+      <button class="ml-auto" mat-icon-button (click)="dialogRef.close()">
+        <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+      </button>
+    </div>
     <div class="card-header">
       <h3 class="card-title">Ảnh sản phẩm</h3>
       <div class="card-tools">
@@ -12,31 +23,32 @@
 
     <div class="card-body body-image">
       <ul class="glImage">
-        <li *ngFor="let item of images" [id]="'trow_' + item.id">
+        <li *ngFor="let item of images">
           <img [src]="item.image" style="cursor: pointer" />
           <div class="box-btn">
-            <a href="#" class="btn btn-sm btn-danger" (click)="deleteImage(item.id)">
+            <button class="btn btn-sm btn-danger" (click)="deleteImage(item.id)">
               <i class="fa fa-trash"></i>
-            </a>
-            <a
+            </button>
+            <button
               *ngIf="item.isDefault"
-              href="#"
+              type="button"
               class="btn btn-sm btn-success btnNoDefault"
               [attr.data-id]="item.id"
               id="Default"
               (click)="changeDefault(item.id)"
             >
               <i class="fa fa-check"></i>
-            </a>
-            <a
+            </button>
+
+            <button
               *ngIf="!item.isDefault"
-              href="#"
+              type="button"
               class="btn btn-sm btn-warning btnDefault"
               [attr.data-id]="item.id"
               (click)="changeDefault(item.id)"
             >
-              <i class="fa-solid fa-xmark"></i>
-            </a>
+              <i class="fas fa-times"></i>
+            </button>
           </div>
         </li>
       </ul>

@@ -59,10 +59,10 @@
           <tr *ngFor="let item of lstProduct; let i = index">
             <td>{{ item.position }}</td>
             <td>
-              <span *ngIf="item.image">
+              <span *ngIf="item.imageDefault">
                 <img
-                  [src]="item.image"
-                  class="w-[100px] h-[100px] object-cover mb-2"
+                  [src]="item.imageDefault"
+                  class="w-[100px] h-[100px] object-cover mb-2 cursor-pointer"
                   (click)="editImage(item)"
                 />
               </span>

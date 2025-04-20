@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { EditProductComponent } from './editproduct/editproduct.component';
 import { AddProductComponent } from './addproduct/addproduct.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { EditImageProductComponent } from './editimageproduct/editimageproduct.component';
 
 @Component({
   selector: 'app-product',
@@ -153,7 +154,26 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  editImage(item: any) {}
+  editImage(item: any) {
+    this.selectedItem = item;
+    const dialogRef = this.dialog.open(EditImageProductComponent, {
+      minWidth: '70%',
+      height: '100%',
+      panelClass: 'custom-dialog-right',
+      position: {
+        right: '0'
+      },
+      data: {
+        title: 'Product.EditTitle',
+        productId: this.selectedItem.id
+      }
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getData();
+      }
+    });
+  }
   handleChangeSearchInput(event: any) {
     if (event.key === 'Enter') {
       this.params = {

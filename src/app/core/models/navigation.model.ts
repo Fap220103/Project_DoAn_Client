@@ -6,4 +6,5 @@ export interface NavigationItem {
   children: NavigationItem[];
   index: number;
   parentIndex: number;
+  expanded?: boolean;
 }

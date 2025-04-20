@@ -27,6 +27,7 @@ import { AddUserComponent } from './pages/userprofile/adduser/adduser.component'
 import { EditUserComponent } from './pages/userprofile/edituser/edituser.component';
 import { AddProductComponent } from './pages/product/addproduct/addproduct.component';
 import { EditProductComponent } from './pages/product/editproduct/editproduct.component';
+import { EditImageProductComponent } from './pages/product/editimageproduct/editimageproduct.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { EditProductComponent } from './pages/product/editproduct/editproduct.co
     AddUserComponent,
     EditUserComponent,
     AddProductComponent,
-    EditProductComponent
+    EditProductComponent,
+    EditImageProductComponent
   ],
   imports: [
     CommonModule,
