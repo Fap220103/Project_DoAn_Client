@@ -24,7 +24,7 @@
                       class="nav-link"
                       [class.active]="activeTab === 'info'"
                       (click)="activeTab = 'info'"
-                      >Thông tin chung</a
+                      >{{ 'Product.Info' | translate }}</a
                     >
                   </li>
                   <li class="nav-item">
@@ -41,39 +41,39 @@
                 <div [hidden]="activeTab !== 'info'">
                   <!-- Thông tin chung -->
                   <div class="form-group">
-                    <label>Tên sản phẩm</label>
+                    <label>{{ 'Product.Name' | translate }}</label>
                     <input
                       formControlName="title"
                       class="form-control"
-                      placeholder="Tên sản phẩm"
+                      placeholder="{{ 'Product.Name' | translate }}"
                       [readonly]="isDetail"
                     />
                   </div>
 
                   <div class="form-group">
-                    <label>Alias</label>
+                    <label>{{ 'Product.Alias' | translate }}</label>
                     <input
                       formControlName="alias"
                       class="form-control"
-                      placeholder="Alias"
+                      placeholder="{{ 'Product.Alias' | translate }}"
                       [readonly]="isDetail"
                     />
                   </div>
 
                   <div class="form-group">
-                    <label>CODE</label>
+                    <label>{{ 'Product.Code' | translate }}</label>
                     <input
                       formControlName="productCode"
                       class="form-control"
-                      placeholder="CODE"
+                      placeholder="{{ 'Product.Code' | translate }}"
                       [readonly]="isDetail"
                     />
                   </div>
 
                   <div class="form-group">
-                    <label>Danh mục</label>
+                    <label>{{ 'Product.Category' | translate }}</label>
                     <select formControlName="productCategoryId" class="form-control">
-                      <option value="">-Chọn danh mục sản phẩm-</option>
+                      <option value="">{{ 'Product.SelectCategory' | translate }}</option>
                       <option *ngFor="let c of productCategories" [value]="c.id">
                         {{ c.title }}
                       </option>
@@ -81,17 +81,17 @@
                   </div>
 
                   <div class="form-group">
-                    <label>Mô tả</label>
+                    <label>{{ 'Product.Description' | translate }}</label>
                     <input
                       formControlName="description"
                       class="form-control"
-                      placeholder="Mô tả"
+                      placeholder="{{ 'Product.Description' | translate }}"
                       [readonly]="isDetail"
                     />
                   </div>
 
                   <div class="form-group">
-                    <label>Chi tiết</label>
+                    <label>{{ 'Product.Detail' | translate }}</label>
                     <ckeditor [editor]="Editor" formControlName="detail" [config]="editorConfig">
                     </ckeditor>
                   </div>
@@ -99,7 +99,7 @@
                   <div class="row">
                     <div class="col-3" *ngFor="let field of priceFields">
                       <div class="form-group">
-                        <label>{{ field.label }}</label>
+                        <label>{{ field.label | translate }}</label>
                         <input type="text" class="form-control" [formControlName]="field.name" />
                       </div>
                     </div>

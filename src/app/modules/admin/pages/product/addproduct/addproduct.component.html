@@ -24,7 +24,7 @@
                       class="nav-link"
                       [class.active]="activeTab === 'info'"
                       (click)="activeTab = 'info'"
-                      >Thông tin chung</a
+                      >{{ 'Product.Info' | translate }}</a
                     >
                   </li>
                   <li class="nav-item">
@@ -32,7 +32,7 @@
                       class="nav-link"
                       [class.active]="activeTab === 'images'"
                       (click)="activeTab = 'images'"
-                      >Hình ảnh</a
+                      >{{ 'Product.Image' | translate }}</a
                     >
                   </li>
                   <li class="nav-item">
@@ -50,28 +50,28 @@
                 <div [hidden]="activeTab !== 'info'">
                   <!-- Thông tin chung -->
                   <div class="form-group">
-                    <label>Tên sản phẩm</label>
+                    <label>{{ 'Product.Name' | translate }}</label>
                     <input
                       formControlName="title"
                       class="form-control"
-                      placeholder="Tên sản phẩm"
+                      placeholder="{{ 'Product.Name' | translate }}"
                     />
                   </div>
 
                   <div class="form-group">
-                    <label>Alias</label>
-                    <input formControlName="alias" class="form-control" placeholder="Alias" />
+                    <label>{{ 'Product.Alias' | translate }}</label>
+                    <input formControlName="alias" class="form-control" placeholder="{{ 'Product.Alias' | translate }}" />
                   </div>
 
                   <div class="form-group">
-                    <label>CODE</label>
-                    <input formControlName="productCode" class="form-control" placeholder="CODE" />
+                    <label>{{ 'Product.Code' | translate }}</label>
+                    <input formControlName="productCode" class="form-control" placeholder="{{ 'Product.Code' | translate }}" />
                   </div>
 
                   <div class="form-group">
-                    <label>Danh mục</label>
+                    <label>{{ 'Product.Category' | translate }}</label>
                     <select formControlName="productCategoryId" class="form-control">
-                      <option value="">-Chọn danh mục sản phẩm-</option>
+                      <option value="">{{ 'Product.SelectCategory' | translate }}</option>
                       <option *ngFor="let c of productCategories" [value]="c.id">
                         {{ c.title }}
                       </option>
@@ -79,12 +79,12 @@
                   </div>
 
                   <div class="form-group">
-                    <label>Mô tả</label>
-                    <input formControlName="description" class="form-control" placeholder="Mô tả" />
+                    <label>{{ 'Product.Description' | translate }}</label>
+                    <input formControlName="description" class="form-control" placeholder="{{ 'Product.Description' | translate }}" />
                   </div>
 
                   <div class="form-group">
-                    <label>Chi tiết</label>
+                    <label>{{ 'Product.Detail' | translate }}</label>
                     <!-- <textarea
                       formControlName="detail"
                       class="form-control"
@@ -97,7 +97,7 @@
                   <div class="row">
                     <div class="col-3" *ngFor="let field of priceFields">
                       <div class="form-group">
-                        <label>{{ field.label }}</label>
+                        <label>{{ field.label | translate }}</label>
                         <input
                           type="text"
                           class="form-control"
@@ -119,7 +119,7 @@
                             [id]="opt.name"
                           />
                           <label [for]="opt.name" class="custom-control-label">{{
-                            opt.label
+                            opt.label 
                           }}</label>
                         </div>
                       </div>
@@ -138,16 +138,16 @@
                         hidden
                         #fileInput
                       />
-                      <button class="btn btn-primary" (click)="fileInput.click()">Tải Ảnh</button>
+                      <button class="btn btn-primary" (click)="fileInput.click()">{{ 'Product.UploadImage' | translate }}</button>
                     </div>
                     <div class="col-md-12">
                       <table class="table table-hover">
                         <thead>
                           <tr>
-                            <th class="text-center">#</th>
-                            <th class="text-center">Ảnh</th>
-                            <th class="text-center">Ảnh đại diện</th>
-                            <th class="text-center">Thao tác</th>
+                            <th class="text-center"> {{ 'Common.No' | translate }}</th>
+                            <th class="text-center">{{ 'Product.Image' | translate }}</th>
+                            <th class="text-center">{{ 'Product.DefaultImage' | translate }}</th>
+                            <th class="text-center">{{ 'Common.Action' | translate }}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -166,7 +166,7 @@
                             </td>
                             <td class="text-center">
                               <button (click)="removeImage(i)" class="btn btn-danger btn-sm">
-                                Xoá
+                                {{ 'Common.Delete' | translate }}
                               </button>
                             </td>
                           </tr>

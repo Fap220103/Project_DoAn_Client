@@ -22,7 +22,7 @@
           placeholder="{{ 'Category.GuideTitle' | translate }}"
         />
         <mat-error *ngIf="form.controls['title'].invalid && form.controls['title'].touched">
-          Tiêu đề không được để trống
+          {{ 'Common.TitleNotEmpty' | translate }}
         </mat-error>
       </mat-form-field>
 

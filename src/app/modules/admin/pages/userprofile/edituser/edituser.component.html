@@ -13,23 +13,23 @@
     <div class="pt-4 grid w-full">
       <form [formGroup]="form">
         <mat-form-field appearance="fill" class="w-100">
-          <mat-label>UserName</mat-label>
-          <input matInput formControlName="userName" placeholder="Nhập userName" />
+          <mat-label> {{ 'User.Edit.UserName' | translate }}</mat-label>
+          <input matInput formControlName="userName" placeholder="{{ 'User.Edit.UserName' | translate }}" />
           <mat-error *ngIf="form.get('userName')?.invalid && form.get('userName')?.touched">
-            UserName không hợp lệ
+            {{ 'User.Edit.UserNameError' | translate }}
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="w-100">
-          <mat-label>PhoneNumber</mat-label>
-          <input matInput formControlName="phoneNumber" placeholder="Nhập phoneNumber" />
+          <mat-label>{{ 'User.Edit.PhoneNumber' | translate }}</mat-label>
+          <input matInput formControlName="phoneNumber" placeholder="{{ 'User.Edit.PhoneNumber' | translate }}" />
           <mat-error *ngIf="form.get('phoneNumber')?.invalid && form.get('phoneNumber')?.touched">
-            PhoneNumber không hợp lệ
+            {{ 'User.Edit.PhoneNumberError' | translate }}
           </mat-error>
         </mat-form-field>
 
         <div class="w-100 flex flex-col">
-          <mat-label>Trạng thái</mat-label>
+          <mat-label>{{ 'User.Edit.Status' | translate }}</mat-label>
           <select matNativeControl formControlName="status">
             <option *ngFor="let status of lstStatus" [value]="status.code">
               {{ status.display }}
@@ -40,25 +40,15 @@
         <div class="row mt-3">
           <div class="col-md-12 text-left">
             <input type="file" (change)="onFileSelected($event)" multiple hidden #fileInput />
-            <button class="btn btn-primary" (click)="fileInput.click()">Tải Ảnh</button>
+            <button class="btn btn-primary" (click)="fileInput.click()">{{ 'User.Edit.UploadImage' | translate }}</button>
           </div>
           <div *ngIf="imagePreview" class="mt-4">
             <img [src]="imagePreview" class="w-[100px] h-[100px] object-cover mb-2" />
           </div>
         </div>
 
-        <!-- <div class="mb-4">
-          <label class="block font-medium mb-2">Chọn ảnh đại diện</label>
-          <input
-            type="file"
-            formControlName="image"
-            (change)="onFileSelected($event)"
-            class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-          />
-        </div> -->
-
         <!-- Roles -->
-        <label class="font-medium mb-2">Phân quyền</label>
+        <label class="font-medium mb-2">{{ 'User.Edit.Role' | translate }}</label>
         <div class="flex flex-col gap-2 mb-4">
           <mat-checkbox
             *ngFor="let role of lstRole"

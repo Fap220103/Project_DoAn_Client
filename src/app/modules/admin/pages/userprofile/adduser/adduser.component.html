@@ -13,22 +13,22 @@
     <div class="pt-4 grid w-full">
       <form [formGroup]="form">
         <mat-form-field appearance="fill" class="w-100">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" placeholder="Nhập email" />
+          <mat-label>{{ 'User.Add.Email' | translate }}</mat-label>
+          <input matInput formControlName="email" placeholder="{{ 'User.Add.Email' | translate }}" />
           <mat-error *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
-            Email không hợp lệ
+            {{ 'User.Add.EmailError' | translate }}
           </mat-error>
         </mat-form-field>
 
         <!-- Password -->
         <mat-form-field appearance="fill" class="w-100">
-          <mat-label>Mật khẩu</mat-label>
+          <mat-label>{{ 'User.Add.Password' | translate }}</mat-label>
           <input
             matInput
             type="password"
             [type]="showPassword ? 'text' : 'password'"
             formControlName="password"
-            placeholder="Nhập mật khẩu"
+            placeholder="{{ 'User.Add.Password' | translate }}"
           />
           <button
             mat-icon-button
@@ -43,24 +43,24 @@
           <mat-error
             *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched"
           >
-            Mật khẩu là bắt buộc
+          {{ 'User.Add.PassError1' | translate }}
           </mat-error>
           <mat-error
             *ngIf="form.get('password')?.hasError('minlength') && form.get('password')?.touched"
           >
-            Mật khẩu phải có ít nhất 6 ký tự
+          {{ 'User.Add.PassError2' | translate }}
           </mat-error>
         </mat-form-field>
 
         <!-- Confirm Password -->
         <mat-form-field appearance="fill" class="w-100">
-          <mat-label>Nhập lại mật khẩu</mat-label>
+          <mat-label>{{ 'User.Add.ConfirmPassword' | translate }}</mat-label>
           <input
             matInput
             type="password"
             [type]="showConfirmPassword ? 'text' : 'password'"
             formControlName="confirmPassword"
-            placeholder="Nhập lại mật khẩu"
+            placeholder="{{ 'User.Add.ConfirmPassword' | translate }}"
           />
           <button
             mat-icon-button
@@ -77,12 +77,12 @@
           <mat-error
             *ngIf="form.hasError('passwordMismatch') && form.get('confirmPassword')?.touched"
           >
-            Mật khẩu không khớp
+          {{ 'User.Add.PassError3' | translate }}
           </mat-error>
         </mat-form-field>
 
         <!-- Roles -->
-        <label class="font-medium mb-2">Phân quyền</label>
+        <label class="font-medium mb-2">{{ 'User.Add.Role' | translate }}</label>
         <div class="flex flex-col gap-2 mb-4">
           <mat-checkbox
             *ngFor="let role of lstRole"

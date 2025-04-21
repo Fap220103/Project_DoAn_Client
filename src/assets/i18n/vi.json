@@ -14,6 +14,7 @@
       "DeleteTitle": "Hành động này sẽ không thể hoàn tác!",
       "NoData": "Không có bản ghi nào",
       "NotEmpty": "Không được để trống",
+      "TitleNotEmpty": "Tiêu đề không được để trống",
       "Home": "Trang chủ"
     },
     "Message" : {
@@ -52,7 +53,8 @@
       "Key": "Khóa",
       "Value": "Giá trị",
       "GuideKey": "Khóa",
-      "GuideValue": "Giá trị"
+      "GuideValue": "Giá trị",
+      "KeyNotEmpty": "Khóa không được để trống"
     },
     "Category" : {
       "AddTitle" : "Thêm mới danh mục",
@@ -78,21 +80,49 @@
       "TypeSearchRole": "--Vai trò--",
       "TypeSearchStatus": "--Trạng thái hoạt động--",
       "SearchTitle":"Tìm kiếm theo tên người dùng hoặc email",
-      "AddError": "Vui lòng kiểm tra và điền đầy đủ thông tin hợp lệ."
+      "AddError": "Vui lòng kiểm tra và điền đầy đủ thông tin hợp lệ.",
+      "Add": {
+        "Email": "Email",
+        "Password": "Mật khẩu",
+        "ConfirmPassword": "Nhập lại mật khẩu",
+        "EmailError": "Email không hợp lệ",
+        "PassError1": "Mật khẩu là bắt buộc",
+        "PassError2": "Mật khẩu phải có ít nhất 6 ký tự",
+        "PassError3": "Mật khẩu không khớp",
+        "Role": "Phân quyền"
+      },
+      "Edit": {
+        "UserName": "Tên người dùng",
+        "UserNameError": "Tên người dùng không hợp lệ",
+        "PhoneNumber": "Số điện thoại",
+        "PhoneNumberError": "Số điện thoại không hợp lệ",
+        "Status": "Trạng thái",
+        "UploadImage": "Tải Ảnh",
+        "Role": "Phân quyền"
+      }
     },
     "Product" : {
+      "Info": "Thông tin chung",
       "Title": "Sản phẩm",
       "AddTitle" : "Thêm mới sản phẩm",
       "EditTitle": "Cập nhật sản phẩm",
       "ReadTitle": "Xem chi tiết sản phẩm",
       "Name": "Tên sản phẩm",
+      "Description": "Mô tả",
+      "Detail": "Chi tiết",
+      "Alias": "Bí danh",
+      "Code": "Mã sản phẩm",
       "Image": "Ảnh",
+      "DefaultImage": "Ảnh đại diện",
+      "SelectCategory": "--Chọn danh mục sản phẩm--",
       "SearchTitle":"Tìm kiếm theo tên sản phẩm",
       "CreatedDate": "Ngày tạo",
       "OriginalPrice": "Giá nhập",
       "Price": "Giá bán",
+      "SalePercent": "Phần trăm khuyến mãi",
       "PriceSale": "Giá khuyến mãi",
-      "Category": "Danh mục"
+      "Category": "Danh mục",
+      "UploadImage":"Tải Ảnh"
     },
     "ProductImage" : {
       "Message":{

@@ -18,7 +18,7 @@
         <mat-label>{{ 'Setting.Key' | translate }}</mat-label>
         <input matInput formControlName="key" placeholder="{{ 'Setting.GuideKey' | translate }}" />
         <mat-error *ngIf="form.controls['key'].invalid && form.controls['key'].touched">
-          Khóa không được để trống
+          {{ 'Setting.KeyNotEmpty' | translate }}
         </mat-error>
       </mat-form-field>
 

@@ -19,7 +19,7 @@
         <mat-label>{{ 'Color.Name' | translate }}</mat-label>
         <input matInput formControlName="colorName" placeholder="{{ 'Color.Name' | translate }}" />
         <mat-error *ngIf="form.controls['colorName'].invalid && form.controls['colorName'].touched">
-          Tiêu đề không được để trống
+          {{ 'Common.TitleNotEmpty' | translate }}
         </mat-error>
       </mat-form-field>
 

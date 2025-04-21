@@ -8,11 +8,13 @@
     "Cancel": "Cancel",
     "Save": "Save",
     "Action": "Action",
-    "No": "No",
+    "No": "#",
     "Read": "Xem",
     "DeleteConfirm": "Are you sure?",
     "DeleteTitle": "This action cannot be undo!",
     "NoData": "No Data",
+    "NotEmpty": "Cannot be blank",
+    "TitleNotEmpty": "Title cannot be blank",
     "Home": "Home"
   },
   "Message": {
@@ -23,8 +25,8 @@
     "EditSuccess": "Edit Successfully",
     "EditFail": "Edit Failed"
   },
-  "Dashboard" : {
-      "Title": "Dashboard"
+  "Dashboard": {
+    "Title": "Dashboard"
   },
   "Color": {
     "SearchTitle": "Search by color code and color name",
@@ -50,7 +52,8 @@
     "Key": "Key",
     "Value": "Value",
     "GuideKey": "Key",
-    "GuideValue": "Value"
+    "GuideValue": "Value",
+    "KeyNotEmpty": "Key cannot be blank"
   },
   "Category": {
     "AddTitle": "Add Category",
@@ -76,21 +79,49 @@
     "TypeSearchRole": "--Role--",
     "TypeSearchStatus": "--Status--",
     "SearchTitle": "Find by username or email",
-    "AddError": "Please check and fill in all valid information."
+    "AddError": "Please check and fill in all valid information.",
+    "Add": {
+      "Email": "Email",
+      "Password": "Password",
+      "ConfirmPassword": "Confirm Password",
+      "EmailError": "Invalid email",
+      "PassError1": "Password is required",
+      "PassError2": "Password must be at least 6 characters",
+      "PassError3": "Passwords do not match",
+      "Role": "Role"
+    },
+    "Edit": {
+      "UserName": "Username",
+      "UserNameError": "Invalid username",
+      "PhoneNumber": "Phone number",
+      "PhoneNumberError": "Invalid phone number",
+      "Status": "Status",
+      "UploadImage": "Upload Image",
+      "Role": "Role"
+    }
   },
   "Product": {
+    "Info": "Common Infomation",
     "Title": "Product",
     "AddTitle": "Add Product",
     "EditTitle": "Edit Product",
     "ReadTitle": "Read Deatil Product",
     "Name": "Product Name",
+    "Description": "Description",
+      "Detail": "Detail",
+      "Alias": "Alias",
+      "Code": "Code",
     "Image": "Image",
+    "DefaultImage": "Default Image",
+    "SelectCategory": "--PRODUCT CATEGORY--",
     "SearchTitle": "Find by product name",
     "CreatedDate": "Created Date",
     "OriginalPrice": "OriginalPrice",
     "Price": "Price",
+    "SalePercent": "Sale Percent",
     "PriceSale": "PriceSale",
-    "Category": "Category"
+    "Category": "Category",
+    "UploadImage":"Upload Image"
   },
   "ProductImage": {
     "Message": {
