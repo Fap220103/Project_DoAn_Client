@@ -14,7 +14,11 @@
       <form [formGroup]="form">
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>{{ 'User.Add.Email' | translate }}</mat-label>
-          <input matInput formControlName="email" placeholder="{{ 'User.Add.Email' | translate }}" />
+          <input
+            matInput
+            formControlName="email"
+            placeholder="{{ 'User.Add.Email' | translate }}"
+          />
           <mat-error *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
             {{ 'User.Add.EmailError' | translate }}
           </mat-error>
@@ -43,12 +47,12 @@
           <mat-error
             *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched"
           >
-          {{ 'User.Add.PassError1' | translate }}
+            {{ 'User.Add.PassError1' | translate }}
           </mat-error>
           <mat-error
             *ngIf="form.get('password')?.hasError('minlength') && form.get('password')?.touched"
           >
-          {{ 'User.Add.PassError2' | translate }}
+            {{ 'User.Add.PassError2' | translate }}
           </mat-error>
         </mat-form-field>
 
@@ -77,7 +81,7 @@
           <mat-error
             *ngIf="form.hasError('passwordMismatch') && form.get('confirmPassword')?.touched"
           >
-          {{ 'User.Add.PassError3' | translate }}
+            {{ 'User.Add.PassError3' | translate }}
           </mat-error>
         </mat-form-field>
 

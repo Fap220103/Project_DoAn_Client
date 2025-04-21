@@ -14,7 +14,11 @@
       <form [formGroup]="form">
         <mat-form-field appearance="fill" class="w-100">
           <mat-label> {{ 'User.Edit.UserName' | translate }}</mat-label>
-          <input matInput formControlName="userName" placeholder="{{ 'User.Edit.UserName' | translate }}" />
+          <input
+            matInput
+            formControlName="userName"
+            placeholder="{{ 'User.Edit.UserName' | translate }}"
+          />
           <mat-error *ngIf="form.get('userName')?.invalid && form.get('userName')?.touched">
             {{ 'User.Edit.UserNameError' | translate }}
           </mat-error>
@@ -22,7 +26,11 @@
 
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>{{ 'User.Edit.PhoneNumber' | translate }}</mat-label>
-          <input matInput formControlName="phoneNumber" placeholder="{{ 'User.Edit.PhoneNumber' | translate }}" />
+          <input
+            matInput
+            formControlName="phoneNumber"
+            placeholder="{{ 'User.Edit.PhoneNumber' | translate }}"
+          />
           <mat-error *ngIf="form.get('phoneNumber')?.invalid && form.get('phoneNumber')?.touched">
             {{ 'User.Edit.PhoneNumberError' | translate }}
           </mat-error>
@@ -40,7 +48,9 @@
         <div class="row mt-3">
           <div class="col-md-12 text-left">
             <input type="file" (change)="onFileSelected($event)" multiple hidden #fileInput />
-            <button class="btn btn-primary" (click)="fileInput.click()">{{ 'User.Edit.UploadImage' | translate }}</button>
+            <button class="btn btn-primary" (click)="fileInput.click()">
+              {{ 'User.Edit.UploadImage' | translate }}
+            </button>
           </div>
           <div *ngIf="imagePreview" class="mt-4">
             <img [src]="imagePreview" class="w-[100px] h-[100px] object-cover mb-2" />

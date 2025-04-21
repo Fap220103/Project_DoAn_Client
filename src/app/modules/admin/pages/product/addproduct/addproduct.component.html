@@ -60,12 +60,20 @@
 
                   <div class="form-group">
                     <label>{{ 'Product.Alias' | translate }}</label>
-                    <input formControlName="alias" class="form-control" placeholder="{{ 'Product.Alias' | translate }}" />
+                    <input
+                      formControlName="alias"
+                      class="form-control"
+                      placeholder="{{ 'Product.Alias' | translate }}"
+                    />
                   </div>
 
                   <div class="form-group">
                     <label>{{ 'Product.Code' | translate }}</label>
-                    <input formControlName="productCode" class="form-control" placeholder="{{ 'Product.Code' | translate }}" />
+                    <input
+                      formControlName="productCode"
+                      class="form-control"
+                      placeholder="{{ 'Product.Code' | translate }}"
+                    />
                   </div>
 
                   <div class="form-group">
@@ -80,7 +88,11 @@
 
                   <div class="form-group">
                     <label>{{ 'Product.Description' | translate }}</label>
-                    <input formControlName="description" class="form-control" placeholder="{{ 'Product.Description' | translate }}" />
+                    <input
+                      formControlName="description"
+                      class="form-control"
+                      placeholder="{{ 'Product.Description' | translate }}"
+                    />
                   </div>
 
                   <div class="form-group">
@@ -119,7 +131,7 @@
                             [id]="opt.name"
                           />
                           <label [for]="opt.name" class="custom-control-label">{{
-                            opt.label 
+                            opt.label
                           }}</label>
                         </div>
                       </div>
@@ -138,13 +150,15 @@
                         hidden
                         #fileInput
                       />
-                      <button class="btn btn-primary" (click)="fileInput.click()">{{ 'Product.UploadImage' | translate }}</button>
+                      <button class="btn btn-primary" (click)="fileInput.click()">
+                        {{ 'Product.UploadImage' | translate }}
+                      </button>
                     </div>
                     <div class="col-md-12">
                       <table class="table table-hover">
                         <thead>
                           <tr>
-                            <th class="text-center"> {{ 'Common.No' | translate }}</th>
+                            <th class="text-center">{{ 'Common.No' | translate }}</th>
                             <th class="text-center">{{ 'Product.Image' | translate }}</th>
                             <th class="text-center">{{ 'Product.DefaultImage' | translate }}</th>
                             <th class="text-center">{{ 'Common.Action' | translate }}</th>
