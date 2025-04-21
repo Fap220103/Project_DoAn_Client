@@ -7,7 +7,7 @@ import { SizeService } from '../../../../../core/services/size.service';
 @Component({
   selector: 'app-size-add',
   templateUrl: './size-add.component.html',
-  styleUrls: ['./size-add.component.css']
+  styleUrls: ['./size-add.component.scss']
 })
 export class SizeAddComponent implements OnInit {
   form!: FormGroup;

@@ -11,6 +11,15 @@
       "No": "STT",
       "Read": "Xem"
     },
+    "Message" : {
+      "DeleteSuccess": "Xóa thành công",
+      "DeleteFail": "Xóa thất bại",
+      "AddSuccess": "Thêm thành công",
+      "AddFail": "Thêm thất bại",
+      "EditSuccess": "Cập nhật thành công",
+      "EditFail": "Cập nhật thất bại"
+
+    },
     "Color" : {
       "SearchTitle": "Tìm kiếm theo mã màu và tên màu",
       "AddTitle" : "Thêm mới màu",
@@ -43,6 +52,7 @@
       "Title": "Danh mục",
       "Alias": "Bí danh",
       "Description": "Mô tả",
+      "Link": "Đường dẫn",
       "GuideTitle": "Tên danh mục",
       "GuideAlias": "Bí danh",
       "GuideDescription": "Mô tả",
@@ -72,6 +82,21 @@
       "Price": "Giá bán",
       "PriceSale": "Giá khuyến mãi",
       "Category": "Danh mục"
+    },
+    "ProductVariant" : {
+      "AddTitle" : "Thêm mới biến thể",
+      "ProductName": "Tên sản phẩm",
+      "ProductCode": "Mã sản phẩm",
+      "ColorName":"Màu",
+      "SizeName": "Kích cỡ"
+    },
+    "Inventory" : {
+      "AddTitle" : "Thêm mới tồn kho",
+      "ProductName": "Tên sản phẩm",
+      "ProductCode": "Mã sản phẩm",
+      "ColorName":"Màu",
+      "SizeName": "Kích cỡ",
+      "Quantity": "Số lượng"
     }
 }
   

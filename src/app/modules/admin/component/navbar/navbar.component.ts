@@ -6,7 +6,7 @@ import { filter, map } from 'rxjs';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
   pageTitle: string = '';
@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
   ) {
     this.router.events
       .pipe(
-        filter((event) => event instanceof NavigationEnd), // Chỉ lấy sự kiện khi điều hướng kết thúc
+        filter((event) => event instanceof NavigationEnd),
         map(() => {
           let child = this.route.firstChild;
           while (child?.firstChild) {

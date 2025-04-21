@@ -98,7 +98,12 @@
                     <div class="col-3" *ngFor="let field of priceFields">
                       <div class="form-group">
                         <label>{{ field.label }}</label>
-                        <input type="text" class="form-control" [formControlName]="field.name" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          [formControlName]="field.name"
+                          (input)="formatCurrency(field.name)"
+                        />
                       </div>
                     </div>
                   </div>

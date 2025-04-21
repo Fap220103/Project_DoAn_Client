@@ -34,7 +34,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     CoreModule,
     SharedModule,
     ModulesModule,
-    ReactiveFormsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
       timeOut: 3000,

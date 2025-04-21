@@ -28,6 +28,10 @@ import { EditUserComponent } from './pages/userprofile/edituser/edituser.compone
 import { AddProductComponent } from './pages/product/addproduct/addproduct.component';
 import { EditProductComponent } from './pages/product/editproduct/editproduct.component';
 import { EditImageProductComponent } from './pages/product/editimageproduct/editimageproduct.component';
+import { ProductVariantComponent } from './pages/productvariant/productvariant.component';
+import { AddProductVariantComponent } from './pages/productvariant/addproductvariant/addproductvariant.component';
+import { InventoryComponent } from './pages/inventory/inventory.component';
+import { AddInventoryComponent } from './pages/inventory/addinventory/addinventory.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,11 @@ import { EditImageProductComponent } from './pages/product/editimageproduct/edit
     EditUserComponent,
     AddProductComponent,
     EditProductComponent,
-    EditImageProductComponent
+    EditImageProductComponent,
+    ProductVariantComponent,
+    AddProductVariantComponent,
+    InventoryComponent,
+    AddInventoryComponent
   ],
   imports: [
     CommonModule,

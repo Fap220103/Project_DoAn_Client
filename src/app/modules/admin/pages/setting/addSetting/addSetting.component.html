@@ -12,7 +12,7 @@
       <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
     </button>
   </div>
-  <div class="container mt-[50px]">
+  <div class="wrap-body mt-[50px]">
     <form [formGroup]="form">
       <mat-form-field appearance="fill" class="w-100">
         <mat-label>{{ 'Setting.Key' | translate }}</mat-label>
@@ -33,6 +33,7 @@
     </form>
   </div>
 
+  <div class="border-t"></div>
   <!-- Actions -->
   <div mat-dialog-actions class="pl-5 pr-5 flex items-center justify-center">
     <button mat-dialog-close mat-stroked-button type="button">

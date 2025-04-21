@@ -17,5 +17,14 @@ export const Constants = {
   },
   Product: {
     Resource: 'api/Product'
+  },
+  ProductVariant: {
+    Resource: 'api/ProductVariant'
+  },
+  Inventory: {
+    Resource: 'api/Inventory'
+  },
+  Discount: {
+    Resource: 'api/Discount'
   }
 };

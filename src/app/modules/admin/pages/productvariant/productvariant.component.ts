@@ -2,18 +2,19 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
-import { SettingService } from '../../../../core/services/setting.service';
-import { AddSettingComponent } from './addSetting/addSetting.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AddProductVariantComponent } from './addproductvariant/addproductvariant.component';
+import { ProductVariantService } from '../../../../core/services/productvariant.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-setting',
-  templateUrl: './setting.component.html',
-  styleUrls: ['./setting.component.scss']
+  selector: 'app-productvariant',
+  templateUrl: './productvariant.component.html',
+  styleUrls: ['./productvariant.component.scss']
 })
-export class SettingComponent implements OnInit {
+export class ProductVariantComponent implements OnInit {
   pageTitle: string = 'Cài đặt';
-  lstSetting: any[] = [];
+  lstVariant: any[] = [];
   searchString: string = '';
   selectedItem: any = {};
   params: any = {};
@@ -25,8 +26,9 @@ export class SettingComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private settingService: SettingService,
+    private productVariantService: ProductVariantService,
     public snackBar: MatSnackBar,
+    private translate: TranslateService,
     public dialog: MatDialog
   ) {}
 
@@ -34,43 +36,24 @@ export class SettingComponent implements OnInit {
     this.getData();
   }
   getData() {
-    this.settingService.get(this.params, this.pageIndex + 1, this.pageSize).subscribe((rs) => {
-      this.lstSetting = rs.content.data;
-      this.lstSetting = this.lstSetting.map((x, index) => {
-        x.position = this.pageIndex * this.pageSize + index + 1;
-        return x;
+    this.productVariantService
+      .get(this.params, this.pageIndex + 1, this.pageSize)
+      .subscribe((rs) => {
+        this.lstVariant = rs.content.data;
+        this.lstVariant = this.lstVariant.map((x, index) => {
+          x.position = this.pageIndex * this.pageSize + index + 1;
+          return x;
+        });
+        this.totalCount = rs.content.data.totalRecords;
       });
-      this.totalCount = rs.content.data.totalRecords;
-    });
-    console.log(this.lstSetting);
+    console.log(this.lstVariant);
   }
   onChangePage(event: any) {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.getData();
   }
-  edit(item: any) {
-    console.log(item);
-    this.selectedItem = item;
-    const dialogRef = this.dialog.open(AddSettingComponent, {
-      minWidth: '30%',
-      height: '100%',
-      panelClass: 'custom-dialog-right',
-      position: {
-        right: '0'
-      },
-      data: {
-        title: 'Setting.EditTitle',
-        item: this.selectedItem,
-        isEdit: true
-      }
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.getData();
-      }
-    });
-  }
+
   delete(settingId: string) {
     Swal.fire({
       title: 'Bạn có chắc chắn?',
@@ -81,7 +64,7 @@ export class SettingComponent implements OnInit {
       cancelButtonText: 'Hủy'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.settingService.delete(settingId).subscribe({
+        this.productVariantService.delete(settingId).subscribe({
           next: (res) => {
             if (res.code === 200) {
               this.getData();
@@ -98,14 +81,20 @@ export class SettingComponent implements OnInit {
     });
   }
   processResponse(res: any, msg?: string) {
-    const transForm = res ? (msg ? msg : 'Xóa thành công') : 'Xóa thất bại';
+    const transForm = res
+      ? msg
+        ? msg
+        : this.translate.instant('Message.DeleteSuccess')
+      : msg
+        ? msg
+        : this.translate.instant('Message.DeleteFail');
     this.snackBar.open(transForm, 'OK', {
       verticalPosition: 'bottom',
       duration: 2000
     });
   }
   add() {
-    const dialogRef = this.dialog.open(AddSettingComponent, {
+    const dialogRef = this.dialog.open(AddProductVariantComponent, {
       minWidth: '30%',
       height: '100%',
       panelClass: 'custom-dialog-right',
@@ -113,7 +102,7 @@ export class SettingComponent implements OnInit {
         right: '0'
       },
       data: {
-        title: 'Setting.AddTitle',
+        title: 'ProductVatiant.AddTitle',
         isEdit: false
       }
     });

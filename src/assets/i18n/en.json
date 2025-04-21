@@ -11,6 +11,15 @@
       "No": "No",
       "Read": "Xem"
     },
+    "Message" : {
+      "DeleteSuccess": "Delete Successfully",
+      "DeleteFail": "Delete Failed",
+      "AddSuccess": "Add Successfully",
+      "AddFail": "Add Failed",
+      "EditSuccess": "Edit Successfully",
+      "EditFail": "Edit Failed"
+
+    },
     "Color" : {
       "SearchTitle": "Search by color code and color name",
       "AddTitle" : "Add Color",
@@ -43,6 +52,7 @@
       "Title": "Category",
       "Alias": "Alias",
       "Description": "Description",
+      "Link": "Link",
       "GuideTitle": "Category",
       "GuideAlias": "Alias",
       "GuideDescription": "Description",
@@ -72,5 +82,12 @@
       "Price": "Price",
       "PriceSale": "PriceSale",
       "Category": "Category"
+    },
+    "ProductVariant" : {
+      "AddTitle" : "Add Variant",
+      "ProductName": "Product Name",
+      "ProductCode": "Product Code",
+      "ColorName":"Color",
+      "SizeName": "Size"
     }
   }

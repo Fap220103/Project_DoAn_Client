@@ -1,10 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderClientComponent } from './components/header-client/header-client.component';
-import { FooterClientComponent } from './components/footer-client/footer-client.component';
-import { HeaderAdminComponent } from './components/header-admin/header-admin.component';
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -23,16 +18,10 @@ import { AngularSplitModule } from 'angular-split';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [
-    HeaderClientComponent,
-    FooterClientComponent,
-    HeaderAdminComponent,
-    AdminLayoutComponent,
-    ClientLayoutComponent,
-    AraAutocompleteComponent
-  ],
+  declarations: [AraAutocompleteComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -52,7 +41,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MatCheckboxModule,
     MatTableModule,
     MatPseudoCheckboxModule,
-    CKEditorModule
+    CKEditorModule,
+    MatSelectModule,
+    MatFormFieldModule
   ],
   exports: [
     TranslateModule,
@@ -71,7 +62,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MatCheckboxModule,
     MatTableModule,
     MatPseudoCheckboxModule,
-    CKEditorModule
+    CKEditorModule,
+    MatSelectModule,
+    MatFormFieldModule
   ]
 })
 export class SharedModule {}

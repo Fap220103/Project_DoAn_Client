@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-size',
   templateUrl: './size.component.html',
-  styleUrls: ['./size.component.css']
+  styleUrls: ['./size.component.scss']
 })
 export class SizeComponent implements OnInit {
   pageTitle: string = 'Màu sắc';

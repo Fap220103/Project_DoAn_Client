@@ -7,7 +7,7 @@ import { ProductcategoryService } from '../../../../../../core/services/productc
 @Component({
   selector: 'app-addProductCategory-lv1',
   templateUrl: './addProductCategory-lv1.component.html',
-  styleUrls: ['./addProductCategory-lv1.component.css']
+  styleUrls: ['./addProductCategory-lv1.component.scss']
 })
 export class AddProductCategoryLv1Component implements OnInit {
   form!: FormGroup;
