@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../../../core/services/user.service';
 import { RolesObj, RoleType, StatusUser } from '../../../../../core/constants/roles';
 import { AuthService } from '../../../../../core/services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edituser',
@@ -22,6 +23,7 @@ export class EditUserComponent implements OnInit {
   userId!: string;
   constructor(
     public snackBar: MatSnackBar,
+    private translate: TranslateService,
     public dialogRef: MatDialogRef<EditUserComponent>,
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -130,14 +132,25 @@ export class EditUserComponent implements OnInit {
     // };
     //  console.log('data update: ', addItem);
     this.userService.put(formData).subscribe({
-      next: (res) => this.processResponse(res),
+      next: (res) => {
+        if (res.code === 200) {
+          this.processResponse(res);
+        } else {
+          this.processResponse(false);
+        }
+      },
       error: () => this.processResponse(false)
     });
   }
 
   processResponse(res: any, msg?: string, isClose?: boolean) {
-    const transForm = res ? (msg ? msg : 'Cập nhật thành công') : 'Cập nhật thất bại';
-
+    const transForm = res
+      ? msg
+        ? msg
+        : this.translate.instant('Message.EditSuccess')
+      : msg
+        ? msg
+        : this.translate.instant('Message.EditFail');
     this.snackBar.open(transForm, 'OK', {
       verticalPosition: 'bottom',
       duration: 2000

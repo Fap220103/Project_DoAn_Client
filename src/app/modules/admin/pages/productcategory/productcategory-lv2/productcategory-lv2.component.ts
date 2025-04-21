@@ -14,6 +14,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
 import { ProductcategoryService } from '../../../../../core/services/productcategory.service';
 import { AddProductCategoryLv1Component } from '../productcategory-lv1/addProductCategory-lv1/addProductCategory-lv1.component';
+import { TranslateService } from '@ngx-translate/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-productcategory-lv2',
@@ -37,8 +39,9 @@ export class ProductCategoryLv2Component implements OnInit, OnChanges {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private toastr: ToastrService,
+    private translate: TranslateService,
     private productCategoryService: ProductcategoryService,
+    public snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {}
 
@@ -109,24 +112,41 @@ export class ProductCategoryLv2Component implements OnInit, OnChanges {
   }
   delete(categoryId: string) {
     Swal.fire({
-      title: 'Bạn có chắc chắn?',
-      text: 'Hành động này sẽ không thể hoàn tác!',
+      title: this.translate.instant('Common.DeleteConfirm'),
+      text: this.translate.instant('Common.DeleteTitle'),
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy'
+      confirmButtonText: this.translate.instant('Common.Delete'),
+      cancelButtonText: this.translate.instant('Common.Cancel')
     }).then((result) => {
       if (result.isConfirmed) {
         this.productCategoryService.delete(categoryId).subscribe({
-          next: () => {
-            this.getData();
-            this.toastr.success('Xóa thành công!', 'Thành công');
+          next: (res) => {
+            if (res.code === 200) {
+              this.getData();
+              this.processResponse(res);
+            } else {
+              this.processResponse(false);
+            }
           },
           error: (err) => {
-            this.toastr.error('Đã xảy ra lỗi khi xóa!', 'Lỗi');
+            this.processResponse(false);
           }
         });
       }
+    });
+  }
+  processResponse(res: any, msg?: string) {
+    const transForm = res
+      ? msg
+        ? msg
+        : this.translate.instant('Message.DeleteSuccess')
+      : msg
+        ? msg
+        : this.translate.instant('Message.DeleteFail');
+    this.snackBar.open(transForm, 'OK', {
+      verticalPosition: 'bottom',
+      duration: 2000
     });
   }
   add() {

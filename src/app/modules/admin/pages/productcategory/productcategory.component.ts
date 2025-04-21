@@ -13,16 +13,10 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./productcategory.component.scss']
 })
 export class ProductcategoryComponent implements OnInit {
-  pageTitle: string = 'Danh mục Sản phẩm';
-  categories: Category[] = [];
-  ListCategory: Category[] = [];
   itemSelectedLv1: any = {};
   itemSelectedLv2: any = {};
   notice: boolean = true;
-  constructor(
-    private toastr: ToastrService,
-    private dialog: MatDialog
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {}
 

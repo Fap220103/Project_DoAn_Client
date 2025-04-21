@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SettingService } from '../../../../../core/services/setting.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-addSetting',
@@ -15,6 +16,7 @@ export class AddSettingComponent implements OnInit {
   isEdit!: boolean;
   constructor(
     public snackBar: MatSnackBar,
+    private translate: TranslateService,
     public dialogRef: MatDialogRef<AddSettingComponent>,
     private formBuilder: FormBuilder,
     public settingService: SettingService,
@@ -62,7 +64,13 @@ export class AddSettingComponent implements OnInit {
         value: formValue.value
       };
       this.settingService.post(addItem).subscribe({
-        next: (res) => this.processResponse(res),
+        next: (res) => {
+          if (res.code === 200) {
+            this.processResponse(res);
+          } else {
+            this.processResponse(false);
+          }
+        },
         error: () => this.processResponse(false)
       });
     }
@@ -73,17 +81,17 @@ export class AddSettingComponent implements OnInit {
       ? !this.isEdit
         ? msg
           ? msg
-          : 'Thêm mới thành công'
+          : this.translate.instant('Message.AddSuccess')
         : msg
           ? msg
-          : 'Cập nhật thành công'
+          : this.translate.instant('Message.EditSuccess')
       : !this.isEdit
         ? msg
           ? msg
-          : 'Thêm mới thất bại'
+          : this.translate.instant('Message.AddFail')
         : msg
           ? msg
-          : 'Cập nhật thất bại';
+          : this.translate.instant('Message.EditFail');
     this.snackBar.open(transForm, 'OK', {
       verticalPosition: 'bottom',
       duration: 2000

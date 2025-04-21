@@ -22,51 +22,51 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
-        data: { title: 'Tổng quan', alias: 'dashboard' }
+        data: { title: 'Dashboard.Title' }
       },
       {
         path: 'product',
         component: ProductComponent,
-        data: { title: 'Sản phẩm', alias: 'product' }
+        data: { title: 'Product.Title' }
       },
       {
         path: 'productcategory',
         component: ProductcategoryComponent,
-        data: { title: 'Danh mục sản phẩm', alias: 'productcategory' }
+        data: { title: 'Category.Title' }
       },
       {
         path: 'color',
         component: ColorComponent,
-        data: { title: 'Màu sắc', alias: 'color' }
+        data: { title: 'Color.Title' }
       },
       {
         path: 'size',
         component: SizeComponent,
-        data: { title: 'kích cỡ', alias: 'size' }
+        data: { title: 'Size.Title' }
       },
       {
         path: 'setting',
         component: SettingComponent,
         canActivate: [adminGuard],
-        data: { title: 'Cài đặt', alias: 'setting' }
+        data: { title: 'Setting.Title' }
       },
       {
         path: 'userprofile',
         component: UserProfileComponent,
         canActivate: [adminGuard],
-        data: { title: 'Người dùng', alias: 'userprofile' }
+        data: { title: 'User.Title' }
       },
       {
         path: 'productvariant',
         component: ProductVariantComponent,
         canActivate: [adminGuard],
-        data: { title: 'Biến thể', alias: 'productvariant' }
+        data: { title: 'ProductVariant.Title' }
       },
       {
         path: 'inventory',
         component: InventoryComponent,
         canActivate: [adminGuard],
-        data: { title: 'Tồn kho', alias: 'inventory' }
+        data: { title: 'Inventory.Title' }
       }
     ]
   }

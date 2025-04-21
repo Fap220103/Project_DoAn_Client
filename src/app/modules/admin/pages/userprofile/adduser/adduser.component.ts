@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../../../core/services/user.service';
 import { RolesObj, RoleType } from '../../../../../core/constants/roles';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-adduser',
@@ -18,6 +19,7 @@ export class AddUserComponent implements OnInit {
   showConfirmPassword: boolean = false;
   constructor(
     public snackBar: MatSnackBar,
+    private translate: TranslateService,
     public dialogRef: MatDialogRef<AddUserComponent>,
     private formBuilder: FormBuilder,
     public userService: UserService,
@@ -77,7 +79,7 @@ export class AddUserComponent implements OnInit {
       this.form.markAllAsTouched();
       if (this.form.invalid) {
         this.form.markAllAsTouched();
-        this.snackBar.open('Vui lòng kiểm tra và điền đầy đủ thông tin hợp lệ.', 'OK', {
+        this.snackBar.open(this.translate.instant('User.AddError'), 'OK', {
           verticalPosition: 'bottom',
           duration: 3000
         });
@@ -105,7 +107,13 @@ export class AddUserComponent implements OnInit {
   }
 
   processResponse(res: any, msg?: string, isClose?: boolean) {
-    const transForm = res ? (msg ? msg : 'Thêm mới thành công') : 'Thêm mới thất bại';
+    const transForm = res
+      ? msg
+        ? msg
+        : this.translate.instant('Message.AddSuccess')
+      : msg
+        ? msg
+        : this.translate.instant('Message.AddFail');
 
     this.snackBar.open(transForm, 'OK', {
       verticalPosition: 'bottom',
@@ -113,6 +121,7 @@ export class AddUserComponent implements OnInit {
     });
     if (!isClose && res) this.dialogRef.close(res);
   }
+  // ẩn/hiện password
   togglePasswordVisibility(field: 'password' | 'confirmPassword') {
     if (field === 'password') {
       this.showPassword = !this.showPassword;

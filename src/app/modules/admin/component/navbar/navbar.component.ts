@@ -10,7 +10,7 @@ import { filter, map } from 'rxjs';
 })
 export class NavbarComponent implements OnInit {
   pageTitle: string = '';
-  pageAlias: string = '';
+  //pageAlias: string = '';
   currentLang = 'vi';
   constructor(
     private router: Router,
@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
       )
       .subscribe((data) => {
         this.pageTitle = data['title'] || 'Tổng quan';
-        this.pageAlias = data['alias'] || 'dashboard';
+        //this.pageAlias = data['alias'] || 'dashboard';
       });
 
     translate.addLangs(['en', 'vi']);

@@ -36,7 +36,6 @@
             <td>
               <button
                 mat-icon-button
-                color="primary"
                 (click)="edit(item)"
                 matTooltip="{{ 'Common.Edit' | translate }}"
               >
@@ -44,7 +43,6 @@
               </button>
               <button
                 mat-icon-button
-                color="warn"
                 (click)="delete(item.id)"
                 matTooltip="{{ 'Common.Delete' | translate }}"
               >
@@ -52,14 +50,11 @@
               </button>
             </td>
           </tr>
-          <tr *ngIf="lstSize.length === 0">
-            <td colspan="5">Không có bản ghi nào</td>
-          </tr>
         </tbody>
         <!-- Hiển thị khi không có dữ liệu -->
         <ng-template #noData>
           <tr>
-            <td colspan="5" class="text-center">Không có bản ghi nào</td>
+            <td colspan="5" class="text-center">{{ 'Common.NoData' | translate }}</td>
           </tr>
         </ng-template>
       </table>

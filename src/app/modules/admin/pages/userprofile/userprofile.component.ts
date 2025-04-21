@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { ColorService } from '../../../../core/services/color.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
@@ -10,6 +8,7 @@ import { RoleType, StatusUser } from '../../../../core/constants/roles';
 import { EditUserComponent } from './edituser/edituser.component';
 import { AuthService } from '../../../../core/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-userprofile',
@@ -17,7 +16,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./userprofile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  pageTitle: string = 'Màu sắc';
   lstUser: any[] = [];
   searchString: string = '';
   selectedItem: any = {};
@@ -33,10 +31,10 @@ export class UserProfileComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private toastr: ToastrService,
     private userService: UserService,
     private authService: AuthService,
     public snackBar: MatSnackBar,
+    private translate: TranslateService,
     public dialog: MatDialog
   ) {
     this.currentUserId = authService.getUserId();
@@ -85,12 +83,12 @@ export class UserProfileComponent implements OnInit {
   }
   delete(userId: string) {
     Swal.fire({
-      title: 'Bạn có chắc chắn?',
-      text: 'Hành động này sẽ không thể hoàn tác!',
+      title: this.translate.instant('Common.DeleteConfirm'),
+      text: this.translate.instant('Common.DeleteTitle'),
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy'
+      confirmButtonText: this.translate.instant('Common.Delete'),
+      cancelButtonText: this.translate.instant('Common.Cancel')
     }).then((result) => {
       if (result.isConfirmed) {
         this.userService.delete(userId).subscribe({
@@ -110,7 +108,13 @@ export class UserProfileComponent implements OnInit {
     });
   }
   processResponse(res: any, msg?: string) {
-    const transForm = res ? (msg ? msg : 'Xóa thành công') : 'Xóa thất bại';
+    const transForm = res
+      ? msg
+        ? msg
+        : this.translate.instant('Message.DeleteSuccess')
+      : msg
+        ? msg
+        : this.translate.instant('Message.DeleteFail');
     this.snackBar.open(transForm, 'OK', {
       verticalPosition: 'bottom',
       duration: 2000

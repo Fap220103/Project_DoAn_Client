@@ -9,7 +9,12 @@
       "Save": "Lưu",
       "Action": "Thao tác",
       "No": "STT",
-      "Read": "Xem"
+      "Read": "Xem",
+      "DeleteConfirm": "Bạn có chắc chắn?",
+      "DeleteTitle": "Hành động này sẽ không thể hoàn tác!",
+      "NoData": "Không có bản ghi nào",
+      "NotEmpty": "Không được để trống",
+      "Home": "Trang chủ"
     },
     "Message" : {
       "DeleteSuccess": "Xóa thành công",
@@ -18,8 +23,11 @@
       "AddFail": "Thêm thất bại",
       "EditSuccess": "Cập nhật thành công",
       "EditFail": "Cập nhật thất bại"
-
     },
+    "Dashboard" : {
+      "Title": "Tổng quan"
+    },
+    
     "Color" : {
       "SearchTitle": "Tìm kiếm theo mã màu và tên màu",
       "AddTitle" : "Thêm mới màu",
@@ -59,6 +67,7 @@
       "IsActive": "Kích hoạt"
     },
     "User" : {
+      "Title": "Người dùng",
       "AddTitle" : "Thêm mới người dùng",
       "EditTitle": "Cập nhật người dùng",
       "Name": "Tên người dùng",
@@ -68,9 +77,11 @@
       "Status": "Trạng thái hoạt động",
       "TypeSearchRole": "--Vai trò--",
       "TypeSearchStatus": "--Trạng thái hoạt động--",
-      "SearchTitle":"Tìm kiếm theo tên người dùng hoặc email"
+      "SearchTitle":"Tìm kiếm theo tên người dùng hoặc email",
+      "AddError": "Vui lòng kiểm tra và điền đầy đủ thông tin hợp lệ."
     },
     "Product" : {
+      "Title": "Sản phẩm",
       "AddTitle" : "Thêm mới sản phẩm",
       "EditTitle": "Cập nhật sản phẩm",
       "ReadTitle": "Xem chi tiết sản phẩm",
@@ -83,7 +94,21 @@
       "PriceSale": "Giá khuyến mãi",
       "Category": "Danh mục"
     },
+    "ProductImage" : {
+      "Message":{
+        "AddSuccess": "Tải ảnh lên thành công",
+        "AddFail": "Tải ảnh lên thất bại",
+        "DeleteSuccess": "Xóa thành công",
+        "DeleteFail": "Xóa thất bại",
+        "ChangeDefaultConfirm": "Bạn có chắc chắn muốn thay đổi ảnh đại diện?",
+        "ChangeDefaultFail" : "Thay đổi ảnh đại diện thất bại",
+        "ChangeDefaultSuccess" : "Đặt ảnh đại diện thành công",
+        "Yes": "Có",
+        "No": "Không"
+      }
+    },
     "ProductVariant" : {
+      "Title": "Biến thể",
       "AddTitle" : "Thêm mới biến thể",
       "ProductName": "Tên sản phẩm",
       "ProductCode": "Mã sản phẩm",
@@ -91,6 +116,7 @@
       "SizeName": "Kích cỡ"
     },
     "Inventory" : {
+      "Title": "Tồn kho",
       "AddTitle" : "Thêm mới tồn kho",
       "ProductName": "Tên sản phẩm",
       "ProductCode": "Mã sản phẩm",

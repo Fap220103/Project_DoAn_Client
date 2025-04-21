@@ -17,11 +17,7 @@
       <!-- Màu sắc -->
       <mat-form-field appearance="fill" class="w-100">
         <mat-label>{{ 'Color.Name' | translate }}</mat-label>
-        <input
-          matInput
-          formControlName="colorName"
-          placeholder="{{ 'Color.GuideName' | translate }}"
-        />
+        <input matInput formControlName="colorName" placeholder="{{ 'Color.Name' | translate }}" />
         <mat-error *ngIf="form.controls['colorName'].invalid && form.controls['colorName'].touched">
           Tiêu đề không được để trống
         </mat-error>
@@ -30,11 +26,7 @@
       <!-- Mã màu -->
       <mat-form-field appearance="fill" class="w-100">
         <mat-label>{{ 'Color.Code' | translate }}</mat-label>
-        <input
-          matInput
-          formControlName="colorCode"
-          placeholder="{{ 'Color.GuideCode' | translate }}"
-        />
+        <input matInput formControlName="colorCode" placeholder="{{ 'Color.Code' | translate }}" />
       </mat-form-field>
     </form>
   </div>

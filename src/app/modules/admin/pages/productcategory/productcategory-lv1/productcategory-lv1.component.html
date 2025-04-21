@@ -52,14 +52,11 @@
               </button>
             </td>
           </tr>
-          <tr *ngIf="lstCategory1.length === 0">
-            <td colspan="5">Không có bản ghi nào</td>
-          </tr>
         </tbody>
         <!-- Hiển thị khi không có dữ liệu -->
         <ng-template #noData>
           <tr>
-            <td colspan="5" class="text-center">Không có bản ghi nào</td>
+            <td colspan="5" class="text-center">{{ 'Common.NoData' | translate }}</td>
           </tr>
         </ng-template>
       </table>

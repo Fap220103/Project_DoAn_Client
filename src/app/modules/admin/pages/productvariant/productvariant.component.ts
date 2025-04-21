@@ -13,7 +13,6 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./productvariant.component.scss']
 })
 export class ProductVariantComponent implements OnInit {
-  pageTitle: string = 'Cài đặt';
   lstVariant: any[] = [];
   searchString: string = '';
   selectedItem: any = {};
@@ -56,12 +55,12 @@ export class ProductVariantComponent implements OnInit {
 
   delete(settingId: string) {
     Swal.fire({
-      title: 'Bạn có chắc chắn?',
-      text: 'Hành động này sẽ không thể hoàn tác!',
+      title: this.translate.instant('Common.DeleteConfirm'),
+      text: this.translate.instant('Common.DeleteTitle'),
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy'
+      confirmButtonText: this.translate.instant('Common.Delete'),
+      cancelButtonText: this.translate.instant('Common.Cancel')
     }).then((result) => {
       if (result.isConfirmed) {
         this.productVariantService.delete(settingId).subscribe({

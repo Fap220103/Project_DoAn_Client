@@ -7,6 +7,7 @@ import { PriceFields, optionsCheckbox } from '../../../../../core/constants/comm
 import { ProductcategoryService } from '../../../../../core/services/productcategory.service';
 import { forkJoin } from 'rxjs';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-addproduct',
@@ -45,6 +46,7 @@ export class AddProductComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public snackBar: MatSnackBar,
+    private translate: TranslateService,
     private productService: ProductService,
     public dialogRef: MatDialogRef<AddProductComponent>,
     private categoryService: ProductcategoryService,
@@ -69,7 +71,6 @@ export class AddProductComponent implements OnInit {
   }
   ngOnInit() {
     this.getLstProductCategories();
-    console.log('list category: ', this.productCategories);
   }
 
   getLstProductCategories() {
@@ -120,41 +121,46 @@ export class AddProductComponent implements OnInit {
       const formData = new FormData();
       console.log('price', formValue.price.replace(/,/g, ''));
       console.log('original price', formValue.originalPrice.replace(/,/g, ''));
-      // formData.append('title', formValue.title);
-      // formData.append('alias', formValue.alias ?? '');
-      // formData.append('productCode', formValue.productCode ?? '');
-      // formData.append('productCategoryId', formValue.productCategoryId);
-      // formData.append('description', formValue.description);
-      // formData.append('detail', formValue.detail ?? '');
-      // formData.append('price', formValue.price);
-      // formData.append('salePercent', formValue.salePercent);
-      // formData.append('originalPrice', formValue.originalPrice);
-      // formData.append('isActive', formValue.isActive);
-      // formData.append('seoTitle', formValue.seoTitle);
-      // formData.append('seoDescription', formValue.seoDescription);
-      // formData.append('seoKeywords', formValue.seoKeywords);
-      // this.images.forEach((img, i) => {
-      //   if (img.file) {
-      //     formData.append('Images', img.file);
-      //   }
-      //   formData.append('Default', img.isDefault ? '1' : '0');
-      // });
+      formData.append('title', formValue.title);
+      formData.append('alias', formValue.alias ?? '');
+      formData.append('productCode', formValue.productCode ?? '');
+      formData.append('productCategoryId', formValue.productCategoryId);
+      formData.append('description', formValue.description);
+      formData.append('detail', formValue.detail ?? '');
+      formData.append('price', formValue.price);
+      formData.append('salePercent', formValue.salePercent);
+      formData.append('originalPrice', formValue.originalPrice);
+      formData.append('isActive', formValue.isActive);
+      formData.append('seoTitle', formValue.seoTitle);
+      formData.append('seoDescription', formValue.seoDescription);
+      formData.append('seoKeywords', formValue.seoKeywords);
+      this.images.forEach((img, i) => {
+        if (img.file) {
+          formData.append('Images', img.file);
+        }
+        formData.append('Default', img.isDefault ? '1' : '0');
+      });
 
-      // this.productService.post(formData).subscribe({
-      //   next: (res) => {
-      //     if (res.code === 200) {
-      //       this.processResponse(res);
-      //     } else {
-      //       this.processResponse(false);
-      //     }
-      //   },
-      //   error: () => this.processResponse(false)
-      // });
+      this.productService.post(formData).subscribe({
+        next: (res) => {
+          if (res.code === 200) {
+            this.processResponse(res);
+          } else {
+            this.processResponse(false);
+          }
+        },
+        error: () => this.processResponse(false)
+      });
     }
   }
   processResponse(res: any, msg?: string, isClose?: boolean) {
-    const transForm = res ? (msg ? msg : 'Thêm mới thành công') : 'Thêm mới thất bại';
-
+    const transForm = res
+      ? msg
+        ? msg
+        : this.translate.instant('Message.AddSuccess')
+      : msg
+        ? msg
+        : this.translate.instant('Message.AddFail');
     this.snackBar.open(transForm, 'OK', {
       verticalPosition: 'bottom',
       duration: 2000
@@ -162,24 +168,24 @@ export class AddProductComponent implements OnInit {
     if (!isClose && res) this.dialogRef.close(res);
   }
   // format số tiền | chỉ cho nhập số | không quá 16 số
-  validateNumber(event: any): void {
-    let value = event.target.value;
+  // validateNumber(event: any): void {
+  //   let value = event.target.value;
 
-    value = value.replace(/[^0-9]/g, '');
+  //   value = value.replace(/[^0-9]/g, '');
 
-    if (value.length > 16) {
-      value = value.slice(0, 16);
-    }
+  //   if (value.length > 16) {
+  //     value = value.slice(0, 16);
+  //   }
 
-    if (value) {
-      const formattedValue = Number(value).toLocaleString('en-US');
-      this.displayAdvanceAmount = formattedValue;
-      this.item.advanceAmount = Number(value);
-    } else {
-      this.displayAdvanceAmount = '';
-      this.item.advanceAmount = 0;
-    }
-  }
+  //   if (value) {
+  //     const formattedValue = Number(value).toLocaleString('en-US');
+  //     this.displayAdvanceAmount = formattedValue;
+  //     this.item.advanceAmount = Number(value);
+  //   } else {
+  //     this.displayAdvanceAmount = '';
+  //     this.item.advanceAmount = 0;
+  //   }
+  // }
   formatCurrency(controlName: string) {
     let value = this.form.get(controlName)?.value;
     if (value) {

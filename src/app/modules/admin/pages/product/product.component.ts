@@ -11,6 +11,7 @@ import { EditProductComponent } from './editproduct/editproduct.component';
 import { AddProductComponent } from './addproduct/addproduct.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EditImageProductComponent } from './editimageproduct/editimageproduct.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product',
@@ -35,6 +36,7 @@ export class ProductComponent implements OnInit {
     private productService: ProductService,
     private authService: AuthService,
     public snackBar: MatSnackBar,
+    private translate: TranslateService,
     public dialog: MatDialog
   ) {
     this.currentUserId = authService.getUserId();
@@ -81,12 +83,12 @@ export class ProductComponent implements OnInit {
   }
   delete(productId: string) {
     Swal.fire({
-      title: 'Bạn có chắc chắn?',
-      text: 'Hành động này sẽ không thể hoàn tác!',
+      title: this.translate.instant('Common.DeleteConfirm'),
+      text: this.translate.instant('Common.DeleteTitle'),
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy'
+      confirmButtonText: this.translate.instant('Common.Delete'),
+      cancelButtonText: this.translate.instant('Common.Cancel')
     }).then((result) => {
       if (result.isConfirmed) {
         this.productService.deleteProduct(this.currentUserId, productId).subscribe({
@@ -106,7 +108,13 @@ export class ProductComponent implements OnInit {
     });
   }
   processResponse(res: any, msg?: string) {
-    const transForm = res ? (msg ? msg : 'Xóa thành công') : 'Xóa thất bại';
+    const transForm = res
+      ? msg
+        ? msg
+        : this.translate.instant('Message.DeleteSuccess')
+      : msg
+        ? msg
+        : this.translate.instant('Message.DeleteFail');
     this.snackBar.open(transForm, 'OK', {
       verticalPosition: 'bottom',
       duration: 2000

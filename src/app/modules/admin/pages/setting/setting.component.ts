@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { SettingService } from '../../../../core/services/setting.service';
 import { AddSettingComponent } from './addSetting/addSetting.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-setting',
@@ -26,6 +27,7 @@ export class SettingComponent implements OnInit {
 
   constructor(
     private settingService: SettingService,
+    private translate: TranslateService,
     public snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {}
@@ -42,7 +44,6 @@ export class SettingComponent implements OnInit {
       });
       this.totalCount = rs.content.data.totalRecords;
     });
-    console.log(this.lstSetting);
   }
   onChangePage(event: any) {
     this.pageIndex = event.pageIndex;
@@ -50,7 +51,6 @@ export class SettingComponent implements OnInit {
     this.getData();
   }
   edit(item: any) {
-    console.log(item);
     this.selectedItem = item;
     const dialogRef = this.dialog.open(AddSettingComponent, {
       minWidth: '30%',
@@ -73,12 +73,12 @@ export class SettingComponent implements OnInit {
   }
   delete(settingId: string) {
     Swal.fire({
-      title: 'Bạn có chắc chắn?',
-      text: 'Hành động này sẽ không thể hoàn tác!',
+      title: this.translate.instant('Common.DeleteConfirm'),
+      text: this.translate.instant('Common.DeleteTitle'),
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy'
+      confirmButtonText: this.translate.instant('Common.Delete'),
+      cancelButtonText: this.translate.instant('Common.Cancel')
     }).then((result) => {
       if (result.isConfirmed) {
         this.settingService.delete(settingId).subscribe({
@@ -98,7 +98,14 @@ export class SettingComponent implements OnInit {
     });
   }
   processResponse(res: any, msg?: string) {
-    const transForm = res ? (msg ? msg : 'Xóa thành công') : 'Xóa thất bại';
+    const transForm = res
+      ? msg
+        ? msg
+        : this.translate.instant('Message.DeleteSuccess')
+      : msg
+        ? msg
+        : this.translate.instant('Message.DeleteFail');
+
     this.snackBar.open(transForm, 'OK', {
       verticalPosition: 'bottom',
       duration: 2000

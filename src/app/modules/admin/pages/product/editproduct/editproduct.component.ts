@@ -8,6 +8,7 @@ import { ProductcategoryService } from '../../../../../core/services/productcate
 import { forkJoin } from 'rxjs';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { AuthService } from '../../../../../core/services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-editproduct',
@@ -48,6 +49,7 @@ export class EditProductComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public snackBar: MatSnackBar,
+    private translate: TranslateService,
     private productService: ProductService,
     public dialogRef: MatDialogRef<EditProductComponent>,
     private categoryService: ProductcategoryService,
@@ -136,8 +138,13 @@ export class EditProductComponent implements OnInit {
     }
   }
   processResponse(res: any, msg?: string, isClose?: boolean) {
-    const transForm = res ? (msg ? msg : 'Cập nhật thành công') : 'Cập nhật thất bại';
-
+    const transForm = res
+      ? msg
+        ? msg
+        : this.translate.instant('Message.EditSuccess')
+      : msg
+        ? msg
+        : this.translate.instant('Message.EditFail');
     this.snackBar.open(transForm, 'OK', {
       verticalPosition: 'bottom',
       duration: 2000

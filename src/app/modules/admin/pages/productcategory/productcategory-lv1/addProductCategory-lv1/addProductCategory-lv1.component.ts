@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductcategoryService } from '../../../../../../core/services/productcategory.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-addProductCategory-lv1',
@@ -17,6 +18,7 @@ export class AddProductCategoryLv1Component implements OnInit {
   parentId!: string;
   constructor(
     public snackBar: MatSnackBar,
+    private translate: TranslateService,
     public dialogRef: MatDialogRef<AddProductCategoryLv1Component>,
     private formBuilder: FormBuilder,
     public productCategoryService: ProductcategoryService,
@@ -102,17 +104,17 @@ export class AddProductCategoryLv1Component implements OnInit {
       ? !this.isEdit
         ? msg
           ? msg
-          : 'Thêm mới thành công'
+          : this.translate.instant('Message.AddSuccess')
         : msg
           ? msg
-          : 'Cập nhật thành công'
+          : this.translate.instant('Message.EditSuccess')
       : !this.isEdit
         ? msg
           ? msg
-          : 'Thêm mới thất bại'
+          : this.translate.instant('Message.AddFail')
         : msg
           ? msg
-          : 'Cập nhật thất bại';
+          : this.translate.instant('Message.EditFail');
     this.snackBar.open(transForm, 'OK', {
       verticalPosition: 'bottom',
       duration: 2000

@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductImageService } from '../../../../../core/services/productimage.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-editimageproduct',
@@ -16,6 +17,7 @@ export class EditImageProductComponent implements OnInit {
 
   constructor(
     public snackBar: MatSnackBar,
+    private translate: TranslateService,
     private productImageService: ProductImageService,
     public dialogRef: MatDialogRef<EditImageProductComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -46,29 +48,31 @@ export class EditImageProductComponent implements OnInit {
 
       this.productImageService.uploadImages(formData).subscribe({
         next: (res) => {
-          this.processResponse(res, 'Tải ảnh lên thành công');
+          this.processResponse(res, this.translate.instant('ProductImage.Message.AddSuccess'));
           this.loadImages();
         },
-        error: () => this.processResponse(false, 'Tải ảnh thất bại')
+        error: () =>
+          this.processResponse(false, this.translate.instant('ProductImage.Message.AddFail'))
       });
     }
   }
   deleteImage(id: string) {
     Swal.fire({
-      title: 'Bạn có chắc chắn?',
-      text: 'Hành động này sẽ không thể hoàn tác!',
+      title: this.translate.instant('Common.DeleteConfirm'),
+      text: this.translate.instant('Common.DeleteTitle'),
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy'
+      confirmButtonText: this.translate.instant('Common.Delete'),
+      cancelButtonText: this.translate.instant('Common.Cancel')
     }).then((result) => {
       if (result.isConfirmed) {
         this.productImageService.deleteImage(id.toString()).subscribe({
           next: (res) => {
-            this.processResponse(res, 'Xoá ảnh thành công');
+            this.processResponse(res, this.translate.instant('ProductImage.Message.DeleteSuccess'));
             this.loadImages();
           },
-          error: () => this.processResponse(false, 'Xoá ảnh thất bại')
+          error: () =>
+            this.processResponse(false, this.translate.instant('ProductImage.Message.DeleteFail'))
         });
       }
     });
@@ -77,31 +81,38 @@ export class EditImageProductComponent implements OnInit {
   changeDefault(id: string) {
     const idDefault = this.images.find((i) => i.isDefault)?.id || -1;
     Swal.fire({
-      title: 'Bạn có chắc chắn muốn thay đổi ảnh đại diện?',
+      title: this.translate.instant('ProductImage.Message.ChangeDefaultConfirm'),
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: 'Có',
-      cancelButtonText: 'Không'
+      confirmButtonText: this.translate.instant('ProductImage.Message.Yes'),
+      cancelButtonText: this.translate.instant('ProductImage.Message.No')
     }).then((result) => {
       if (result.isConfirmed) {
         this.productImageService.changeDefault(id.toString(), idDefault.toString()).subscribe({
           next: (res) => {
-            this.processResponse(res, 'Đặt ảnh đại diện thành công');
+            this.processResponse(
+              res,
+              this.translate.instant('ProductImage.Message.ChangeDefaultSuccess')
+            );
             this.loadImages();
           },
-          error: () => this.processResponse(false, 'Thay đổi ảnh đại diện thất bại')
+          error: () =>
+            this.processResponse(
+              false,
+              this.translate.instant('ProductImage.Message.ChangeDefaultFail')
+            )
         });
       }
     });
   }
   deleteAllImages() {
     Swal.fire({
-      title: 'Bạn có chắc chắn?',
-      text: 'Hành động này sẽ không thể hoàn tác!',
+      title: this.translate.instant('Common.DeleteConfirm'),
+      text: this.translate.instant('Common.DeleteTitle'),
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy'
+      confirmButtonText: this.translate.instant('Common.Delete'),
+      cancelButtonText: this.translate.instant('Common.Cancel')
     }).then((result) => {
       if (result.isConfirmed) {
         const deleteTasks = this.images.map((img) =>
@@ -110,17 +121,30 @@ export class EditImageProductComponent implements OnInit {
 
         Promise.all(deleteTasks.map((obs) => obs.toPromise()))
           .then(() => {
-            this.processResponse(true, 'Đã xoá tất cả ảnh');
+            this.processResponse(
+              true,
+              this.translate.instant('ProductImage.Message.ChangeDefaultSuccess')
+            );
             this.loadImages();
           })
-          .catch(() => this.processResponse(false, 'Lỗi khi xoá tất cả ảnh'));
+          .catch(() =>
+            this.processResponse(
+              false,
+              this.translate.instant('ProductImage.Message.ChangeDefaultFail')
+            )
+          );
       }
     });
   }
 
   processResponse(res: any, msg?: string, isClose?: boolean) {
-    const transForm = res ? (msg ? msg : 'Cập nhật thành công') : 'Cập nhật thất bại';
-
+    const transForm = res
+      ? msg
+        ? msg
+        : this.translate.instant('Message.EditSuccess')
+      : msg
+        ? msg
+        : this.translate.instant('Message.EditFail');
     this.snackBar.open(transForm, 'OK', {
       verticalPosition: 'bottom',
       duration: 2000

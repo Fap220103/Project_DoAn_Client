@@ -17,13 +17,9 @@
       <!-- Size -->
       <mat-form-field appearance="fill" class="w-100">
         <mat-label>{{ 'Size.Name' | translate }}</mat-label>
-        <input
-          matInput
-          formControlName="sizeName"
-          placeholder="{{ 'Size.GuideName' | translate }}"
-        />
+        <input matInput formControlName="sizeName" placeholder="{{ 'Size.Name' | translate }}" />
         <mat-error *ngIf="form.controls['sizeName'].invalid && form.controls['sizeName'].touched">
-          Không được để trống
+          {{ 'Common.NotEmpty' | translate }}
         </mat-error>
       </mat-form-field>
     </form>

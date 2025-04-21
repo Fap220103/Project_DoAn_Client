@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { ProductcategoryService } from '../../../../../core/services/productcategory.service';
 import { AddProductCategoryLv1Component } from './addProductCategory-lv1/addProductCategory-lv1.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-productcategory-lv1',
@@ -28,7 +29,7 @@ export class ProductCategoryLv1Component implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private toastr: ToastrService,
+    private translate: TranslateService,
     private productCategoryService: ProductcategoryService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
@@ -79,12 +80,12 @@ export class ProductCategoryLv1Component implements OnInit {
   }
   delete(categoryId: string) {
     Swal.fire({
-      title: 'Bạn có chắc chắn?',
-      text: 'Hành động này sẽ không thể hoàn tác!',
+      title: this.translate.instant('Common.DeleteConfirm'),
+      text: this.translate.instant('Common.DeleteTitle'),
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy'
+      confirmButtonText: this.translate.instant('Common.Delete'),
+      cancelButtonText: this.translate.instant('Common.Cancel')
     }).then((result) => {
       if (result.isConfirmed) {
         this.productCategoryService.delete(categoryId).subscribe({
@@ -129,10 +130,16 @@ export class ProductCategoryLv1Component implements OnInit {
     this.onSelectedLv1.emit(item);
   }
   processResponse(res: any, msg?: string) {
-    const transForm = res ? (msg ? msg : 'Xóa thành công') : msg ? msg : 'Xóa thất bại';
+    const transForm = res
+      ? msg
+        ? msg
+        : this.translate.instant('Message.DeleteSuccess')
+      : msg
+        ? msg
+        : this.translate.instant('Message.DeleteFail');
     this.snackBar.open(transForm, 'OK', {
       verticalPosition: 'bottom',
-      duration: 3000
+      duration: 2000
     });
   }
 }
