@@ -39,12 +39,11 @@
               "src/assets/Content/clients/dist/css/adminlte.min.css",
               "node_modules/ngx-spinner/animations/ball-clip-rotate-pulse.css",
               "node_modules/ngx-toastr/toastr.css",
-
-              "src/assets/Client/plugins/OwlCarousel2-2.2.1/owl.carousel.css",
-              "src/assets/Client/plugins/OwlCarousel2-2.2.1/owl.theme.default.css",          
-              "src/assets/Client/plugins/OwlCarousel2-2.2.1/animate.css",
-              "src/assets/Client/styles/main_styles.css",
-              "src/assets/Client/styles/responsive.css"
+              
+              "src/assets/Content/assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css",
+     
+              "src/assets/Content/assets/plugins/OwlCarousel2-2.2.1/animate.css",
+              "src/assets/Content/assets/styles/responsive.css"
             ],
             "scripts": [
               "src/assets/Content/clients/plugins/jquery/jquery.min.js",
@@ -53,14 +52,19 @@
               "src/assets/Content/clients/dist/js/adminlte.min.js",
               "src/assets/Content/autoNumeric-1.9.45.js",
 
-      
-              "src/assets/Client/js/jquery-3.2.1.min.js",
-              "src/assets/Client/styles/bootstrap4/popper.js",
-              "src/assets/Client/styles/bootstrap4/bootstrap.min.js",
-              "src/assets/Client/plugins/Isotope/isotope.pkgd.min.js",
-              "src/assets/Client/plugins/OwlCarousel2-2.2.1/owl.carousel.js",
-              "src/assets/Client/plugins/easing/easing.js",
-              "src/assets/Client/js/custom.js"  
+              "src/assets/lib/jquery/dist/jquery.min.js",
+              "src/assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "src/assets/Content/assets/styles/bootstrap4/popper.js",
+              "src/assets/Content/assets/styles/bootstrap4/bootstrap.min.js",
+              "src/assets/Content/assets/plugins/Isotope/isotope.pkgd.min.js",
+              "src/assets/Content/assets/plugins/OwlCarousel2-2.2.1/owl.carousel.js",
+              "src/assets/Content/assets/plugins/easing/easing.js",
+              "src/assets/Content/assets/js/custom.js",
+              "src/assets/Content/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.js",
+              "src/assets/Content/Scripts/jquery.validate.min.js",
+              "src/assets/Content/jsShopping.js",
+              "src/assets/Content/assets/js/categories_custom.js", 
+              "src/assets/Content/assets/js/single_custom.js" 
             ]
           },
           "configurations": {

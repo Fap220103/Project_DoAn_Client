@@ -9,9 +9,44 @@ import { NavbarComponent } from './component/navbar/navbar.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { ClientComponent } from './client.component';
 import { PartialSubComponent } from './component/partialsub/partialsub.component';
+import { MenuProductCategoryComponent } from './component/menuproductcategory/menuproductcategory.component';
+import { HomeComponent } from './pages/home/home.component';
+import { MenuArraivalComponent } from './component/menuarraival/menuarraival.component';
+import { ProductSalesComponent } from './component/productsales/productsales.component';
+import { PartialNewsComponent } from './component/partialnews/partialnews.component';
+import { DealOfTheWeekComponent } from './component/dealoftheweek/dealoftheweek.component';
+import { BenefitComponent } from './component/benefit/benefit.component';
+import { MenuLeftComponent } from './component/menuleft/menuleft.component';
+import { ProductComponent } from './pages/product/product.component';
+import { ProductDetailComponent } from './pages/product/productdetail/productdetail.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { PartialCheckoutComponent } from './component/partialcheckout/partialcheckout.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { PartialPayComponent } from './component/partialpay/partialpay.component';
+import { CheckoutSuccessComponent } from './pages/checkout/checkoutsuccess/checkoutsuccess.component';
 
 @NgModule({
-  declarations: [NavbarComponent, FooterComponent, ClientComponent, PartialSubComponent],
+  declarations: [
+    NavbarComponent,
+    FooterComponent,
+    ClientComponent,
+    PartialSubComponent,
+    MenuProductCategoryComponent,
+    MenuArraivalComponent,
+    HomeComponent,
+    ProductSalesComponent,
+    PartialNewsComponent,
+    DealOfTheWeekComponent,
+    BenefitComponent,
+    ProductComponent,
+    MenuLeftComponent,
+    ProductDetailComponent,
+    CartComponent,
+    PartialCheckoutComponent,
+    CheckoutComponent,
+    PartialPayComponent,
+    CheckoutSuccessComponent
+  ],
   imports: [
     CommonModule,
     ClientRoutingModule,

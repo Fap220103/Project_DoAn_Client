@@ -77,7 +77,16 @@
               <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
             </li>
 
-            <div *ngIf="this.isLoggedIn; else LoggedIn">
+     
+              <span class="auth-links" *ngIf="!isLoggedIn; else LoggedIn">
+                <a (click)="login()">Đăng nhập</a>
+                <span>|</span>
+                <a (click)="register()">Đăng ký</a>
+              </span>
+       
+
+            <ng-template #LoggedIn>
+            
               <li class="account_fix">
                 <a href="#">
                   <i class="fa fa-user" aria-hidden="true"></i>
@@ -90,7 +99,7 @@
                     </a>
                   </li>
                   <li>
-                    <a asp-action="Index" asp-controller="WishList">
+                    <a href="#">
                       <i class="fa fa-sign-in" aria-hidden="true"></i>
                       <p>Favourite List</p>
                     </a>
@@ -110,20 +119,12 @@
                           color: white;
                         "
                       >
-                        <p>Logout</p>
+                        <p (click)="logout()">Logout</p>
                       </button>
                     </a>
                   </li>
                 </ul>
               </li>
-            </div>
-
-            <ng-template #LoggedIn>
-              <span class="auth-links">
-                <a asp-controller="Account" asp-action="Login">Đăng nhập</a>
-                <span>|</span>
-                <a asp-controller="Account" asp-action="Register">Đăng ký</a>
-              </span>
             </ng-template>
 
             <li class="checkout">

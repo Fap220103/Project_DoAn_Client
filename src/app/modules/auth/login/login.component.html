@@ -1,1 +1,55 @@
-<p>login works!</p>
+
+<link rel="stylesheet" type="text/css" href="/assets/Content/assets/styles/main_styles.css">
+<div class="container">
+  <div class="partleft">
+    <!-- Thêm logo công ty -->
+    <img src="/assets/images/logo/ara-logo-bg-256.png" alt="Logo Công Ty">
+    <p class="text-white">Nền tảng thương mại điện tử<br>yêu thích ở Đông Nam Á & Đài Loan</p>
+  </div>
+  <div class="partright">
+    <div class="login-card">
+      <h2 id="title">Đăng Nhập</h2>
+      <form>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Nhập email của bạn" required />
+          <div class="text-danger" style="display: none;">Email không hợp lệ</div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Mật Khẩu</label>
+          <input type="password" id="password" placeholder="Nhập mật khẩu" required />
+          <div class="text-danger" style="display: none;">Mật khẩu không được để trống</div>
+        </div>
+
+        <div class="form-group d-md-flex">
+          <div>
+            <label>
+              <input type="checkbox" />
+              Ghi nhớ đăng nhập
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit">Đăng Nhập</button>
+        </div>
+
+        <div class="form-group">
+          <p>
+            <a href="/register">Đăng Ký</a>
+            <a href="/forgot-password">Quên Mật Khẩu</a>
+          </p>
+        </div>
+
+        <div class="external-login">
+          <h4>Đăng nhập bằng tài khoản khác</h4>
+          <div>
+            <button class="facebook-btn"><i class="fab fa-facebook-f"></i> Facebook</button>
+            <button class="google-btn"><i class="fab fa-google"></i> Google</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

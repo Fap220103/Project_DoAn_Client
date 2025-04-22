@@ -1,1 +1,51 @@
-<p>register works!</p>
+
+<link rel="stylesheet" type="text/css" href="/assets/Content/assets/styles/main_styles.css">
+<div class="container">
+  <div class="partleft">
+    <!-- Thêm logo công ty -->
+    <img src="/assets/images/logo/ara-logo-bg-256.png" alt="Logo Công Ty">
+    <p class="text-white">Nền tảng thương mại điện tử<br>yêu thích ở Đông Nam Á & Đài Loan</p>
+  </div>
+  <div class="partright">
+    <div class="login-card">
+      <h2 id="title">Sign up</h2>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="formError" class="text-danger">{{ formError }}</div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" formControlName="email" class="form-control" />
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+            <div *ngIf="email.errors?.['required']">Email là bắt buộc.</div>
+            <div *ngIf="email.errors?.['email']">Email không hợp lệ.</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Mật khẩu</label>
+          <input id="password" type="password" formControlName="password" class="form-control" />
+          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">
+            <div *ngIf="password.errors?.['required']">Mật khẩu là bắt buộc.</div>
+            <div *ngIf="password.errors?.['minlength']">Mật khẩu ít nhất 6 ký tự.</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Xác nhận mật khẩu</label>
+          <input id="confirmPassword" type="password" formControlName="confirmPassword" class="form-control" />
+          <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="text-danger">
+            <div *ngIf="confirmPassword.errors?.['required']">Bắt buộc xác nhận mật khẩu.</div>
+            <div *ngIf="confirmPassword.errors?.['mismatch']">Mật khẩu không khớp.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <p>Đã có tài khoản rồi</p>
+        </div>
+        <div class="form-group" style="margin-top:15px">
+          <input class="btn btn-outline-success float-right" type="submit" value="Sign up" [disabled]="registerForm.invalid" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

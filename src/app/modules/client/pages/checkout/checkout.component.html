@@ -1,0 +1,42 @@
+<link rel="stylesheet" type="text/css" href="/assets/Content/assets/styles/categories_styles.css">
+<link rel="stylesheet" type="text/css" href="/assets/Content/assets/styles/categories_responsive.css">
+<div class="container product_section_container">
+  <div class="row">
+      <div class="col product_section clearfix">
+
+          <!-- Breadcrumbs -->
+
+          <div class="breadcrumbs d-flex flex-row align-items-center">
+              <ul>
+                  <li><a href="/">Home</a></li>
+                  <li class="active">
+                      <a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Thanh toán</a>
+                  </li>
+              </ul>
+          </div>
+
+          <!-- Sidebar -->
+          <!-- Main Content -->
+          <div class="row">
+              <div class="col-md-12 text-center">
+                  <h1>Thanh toán</h1>
+                  <p>Bạn hãy kiểm tra lại thông tin đơn hàng cho chính xác</p>
+              </div>
+          </div>
+          <hr />
+         
+              <div class="row" id="show_success">
+                  <div class="col-md-9">
+                      <div id="load_send">
+                      </div>
+                      <app-partialcheckout></app-partialcheckout>
+                  </div>
+                  <div class="col-md-3">
+                      <app-partialpay></app-partialpay>
+                  </div>
+              </div>
+         
+
+      </div>
+  </div>
+</div>
