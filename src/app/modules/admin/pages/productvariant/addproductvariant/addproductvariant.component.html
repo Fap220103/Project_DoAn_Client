@@ -15,7 +15,7 @@
       <mat-form-field class="w-100">
         <mat-label>{{ 'ProductVariant.ProductName' | translate }}</mat-label>
         <mat-select formControlName="productId">
-          <mat-option *ngFor="let product of products" [value]="product.id">
+          <mat-option *ngFor="let product of lstProduct" [value]="product.id">
             {{ product.name }} ({{ product.code }})
           </mat-option>
         </mat-select>
@@ -25,7 +25,7 @@
       <mat-form-field class="w-100">
         <mat-label>{{ 'ProductVariant.SizeName' | translate }}</mat-label>
         <mat-select formControlName="sizeId" multiple>
-          <mat-option *ngFor="let size of sizes" [value]="size.id">
+          <mat-option *ngFor="let size of lstSize" [value]="size.id">
             {{ size.name }}
           </mat-option>
         </mat-select>
@@ -35,7 +35,7 @@
       <mat-form-field class="w-100">
         <mat-label>{{ 'ProductVariant.ColorName' | translate }}</mat-label>
         <mat-select formControlName="colorId" multiple>
-          <mat-option *ngFor="let color of colors" [value]="color.id">
+          <mat-option *ngFor="let color of lstColor" [value]="color.id">
             {{ color.name }}
           </mat-option>
         </mat-select>

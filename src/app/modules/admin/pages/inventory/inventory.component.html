@@ -34,8 +34,8 @@
         <tbody *ngIf="lstInventory.length > 0; else noData">
           <tr *ngFor="let item of lstInventory; let i = index">
             <td>{{ item.position }}</td>
-            <td>
-              <span matTooltip="{{ item.productTitle }}">{{ item.productTitle }}</span>
+            <td class="truncate-text">
+              <span matTooltip="{{ item.productName }}">{{ item.productName }}</span>
             </td>
             <td>
               <span matTooltip="{{ item.productCode }}">{{ item.productCode }}</span>
@@ -52,7 +52,14 @@
             <td>
               <button
                 mat-icon-button
-                (click)="delete(item.id)"
+                (click)="addQuantity(item.productVariantId)"
+                matTooltip="{{ 'Common.Add' | translate }}"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                (click)="delete(item.productVariantId)"
                 matTooltip="{{ 'Common.Delete' | translate }}"
               >
                 <mat-icon>delete</mat-icon>

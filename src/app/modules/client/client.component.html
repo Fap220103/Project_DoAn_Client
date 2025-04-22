@@ -1,7 +1,13 @@
 <head>
   <link
     rel="stylesheet"
-    href="/assets/Content/assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css"
+    type="text/css"
+    href="/assets/Client/styles/bootstrap4/bootstrap.min.css"
+  />
+  <link
+    href="/assets/Client/plugins/font-awesome-4.7.0/css/font-awesome.min.css"
+    rel="stylesheet"
+    type="text/css"
   />
 </head>
 <div class="super_container">
@@ -11,7 +17,7 @@
   </header>
 
   <div class="fs_menu_overlay"></div>
-  <div class="hamburger_menu">
+  <!-- <div class="hamburger_menu">
     <div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
     <div class="hamburger_menu_content text-right">
       <ul class="menu_top_nav">
@@ -61,11 +67,11 @@
         <li class="menu_item"><a href="#">contact</a></li>
       </ul>
     </div>
-  </div>
-  <div class="content-wrapper">
+  </div> -->
+  <div class="">
     <router-outlet></router-outlet>
   </div>
-
+  <app-partialsub></app-partialsub>
   <!-- Footer -->
   <app-footer></app-footer>
 </div>

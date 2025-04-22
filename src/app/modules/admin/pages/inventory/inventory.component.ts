@@ -7,6 +7,7 @@ import { ProductVariantService } from '../../../../core/services/productvariant.
 import { TranslateService } from '@ngx-translate/core';
 import { AddInventoryComponent } from './addinventory/addinventory.component';
 import { InventoryService } from '../../../../core/services/inventory.service';
+import { AddQuantityComponent } from './addquantity/addquantity.component';
 
 @Component({
   selector: 'app-inventory',
@@ -37,7 +38,7 @@ export class InventoryComponent implements OnInit {
   }
   getData() {
     this.inventoryService.get(this.params, this.pageIndex + 1, this.pageSize).subscribe((rs) => {
-      this.lstInventory = rs.content.data;
+      this.lstInventory = rs.content.data.items;
       this.lstInventory = this.lstInventory.map((x, index) => {
         x.position = this.pageIndex * this.pageSize + index + 1;
         return x;
@@ -107,6 +108,21 @@ export class InventoryComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.getData();
+      }
+    });
+  }
+  addQuantity(id: string) {
+    const dialogRef = this.dialog.open(AddQuantityComponent, {
+      width: '300px',
+      data: { quantity: 1 } // default
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result !== undefined) {
+        console.log('Số lượng được nhập:', result);
+        console.log('id:', id);
+        // Gọi API cập nhật số lượng ở đây
+        //this.updateQuantity(itemId, result);
       }
     });
   }

@@ -38,14 +38,13 @@ export class ProductVariantComponent implements OnInit {
     this.productVariantService
       .get(this.params, this.pageIndex + 1, this.pageSize)
       .subscribe((rs) => {
-        this.lstVariant = rs.content.data;
+        this.lstVariant = rs.content.data.items;
         this.lstVariant = this.lstVariant.map((x, index) => {
           x.position = this.pageIndex * this.pageSize + index + 1;
           return x;
         });
         this.totalCount = rs.content.data.totalRecords;
       });
-    console.log(this.lstVariant);
   }
   onChangePage(event: any) {
     this.pageIndex = event.pageIndex;
@@ -53,7 +52,7 @@ export class ProductVariantComponent implements OnInit {
     this.getData();
   }
 
-  delete(settingId: string) {
+  delete(variantId: string) {
     Swal.fire({
       title: this.translate.instant('Common.DeleteConfirm'),
       text: this.translate.instant('Common.DeleteTitle'),
@@ -63,7 +62,7 @@ export class ProductVariantComponent implements OnInit {
       cancelButtonText: this.translate.instant('Common.Cancel')
     }).then((result) => {
       if (result.isConfirmed) {
-        this.productVariantService.delete(settingId).subscribe({
+        this.productVariantService.delete(variantId).subscribe({
           next: (res) => {
             if (res.code === 200) {
               this.getData();
