@@ -147,7 +147,7 @@
     },
     "Inventory" : {
       "Title": "Tồn kho",
-      "AddTitle" : "Thêm mới tồn kho",
+      "AddTitle" : "Thêm tồn kho",
       "ProductName": "Tên sản phẩm",
       "ProductCode": "Mã sản phẩm",
       "ColorName":"Màu",

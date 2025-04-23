@@ -31,8 +31,8 @@ import { EditImageProductComponent } from './pages/product/editimageproduct/edit
 import { ProductVariantComponent } from './pages/productvariant/productvariant.component';
 import { AddProductVariantComponent } from './pages/productvariant/addproductvariant/addproductvariant.component';
 import { InventoryComponent } from './pages/inventory/inventory.component';
-import { AddInventoryComponent } from './pages/inventory/addinventory/addinventory.component';
 import { AddQuantityComponent } from './pages/inventory/addquantity/addquantity.component';
+import { AddInventoryComponent } from './pages/productvariant/addinventory/addinventory.component';
 
 @NgModule({
   declarations: [

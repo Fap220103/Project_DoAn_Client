@@ -6,7 +6,7 @@
       <div class="flex justify-start items-center"></div>
       <div class="relative hedear flex flex-col sm:flex-row flex-0 sm:items-center sm:px-6 xs:py-4">
         <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
-          <button
+          <!-- <button
             mat-flat-button
             [color]="'primary'"
             class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
@@ -14,7 +14,7 @@
           >
             <mat-icon class="md:text-base sm:text-base xs:text-xs">add</mat-icon>
             <span>{{ 'Common.Add' | translate }}</span>
-          </button>
+          </button> -->
         </div>
       </div>
     </div>
@@ -53,7 +53,7 @@
               <button
                 mat-icon-button
                 (click)="addQuantity(item.productVariantId)"
-                matTooltip="{{ 'Common.Add' | translate }}"
+                matTooltip="{{ 'Inventory.AddTitle' | translate }}"
               >
                 <mat-icon>add</mat-icon>
               </button>

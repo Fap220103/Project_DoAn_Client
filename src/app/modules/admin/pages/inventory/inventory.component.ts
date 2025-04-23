@@ -5,7 +5,6 @@ import Swal from 'sweetalert2';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductVariantService } from '../../../../core/services/productvariant.service';
 import { TranslateService } from '@ngx-translate/core';
-import { AddInventoryComponent } from './addinventory/addinventory.component';
 import { InventoryService } from '../../../../core/services/inventory.service';
 import { AddQuantityComponent } from './addquantity/addquantity.component';
 
@@ -92,25 +91,7 @@ export class InventoryComponent implements OnInit {
       duration: 2000
     });
   }
-  add() {
-    const dialogRef = this.dialog.open(AddInventoryComponent, {
-      minWidth: '30%',
-      height: '100%',
-      panelClass: 'custom-dialog-right',
-      position: {
-        right: '0'
-      },
-      data: {
-        title: 'Inventory.AddTitle',
-        isEdit: false
-      }
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.getData();
-      }
-    });
-  }
+
   addQuantity(id: string) {
     const dialogRef = this.dialog.open(AddQuantityComponent, {
       width: '300px',
@@ -119,10 +100,22 @@ export class InventoryComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result !== undefined) {
-        console.log('Số lượng được nhập:', result);
-        console.log('id:', id);
+        const payload = {
+          ProductVariantId: id,
+          Quantity: result
+        };
         // Gọi API cập nhật số lượng ở đây
-        //this.updateQuantity(itemId, result);
+        this.inventoryService.post(payload).subscribe({
+          next: (res) => {
+            if (res.code === 200) {
+              this.getData();
+              this.processResponse(res, 'Thêm tồn kho thành công');
+            } else {
+              this.processResponse(false, 'Thêm tồn kho thất bại');
+            }
+          },
+          error: () => this.processResponse(false, 'Thêm tồn kho thất bại')
+        });
       }
     });
   }
