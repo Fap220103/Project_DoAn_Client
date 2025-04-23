@@ -17,4 +17,10 @@ export class ProductService extends BaseService<any> {
     const url = `${this.svUrl}?userid=${userId}&productId=${productId}`;
     return this.http.delete(url, { headers: headers, withCredentials: true });
   }
+
+  getProductById(productId: string): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders();
+    const url = `${this.svUrl}/GetById?productId=${productId}`;
+    return this.http.get(url, { headers: headers, withCredentials: true });
+  }
 }

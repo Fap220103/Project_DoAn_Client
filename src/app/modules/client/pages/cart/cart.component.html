@@ -1,34 +1,97 @@
-<link rel="stylesheet" type="text/css" href="/assets/Content/assets/styles/categories_styles.css">
-<link rel="stylesheet" type="text/css" href="/assets/Content/assets/styles/categories_responsive.css">
+<link rel="stylesheet" type="text/css" href="/assets/Content/assets/styles/categories_styles.css" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/assets/Content/assets/styles/categories_responsive.css"
+/>
 <div class="container product_section_container">
   <div class="row">
-      <div class="col product_section clearfix">
+    <div class="col product_section clearfix">
+      <!-- Breadcrumbs -->
 
-          <!-- Breadcrumbs -->
-
-          <div class="breadcrumbs d-flex flex-row align-items-center">
-              <ul>
-                  <li><a href="/">Home</a></li>
-                  <li class="active">
-                      <a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Giỏ hàng</a>
-                  </li>
-              </ul>
-          </div>
-
-          <!-- Sidebar -->
-          <!-- Main Content -->
-          <div class="row">
-              <div class="col-md-12" id="load_data">
-                 
-
-              </div>
-              <div class="col-md-12">
-                  <div class="text-right" style="text-align:right">
-                      <a href="#" class="btn btn-danger btnDeleteAll">Xóa All</a>
-                      <a href="/thanh-toan" class="btn btn-success" id="btnThanhToan">Thanh toán</a>
-                  </div>
-              </div>
-          </div>
+      <div class="breadcrumbs d-flex flex-row align-items-center">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li class="active">
+            <a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Giỏ hàng</a>
+          </li>
+        </ul>
       </div>
+
+      <!-- Sidebar -->
+      <!-- Main Content -->
+      <div class="row">
+        <div class="col-md-12" id="load_data">
+          <table class="table">
+            <thead>
+              <tr class="text-center">
+                <th>STT</th>
+                <th>Ảnh sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+                <th>Màu</th>
+                <th>Kích cỡ</th>
+                <th style="width: 100px">Số lượng</th>
+                <th>Thành tiền</th>
+                <th style="width: 200px"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of cartItems; let i = index" class="text-center">
+                <td>{{ i + 1 }}</td>
+                <td><img [src]="item.image" width="100" /></td>
+                <td>
+                  <a [routerLink]="">{{ item.productName }}</a>
+                </td>
+                <td>{{ item.price | number: '1.0-0' }}</td>
+                <td>
+                  <span matTooltip="{{ item.colorName }}">{{ item.colorName }}</span>
+                </td>
+                <td>
+                  <span matTooltip="{{ item.sizeName }}">{{ item.sizeName }}</span>
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    class="form-control"
+                    (keypress)="preventInvalidInput($event)"
+                    (input)="onQuantityInput($event, item)"
+                    [(ngModel)]="item.quantity"
+                    min="1"
+                  />
+                </td>
+                <th>{{ item.totalPrice | number: '1.0-0' }}</th>
+                <td>
+                  <button (click)="deleteProduct(item.productId)" class="btn btn-sm btn-danger">
+                    Xóa
+                  </button>
+                  <!-- <button (click)="updateProduct(item.productId)" class="btn btn-sm btn-success">
+                    Cập nhật
+                  </button> -->
+                </td>
+              </tr>
+
+              <tr *ngIf="cartItems.length > 0">
+                <th colspan="6" class="text-right">Tổng:</th>
+                <th>{{ totalAmount | number: '1.0-0' }}</th>
+                <th></th>
+              </tr>
+
+              <tr *ngIf="cartItems.length === 0">
+                <th colspan="8">Không có sản phẩm trong giỏ hàng</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-12">
+          <div class="text-right" style="text-align: right">
+            <button type="button" class="btn btn-danger btnDeleteAll" (click)="deleteAll()">
+              Xóa All
+            </button>
+            <button [routerLink]="['/client/checkout']" class="btn btn-success">Thanh toán</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

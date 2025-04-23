@@ -139,8 +139,7 @@ export class ProductVariantComponent implements OnInit {
       }
     });
   }
-  addInventory(id: string) {
-    console.log(id);
+  addStock(id: string) {
     const dialogRef = this.dialog.open(AddInventoryComponent, {
       width: '300px',
       data: { quantity: 1 } // default
@@ -153,9 +152,10 @@ export class ProductVariantComponent implements OnInit {
           Quantity: result
         };
         // Gọi API cập nhật số lượng ở đây
-        this.inventoryService.post(payload).subscribe({
+        this.productVariantService.addStock(payload).subscribe({
           next: (res) => {
             if (res.code === 200) {
+              this.getData();
               this.processResponse(res, 'Thêm tồn kho thành công');
             } else {
               this.processResponse(false, 'Thêm tồn kho thất bại');

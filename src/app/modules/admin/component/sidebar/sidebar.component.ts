@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
   mainNavigations: NavigationItem[] = [];
-  currentUser$!: Observable<User | null>;
   isLoggedIn: boolean = false;
   constructor(private authService: AuthService) {}
 
@@ -39,7 +38,7 @@ export class SidebarComponent implements OnInit {
     return item.children.length === 1 ? item.children[0] : item;
   }
   logout() {
-    this.authService.logout();
+    this.authService.logout('admin');
   }
   toggleDropdown(item: NavigationItem, event: MouseEvent): void {
     item.expanded = !item.expanded;

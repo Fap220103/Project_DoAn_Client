@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -12,15 +14,20 @@ export class LoginComponent implements OnInit {
   formError = '';
   externalProviders: string[] = [];
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
-
-  ngOnInit() {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private toastr: ToastrService
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      rememberMe: [false]
+      password: ['', Validators.required]
+      // rememberMe: [false]
     });
+  }
 
+  ngOnInit() {
     // Lấy danh sách các nhà cung cấp đăng nhập bên ngoài từ backend
     // this.authService.getExternalProviders().subscribe({
     //   next: (providers) => this.externalProviders = providers,
@@ -28,19 +35,16 @@ export class LoginComponent implements OnInit {
     // });
   }
 
-  onSubmit() {
-    if (this.loginForm.invalid) return;
-
-    const { email, password, rememberMe } = this.loginForm.value;
-    // this.authService.login(email, password, rememberMe).subscribe({
-    //   next: () => {
-    //     // Xử lý sau khi đăng nhập thành công
-    //   },
-    //   error: (err) => {
-    //     this.formError = 'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.';
-    //     console.error('Lỗi đăng nhập:', err);
-    //   }
-    // });
+  save() {
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (res) => {
+        this.toastr.success('Đăng nhập thành công', 'Thành công');
+        this.router.navigate(['/client/home']);
+      },
+      error: (err) => {
+        this.toastr.error('Đăng nhập thất bại', 'Lỗi');
+      }
+    });
   }
 
   externalLogin(provider: string) {

@@ -23,7 +23,7 @@ const routes: Routes = [
       { path: 'checkout', component: CheckoutComponent },
       { path: 'checkoutsuccess', component: CheckoutSuccessComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
+      { path: 'register', component: RegisterComponent }
     ]
   }
 ];

@@ -4,11 +4,7 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
-const routes: Routes = [
-  { path: 'login-admin', component: AdminLoginComponent },
-
-
-];
+const routes: Routes = [{ path: 'login-admin', component: AdminLoginComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

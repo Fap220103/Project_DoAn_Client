@@ -2,9 +2,8 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '../models/cart.model';
 
-
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CartService {
   private readonly CART_KEY = 'local_cart';
@@ -22,7 +21,7 @@ export class CartService {
 
   addToCart(item: CartItem, quantity: number = 1) {
     const cart = this.getCart();
-    const existing = cart.find((x) => x.productId === item.productId);
+    const existing = cart.find((x) => x.productVariantId === item.productVariantId);
     if (existing) {
       existing.quantity += quantity;
       existing.totalPrice = existing.quantity * existing.price;
@@ -34,14 +33,14 @@ export class CartService {
     this.saveCart(cart);
   }
 
-  removeFromCart(productId: string) {
-    const cart = this.getCart().filter((x) => x.productId !== productId);
+  removeFromCart(productVariantId: string) {
+    const cart = this.getCart().filter((x) => x.productVariantId !== productVariantId);
     this.saveCart(cart);
   }
 
-  updateQuantity(productId: string, quantity: number) {
+  updateQuantity(productVariantId: string, quantity: number) {
     const cart = this.getCart();
-    const item = cart.find((x) => x.productId === productId);
+    const item = cart.find((x) => x.productVariantId === productVariantId);
     if (item) {
       item.quantity = quantity;
       item.totalPrice = quantity * item.price;

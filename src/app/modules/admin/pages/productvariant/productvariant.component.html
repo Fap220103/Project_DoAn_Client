@@ -72,6 +72,7 @@
             <th>{{ 'ProductVariant.ProductCode' | translate }}</th>
             <th>{{ 'ProductVariant.ColorName' | translate }}</th>
             <th>{{ 'ProductVariant.SizeName' | translate }}</th>
+            <th>{{ 'ProductVariant.Quantity' | translate }}</th>
             <th style="width: 200px">{{ 'Common.Action' | translate }}</th>
           </tr>
         </thead>
@@ -91,9 +92,12 @@
               <span matTooltip="{{ item.sizeName }}">{{ item.sizeName }}</span>
             </td>
             <td>
+              <span matTooltip="{{ item.quantity }}">{{ item.quantity }}</span>
+            </td>
+            <td>
               <button
                 mat-icon-button
-                (click)="addInventory(item.id)"
+                (click)="addStock(item.id)"
                 matTooltip="{{ 'Inventory.AddTitle' | translate }}"
               >
                 <mat-icon>add</mat-icon>

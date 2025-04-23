@@ -142,7 +142,8 @@
     "ProductName": "Product Name",
     "ProductCode": "Product Code",
     "ColorName": "Color",
-    "SizeName": "Size"
+    "SizeName": "Size",
+    "Quantity": "Quantity"
   },
   "Inventory": {
     "Title": "Inventory",

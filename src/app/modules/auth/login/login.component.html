@@ -1,25 +1,29 @@
-
-<link rel="stylesheet" type="text/css" href="/assets/Content/assets/styles/main_styles.css">
+<link rel="stylesheet" type="text/css" href="/assets/Content/assets/styles/main_styles.css" />
 <div class="container">
   <div class="partleft">
     <!-- Thêm logo công ty -->
-    <img src="/assets/images/logo/ara-logo-bg-256.png" alt="Logo Công Ty">
-    <p class="text-white">Nền tảng thương mại điện tử<br>yêu thích ở Đông Nam Á & Đài Loan</p>
+    <img src="/assets/images/logo/ara-logo-bg-256.png" alt="Logo Công Ty" />
+    <p class="text-white">Nền tảng thương mại điện tử<br />yêu thích ở Đông Nam Á & Đài Loan</p>
   </div>
   <div class="partright">
     <div class="login-card">
       <h2 id="title">Đăng Nhập</h2>
-      <form>
+      <form [formGroup]="loginForm">
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" placeholder="Nhập email của bạn" required />
-          <div class="text-danger" style="display: none;">Email không hợp lệ</div>
+          <input type="email" id="email" placeholder="Nhập email của bạn" formControlName="email" />
+          <div class="text-danger" style="display: none">Email không hợp lệ</div>
         </div>
 
         <div class="form-group">
           <label for="password">Mật Khẩu</label>
-          <input type="password" id="password" placeholder="Nhập mật khẩu" required />
-          <div class="text-danger" style="display: none;">Mật khẩu không được để trống</div>
+          <input
+            type="password"
+            id="password"
+            placeholder="Nhập mật khẩu"
+            formControlName="password"
+          />
+          <div class="text-danger" style="display: none">Mật khẩu không được để trống</div>
         </div>
 
         <div class="form-group d-md-flex">
@@ -32,7 +36,7 @@
         </div>
 
         <div class="form-group">
-          <button type="submit">Đăng Nhập</button>
+          <button type="submit" (click)="save()">Đăng Nhập</button>
         </div>
 
         <div class="form-group">

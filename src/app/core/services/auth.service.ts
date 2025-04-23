@@ -18,6 +18,9 @@ export class AuthService {
   private readonly USER_KEY = 'userId';
   private readonly NAVIGATION = 'menu';
 
+  private isLoggedInSubject = new BehaviorSubject<boolean>(this.checkLogin());
+  isLoggedIn$ = this.isLoggedInSubject.asObservable();
+
   constructor(
     private http: HttpClient,
     private router: Router
@@ -33,15 +36,15 @@ export class AuthService {
       )
       .pipe(
         tap((response) => {
-          console.log(response.content.expires_in_second);
           this.saveTokens(response.content.accessToken, response.content.expires_in_second);
           this.setCurrentUser(response);
+          this.updateLoginStatus(true);
         })
       );
   }
 
-  // Đăng xuất
-  logout(): void {
+  // Đăng xuất admin
+  logout(type?: any): void {
     const userId = this.getUserId();
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.EXPIRES_AT_KEY);
@@ -49,15 +52,20 @@ export class AuthService {
     localStorage.removeItem(this.ROLE_KEY);
     localStorage.removeItem(this.NAVIGATION);
 
+    this.updateLoginStatus(false);
+
     this.http
       .post(`${this.baseUrl}Account/Logout?userId=${userId}`, {}, { withCredentials: true })
       .subscribe({
         complete: () => {
-          this.router.navigate(['/auth/login-admin']);
+          const redirectPath = type === 'admin' ? '/auth/login-admin' : '/client/login';
+          this.router.navigate([redirectPath]);
         }
       });
   }
-
+  private updateLoginStatus(isLoggedIn: boolean) {
+    this.isLoggedInSubject.next(isLoggedIn);
+  }
   getUserRole(): string {
     return localStorage.getItem('userRole') || '';
   }
@@ -94,10 +102,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    const token = this.getAccessToken();
-    if (!token) return false;
-
-    return !this.isTokenExpired();
+    return this.checkLogin();
   }
 
   refreshToken(): Observable<any> {
@@ -106,6 +111,7 @@ export class AuthService {
       .pipe(
         tap((response) => {
           this.saveTokens(response.content.accessToken, response.content.expires_in_second);
+          this.updateLoginStatus(true);
         }),
         catchError((error) => {
           this.logout();
@@ -132,5 +138,9 @@ export class AuthService {
 
   getDecodedToken(token: string) {
     return JSON.parse(atob(token.split('.')[1]));
+  }
+  checkLogin(): boolean {
+    const token = this.getAccessToken();
+    return !!token && !this.isTokenExpired();
   }
 }

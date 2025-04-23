@@ -1,0 +1,25 @@
+.short-line {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /*Thêm các thuộc tính tương tự cho các trình duyệt khác nhau (nếu cần)*/
+  display: -moz-box;
+  -moz-line-clamp: 3;
+  -moz-box-orient: vertical;
+  display: -o-box;
+  -o-line-clamp: 3;
+  -o-box-orient: vertical;
+}
+.product-meta {
+  padding: 5px;
+  margin-top: 10px;
+  font-size: 0.7rem;
+  color: gray;
+  display: flex;
+  justify-content: space-between;
+}
+
+.stars i {
+  margin-right: 2px;
+}

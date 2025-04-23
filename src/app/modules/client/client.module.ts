@@ -24,6 +24,7 @@ import { PartialCheckoutComponent } from './component/partialcheckout/partialche
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { PartialPayComponent } from './component/partialpay/partialpay.component';
 import { CheckoutSuccessComponent } from './pages/checkout/checkoutsuccess/checkoutsuccess.component';
+import { PartialReviewComponent } from './component/partialreview/partialreview.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CheckoutSuccessComponent } from './pages/checkout/checkoutsuccess/check
     PartialCheckoutComponent,
     CheckoutComponent,
     PartialPayComponent,
-    CheckoutSuccessComponent
+    CheckoutSuccessComponent,
+    PartialReviewComponent
   ],
   imports: [
     CommonModule,

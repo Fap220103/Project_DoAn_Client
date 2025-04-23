@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class PartialCheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
   isSignedIn = false; // set true nếu user đã đăng nhập
-  user: any = null;   // nếu isSignedIn = true, set user từ localStorage hoặc API
+  user: any = null; // nếu isSignedIn = true, set user từ localStorage hoặc API
   loading = false;
   showVNPayOptions = false;
 
@@ -21,10 +21,9 @@ export class PartialCheckoutComponent implements OnInit {
       email: [''],
       typePayment: ['1'],
       typePaymentVN: ['0']
-    })
+    });
   }
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onPaymentChange(event: any) {
     const selected = event.target.value;

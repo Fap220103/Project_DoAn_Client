@@ -1,0 +1,80 @@
+.product_color_custom,
+.product_size {
+  margin: 20px 0;
+}
+.product_size span {
+  margin-right: 10px;
+}
+.product_size ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+}
+.product_size li {
+  cursor: pointer;
+  padding: 10px 10px;
+  border: 1px solid #ccc;
+  transition: border 0.3s ease;
+}
+.product_size li.active {
+  border: 1px solid orange;
+}
+// .product_color_custom li {
+//   display: flex; /* Căn chỉnh các phần tử theo chiều ngang */
+//   flex-wrap: wrap;
+//   align-items: center;
+//   cursor: pointer;
+//   padding: 5px;
+//   border: 1px solid #ccc;
+//   transition: border 0.3s ease;;
+//   width: auto;
+// }
+// .color-circle {
+//   width: 20px;
+//   height: 20px;
+//   border: 1px solid #ccc;
+//   border-radius: 100%;
+//   background-color: #ccc; /* Mặc định cho khi chưa có màu */
+// }
+
+.product_color_list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.product_color_list li {
+  margin: 0;
+}
+
+.color-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  transition:
+    border 0.3s ease,
+    box-shadow 0.2s ease;
+}
+
+.color-button:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.color-button.active {
+  border: 1px solid orange;
+}
+
+.color-circle {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+}

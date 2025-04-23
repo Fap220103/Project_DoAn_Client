@@ -77,16 +77,13 @@
               <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
             </li>
 
-     
-              <span class="auth-links" *ngIf="!isLoggedIn; else LoggedIn">
-                <a (click)="login()">Đăng nhập</a>
-                <span>|</span>
-                <a (click)="register()">Đăng ký</a>
-              </span>
-       
+            <span class="auth-links" *ngIf="!isLoggedIn; else LoggedIn">
+              <a [routerLink]="['/client/login']">Đăng nhập</a>
+              <span>|</span>
+              <a [routerLink]="['/client/register']">Đăng ký</a>
+            </span>
 
             <ng-template #LoggedIn>
-            
               <li class="account_fix">
                 <a href="#">
                   <i class="fa fa-user" aria-hidden="true"></i>
@@ -128,7 +125,7 @@
             </ng-template>
 
             <li class="checkout">
-              <a href="/gio-hang" id="goToCart">
+              <a [routerLink]="['/client/cart']">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 <span id="checkout_items" class="checkout_items">0</span>
               </a>

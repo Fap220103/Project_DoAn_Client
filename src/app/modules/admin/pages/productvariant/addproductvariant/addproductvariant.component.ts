@@ -34,7 +34,8 @@ export class AddProductVariantComponent implements OnInit {
     this.form = this.fb.group({
       productId: [''],
       sizeId: [[]],
-      colorId: [[]]
+      colorId: [[]],
+      quantity: [[1]]
     });
   }
 
@@ -81,7 +82,8 @@ export class AddProductVariantComponent implements OnInit {
     const payload = {
       productId: formValue.productId,
       sizeId: formValue.sizeId,
-      colorId: formValue.colorId
+      colorId: formValue.colorId,
+      quantity: formValue.quantity
     };
     this.productVariantService.post(payload).subscribe({
       next: (res) => {
