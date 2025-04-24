@@ -23,4 +23,15 @@ export class ProductService extends BaseService<any> {
     const url = `${this.svUrl}/GetById?productId=${productId}`;
     return this.http.get(url, { headers: headers, withCredentials: true });
   }
+
+  getProductByCategory(ids: string[], page?: number, limit?: number): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders();
+    const xLimit = limit ? limit : 10;
+    const xPage = page ? page : 1;
+    const idsParam = ids.join(',');
+    let url = `${this.svUrl}/GetByCategoryId?categoryId=${idsParam}`;
+    url += '&page=' + xPage + '&limit=' + xLimit;
+
+    return this.http.get(url, { headers: headers, withCredentials: true });
+  }
 }

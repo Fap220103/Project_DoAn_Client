@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="title-news">Danh sách đơn hàng</h2>
+    </div>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Mã đơn hàng</th>
+        <th>Tổng tiền</th>
+        <th>Trạng thái</th>
+        <th>Ngày tạo</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody *ngIf="lstOrder.length > 0; else noData">
+      <tr *ngFor="let item of lstOrder; let i = index">
+        <td>(i + 1)</td>
+        <td>item.Code</td>
+        <td>ShoppingOnline.Helpers.Common.FormatNumber(item.TotalAmount, 0)</td>
+        <td>(item.TypePayment == 1 ? "Chờ thanh toán:" : "Đã thanh toán")</td>
+        <td>item.CreatedDate.ToString("dd/MM/yyyy")</td>
+      </tr>
+    </tbody>
+    <ng-template #noData>
+      <tr>
+        <td colspan="5" class="text-center">{{ 'Common.NoData' | translate }}</td>
+      </tr>
+    </ng-template>
+  </table>
+</div>

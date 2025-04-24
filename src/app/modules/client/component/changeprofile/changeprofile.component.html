@@ -1,0 +1,73 @@
+<h2>Hồ sơ của tôi</h2>
+<span>Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <hr />
+  <div *ngIf="profileForm.invalid && profileForm.touched" class="text-danger">
+    Vui lòng điền đầy đủ thông tin hợp lệ.
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="form-group">
+          <label for="userName">Tên người dùng</label>
+          <input formControlName="userName" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input formControlName="email" readonly class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="phoneNumber">Số điện thoại</label>
+          <input formControlName="phoneNumber" class="form-control" />
+        </div>
+
+        <div class="form-group mt-3">
+          <button
+            type="submit"
+            class="btn btn-outline-success"
+            [disabled]="isLoading || profileForm.invalid"
+            id="btnSubmit"
+          >
+            Cập nhật
+          </button>
+        </div>
+
+        <div *ngIf="isLoading" class="loading-spinner mt-2">
+          <i class="fa fa-spinner fa-spin"></i> Đang xử lý...
+        </div>
+      </div>
+
+      <div class="col-md-1 d-flex justify-content-center">
+        <div class="vertical-line" style="border-left: 1px solid #333; height: 100%"></div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card-body-right d-flex flex-column align-items-center text-center">
+          <img
+            [src]="previewImageUrl || defaultImage"
+            id="output"
+            alt="Avatar"
+            class="rounded-circle p-1 no-border"
+            width="100"
+            height="100"
+          />
+          <div class="mt-3">
+            <p><label for="imageInput" style="cursor: pointer">Chọn ảnh</label></p>
+            <input
+              type="file"
+              id="imageInput"
+              (change)="onFileSelected($event)"
+              accept="image/png, image/jpeg"
+              hidden
+            />
+            <p class="mb-0">Dung lượng tối đa 1 MB</p>
+            <p class="mb-0">Định dạng: .JPEG, .PNG</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

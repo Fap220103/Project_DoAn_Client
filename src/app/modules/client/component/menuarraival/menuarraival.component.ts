@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ProductcategoryService } from '../../../../core/services/productcategory.service';
 import { ProductService } from '../../../../core/services/product.service';
@@ -9,22 +9,12 @@ import { ProductService } from '../../../../core/services/product.service';
   styleUrls: ['./menuarraival.component.scss']
 })
 export class MenuArraivalComponent implements OnInit {
-  lstCategory: any[] = [];
+  @Input() lstCategory1: any;
   lstProduct: any[] = [];
-  constructor(
-    private translate: TranslateService,
-    private productCategoryService: ProductcategoryService,
-    private productService: ProductService
-  ) {}
+  constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.getLstCategory();
     this.getLstProduct();
-  }
-  getLstCategory() {
-    this.productCategoryService.get({ level: 1 }, 1, 4).subscribe((rs) => {
-      this.lstCategory = rs.content.data.items;
-    });
   }
   getLstProduct() {
     this.productService.get({}, 1, 10).subscribe((rs) => {

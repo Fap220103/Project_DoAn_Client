@@ -12,6 +12,7 @@ import { adminGuard } from '../../core/guards/admin.guard';
 import { UserProfileComponent } from './pages/userprofile/userprofile.component';
 import { ProductVariantComponent } from './pages/productvariant/productvariant.component';
 import { InventoryComponent } from './pages/inventory/inventory.component';
+import { OrderComponent } from './pages/order/order.component';
 
 const routes: Routes = [
   {
@@ -67,6 +68,12 @@ const routes: Routes = [
         component: InventoryComponent,
         canActivate: [adminGuard],
         data: { title: 'Inventory.Title' }
+      },
+      {
+        path: 'order',
+        component: OrderComponent,
+        canActivate: [adminGuard],
+        data: { title: 'Order.Title' }
       }
     ]
   }

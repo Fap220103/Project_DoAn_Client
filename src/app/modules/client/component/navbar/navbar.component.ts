@@ -3,6 +3,8 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { LoginComponent } from '../../../auth/login/login.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../../../auth/register/register.component';
+import { ProductcategoryService } from '../../../../core/services/productcategory.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,53 +13,55 @@ import { RegisterComponent } from '../../../auth/register/register.component';
 })
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
+  lstCategory1: any[] = [];
+  lstCategory2: any[] = [];
+  lstCategory3: any[] = [];
   constructor(
     private authService: AuthService,
-    public dialog: MatDialog
+    private productCategoryService: ProductcategoryService,
+    public dialog: MatDialog,
+    public router: Router
   ) {
     this.authService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getLstCategory1();
+    this.getLstCategory2();
+    this.getLstCategory3();
+  }
+  getLstCategory1() {
+    this.productCategoryService.get({ level: 1 }, 1, 4).subscribe((rs) => {
+      this.lstCategory1 = rs.content.data.items;
+    });
+  }
+  getLstCategory2() {
+    this.productCategoryService.get({ level: 2 }, 1, 20).subscribe((rs) => {
+      this.lstCategory2 = rs.content.data.items;
+    });
+  }
+  getLstCategory3() {
+    this.productCategoryService.get({ level: 3 }, 1, 20).subscribe((rs) => {
+      this.lstCategory3 = rs.content.data.items;
+    });
+  }
+  getCategory2ByParent(parentId: number) {
+    return this.lstCategory2.filter((c) => c.parentId === parentId);
+  }
+
+  getCategory3ByParent(parentId: number) {
+    return this.lstCategory3.filter((c) => c.parentId === parentId);
+  }
+
   logout() {
     this.authService.logout('client');
   }
-  // login() {
-  //   const dialogRef = this.dialog.open(LoginComponent, {
-  //     width: '600px', // hoặc tùy chỉnh theo nhu cầu
-  //     height: '500px',
-  //     disableClose: false, // nếu bạn không muốn người dùng click ngoài để đóng
-  //     autoFocus: true,
-  //     data: {
-  //       title: 'Product.AddTitle',
-  //       isEdit: false
-  //     }
-  //   });
-  //   dialogRef.afterClosed().subscribe((result) => {
-  //     if (result) {
-  //       //this.getData();
-  //     }
-  //   });
-  // }
-  // register() {
-  //   const dialogRef = this.dialog.open(RegisterComponent, {
-  //     minWidth: '70%',
-  //     height: '100%',
-  //     panelClass: 'custom-dialog-right',
-  //     position: {
-  //       right: '0'
-  //     },
-  //     data: {
-  //       title: 'Product.AddTitle',
-  //       isEdit: false
-  //     }
-  //   });
-  //   dialogRef.afterClosed().subscribe((result) => {
-  //     if (result) {
-  //       //this.getData();
-  //     }
-  //   });
-  // }
+
+  onCategoryClick(categoryId: number) {
+    this.router.navigate(['/products'], {
+      queryParams: { categoryId }
+    });
+  }
 }

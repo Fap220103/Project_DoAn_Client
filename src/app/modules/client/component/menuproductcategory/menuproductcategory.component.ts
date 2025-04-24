@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ProductcategoryService } from '../../../../core/services/productcategory.service';
 
@@ -8,18 +8,10 @@ import { ProductcategoryService } from '../../../../core/services/productcategor
   styleUrls: ['./menuproductcategory.component.scss']
 })
 export class MenuProductCategoryComponent implements OnInit {
-  lstCategory: any[] = [];
-  constructor(
-    private translate: TranslateService,
-    private productCategoryService: ProductcategoryService
-  ) {}
+  @Input() lstCategory1: any;
+  constructor() {}
 
   ngOnInit(): void {
-    this.getData();
-  }
-  getData() {
-    this.productCategoryService.get({ level: 1 }, 1, 4).subscribe((rs) => {
-      this.lstCategory = rs.content.data.items;
-    });
+    console.log('menu product categoy', this.lstCategory1);
   }
 }

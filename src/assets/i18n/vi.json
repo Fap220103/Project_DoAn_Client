@@ -154,6 +154,20 @@
       "ColorName":"Màu",
       "SizeName": "Kích cỡ",
       "Quantity": "Số lượng"
+    },
+    "Order" : {
+      "Title": "Đơn hàng",
+      "AddTitle" : "Thêm đơn hàng",
+      "ProductName": "Tên sản phẩm",
+      "ProductCode": "Mã sản phẩm",
+      "ColorName":"Màu",
+      "SizeName": "Kích cỡ",
+      "Quantity": "Số lượng",
+      "TotalAmount": "Tổng tiền",
+      "Code": "Mã đơn hàng",
+      "Status": "Tình trạng đơn hàng",
+      "CustomerName": "Khách hàng",
+      "EditStatus": "Cập nhật trạng thái"
     }
 }
   

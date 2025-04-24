@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     private authService: AuthService,
     private toastr: ToastrService
   ) {
@@ -39,7 +40,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value).subscribe({
       next: (res) => {
         this.toastr.success('Đăng nhập thành công', 'Thành công');
-        this.router.navigate(['/client/home']);
+        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+        this.router.navigate([returnUrl]);
       },
       error: (err) => {
         this.toastr.error('Đăng nhập thất bại', 'Lỗi');

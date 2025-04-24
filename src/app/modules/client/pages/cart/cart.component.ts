@@ -1,5 +1,7 @@
+import { AuthService } from './../../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../../../core/services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -9,7 +11,12 @@ import { CartService } from '../../../../core/services/cart.service';
 export class CartComponent implements OnInit {
   cartItems: any[] = [];
   totalAmount: number = 0;
-  constructor(private cartService: CartService) {}
+  isLoggedIn: any;
+  constructor(
+    private cartService: CartService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
   ngOnInit() {
     this.loadCartItems();
   }
@@ -56,19 +63,30 @@ export class CartComponent implements OnInit {
     this.cartService.saveCart(this.cartItems);
   }
 
-  deleteProduct(productId: string) {
-    this.cartItems = this.cartItems.filter((item) => item.productId !== productId);
+  deleteProduct(productVariantId: string) {
+    this.cartItems = this.cartItems.filter((item) => item.productVariantId !== productVariantId);
     this.calculateTotalAmount();
-    this.cartService.removeFromCart(productId);
+    this.cartService.removeFromCart(productVariantId);
   }
 
-  updateProduct(productId: number) {
-    console.log(`Sản phẩm ${productId} đã được cập nhật`);
+  updateProduct(productVariantId: string) {
+    console.log(`Sản phẩm ${productVariantId} đã được cập nhật`);
   }
 
   deleteAll() {
     this.cartItems = [];
     this.calculateTotalAmount();
     this.cartService.saveCart(this.cartItems);
+  }
+
+  goToCheckOut() {
+    this.authService.isLoggedIn$.subscribe((status) => {
+      this.isLoggedIn = status;
+    });
+    if (this.isLoggedIn) {
+      this.router.navigate(['/checkout']);
+    } else {
+      this.router.navigate(['/login'], { queryParams: { returnUrl: '/checkout' } });
+    }
   }
 }

@@ -62,7 +62,10 @@
                 </td>
                 <th>{{ item.totalPrice | number: '1.0-0' }}</th>
                 <td>
-                  <button (click)="deleteProduct(item.productId)" class="btn btn-sm btn-danger">
+                  <button
+                    (click)="deleteProduct(item.productVariantId)"
+                    class="btn btn-sm btn-danger"
+                  >
                     Xóa
                   </button>
                   <!-- <button (click)="updateProduct(item.productId)" class="btn btn-sm btn-success">
@@ -88,7 +91,7 @@
             <button type="button" class="btn btn-danger btnDeleteAll" (click)="deleteAll()">
               Xóa All
             </button>
-            <button [routerLink]="['/client/checkout']" class="btn btn-success">Thanh toán</button>
+            <button (click)="goToCheckOut()" class="btn btn-success">Đặt hàng</button>
           </div>
         </div>
       </div>

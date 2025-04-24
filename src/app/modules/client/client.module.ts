@@ -25,6 +25,10 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { PartialPayComponent } from './component/partialpay/partialpay.component';
 import { CheckoutSuccessComponent } from './pages/checkout/checkoutsuccess/checkoutsuccess.component';
 import { PartialReviewComponent } from './component/partialreview/partialreview.component';
+import { ChangePassComponent } from './component/changepass/changepass.component';
+import { ChangeProfileComponent } from './component/changeprofile/changeprofile.component';
+import { MyOrderComponent } from './component/myorder/myorder.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,11 @@ import { PartialReviewComponent } from './component/partialreview/partialreview.
     CheckoutComponent,
     PartialPayComponent,
     CheckoutSuccessComponent,
-    PartialReviewComponent
+    PartialReviewComponent,
+    ProfileComponent,
+    ChangePassComponent,
+    ChangeProfileComponent,
+    MyOrderComponent
   ],
   imports: [
     CommonModule,

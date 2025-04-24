@@ -24,6 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+         
             "outputPath": "dist/client",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -110,7 +111,10 @@
               "buildTarget": "client:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

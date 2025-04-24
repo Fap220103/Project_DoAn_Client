@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './shared/layouts/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'client', pathMatch: 'full' },
+  { path: '', redirectTo: '', pathMatch: 'full' },
   {
     path: 'auth',
     loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule)
@@ -13,7 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/admin/admin.module').then((m) => m.AdminModule)
   },
   {
-    path: 'client',
+    path: '',
     loadChildren: () => import('./modules/client/client.module').then((m) => m.ClientModule)
   },
   { path: 'not-found', component: NotFoundComponent },

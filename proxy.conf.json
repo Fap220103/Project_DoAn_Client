@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://provinces.open-api.vn",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

@@ -1,0 +1,114 @@
+<!-- Main content -->
+<section class="content mt-3">
+  <!-- Default box -->
+  <div class="card">
+    <div class="flex justify-between">
+      <div class="flex justify-start items-center"></div>
+      <div class="relative hedear flex flex-col sm:flex-row flex-0 sm:items-center sm:px-6 xs:py-4">
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+          <app-AraAutocomplete
+            [placeholder]="'Order.Status' | translate"
+            [displayField]="['display']"
+            [items]="lstStatus"
+            [valueField]="'id'"
+            [isUseForm]="false"
+            [isFirstLoad]="false"
+            (onChange)="handleChangeStatus($event)"
+          >
+          </app-AraAutocomplete>
+          <mat-form-field
+            class="ml-3 mt-1 w-[500px] pr-2 md:min-w-64 xs:min-w-50 md:mr-[10px] sm:mr-[10px] xs:mr-[5px] md:text-base sm:text-base xs:text-xs"
+            [subscriptSizing]="'dynamic'"
+          >
+            <input
+              matInput
+              #inputSearch
+              [value]="searchString"
+              placeholder="{{ 'Order.SearchTitle' | translate }}"
+              (keyup)="handleChangeSearchInput($event)"
+              trim
+            />
+            <button
+              class="btn-close !w-6 !h-6 min-w-0 p-0 mr-3"
+              *ngIf="inputSearch.value !== ''"
+              matSuffix
+              mat-icon-button
+              type="button"
+              (click)="handleClearSearchInput()"
+            >
+              <mat-icon class="w-4 h-4 text-gray-500" [svgIcon]="'heroicons_solid:x'"> </mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>{{ 'Common.No' | translate }}</th>
+            <th>{{ 'Order.Code' | translate }}</th>
+            <th>{{ 'Order.CustomerName' | translate }}</th>
+            <th>{{ 'Order.Quantity' | translate }}</th>
+            <th>{{ 'Order.TotalAmount' | translate }}</th>
+            <th>{{ 'Order.Status' | translate }}</th>
+            <th style="width: 200px">{{ 'Common.Action' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="lstOrder.length > 0; else noData">
+          <tr *ngFor="let item of lstOrder; let i = index">
+            <td>{{ item.position }}</td>
+            <td>
+              <span matTooltip="{{ item.orderCode }}">{{ item.orderCode }}</span>
+            </td>
+            <td>
+              <span matTooltip="{{ item.customerId }}">{{ item.customerId }}</span>
+            </td>
+            <td>
+              <span matTooltip="{{ item.totalQuantity }}">{{ item.totalQuantity }}</span>
+            </td>
+            <td>
+              <span matTooltip="{{ item.totalAmount }}">{{ item.totalAmount }}</span>
+            </td>
+            <td>
+              <span matTooltip="{{ item.status }}">{{ item.status }}</span>
+            </td>
+            <td>
+              <button
+                mat-icon-button
+                (click)="detail(item)"
+                matTooltip="{{ 'Common.Read' | translate }}"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                (click)="edit(item)"
+                matTooltip="{{ 'Order.EditStatus' | translate }}"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <!-- Hiển thị khi không có dữ liệu -->
+        <ng-template #noData>
+          <tr>
+            <td colspan="5" class="text-center">{{ 'Common.NoData' | translate }}</td>
+          </tr>
+        </ng-template>
+      </table>
+    </div>
+  </div>
+</section>
+<!-- /.content -->
+<mat-paginator
+  class="absolute inset-x-0 bottom-0 border-b border-t z-10 bg-gray-50 dark:bg-transparent md:text-base sm:text-base xs:text-xs"
+  [pageSizeOptions]="pageSizeOptions"
+  [length]="totalCount"
+  [pageIndex]="pageIndex"
+  [pageSize]="pageSize"
+  (page)="onChangePage($event)"
+  showFirstLastButtons
+>
+</mat-paginator>

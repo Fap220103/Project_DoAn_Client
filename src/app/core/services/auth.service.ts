@@ -58,7 +58,7 @@ export class AuthService {
       .post(`${this.baseUrl}Account/Logout?userId=${userId}`, {}, { withCredentials: true })
       .subscribe({
         complete: () => {
-          const redirectPath = type === 'admin' ? '/auth/login-admin' : '/client/login';
+          const redirectPath = type === 'admin' ? '/auth/login-admin' : '/login';
           this.router.navigate([redirectPath]);
         }
       });

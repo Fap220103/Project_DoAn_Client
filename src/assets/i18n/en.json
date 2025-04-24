@@ -153,5 +153,17 @@
     "ColorName": "Color",
     "SizeName": "Size",
     "Quantity": "Quantity"
+  },
+  "Order" : {
+    "Title": "Order",
+    "AddTitle" : "Add Order",
+    "ProductName": "Product Name",
+    "ProductCode": "Product Code",
+    "ColorName":"Color",
+    "SizeName": "Size",
+    "Quantity": "Quantity",
+    "TotalAmount": "Total Amount",
+    "Code": "Order Code",
+    "Status": "Status"
   }
 }
