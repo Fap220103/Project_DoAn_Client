@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { ProductVariantService } from '../../../../../core/services/productvariant.service';
 import { CartService } from '../../../../../core/services/cart.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-productdetail',
@@ -17,7 +18,7 @@ export class ProductDetailComponent implements OnInit {
   item: any;
   params: any = {};
   currentUserId!: string;
-  productId: string = 'c4acfdb0-09ec-4c2e-afbb-b2c800af2336';
+  productId!: string;
   reviewCount = 3;
   quantity = 1;
   lstColor: any[] = [];
@@ -31,11 +32,15 @@ export class ProductDetailComponent implements OnInit {
     private cartService: CartService,
     private authService: AuthService,
     public snackBar: MatSnackBar,
+    private route: ActivatedRoute,
     private translate: TranslateService
   ) {
     this.currentUserId = authService.getUserId();
   }
   ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      this.productId = params.get('id')!;
+    });
     this.getData();
     this.fetchProductData();
   }

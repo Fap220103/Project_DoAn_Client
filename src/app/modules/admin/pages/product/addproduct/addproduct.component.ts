@@ -15,6 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./addproduct.component.scss']
 })
 export class AddProductComponent implements OnInit {
+  rawValues: { [key: string]: string } = {};
   form: FormGroup;
   activeTab = 'info';
   images: { url: string; file?: File; isDefault: boolean }[] = [];
@@ -189,11 +190,16 @@ export class AddProductComponent implements OnInit {
   formatCurrency(controlName: string) {
     let value = this.form.get(controlName)?.value;
     if (value) {
-      // Xoá các ký tự không phải số
       value = value.replace(/[^0-9]/g, '');
-      // Format thành 100,000,000
+      this.rawValues[controlName] = value; // lưu giá trị gốc
       const formatted = Number(value).toLocaleString('en-US');
       this.form.get(controlName)?.setValue(formatted, { emitEvent: false });
     }
+  }
+
+  removeFormat(controlName: string) {
+    const raw =
+      this.rawValues[controlName] || this.form.get(controlName)?.value?.replace(/[^0-9]/g, '');
+    this.form.get(controlName)?.setValue(raw, { emitEvent: false });
   }
 }

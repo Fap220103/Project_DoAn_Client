@@ -115,6 +115,8 @@
                           class="form-control"
                           [formControlName]="field.name"
                           (input)="formatCurrency(field.name)"
+                          (focus)="removeFormat(field.name)"
+                          (blur)="formatCurrency(field.name)"
                         />
                       </div>
                     </div>

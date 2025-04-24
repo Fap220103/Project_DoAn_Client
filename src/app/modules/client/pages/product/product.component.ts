@@ -39,13 +39,11 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
-    console.log(this.lstProduct);
   }
   getData() {
     this.productService.get(this.params, this.pageIndex + 1, this.pageSize).subscribe((rs) => {
       this.lstProduct = rs.content.data.items;
       this.totalCount = rs.content.data.totalRecords;
-      console.log('Dữ liệu lấy được:', this.lstProduct);
     });
   }
   onChangePage(event: any) {
@@ -76,9 +74,7 @@ export class ProductComponent implements OnInit {
   getProductImage(item: any): string {
     return item.imageDefault || 'assets/Content/img/SanPham/h0.png';
   }
-  isWishList(item: any): boolean {
-    return false;
-  }
+
   getStarArray(rating: number): number[] {
     return Array(Math.round(rating)).fill(0);
   }

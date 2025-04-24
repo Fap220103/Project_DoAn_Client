@@ -18,9 +18,10 @@
 
         <li
           class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
-          data-filter=".@item.Alias"
+          *ngFor="let item of lstCategory"
+          [attr.data-filter]="'.' + item.alias"
         >
-          abc
+          {{ item.title }}
         </li>
       </ul>
     </div>
@@ -32,7 +33,53 @@
       class="product-grid"
       data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'
     >
-      abc
+      <div class="product-grid d-flex flex-wrap">
+        <div *ngFor="let item of lstProduct" class="product-item">
+          <div class="product discount product_filter">
+            <div class="product_image">
+              <img [src]="item.imageDefault" height="200" [alt]="item.title" />
+            </div>
+
+            <div
+              *ngIf="item.salePercent > 0"
+              class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"
+            >
+              <span>-{{ item.salePercent }}%</span>
+            </div>
+
+            <div class="product_info">
+              <h6 class="product_name short-line">
+                <a>{{ item.title }}</a>
+              </h6>
+
+              <ng-container *ngIf="item.salePercent > 0; else noSale">
+                <div class="product_price">
+                  {{ item.priceSale | number: '1.0-0' }} VND
+                  <span>{{ item.price | number: '1.0-0' }} VND</span>
+                </div>
+                <div style="display: none" class="in_product_price">
+                  {{ item.priceSale | number: '1.0-0' }} VND
+                </div>
+              </ng-container>
+              <ng-template #noSale>
+                <div class="product_price">{{ item.price | number: '1.0-0' }} VND</div>
+                <div style="display: none" class="in_product_price">
+                  {{ item.price | number: '1.0-0' }} VND
+                </div>
+              </ng-template>
+            </div>
+          </div>
+          <div class="product-meta">
+            <span class="sold">Đã bán 2000</span>
+            <span class="stars">
+              <ng-container *ngFor="let star of getStarArray(4.5)">
+                <i class="fa fa-star text-warning"></i>
+              </ng-container>
+              (1000)
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
