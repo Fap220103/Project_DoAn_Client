@@ -96,9 +96,6 @@ export class ProductDetailComponent implements OnInit {
           const price = this.item.salePercent > 0 ? this.item.priceSale : this.item.price;
           const cartItem = {
             productVariantId: variantId,
-            productId: this.item.id,
-            colorId: color.id,
-            sizeId: size.id,
             productName: this.item.title,
             sizeName: size.name,
             colorName: color.name,

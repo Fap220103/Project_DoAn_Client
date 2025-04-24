@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { AuthService } from '../../../core/services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +14,13 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   formError: string = '';
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private translate: TranslateService,
+    public snackBar: MatSnackBar,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.registerForm = this.fb.group(
@@ -50,10 +60,34 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     if (this.registerForm.valid) {
       const formData = this.registerForm.value;
-      // Gửi dữ liệu đến backend tại đây
-      console.log('Đăng ký với', formData);
+      this.authService.register(formData).subscribe({
+        next: (res) => {
+          if (res.code === 200) {
+            this.router.navigate(['/home']);
+            this.processResponse(res);
+          } else {
+            this.processResponse(false);
+          }
+        },
+        error: (err) => {
+          this.processResponse(false);
+        }
+      });
     } else {
       this.formError = 'Vui lòng kiểm tra lại thông tin.';
     }
+  }
+  processResponse(res: any, msg?: string) {
+    const transForm = res
+      ? msg
+        ? msg
+        : this.translate.instant('Message.DeleteSuccess')
+      : msg
+        ? msg
+        : this.translate.instant('Message.DeleteFail');
+    this.snackBar.open(transForm, 'OK', {
+      verticalPosition: 'bottom',
+      duration: 2000
+    });
   }
 }

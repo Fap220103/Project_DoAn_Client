@@ -9,7 +9,7 @@
     <div class="login-card">
       <h2 id="title">Sign up</h2>
 
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="registerForm">
         <div *ngIf="formError" class="text-danger">{{ formError }}</div>
 
         <div class="form-group">
@@ -55,6 +55,7 @@
             type="submit"
             value="Sign up"
             [disabled]="registerForm.invalid"
+            (click)="onSubmit()"
           />
         </div>
       </form>

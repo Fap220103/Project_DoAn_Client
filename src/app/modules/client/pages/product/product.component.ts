@@ -46,8 +46,8 @@ export class ProductComponent implements OnInit {
     this.currentUserId = authService.getUserId();
   }
 
-  ngOnInit(): void {
-    this.loadAllCategories();
+  async ngOnInit(): Promise<void> {
+    await this.loadAllCategories();
     this.activatedRoute.queryParams.subscribe((params) => {
       const categoryId = params['categoryId'];
       if (!categoryId) {
@@ -116,17 +116,18 @@ export class ProductComponent implements OnInit {
   }
 
   // load danh muc lv 1 2 3
-  loadAllCategories() {
-    this.productCategoryService.get({ level: 1 }, 1, 20).subscribe((res) => {
-      this.lstCategory1 = res.content.data.items;
-    });
-    this.productCategoryService.get({ level: 2 }, 1, 20).subscribe((res) => {
-      this.lstCategory2 = res.content.data.items;
-    });
-    this.productCategoryService.get({ level: 3 }, 1, 20).subscribe((res) => {
-      this.lstCategory3 = res.content.data.items;
-    });
+  async loadAllCategories() {
+    const p1 = this.productCategoryService.get({ level: 1 }, 1, 100).toPromise();
+    const p2 = this.productCategoryService.get({ level: 2 }, 1, 100).toPromise();
+    const p3 = this.productCategoryService.get({ level: 3 }, 1, 100).toPromise();
+
+    const [res1, res2, res3] = await Promise.all([p1, p2, p3]);
+
+    this.lstCategory1 = res1.content.data.items;
+    this.lstCategory2 = res2.content.data.items;
+    this.lstCategory3 = res3.content.data.items;
   }
+
   onChangePage(event: any) {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;

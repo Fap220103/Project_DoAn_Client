@@ -2,6 +2,7 @@ import { AuthService } from './../../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../../../core/services/cart.service';
 import { Router } from '@angular/router';
+import { Cart } from '../../../../core/models/cart.model';
 
 @Component({
   selector: 'app-cart',
@@ -12,6 +13,8 @@ export class CartComponent implements OnInit {
   cartItems: any[] = [];
   totalAmount: number = 0;
   isLoggedIn: any;
+  cart!: Cart;
+  userId!: string;
   constructor(
     private cartService: CartService,
     private authService: AuthService,
@@ -28,17 +31,6 @@ export class CartComponent implements OnInit {
 
   calculateTotalAmount() {
     this.totalAmount = this.cartItems.reduce((acc, item) => acc + item.totalPrice, 0);
-  }
-
-  updateQuantity(item: any) {
-    if (item.quantity < 1) {
-      item.quantity = 1;
-    }
-    if (item.quantity > 100) {
-      item.quantity = 100;
-    }
-    item.totalPrice = item.quantity * item.price;
-    this.calculateTotalAmount();
   }
 
   preventInvalidInput(event: KeyboardEvent) {

@@ -68,7 +68,9 @@
         <nav class="navbar">
           <ul class="custom-navbar">
             <li class="custom-menu-item has-sub" *ngFor="let category1 of lstCategory1">
-              <a (click)="onCategoryClick(category1.id)">{{ category1.title | uppercase }}</a>
+              <a (click)="onCategoryClick(category1.id)" class="cursor-pointer">{{
+                category1.title | uppercase
+              }}</a>
 
               <div class="custom-submenu">
                 <!-- Danh mục cấp 2 -->
@@ -76,10 +78,14 @@
                   class="custom-submenu-col"
                   *ngFor="let category2 of getCategory2ByParent(category1.id)"
                 >
-                  <h4 (click)="onCategoryClick(category2.id)">{{ category2.title }}</h4>
+                  <h4 (click)="onCategoryClick(category2.id)" class="cursor-pointer">
+                    {{ category2.title }}
+                  </h4>
                   <ul>
                     <li *ngFor="let category3 of getCategory3ByParent(category2.id)">
-                      <a (click)="onCategoryClick(category3.id)">{{ category3.title }}</a>
+                      <a (click)="onCategoryClick(category3.id)" class="cursor-pointer">{{
+                        category3.title
+                      }}</a>
                     </li>
                   </ul>
                 </div>

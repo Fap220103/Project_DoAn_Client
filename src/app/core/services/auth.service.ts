@@ -4,14 +4,15 @@ import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable, ReplaySubject, catchError, map, tap, throwError } from 'rxjs';
 import { LoginModel } from '../models/login.model';
 import { User } from '../models/user.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Constants } from '../constants/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl = environment.apiUrl;
+  baseUrl = Constants.ApiResources;
   private readonly TOKEN_KEY = 'access_token';
   private readonly EXPIRES_AT_KEY = 'expires_at';
   private readonly ROLE_KEY = 'userRole';
@@ -63,6 +64,12 @@ export class AuthService {
         }
       });
   }
+  register(data: any): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders();
+    const url = `${this.baseUrl}api/account/register`;
+    return this.http.post(url, data, { headers: headers, withCredentials: true });
+  }
+
   private updateLoginStatus(isLoggedIn: boolean) {
     this.isLoggedInSubject.next(isLoggedIn);
   }

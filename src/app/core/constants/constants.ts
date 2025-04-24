@@ -29,5 +29,8 @@ export const Constants = {
   },
   Order: {
     Resource: 'api/Order'
+  },
+  Cart: {
+    Resource: 'api/Cart'
   }
 };

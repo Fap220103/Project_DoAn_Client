@@ -60,7 +60,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onCategoryClick(categoryId: number) {
-    this.router.navigate(['/products'], {
+    this.router.navigate(['/product'], {
       queryParams: { categoryId }
     });
   }

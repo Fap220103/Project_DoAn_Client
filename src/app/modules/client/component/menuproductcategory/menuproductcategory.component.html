@@ -8,10 +8,8 @@
             'background-image': 'url(assets/Content/assets/images/banner_' + (i + 1) + '.jpg)'
           }"
         >
-          <div class="banner_category">
-            <a [routerLink]="['/danh-muc-san-pham', item.Alias + '-' + item.Id]">{{
-              item.title
-            }}</a>
+          <div class="banner_category cursor-pointer">
+            <a (click)="onCategoryClick(item.id)">{{ item.title }}</a>
           </div>
         </div>
       </div>

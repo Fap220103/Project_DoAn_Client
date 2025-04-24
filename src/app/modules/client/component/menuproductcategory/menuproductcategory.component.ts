@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ProductcategoryService } from '../../../../core/services/productcategory.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menuproductcategory',
@@ -9,9 +10,12 @@ import { ProductcategoryService } from '../../../../core/services/productcategor
 })
 export class MenuProductCategoryComponent implements OnInit {
   @Input() lstCategory1: any;
-  constructor() {}
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {
-    console.log('menu product categoy', this.lstCategory1);
+  ngOnInit(): void {}
+  onCategoryClick(categoryId: number) {
+    this.router.navigate(['/product'], {
+      queryParams: { categoryId }
+    });
   }
 }
