@@ -1,0 +1,97 @@
+.address-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+
+  .header_custom {
+    margin-bottom: 20px;
+
+    h3 {
+      margin: 0;
+    }
+
+    .btn-add {
+      background-color: #ee4d2d;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+
+  .address-list {
+    .address-item {
+      border-top: 1px solid #e5e5e5;
+      padding: 15px 0;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      .info {
+        flex: 1;
+
+        .name {
+          font-weight: bold;
+          margin-bottom: 4px;
+
+          .phone {
+            font-weight: normal;
+            margin-left: 5px;
+          }
+        }
+
+        .line {
+          margin: 2px 0;
+        }
+
+        .tags {
+          margin-top: 6px;
+
+          .badge {
+            display: inline-block;
+            padding: 2px 6px;
+            font-size: 12px;
+            border-radius: 4px;
+            margin-right: 5px;
+
+            &-default {
+              background-color: #fff0f0;
+              color: #ee4d2d;
+              border: 1px solid #ee4d2d;
+            }
+
+            &-pickup,
+            &-return {
+              background-color: #f5f5f5;
+              border: 1px solid #ccc;
+            }
+          }
+        }
+      }
+
+      .actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        min-width: 150px;
+
+        .btn-link {
+          color: #1677ff;
+          text-decoration: none;
+          margin-bottom: 5px;
+          font-size: 14px;
+        }
+
+        .btn-set-default {
+          background-color: white;
+          border: 1px solid #ccc;
+          padding: 4px 10px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

@@ -8,7 +8,7 @@ import { AuthService } from '../../../../core/services/auth.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  currentView: 'profile' | 'password' | 'order' = 'profile';
+  currentView: 'profile' | 'password' | 'order'| 'address' = 'profile';
   userName!: string;
   image!: string;
   constructor(private userService: UserService,
@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.getData();
   }
-  show(view: 'profile' | 'password' | 'order') {
+  show(view: 'profile' | 'password' | 'order' | 'address') {
     this.currentView = view;
   }
   getData() {

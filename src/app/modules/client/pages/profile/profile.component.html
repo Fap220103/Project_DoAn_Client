@@ -40,6 +40,14 @@
               </li>
               <li class="nav-item">
                 <a
+                (click)="show('address')"
+                  class="nav-link nav-link-profile cursor-pointer"
+                >
+                  <i class="fas fa-shopping-cart nav-icon-profile"></i> Địa chỉ
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
                 (click)="show('password')"
                   class="nav-link nav-link-profile cursor-pointer"
                 >
@@ -55,6 +63,7 @@
     <div class="col-md-9 form-container">
       <app-changeprofile *ngIf="currentView === 'profile'" (updated)="getData()"></app-changeprofile>
       <app-myorder *ngIf="currentView === 'order'"></app-myorder>
+      <app-shippingaddress *ngIf="currentView === 'address'"></app-shippingaddress>
       <app-changepass *ngIf="currentView === 'password'"></app-changepass>
     </div>
   </div>

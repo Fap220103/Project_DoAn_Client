@@ -29,6 +29,7 @@ import { ChangePassComponent } from './component/changepass/changepass.component
 import { ChangeProfileComponent } from './component/changeprofile/changeprofile.component';
 import { MyOrderComponent } from './component/myorder/myorder.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ShippingAddressComponent } from './component/shippingaddress/shippingaddress.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     ProfileComponent,
     ChangePassComponent,
     ChangeProfileComponent,
-    MyOrderComponent
+    MyOrderComponent,
+    ShippingAddressComponent
   ],
   imports: [
     CommonModule,

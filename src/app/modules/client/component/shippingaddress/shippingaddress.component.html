@@ -1,0 +1,31 @@
+<div class="address-container">
+  <div class="d-flex justify-between align-center header_custom">
+    <h3>Địa chỉ của tôi</h3>
+    <button class="btn btn-add">+ Thêm địa chỉ mới</button>
+  </div>
+
+  <div class="address-list">
+    <div class="address-item" *ngFor="let address of addresses">
+      <div class="info">
+        <p class="name">
+          {{ address.name }}
+          <span class="phone">({{ address.phone }})</span>
+        </p>
+        <p class="line">{{ address.addressLine1 }}</p>
+        <p class="line">{{ address.addressLine2 }}</p>
+
+        <div class="tags">
+          <span class="badge badge-default" *ngIf="address.isDefault">Mặc định</span>
+          <span class="badge badge-pickup" *ngIf="address.isPickup">Địa chỉ lấy hàng</span>
+          <span class="badge badge-return" *ngIf="address.isReturn">Địa chỉ trả hàng</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a href="#" class="btn-link">Cập nhật</a>
+        <a href="#" class="btn-link" *ngIf="!address.isDefault">Xóa</a>
+        <button class="btn-set-default" *ngIf="!address.isDefault">Thiết lập mặc định</button>
+      </div>
+    </div>
+  </div>
+</div>
