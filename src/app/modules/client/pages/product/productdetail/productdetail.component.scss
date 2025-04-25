@@ -15,10 +15,9 @@
   cursor: pointer;
   padding: 10px 10px;
   border: 1px solid #ccc;
-  transition: border 0.3s ease;
 }
 .product_size li.active {
-  border: 1px solid orange;
+  border: 2px solid orange;
 }
 // .product_color_custom li {
 //   display: flex; /* Căn chỉnh các phần tử theo chiều ngang */
@@ -59,9 +58,7 @@
   border: 1px solid #ccc;
   background-color: white;
   cursor: pointer;
-  transition:
-    border 0.3s ease,
-    box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
 }
 
 .color-button:hover {
@@ -69,7 +66,7 @@
 }
 
 .color-button.active {
-  border: 1px solid orange;
+  border: 2px solid orange;
 }
 
 .color-circle {

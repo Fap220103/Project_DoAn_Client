@@ -63,20 +63,34 @@ export class RegisterComponent implements OnInit {
       this.authService.register(formData).subscribe({
         next: (res) => {
           if (res.code === 200) {
-            this.router.navigate(['/home']);
-            this.processResponse(res);
+            // Gọi login sau khi đăng ký thành công
+            const credentials = {
+              username: formData.email,
+              password: formData.password
+            };
+
+            this.authService.login(credentials).subscribe({
+              next: (loginRes) => {
+                this.router.navigate(['/home']);
+                this.processResponse(loginRes, 'Đăng ký thành công');
+              },
+              error: () => {
+                this.processResponse(false, 'Đăng ký thành công');
+              }
+            });
           } else {
-            this.processResponse(false);
+            this.processResponse(false, 'Đăng ký thất bại');
           }
         },
-        error: (err) => {
-          this.processResponse(false);
+        error: () => {
+          this.processResponse(false, 'Đăng ký thất bại');
         }
       });
     } else {
       this.formError = 'Vui lòng kiểm tra lại thông tin.';
     }
   }
+
   processResponse(res: any, msg?: string) {
     const transForm = res
       ? msg

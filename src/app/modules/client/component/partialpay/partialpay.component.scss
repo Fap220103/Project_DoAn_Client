@@ -1,0 +1,30 @@
+.cart-container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.cart-title {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.product-img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.product-info {
+  min-width: 0;
+}
+
+select.form-select {
+  font-size: 14px;
+}

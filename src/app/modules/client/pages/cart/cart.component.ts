@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../../../core/services/cart.service';
 import { Router } from '@angular/router';
 import { Cart } from '../../../../core/models/cart.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -25,8 +26,17 @@ export class CartComponent implements OnInit {
   }
 
   loadCartItems() {
-    this.cartItems = this.cartService.getCart();
-    this.calculateTotalAmount();
+    const cart$ = this.cartService.getCart();
+
+    if (cart$ instanceof Observable) {
+      cart$.subscribe((items) => {
+        this.cartItems = items;
+        this.calculateTotalAmount();
+      });
+    } else {
+      this.cartItems = cart$;
+      this.calculateTotalAmount();
+    }
   }
 
   calculateTotalAmount() {
@@ -43,7 +53,6 @@ export class CartComponent implements OnInit {
   onQuantityInput(event: Event, item: any) {
     const input = event.target as HTMLInputElement;
     let value = Number(input.value);
-    // Nếu < 1 thì đặt lại thành 1
     if (value < 1) {
       value = 1;
       input.value = '1';
@@ -52,13 +61,16 @@ export class CartComponent implements OnInit {
     item.quantity = value;
     item.totalPrice = item.quantity * item.price;
     this.calculateTotalAmount();
-    this.cartService.saveCart(this.cartItems);
+    setTimeout(() => {
+      this.cartService.saveCart(this.cartItems);
+    });
   }
 
   deleteProduct(productVariantId: string) {
-    this.cartItems = this.cartItems.filter((item) => item.productVariantId !== productVariantId);
-    this.calculateTotalAmount();
-    this.cartService.removeFromCart(productVariantId);
+    this.cartService.removeFromCart(productVariantId).subscribe(() => {
+      this.cartItems = this.cartItems.filter((item) => item.productVariantId !== productVariantId);
+      this.calculateTotalAmount();
+    });
   }
 
   updateProduct(productVariantId: string) {
@@ -66,9 +78,9 @@ export class CartComponent implements OnInit {
   }
 
   deleteAll() {
+    this.cartService.clearCart();
     this.cartItems = [];
     this.calculateTotalAmount();
-    this.cartService.saveCart(this.cartItems);
   }
 
   goToCheckOut() {

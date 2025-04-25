@@ -10,6 +10,9 @@ import { CheckoutSuccessComponent } from './pages/checkout/checkoutsuccess/check
 import { LoginComponent } from '../auth/login/login.component';
 import { RegisterComponent } from '../auth/register/register.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ChangePassComponent } from './component/changepass/changepass.component';
+import { ChangeProfileComponent } from './component/changeprofile/changeprofile.component';
+import { MyOrderComponent } from './component/myorder/myorder.component';
 
 const routes: Routes = [
   {
@@ -21,7 +24,10 @@ const routes: Routes = [
       { path: 'product', component: ProductComponent },
       { path: 'product/:id', component: ProductDetailComponent },
       { path: 'cart', component: CartComponent },
-      { path: 'profile', component: ProfileComponent },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+      },
       { path: 'checkout', component: CheckoutComponent },
       { path: 'checkoutsuccess', component: CheckoutSuccessComponent },
       { path: 'login', component: LoginComponent },

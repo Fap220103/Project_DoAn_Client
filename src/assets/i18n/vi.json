@@ -168,6 +168,19 @@
       "Status": "Tình trạng đơn hàng",
       "CustomerName": "Khách hàng",
       "EditStatus": "Cập nhật trạng thái"
+    },
+    "Discount" : {
+      "Title": "Khuyến mãi",
+      "AddTitle" : "Thêm khuyến mãi",
+      "Code" : "Mã khuyến mãi",
+      "Name" : "Tên chương trình",
+      "Description" : "Mô tả",
+      "DiscountType" : "Loại khuyến mãi",
+      "DiscountValue" : "Giá trị khuyến mãi",
+      "StartDate" : "Ngày bắt đầu",
+      "EndDate" : "Ngày kết thúc",
+      "UsageLimit" : "Số lượng",
+      "UsageCount" : "Đã dùng"
     }
 }
   

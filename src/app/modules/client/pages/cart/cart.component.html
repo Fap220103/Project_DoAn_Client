@@ -62,11 +62,18 @@
                 </td>
                 <th>{{ item.totalPrice | number: '1.0-0' }}</th>
                 <td>
-                  <button
+                  <!-- <button
                     (click)="deleteProduct(item.productVariantId)"
                     class="btn btn-sm btn-danger"
                   >
                     Xóa
+                  </button> -->
+                  <button
+                    mat-icon-button
+                    (click)="deleteProduct(item.productVariantId)"
+                    matTooltip="{{ 'Common.Delete' | translate }}"
+                  >
+                    <mat-icon>delete</mat-icon>
                   </button>
                   <!-- <button (click)="updateProduct(item.productId)" class="btn btn-sm btn-success">
                     Cập nhật

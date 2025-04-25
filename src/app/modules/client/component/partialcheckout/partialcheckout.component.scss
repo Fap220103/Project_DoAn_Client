@@ -1,0 +1,33 @@
+.checkout-form {
+  max-width: 700px;
+  margin: auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  font-size: 15px;
+
+  h4 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .form-control,
+  .form-select {
+    border-radius: 10px;
+  }
+
+  .form-check-input {
+    margin-right: 10px;
+  }
+
+  .payment-methods {
+    .form-check-label {
+      display: flex;
+      align-items: center;
+    }
+
+    img {
+      height: 20px;
+    }
+  }
+}

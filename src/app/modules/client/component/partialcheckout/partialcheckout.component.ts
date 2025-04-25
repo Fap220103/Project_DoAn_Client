@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-partialcheckout',
@@ -9,7 +10,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class PartialCheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
-  isSignedIn = false; // set true nếu user đã đăng nhập
+  isSignedIn = true; // set true nếu user đã đăng nhập
   user: any = null; // nếu isSignedIn = true, set user từ localStorage hoặc API
   loading = false;
   showVNPayOptions = false;
@@ -21,17 +22,19 @@ export class PartialCheckoutComponent implements OnInit {
   selectedDistrict: string = '';
   selectedWard: string = '';
 
+  paymentMethod = 'cod';
+
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) {
     this.checkoutForm = this.fb.group({
-      customerName: [''],
+      username: [''],
       phone: [''],
       address: [''],
       email: [''],
-      typePayment: ['1'],
-      typePaymentVN: ['0'],
+      paymentMethod: ['1'],
       province: [''],
       district: [''],
       ward: ['']
@@ -46,19 +49,13 @@ export class PartialCheckoutComponent implements OnInit {
     this.showVNPayOptions = selected === '2';
   }
 
-  onSubmit() {
+  checkOut() {
     if (this.checkoutForm.invalid) return;
-    this.loading = true;
 
-    // Gửi dữ liệu đến API
-    // const formData = this.checkoutForm.value;
-
-    // console.log('Submitting form: ', formData);
-
-    // setTimeout(() => {
-    //   this.loading = false;
-    //   alert('Đặt hàng thành công!');
-    // }, 2000);
+    const infoCheckout = {
+      customerId: this.authService.getUserId(),
+      TypePayment: 1
+    };
   }
   loadProvinces() {
     this.http.get<any[]>('/api/p/').subscribe((data) => {

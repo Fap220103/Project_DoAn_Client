@@ -30,11 +30,7 @@ export class AuthService {
   // Đăng nhập
   login(credentials: { username: string; password: string }): Observable<any> {
     return this.http
-      .post<any>(
-        `${this.baseUrl}Account/Login`, // Giả định endpoint đăng nhập
-        credentials,
-        { withCredentials: true }
-      )
+      .post<any>(`${this.baseUrl}api/Account/Login`, credentials, { withCredentials: true })
       .pipe(
         tap((response) => {
           this.saveTokens(response.content.accessToken, response.content.expires_in_second);
@@ -56,7 +52,7 @@ export class AuthService {
     this.updateLoginStatus(false);
 
     this.http
-      .post(`${this.baseUrl}Account/Logout?userId=${userId}`, {}, { withCredentials: true })
+      .post(`${this.baseUrl}api/Account/Logout?userId=${userId}`, {}, { withCredentials: true })
       .subscribe({
         complete: () => {
           const redirectPath = type === 'admin' ? '/auth/login-admin' : '/login';
@@ -114,7 +110,7 @@ export class AuthService {
 
   refreshToken(): Observable<any> {
     return this.http
-      .post<any>(`${this.baseUrl}Account/RefreshToken`, {}, { withCredentials: true })
+      .post<any>(`${this.baseUrl}api/Account/RefreshToken`, {}, { withCredentials: true })
       .pipe(
         tap((response) => {
           this.saveTokens(response.content.accessToken, response.content.expires_in_second);

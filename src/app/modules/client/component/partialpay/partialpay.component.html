@@ -1,21 +1,56 @@
-<h3>GIỎ HÀNG<span style="float: right">Model.Count()</span></h3>
-var i = 0; var tongtien = decimal.Zero;
-<div style="border: 1px solid #808080">
-  <table class="table">
-    <tr>
-      <td>item.ProductName</td>
-      <td>Common.FormatNumber(item.Price, 0)</td>
-      <td>item.Quantity</td>
-    </tr>
-    <tr>
-      <td>item.ProductName</td>
-      <td>Common.FormatNumber(item.Price, 0)</td>
-      <td>item.Quantity</td>
-    </tr>
+<div class="cart-container mt-4">
+  <h4 class="cart-title">Giỏ hàng</h4>
 
-    <tr>
-      <td>Tổng tiền</td>
-      <td>Common.FormatNumber(tongtien, 0)</td>
-    </tr>
-  </table>
+  <div class="alert alert-primary d-flex justify-content-between align-items-center">
+    <div>
+      🎁 Mua thêm <strong>340.000đ</strong> để nhận <strong>01 Áo thun Tự Hào Việt Nam</strong>
+    </div>
+    <button class="btn btn-outline-light btn-sm">Mua ngay</button>
+  </div>
+
+  <div
+    *ngFor="let item of cartItems; let i = index"
+    class="cart-item d-flex align-items-center py-3 border-bottom"
+  >
+    <input type="checkbox" class="form-check-input me-3" />
+
+    <img [src]="item.image" class="product-img me-3" />
+
+    <div class="product-info flex-grow-1">
+      <div class="product-name fw-semibold text-sm">{{ item.productName }}</div>
+      <div class="text-muted text-sm">{{ item.colorName }} / {{ item.sizeName }}</div>
+
+      <div class="d-flex gap-2 mt-2">
+        <!-- <select class="form-select form-select-sm w-auto " [(ngModel)]="item.colorName">
+          <option>{{ item.colorName }}</option>
+        </select>
+        <select class="form-select form-select-sm w-auto" [(ngModel)]="item.sizeName">
+          <option>{{ item.sizeName }}</option>
+        </select> -->
+        <!-- <button class="btn btn-link text-danger p-0" (click)="removeItem(i)">
+          <i class="bi bi-trash3"></i> Xóa
+        </button> -->
+        <button
+          mat-icon-button
+          (click)="delete(item.id)"
+          matTooltip="{{ 'Common.Delete' | translate }}"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center">
+      <button class="btn btn-outline-secondary btn-sm" (click)="decreaseQty(i)">-</button>
+      <span class="mx-2">{{ item.quantity }}</span>
+      <button class="btn btn-outline-secondary btn-sm" (click)="increaseQty(i)">+</button>
+    </div>
+
+    <div class="text-end ms-3">
+      <div class="fw-bold">{{ item.price | number: '1.0-0' }}đ</div>
+      <div class="text-decoration-line-through text-muted small" *ngIf="item.originalPrice">
+        {{ item.originalPrice | number: '1.0-0' }} VND
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,140 +1,153 @@
-<form [formGroup]="checkoutForm">
-  <h3>Thông tin khách hàng</h3>
+<form class="checkout-form" [formGroup]="checkoutForm">
+  <h4>Thông tin đặt hàng</h4>
 
-  <div *ngIf="!isSignedIn; else signedInBlock">
-    <div class="form-group">
-      <label>Họ tên khách hàng</label>
-      <input formControlName="customerName" class="form-control" autocomplete="off" required />
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Họ và tên"
+        formControlName="username"
+        name="fullName"
+      />
     </div>
-    <div class="form-group">
-      <label>Số điện thoại</label>
-      <input formControlName="phone" class="form-control" autocomplete="off" />
-    </div>
-    <div class="form-group">
-      <label>Địa chỉ</label>
-      <input formControlName="address" class="form-control" autocomplete="off" />
-    </div>
-    <div class="form-group">
-      <label>Email</label>
-      <input formControlName="email" class="form-control" autocomplete="off" />
+    <div class="col-md-6">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Số điện thoại"
+        formControlName="phonenumber"
+        name="phone"
+      />
     </div>
   </div>
 
-  <ng-template #signedInBlock>
-    <div class="form-group">
-      <label>Họ tên khách hàng</label>
-      <input
-        formControlName="customerName"
-        class="form-control"
-        [value]="user?.userName"
-        autocomplete="off"
-        required
-      />
-    </div>
-    <div class="form-group">
-      <label>Số điện thoại</label>
-      <input
-        formControlName="phone"
-        class="form-control"
-        [value]="user?.phoneNumber"
-        autocomplete="off"
-      />
-    </div>
-    <div class="form-group">
-      <label>Địa chỉ</label>
-      <div>
-        <label for="province">Province:</label>
-        <select
-          id="province"
-          formControlName="province"
-          (change)="onProvinceChange()"
-          class="form-control"
-        >
-          <option value="">Select Province</option>
-          <option *ngFor="let province of provinces" [value]="province.code">
-            {{ province.name }}
-          </option>
-        </select>
-      </div>
-
-      <div>
-        <label for="district">District:</label>
-        <select
-          id="district"
-          formControlName="district"
-          (change)="onDistrictChange()"
-          [disabled]="!districts.length"
-          class="form-control"
-        >
-          <option value="">Select District</option>
-          <option *ngFor="let district of districts" [value]="district.code">
-            {{ district.name }}
-          </option>
-        </select>
-      </div>
-
-      <div>
-        <label for="ward">Ward:</label>
-        <select id="ward" formControlName="ward" [disabled]="!wards.length" class="form-control">
-          <option value="">Select Ward</option>
-          <option *ngFor="let ward of wards" [value]="ward.code">{{ ward.name }}</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Email</label>
-      <input
-        formControlName="email"
-        class="form-control"
-        [value]="user?.email"
-        autocomplete="off"
-      />
-    </div>
-  </ng-template>
-
-  <div class="form-group">
-    <label>Hình thức thanh toán</label>
-    <select
-      formControlName="typePayment"
+  <div class="mb-3">
+    <input
+      type="email"
       class="form-control"
-      id="drTypePayment"
-      (change)="onPaymentChange($event)"
-    >
-      <option value="1">COD</option>
-      <option value="2">Chuyển khoản</option>
-    </select>
+      placeholder="Email"
+      formControlName="email"
+      name="email"
+    />
   </div>
 
-  <div class="form-group" id="load_form_payment" *ngIf="showVNPayOptions">
-    <h4><label>Chọn phương thức thanh toán:</label></h4>
-    <h5>Cách 1: Chuyển hướng sang VNPAY chọn phương thức thanh toán</h5>
-    <label
-      ><input type="radio" formControlName="typePaymentVN" value="0" /> Cổng thanh toán VNPAYQR
-    </label>
-    <h5>Cách 2: Tách phương thức thanh toán tại site của Merchant</h5>
-    <label
-      ><input type="radio" formControlName="typePaymentVN" value="1" /> Thanh toán qua ứng dụng hỗ
-      trợ VNPAYQR </label
-    ><br />
-    <label
-      ><input type="radio" formControlName="typePaymentVN" value="2" /> ATM-Tài khoản ngân hàng nội
-      địa </label
-    ><br />
-    <label
-      ><input type="radio" formControlName="typePaymentVN" value="3" /> Thanh toán qua thẻ quốc tế </label
-    ><br />
+  <div class="mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Địa chỉ"
+      formControlName="address"
+      name="address"
+    />
   </div>
 
-  <div id="loading" class="loading-spinner" *ngIf="loading"></div>
-
-  <div class="form-group">
-    <button
-      type="submit"
-      class="btn btn-block btn-success"
-      [disabled]="checkoutForm.invalid"
-      (click)="onSubmit()"
-    >
-      Đặt hàng
-    </button>
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <select
+        id="province"
+        formControlName="province"
+        (change)="onProvinceChange()"
+        class="form-control"
+      >
+        <option value="">--Province--</option>
+        <option *ngFor="let province of provinces" [value]="province.code">
+          {{ province.name }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <select
+        id="district"
+        formControlName="district"
+        (change)="onDistrictChange()"
+        [disabled]="!districts.length"
+        class="form-control"
+      >
+        <option value="">--District--</option>
+        <option *ngFor="let district of districts" [value]="district.code">
+          {{ district.name }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <select id="ward" formControlName="ward" [disabled]="!wards.length" class="form-control">
+        <option value="">--Ward--</option>
+        <option *ngFor="let ward of wards" [value]="ward.code">{{ ward.name }}</option>
+      </select>
+    </div>
   </div>
+
+  <div class="mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Ghi chú thêm (Ví dụ: Giao hàng giờ hành chính)"
+      formControlName="note"
+      name="note"
+    />
+  </div>
+
+  <!-- <div class="form-check mb-2">
+    <input type="checkbox" class="form-check-input" [(ngModel)]="callReceiver" name="callReceiver" />
+    <label class="form-check-label">Gọi cho người nhận hàng (nếu có)</label>
+  </div>
+
+  <div class="form-check mb-4">
+    <input type="checkbox" class="form-check-input" [(ngModel)]="saveAddress" name="saveAddress" />
+    <label class="form-check-label">Lưu vào sổ địa chỉ để dùng cho lần mua hàng tiếp theo</label>
+  </div> -->
+
+  <hr />
+  <h4>Hình thức thanh toán</h4>
+
+  <div class="payment-methods">
+    <div class="form-check mt-3">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="payment"
+        [(ngModel)]="paymentMethod"
+        value="cod"
+        checked
+      />
+      <label class="form-check-label">Thanh toán khi nhận hàng</label>
+    </div>
+    <div class="form-check mt-3">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="payment"
+        [(ngModel)]="paymentMethod"
+        value="momo"
+      />
+      <label class="form-check-label">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png"
+          width="25"
+          class="me-2"
+        />
+        Ví MoMo
+      </label>
+    </div>
+    <div class="form-check mt-3">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="payment"
+        [(ngModel)]="paymentMethod"
+        value="vnpay"
+      />
+      <label class="form-check-label d-flex align-items-center">
+        <a class="mr-3" href="https://cdnlogo.com/logo/vnpay_135086.html"
+          ><img src="https://static.cdnlogo.com/logos/v/99/vnpay.svg"
+        /></a>
+        <div>
+          <strong>Ví điện tử VNPAY</strong><br />
+          <small class="text-muted">Quét QR để thanh toán</small>
+        </div>
+      </label>
+    </div>
+  </div>
+  <button class="btn btn-success mt-3" (click)="checkOut()">Đặt hàng</button>
 </form>

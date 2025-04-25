@@ -105,8 +105,17 @@ export class ProductDetailComponent implements OnInit {
             totalPrice: price * this.quantity
           };
 
-          this.cartService.addToCart(cartItem, this.quantity);
-          this.snackBar.open('Đã thêm sản phẩm vào giỏ hàng', 'Đóng', { duration: 3000 });
+          this.cartService.addToCart(cartItem, this.quantity).subscribe(
+            () => {
+              this.snackBar.open('Đã thêm sản phẩm vào giỏ hàng', 'Đóng', { duration: 3000 });
+            },
+            (error) => {
+              this.snackBar.open('Có lỗi khi thêm sản phẩm vào giỏ hàng', 'Đóng', {
+                duration: 3000
+              });
+              console.error('Error adding product to cart:', error);
+            }
+          );
         });
       },
       error: () => {

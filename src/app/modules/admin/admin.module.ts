@@ -34,6 +34,7 @@ import { InventoryComponent } from './pages/inventory/inventory.component';
 import { AddQuantityComponent } from './pages/inventory/addquantity/addquantity.component';
 import { AddInventoryComponent } from './pages/productvariant/addinventory/addinventory.component';
 import { OrderComponent } from './pages/order/order.component';
+import { DiscountComponent } from './pages/discount/discount.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { OrderComponent } from './pages/order/order.component';
     InventoryComponent,
     AddInventoryComponent,
     AddQuantityComponent,
-    OrderComponent
+    OrderComponent,
+    DiscountComponent
   ],
   imports: [
     CommonModule,
