@@ -1,3 +1,19 @@
-<p>
-  forgotpass works!
-</p>
+<link rel="stylesheet" type="text/css" href="/assets/Content/assets/styles/categories_styles.css" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/assets/Content/assets/styles/categories_responsive.css"
+/>
+<div class="wrap container">
+  <div *ngIf="!submitted" class="form-group">
+    <form [formGroup]="forgotPasswordForm">
+      <label>Email:</label>
+      <input type="email" formControlName="email" class="form-control"/>
+      <button type="submit" class="btn btn-primary mt-3" (click)="save()">Gửi liên kết đặt lại mật khẩu</button>
+    </form>
+  </div>
+  
+  <div *ngIf="submitted">
+    <p>{{ message }}</p>
+  </div>
+</div>

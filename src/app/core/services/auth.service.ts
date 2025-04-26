@@ -28,7 +28,7 @@ export class AuthService {
   ) {}
 
   // Đăng nhập
-  login(credentials: { username: string; password: string }): Observable<any> {
+  login(credentials: { email: string; password: string }): Observable<any> {
     return this.http
       .post<any>(`${this.baseUrl}api/Account/Login`, credentials, { withCredentials: true })
       .pipe(
@@ -65,7 +65,18 @@ export class AuthService {
     const url = `${this.baseUrl}api/account/register`;
     return this.http.post(url, data, { headers: headers, withCredentials: true });
   }
+  forgotPassword(email: string): Observable<any> {
+    const host = window.location.origin ;
+    return this.http.post(`${this.baseUrl}api/account/ForgotPassword`, { email, host });
+  }
 
+  resetPassword(email: string, code: string, newPassword: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}api/account/resetpassword`, {
+      email,
+      code,
+      newPassword
+    });
+  }
   private updateLoginStatus(isLoggedIn: boolean) {
     this.isLoggedInSubject.next(isLoggedIn);
   }

@@ -1,3 +1,59 @@
-<p>
-  resetpass works!
-</p>
+<link rel="stylesheet" type="text/css" href="/assets/Content/assets/styles/categories_styles.css" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/assets/Content/assets/styles/categories_responsive.css"
+/>
+<div class="wrap container">
+  <div *ngIf="!isSuccess">
+    <h2>Reset Password</h2>
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label for="newPassword">Mật khẩu mới</label>
+        <input
+          type="password"
+          formControlName="newPassword"
+          class="form-control"
+          [type]="showNewPassword ? 'text' : 'password'"
+        />
+        <i
+          class="fa"
+          [ngClass]="showNewPassword ? 'fa-eye-slash' : 'fa-eye'"
+          (click)="showNewPassword = !showNewPassword"
+          style="position: absolute; top: 38px; right: 15px; cursor: pointer"
+        ></i>
+        <div
+          class="text-danger"
+          *ngIf="
+            form.get('newPassword')?.touched && form.get('newPassword')?.invalid
+          "
+        >
+          Mật khẩu mới phải ít nhất 6 ký tự
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <label for="confirmPassword">Xác nhận mật khẩu</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          class="form-control"
+          [type]="showConfirmPassword ? 'text' : 'password'"
+        />
+        <i
+          class="fa"
+          [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"
+          (click)="showConfirmPassword = !showConfirmPassword"
+          style="position: absolute; top: 38px; right: 15px; cursor: pointer"
+        ></i>
+        <div class="text-danger" *ngIf="confirmPassword.touched && confirmPassword.errors?.['mismatch']">Mật khẩu không khớp.</div>
+      </div>
+      <button type="submit" [disabled]="form.invalid" (click)="save()" class="btn btn-primary mt-3">Reset Password</button>
+    </form>
+  </div>
+  
+  <p *ngIf="isSuccess">Password has been reset successfully. You can now <a routerLink="/login">login</a>.</p>
+  <p *ngIf="errorMessage" style="color:red;">{{ errorMessage }}</p>
+  
+</div>

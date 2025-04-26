@@ -24,7 +24,7 @@ export class ChangeProfileComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     public snackBar: MatSnackBar,
-    private translate: TranslateService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -45,10 +45,11 @@ export class ChangeProfileComponent implements OnInit {
         id: this.profile.id,
         userName: this.profile.userName,
         email: this.profile.email,
-        phoneNumber: this.profile.phoneNumber,
+        phoneNumber: this.profile.phoneNumber
       });
 
-      this.previewImageUrl = this.profile.profilePictureName ?? '/assets/Content/img/SanPham/h0.png'; 
+      this.previewImageUrl =
+        this.profile.profilePictureName ?? '/assets/Content/img/SanPham/h0.png';
     });
   }
   onFileSelected(event: Event): void {
@@ -66,12 +67,12 @@ export class ChangeProfileComponent implements OnInit {
 
   save(): void {
     if (this.profileForm.invalid) return;
-  
+
     const formData = new FormData();
     formData.append('id', this.profileForm.value.id);
     formData.append('userName', this.profileForm.value.userName);
     formData.append('phoneNumber', this.profileForm.value.phoneNumber);
-  
+
     if (this.selectedFile) {
       formData.append('image', this.selectedFile);
     }
@@ -80,7 +81,7 @@ export class ChangeProfileComponent implements OnInit {
         this.isLoading = false;
         if (res.code === 200) {
           this.getData();
-          this.updated.emit(); 
+          this.updated.emit();
           this.processResponse(res, 'Cập nhật thành công!');
         } else {
           this.processResponse(false, 'Cập nhật thất bại!');
@@ -91,7 +92,7 @@ export class ChangeProfileComponent implements OnInit {
       }
     });
   }
-  
+
   processResponse(res: any, msg?: string) {
     const transForm = res
       ? msg

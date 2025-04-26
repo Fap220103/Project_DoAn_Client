@@ -36,9 +36,7 @@ export class ShippingAddressComponent implements OnInit {
     }
     // ... thêm các địa chỉ khác tương tự
   ];
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

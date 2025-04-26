@@ -30,6 +30,8 @@ import { ChangeProfileComponent } from './component/changeprofile/changeprofile.
 import { MyOrderComponent } from './component/myorder/myorder.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ShippingAddressComponent } from './component/shippingaddress/shippingaddress.component';
+import { ForgotPassComponent } from './pages/profile/forgotpass/forgotpass.component';
+import { ResetPassComponent } from './pages/profile/resetpass/resetpass.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { ShippingAddressComponent } from './component/shippingaddress/shippingad
     ChangePassComponent,
     ChangeProfileComponent,
     MyOrderComponent,
-    ShippingAddressComponent
+    ShippingAddressComponent,
+    ForgotPassComponent,
+    ResetPassComponent
   ],
   imports: [
     CommonModule,

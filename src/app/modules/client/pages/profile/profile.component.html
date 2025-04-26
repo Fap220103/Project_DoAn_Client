@@ -10,47 +10,30 @@
     <div class="col-md-3">
       <div class="myProfile">
         <div class="topProfile">
-          <img
-            [src]="image"
-            class="rounded-circle p-1 no-border"
-            width="100"
-            height="100"
-          />
-          <span id="topUserName">{{userName}}</span>
+          <img [src]="image" class="rounded-circle p-1 no-border" width="100" height="100" />
+          <span id="topUserName">{{ userName }}</span>
         </div>
         <hr />
         <div class="listProfile">
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column">
               <li class="nav-item">
-                <a
-                (click)="show('profile')"
-                  class="nav-link nav-link-profile cursor-pointer"
-                >
+                <a (click)="show('profile')" class="nav-link nav-link-profile cursor-pointer">
                   <i class="fas fa-user nav-icon-profile"></i> Tài khoản của tôi
                 </a>
               </li>
               <li class="nav-item">
-                <a
-                (click)="show('order')"
-                  class="nav-link nav-link-profile cursor-pointer"
-                >
+                <a (click)="show('order')" class="nav-link nav-link-profile cursor-pointer">
                   <i class="fas fa-shopping-cart nav-icon-profile"></i> Đơn mua
                 </a>
               </li>
               <li class="nav-item">
-                <a
-                (click)="show('address')"
-                  class="nav-link nav-link-profile cursor-pointer"
-                >
+                <a (click)="show('address')" class="nav-link nav-link-profile cursor-pointer">
                   <i class="fas fa-shopping-cart nav-icon-profile"></i> Địa chỉ
                 </a>
               </li>
               <li class="nav-item">
-                <a
-                (click)="show('password')"
-                  class="nav-link nav-link-profile cursor-pointer"
-                >
+                <a (click)="show('password')" class="nav-link nav-link-profile cursor-pointer">
                   <i class="fas fa-key nav-icon-profile"></i> Đổi mật khẩu
                 </a>
               </li>
@@ -61,7 +44,10 @@
     </div>
 
     <div class="col-md-9 form-container">
-      <app-changeprofile *ngIf="currentView === 'profile'" (updated)="getData()"></app-changeprofile>
+      <app-changeprofile
+        *ngIf="currentView === 'profile'"
+        (updated)="getData()"
+      ></app-changeprofile>
       <app-myorder *ngIf="currentView === 'order'"></app-myorder>
       <app-shippingaddress *ngIf="currentView === 'address'"></app-shippingaddress>
       <app-changepass *ngIf="currentView === 'password'"></app-changepass>

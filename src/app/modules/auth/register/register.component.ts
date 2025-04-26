@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   formError: string = '';
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -65,7 +67,7 @@ export class RegisterComponent implements OnInit {
           if (res.code === 200) {
             // Gọi login sau khi đăng ký thành công
             const credentials = {
-              username: formData.email,
+              email: formData.email,
               password: formData.password
             };
 

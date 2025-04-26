@@ -8,10 +8,11 @@ import { AuthService } from '../../../../core/services/auth.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  currentView: 'profile' | 'password' | 'order'| 'address' = 'profile';
+  currentView: 'profile' | 'password' | 'order' | 'address' = 'profile';
   userName!: string;
   image!: string;
-  constructor(private userService: UserService,
+  constructor(
+    private userService: UserService,
     private authService: AuthService
   ) {}
 
@@ -25,7 +26,7 @@ export class ProfileComponent implements OnInit {
     const userId = this.authService.getUserId();
     this.userService.getProfile(userId).subscribe((rs) => {
       this.userName = rs.content.data.userName;
-      this.image = rs.content.data.profilePictureName ?? '/assets/Content/img/SanPham/h0.png'; 
+      this.image = rs.content.data.profilePictureName ?? '/assets/Content/img/SanPham/h0.png';
     });
   }
 }
