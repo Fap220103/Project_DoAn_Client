@@ -12,13 +12,18 @@ export class UserService extends BaseService<any> {
     super(http, Constants.UserProfile.Resource, injector);
   }
   getProfile(userId: string): Observable<any> {
-      const headers: HttpHeaders = new HttpHeaders();
-      const url = `${this.svUrl}/GetProfile?userId=${userId}`;
-      return this.http.get(url, { headers: headers, withCredentials: true });
-    }
-  
-    changeProfile(model: any): Observable<any> {
-      const url = `${this.svUrl}/UpdateProfile`;
-      return this.put(model, url);
-    }
+    const headers: HttpHeaders = new HttpHeaders();
+    const url = `${this.svUrl}/GetProfile?userId=${userId}`;
+    return this.http.get(url, { headers: headers, withCredentials: true });
+  }
+
+  changeProfile(model: any): Observable<any> {
+    const url = `${this.svUrl}/UpdateProfile`;
+    return this.put(model, url);
+  }
+
+  changePass(model: any): Observable<any> {
+    const url = `${this.svUrl}/ChangePass`;
+    return this.post(model, url);
+  }
 }

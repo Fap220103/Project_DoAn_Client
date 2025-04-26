@@ -79,7 +79,7 @@ export class RegisterComponent implements OnInit {
               }
             });
           } else {
-            this.processResponse(false, 'Đăng ký thất bại');
+            this.processResponse(false, res.message);
           }
         },
         error: () => {
