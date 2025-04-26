@@ -1,0 +1,87 @@
+<form [formGroup]="form">
+  <div class="overlay">
+    <div class="dialog">
+      <h2 class="title">{{ data.title | translate }}</h2>
+  
+      <div class="row">
+        <input
+          type="text"
+          placeholder="Họ và tên"
+          class="input-field"
+          formControlName="recipientName"
+        />
+        <input
+          type="text"
+          placeholder="Số điện thoại"
+          class="input-field"
+          formControlName="phoneNumber"
+        />
+      </div>
+  
+      <div class="row">
+        <div class="col">
+          <select
+            id="province"
+            formControlName="province"
+            (change)="onProvinceChange()"
+            class="form-control"
+          >
+            <option value="">--Province--</option>
+            <option *ngFor="let province of provinces" [value]="province.code">
+              {{ province.name }}
+            </option>
+          </select>
+        </div>
+        <div class="col">
+          <select
+            id="district"
+            formControlName="district"
+            (change)="onDistrictChange()"
+            [disabled]="!districts.length"
+            class="form-control"
+          >
+            <option value="">--District--</option>
+            <option *ngFor="let district of districts" [value]="district.code">
+              {{ district.name }}
+            </option>
+          </select>
+        </div>
+        <div class="col">
+          <select id="ward" formControlName="ward" [disabled]="!wards.length" class="form-control">
+            <option value="">--Ward--</option>
+            <option *ngFor="let ward of wards" [value]="ward.code">{{ ward.name }}</option>
+          </select>
+        </div>
+      </div>
+  
+      <input
+        type="text"
+        placeholder="Địa chỉ cụ thể"
+        formControlName="addressLine"
+        class="input-field mt-2"
+      />
+  
+      <!-- <div class="location-box mt-2">
+        <button class="location-btn">+ Thêm vị trí</button>
+      </div> -->
+  
+      <!-- <div class="address-type mt-3">
+        <span>Loại địa chỉ:</span>
+        <button class="type-btn">Nhà Riêng</button>
+        <button class="type-btn">Văn Phòng</button>
+      </div> -->
+  
+      <div class="default-address mt-2">
+        <input type="checkbox" id="default" formControlName="isDefault"  />
+        <label for="default" class="mt-2">Đặt làm địa chỉ mặc định</label>
+      </div>
+  
+      <div class="border-t mt-3"></div>
+  
+      <div class="dialog-actions mt-3">
+        <button (click)="dialogRef.close()" class="cancel-btn">Trở lại</button>
+        <button class="confirm-btn" (click)="save()">Hoàn thành</button>
+      </div>
+    </div>
+  </div>
+</form>

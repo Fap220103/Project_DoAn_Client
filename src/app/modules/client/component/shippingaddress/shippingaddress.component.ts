@@ -1,4 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import Swal from 'sweetalert2';
+import { SettingService } from '../../../../core/services/setting.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
+import { ShippingAddressService } from '../../../../core/services/shippingaddress.service';
+import { AddSettingComponent } from '../../../admin/pages/setting/addSetting/addSetting.component';
+import { AuthService } from '../../../../core/services/auth.service';
+import { AddAddressComponent } from './addaddress/addaddress.component';
 
 @Component({
   selector: 'app-shippingaddress',
@@ -6,37 +16,111 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shippingaddress.component.scss']
 })
 export class ShippingAddressComponent implements OnInit {
-  addresses = [
-    {
-      name: 'Mẫn Anh Pháp',
-      phone: '+84 833 220 103',
-      addressLine1: 'Số 52, Đường Lạc Long Quân',
-      addressLine2: 'Phường Bưởi, Quận Tây Hồ, Hà Nội',
-      isDefault: true,
-      isPickup: false,
-      isReturn: false
-    },
-    {
-      name: 'Mẫn Thị Hương',
-      phone: '+84 357 829 687',
-      addressLine1: 'Mẫn xá văn môn yên phong Bắc ninh',
-      addressLine2: 'Xã Văn Môn, Huyện Yên Phong, Bắc Ninh',
-      isDefault: false,
-      isPickup: true,
-      isReturn: true
-    },
-    {
-      name: 'Mẫn Anh Pháp',
-      phone: '+84 833 220 103',
-      addressLine1: 'Số Nhà 9, Ngõ 46 Xuân Phương',
-      addressLine2: 'Phường Phương Canh, Quận Nam Từ Liêm, Hà Nội',
-      isDefault: false,
-      isPickup: false,
-      isReturn: false
-    }
-    // ... thêm các địa chỉ khác tương tự
-  ];
-  constructor() {}
+  lstAddress: any[] = [];
+  searchString: string = '';
+  selectedItem: any = {};
+  params: any = {};
 
-  ngOnInit() {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(
+    private addressService: ShippingAddressService,
+    private authService: AuthService,
+    private translate: TranslateService,
+    public snackBar: MatSnackBar,
+    public dialog: MatDialog
+  ) {}
+
+  ngOnInit(): void {
+    this.getData();
+  }
+  getData() {
+    this.addressService.get({userId: this.authService.getUserId()},1,10).subscribe((rs) => {
+      this.lstAddress = rs.content.data.items;
+      this.lstAddress = this.lstAddress.map((x, index) => {
+        x.addressOrder =`${x.ward}, ${x.district}, ${x.province}`;
+        return x;
+      });
+    });
+  }
+
+  edit(item: any) {
+    this.selectedItem = item;
+    const dialogRef = this.dialog.open(AddAddressComponent, {
+      position: {
+        right: '0'
+      },
+      data: {
+        title: 'ShippingAddress.EditTitle',
+        item: this.selectedItem,
+        userId: this.selectedItem.userId,
+        isEdit: true
+      }
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getData();
+      }
+    });
+  }
+  delete(settingId: string) {
+    Swal.fire({
+      title: this.translate.instant('Common.DeleteConfirm'),
+      text: this.translate.instant('Common.DeleteTitle'),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: this.translate.instant('Common.Delete'),
+      cancelButtonText: this.translate.instant('Common.Cancel')
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.addressService.delete(settingId).subscribe({
+          next: (res) => {
+            if (res.code === 200) {
+              this.getData();
+              this.processResponse(res);
+            } else {
+              this.processResponse(false);
+            }
+          },
+          error: (err) => {
+            this.processResponse(false);
+          }
+        });
+      }
+    });
+  }
+  processResponse(res: any, msg?: string) {
+    const transForm = res
+      ? msg
+        ? msg
+        : this.translate.instant('Message.DeleteSuccess')
+      : msg
+        ? msg
+        : this.translate.instant('Message.DeleteFail');
+
+    this.snackBar.open(transForm, 'OK', {
+      verticalPosition: 'bottom',
+      duration: 2000
+    });
+  }
+  add() {
+    const dialogRef = this.dialog.open(AddAddressComponent, {
+      position: {
+        right: '0'
+      },
+      data: {
+        title: 'ShippingAddress.AddTitle',
+        isEdit: false,
+        userId: this.selectedItem.userId,
+      }
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getData();
+      }
+    });
+  }
+  changeDefault(item: string){
+
+  }
 }

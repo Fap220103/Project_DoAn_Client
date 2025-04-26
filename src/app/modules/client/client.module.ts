@@ -32,6 +32,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ShippingAddressComponent } from './component/shippingaddress/shippingaddress.component';
 import { ForgotPassComponent } from './pages/profile/forgotpass/forgotpass.component';
 import { ResetPassComponent } from './pages/profile/resetpass/resetpass.component';
+import { AddAddressComponent } from './component/shippingaddress/addaddress/addaddress.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ResetPassComponent } from './pages/profile/resetpass/resetpass.componen
     MyOrderComponent,
     ShippingAddressComponent,
     ForgotPassComponent,
-    ResetPassComponent
+    ResetPassComponent,
+    AddAddressComponent
   ],
   imports: [
     CommonModule,

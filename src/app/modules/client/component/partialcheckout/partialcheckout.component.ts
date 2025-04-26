@@ -18,10 +18,6 @@ export class PartialCheckoutComponent implements OnInit {
   districts: any[] = [];
   wards: any[] = [];
 
-  selectedProvince: string = '';
-  selectedDistrict: string = '';
-  selectedWard: string = '';
-
   paymentMethod = 'cod';
 
   constructor(

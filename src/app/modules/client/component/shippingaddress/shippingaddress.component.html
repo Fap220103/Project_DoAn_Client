@@ -1,30 +1,30 @@
 <div class="address-container">
   <div class="d-flex justify-between align-center header_custom">
     <h3>Địa chỉ của tôi</h3>
-    <button class="btn btn-add">+ Thêm địa chỉ mới</button>
+    <button class="btn btn-add" (click)="add()">+ Thêm địa chỉ mới</button>
   </div>
 
   <div class="address-list">
-    <div class="address-item" *ngFor="let address of addresses">
+    <div class="address-item" *ngFor="let address of lstAddress">
       <div class="info">
         <p class="name">
-          {{ address.name }}
-          <span class="phone">({{ address.phone }})</span>
+          {{ address.recipientName }}
+          <span class="phone">({{ address.phoneNumber }})</span>
         </p>
-        <p class="line">{{ address.addressLine1 }}</p>
-        <p class="line">{{ address.addressLine2 }}</p>
+        <p class="line">{{ address.addressLine }}</p>
+        <p class="line">{{ address.addressOrder }}</p>
 
         <div class="tags">
           <span class="badge badge-default" *ngIf="address.isDefault">Mặc định</span>
-          <span class="badge badge-pickup" *ngIf="address.isPickup">Địa chỉ lấy hàng</span>
-          <span class="badge badge-return" *ngIf="address.isReturn">Địa chỉ trả hàng</span>
+          <span class="badge badge-pickup" *ngIf="!address.isDefault">Địa chỉ lấy hàng</span>
+          <span class="badge badge-return" *ngIf="!address.isDefault">Địa chỉ trả hàng</span>
         </div>
       </div>
 
       <div class="actions">
-        <a href="#" class="btn-link">Cập nhật</a>
-        <a href="#" class="btn-link" *ngIf="!address.isDefault">Xóa</a>
-        <button class="btn-set-default" *ngIf="!address.isDefault">Thiết lập mặc định</button>
+        <a class="btn-link cursor-pointer" (click)="edit(address.id)">Cập nhật</a>
+        <a class="btn-link cursor-pointer" *ngIf="!address.isDefault" (click)="delete(address.id)">Xóa</a>
+        <button class="btn-set-default" *ngIf="!address.isDefault" (click)="changeDefault(address.id)">Thiết lập mặc định</button>
       </div>
     </div>
   </div>

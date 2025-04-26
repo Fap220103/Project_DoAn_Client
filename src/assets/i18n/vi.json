@@ -181,6 +181,12 @@
       "EndDate" : "Ngày kết thúc",
       "UsageLimit" : "Số lượng",
       "UsageCount" : "Đã dùng"
+    },
+    "ShippingAddress" : {
+      "Title": "Địa chỉ",
+      "AddTitle" : "Thêm địa chỉ",
+      "EditTitle" : "Cập nhật địa chỉ"
+    
     }
 }
   
