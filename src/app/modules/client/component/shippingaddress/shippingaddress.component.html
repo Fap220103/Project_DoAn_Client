@@ -16,15 +16,27 @@
 
         <div class="tags">
           <span class="badge badge-default" *ngIf="address.isDefault">Mặc định</span>
-          <span class="badge badge-pickup" *ngIf="!address.isDefault">Địa chỉ lấy hàng</span>
-          <span class="badge badge-return" *ngIf="!address.isDefault">Địa chỉ trả hàng</span>
+          <span class="badge badge-pickup text-black" *ngIf="!address.isDefault"
+            >Địa chỉ lấy hàng</span
+          >
+          <span class="badge badge-return text-black" *ngIf="!address.isDefault"
+            >Địa chỉ trả hàng</span
+          >
         </div>
       </div>
 
       <div class="actions">
-        <a class="btn-link cursor-pointer" (click)="edit(address.id)">Cập nhật</a>
-        <a class="btn-link cursor-pointer" *ngIf="!address.isDefault" (click)="delete(address.id)">Xóa</a>
-        <button class="btn-set-default" *ngIf="!address.isDefault" (click)="changeDefault(address.id)">Thiết lập mặc định</button>
+        <a class="btn-link cursor-pointer" (click)="edit(address)">Cập nhật</a>
+        <a class="btn-link cursor-pointer" *ngIf="!address.isDefault" (click)="delete(address.id)"
+          >Xóa</a
+        >
+        <button
+          class="btn-set-default"
+          *ngIf="!address.isDefault"
+          (click)="changeDefault(address.id)"
+        >
+          Thiết lập mặc định
+        </button>
       </div>
     </div>
   </div>

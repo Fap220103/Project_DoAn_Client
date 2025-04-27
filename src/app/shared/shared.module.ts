@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -65,6 +65,7 @@ import { MatSelectModule } from '@angular/material/select';
     CKEditorModule,
     MatSelectModule,
     MatFormFieldModule
-  ]
+  ],
+  providers: [DatePipe]
 })
 export class SharedModule {}

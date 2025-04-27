@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProductComponent } from './pages/product/product.component';
 import { ProductcategoryComponent } from './pages/productcategory/productcategory.component';
@@ -35,6 +35,8 @@ import { AddQuantityComponent } from './pages/inventory/addquantity/addquantity.
 import { AddInventoryComponent } from './pages/productvariant/addinventory/addinventory.component';
 import { OrderComponent } from './pages/order/order.component';
 import { DiscountComponent } from './pages/discount/discount.component';
+import { OrderItemsComponent } from './pages/order/orderitems/orderitems.component';
+import { OrderDetailComponent } from './pages/order/orderdetail/orderdetail.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { DiscountComponent } from './pages/discount/discount.component';
     AddInventoryComponent,
     AddQuantityComponent,
     OrderComponent,
-    DiscountComponent
+    DiscountComponent,
+    OrderItemsComponent,
+    OrderDetailComponent
   ],
   imports: [
     CommonModule,
@@ -77,6 +81,7 @@ import { DiscountComponent } from './pages/discount/discount.component';
     FormsModule,
     SharedModule
   ],
-  exports: []
+  exports: [],
+  providers: [DatePipe]
 })
 export class AdminModule {}

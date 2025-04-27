@@ -33,6 +33,7 @@ import { ShippingAddressComponent } from './component/shippingaddress/shippingad
 import { ForgotPassComponent } from './pages/profile/forgotpass/forgotpass.component';
 import { ResetPassComponent } from './pages/profile/resetpass/resetpass.component';
 import { AddAddressComponent } from './component/shippingaddress/addaddress/addaddress.component';
+import { ChangeAddressComponent } from './pages/checkout/changeaddress/changeaddress.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { AddAddressComponent } from './component/shippingaddress/addaddress/adda
     ShippingAddressComponent,
     ForgotPassComponent,
     ResetPassComponent,
-    AddAddressComponent
+    AddAddressComponent,
+    ChangeAddressComponent
   ],
   imports: [
     CommonModule,

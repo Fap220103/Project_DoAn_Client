@@ -1,0 +1,149 @@
+.container-box {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.location-icon::before {
+  content: '📍';
+  color: red;
+  margin-right: 5px;
+}
+.store-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+.order-info {
+  font-size: 1rem;
+  color: #333;
+}
+.phone-number {
+  color: #ff4500;
+  text-decoration: none;
+  font-weight: bold;
+}
+.default-label {
+  background-color: #ff4500;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  margin-left: 8px;
+}
+.change-link {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-left: 8px;
+}
+
+// DISCOUNT
+.container-box-discount {
+  background-color: #f8f9fa;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.voucher-label {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #333;
+}
+.voucher-icon::before {
+  content: '🎟️';
+  margin-right: 8px;
+  color: #ff4500;
+}
+.voucher-link {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.voucher-link:hover {
+  text-decoration: underline;
+}
+
+.container-box-pay {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.section-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+.payment-method {
+  font-size: 1rem;
+  color: #333;
+}
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+.summary-label {
+  color: #666;
+}
+.summary-value {
+  color: #333;
+}
+.total-value {
+  font-weight: bold;
+  color: #ff4500;
+}
+.note {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 10px;
+}
+.order-button {
+  background-color: #ff4500;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  float: right;
+  margin-top: 15px;
+}
+.order-button:hover {
+  background-color: #e03e00;
+}
+.change-link {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-left: 8px;
+}
+
+.payment-methods .form-check {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Khoảng cách giữa radio và nội dung */
+}
+
+.payment-methods .form-check-input {
+  margin-top: 0;
+  margin-right: 10px;
+}
+
+.payment-methods .form-check-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.payment-methods .form-check img {
+  height: 25px;
+  width: auto;
+}

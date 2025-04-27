@@ -28,14 +28,144 @@
       </div>
       <hr />
 
-      <div class="row mt-4" id="show_success">
-        <div class="col-md-7 mb-3">
-          <app-partialcheckout></app-partialcheckout>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="container-box">
+            <div>
+              <span class="location-icon"></span>
+              <span class="store-name">Địa Chỉ Nhận Hàng</span>
+            </div>
+            <div class="order-info" *ngIf="addressDefault; else noAddress">
+              <span> {{ addressDefault.recipientName }}</span>
+              <span class="phone-number"> {{ addressDefault.phoneNumber }}</span>
+              <span>
+                {{ addressDefault.addressLine }}, {{ addressDefault.ward }},
+                {{ addressDefault.district }}, {{ addressDefault.province }}</span
+              >
+              <span class="default-label">Mặc Định</span>
+              <button
+                class="change-link cursor-pointer hover:text-red-500"
+                (click)="changeAddress(addressDefault)"
+              >
+                Thay Đổi
+              </button>
+            </div>
+            <ng-template #noAddress>
+              <div class="order-info">
+                <span
+                  >Bạn chưa có địa chỉ nhận hàng. Vui lòng cập nhật địa chỉ trước khi đặt
+                  hàng!</span
+                >
+                <button
+                  class="change-link cursor-pointer hover:text-red-500"
+                  (click)="updateAddress()"
+                >
+                  Cập nhật
+                </button>
+              </div>
+            </ng-template>
+          </div>
         </div>
-        <div class="col-md-5">
+      </div>
+      <hr />
+
+      <div class="row mt-4" id="show_success">
+        <!-- <div class="col-md-7 mb-3">
+          <app-partialcheckout></app-partialcheckout>
+        </div> -->
+        <div class="col">
           <app-partialpay [cartItems]="cartItems" [totalAmount]="totalAmount"></app-partialpay>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="container-box-discount">
+            <div class="voucher-label">
+              <span class="voucher-icon"></span>
+              <span>Mã giảm giá</span>
+            </div>
+            <a href="#" class="voucher-link">Chọn Voucher</a>
+          </div>
+        </div>
+      </div>
+      <hr />
+
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="container-box-pay">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="section-title">Phương thức thanh toán</div>
+              <div class="payment-methods">
+                <div class="form-check mt-3">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="payment"
+                    value="1"
+                    [(ngModel)]="paymentMethod"
+                    checked
+                  />
+                  <label class="form-check-label">Thanh toán khi nhận hàng</label>
+                </div>
+                <div class="form-check mt-3">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="payment"
+                    value="2"
+                    [(ngModel)]="paymentMethod"
+                  />
+                  <label class="form-check-label">
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png"
+                      width="25"
+                      class="me-2"
+                    />
+                    Ví MoMo
+                  </label>
+                </div>
+                <div class="form-check mt-3">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="payment"
+                    value="3"
+                    [(ngModel)]="paymentMethod"
+                  />
+                  <label class="form-check-label d-flex align-items-center">
+                    <img src="https://static.cdnlogo.com/logos/v/99/vnpay.svg" />
+                    <div>
+                      <strong>Ví điện tử VNPAY</strong><br />
+                      <!-- <small class="text-muted">Quét QR để thanh toán</small> -->
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <!-- <div class="summary-row">
+              <span class="summary-label">Tổng tiền hàng</span>
+              <span class="summary-value">đ879.000</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Khuyến mãi</span>
+              <span class="summary-value">đ00.00</span>
+            </div> -->
+            <div class="summary-row">
+              <span class="summary-label">Tổng thanh toán</span>
+              <span class="summary-value total-value"
+                >{{ this.totalAmount | number: '1.0-0' }} VND</span
+              >
+            </div>
+            <div class="note">
+              Khi nhấn 'Đặt hàng', bạn xác nhận rằng bạn đồng ý với Điều khoản Shop.
+            </div>
+            <button class="order-button" (click)="submit()">Đặt hàng</button>
+          </div>
+        </div>
+      </div>
+      <hr />
     </div>
   </div>
 </div>

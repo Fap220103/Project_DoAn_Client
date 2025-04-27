@@ -25,10 +25,6 @@ export const orderStatus = [
   },
   {
     id: '5',
-    display: 'Chưa thanh toán'
-  },
-  {
-    id: '6',
     display: 'Đã thanh toán '
   }
 ];

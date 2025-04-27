@@ -1,0 +1,45 @@
+<div class="form-group">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>{{ 'Common.No' | translate }}</th>
+        <th>{{ 'Order.OrderItem.ProductName' | translate }}</th>
+        <th>{{ 'Order.OrderItem.ColorName' | translate }}</th>
+        <th>{{ 'Order.OrderItem.SizeName' | translate }}</th>
+        <th>{{ 'Order.OrderItem.Quantity' | translate }}</th>
+        <th>{{ 'Order.OrderItem.Price' | translate }}</th>
+        <th>{{ 'Order.OrderItem.TotalPrice' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="productItems.length > 0; else noData">
+      <tr *ngFor="let item of productItems; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td class="truncate-text">
+          <span matTooltip="{{ item.productName }}">{{ item.productName }}</span>
+        </td>
+
+        <td>
+          <span matTooltip="{{ item.colorName }}">{{ item.colorName }}</span>
+        </td>
+        <td>
+          <span matTooltip="{{ item.sizeName }}">{{ item.sizeName }}</span>
+        </td>
+        <td>
+          <span matTooltip="{{ item.quantity }}">{{ item.quantity }}</span>
+        </td>
+        <td>
+          <span matTooltip="{{ item.price }}">{{ item.price }}</span>
+        </td>
+        <td>
+          <span matTooltip="{{ item.totalPrice }}">{{ item.totalPrice }}</span>
+        </td>
+      </tr>
+    </tbody>
+    <!-- Hiển thị khi không có dữ liệu -->
+    <ng-template #noData>
+      <tr>
+        <td colspan="5" class="text-center">{{ 'Common.NoData' | translate }}</td>
+      </tr>
+    </ng-template>
+  </table>
+</div>

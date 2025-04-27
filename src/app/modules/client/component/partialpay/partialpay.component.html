@@ -1,19 +1,15 @@
 <div class="cart-container mt-4">
-  <h4 class="cart-title">Giỏ hàng</h4>
-
-  <div class="alert alert-primary d-flex justify-content-between align-items-center">
-    <div>
-      🎁 Mua thêm <strong>340.000đ</strong> để nhận <strong>01 Áo thun Tự Hào Việt Nam</strong>
-    </div>
-    <button class="btn btn-outline-light btn-sm">Mua ngay</button>
+  <h4 class="cart-title">Sản phẩm</h4>
+  <div class="cart-header d-flex align-items-center py-2 border-bottom fw-bold text-muted">
+    <div class="flex-grow-1">Sản phẩm</div>
+    <div class="text-center" style="width: 100px">Đơn giá</div>
+    <div class="text-center" style="width: 80px">Số lượng</div>
+    <div class="text-end" style="width: 120px">Thành tiền</div>
   </div>
-
   <div
     *ngFor="let item of cartItems; let i = index"
     class="cart-item d-flex align-items-center py-3 border-bottom"
   >
-    <input type="checkbox" class="form-check-input me-3" />
-
     <img [src]="item.image" class="product-img me-3" />
 
     <div class="product-info flex-grow-1">
@@ -21,15 +17,6 @@
       <div class="text-muted text-sm">{{ item.colorName }} / {{ item.sizeName }}</div>
 
       <div class="d-flex gap-2 mt-2">
-        <!-- <select class="form-select form-select-sm w-auto " [(ngModel)]="item.colorName">
-          <option>{{ item.colorName }}</option>
-        </select>
-        <select class="form-select form-select-sm w-auto" [(ngModel)]="item.sizeName">
-          <option>{{ item.sizeName }}</option>
-        </select> -->
-        <!-- <button class="btn btn-link text-danger p-0" (click)="removeItem(i)">
-          <i class="bi bi-trash3"></i> Xóa
-        </button> -->
         <button
           mat-icon-button
           (click)="delete(item.id)"
@@ -40,17 +27,19 @@
       </div>
     </div>
 
-    <div class="d-flex align-items-center">
-      <button class="btn btn-outline-secondary btn-sm" (click)="decreaseQty(i)">-</button>
-      <span class="mx-2">{{ item.quantity }}</span>
-      <button class="btn btn-outline-secondary btn-sm" (click)="increaseQty(i)">+</button>
-    </div>
-
-    <div class="text-end ms-3">
-      <div class="fw-bold">{{ item.price | number: '1.0-0' }}đ</div>
+    <div class="text-center mr-4">
+      <div class="fw-bold">{{ item.price | number: '1.0-0' }} VND</div>
       <div class="text-decoration-line-through text-muted small" *ngIf="item.originalPrice">
         {{ item.originalPrice | number: '1.0-0' }} VND
       </div>
+    </div>
+
+    <div class="d-flex align-items-center">
+      <span class="mx-2">{{ item.quantity }}</span>
+    </div>
+
+    <div class="text-end" style="width: 120px">
+      <div class="fw-bold">{{ item.price * item.quantity | number: '1.0-0' }} VND</div>
     </div>
   </div>
 </div>

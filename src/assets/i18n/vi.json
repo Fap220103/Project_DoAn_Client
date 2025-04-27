@@ -99,6 +99,16 @@
         "Status": "Trạng thái",
         "UploadImage": "Tải Ảnh",
         "Role": "Phân quyền"
+      },
+      "Profile":{
+        "LoginSuccess": "Đăng nhập thành công",
+        "LoginFail": "Đăng nhập thất bại",
+        "RegisterSuccess": "Đăng ký thành công",
+        "RegisterFail": "Đăng ký thất bại",
+        "ChangePassSuccess": "Đổi mật khẩu thành công",
+        "ChangePassFail": "Đổi mật khẩu thất bại",
+        "ChangeProfileSuccess": "Cập nhật thông tin thành công",
+        "ChangeProfileFail": "Cập nhật thông tin thất bại"
       }
     },
     "Product" : {
@@ -167,7 +177,18 @@
       "Code": "Mã đơn hàng",
       "Status": "Tình trạng đơn hàng",
       "CustomerName": "Khách hàng",
-      "EditStatus": "Cập nhật trạng thái"
+      "EditStatus": "Cập nhật trạng thái",
+      "CreatedDate": "Ngày đặt",
+      "OrderItem" : {
+        "Title": "Sản phẩm",
+        "ProductName": "Tên sản phẩm",
+        "ProductCode": "Mã sản phẩm",
+        "ColorName":"Màu",
+        "SizeName": "Kích cỡ",
+        "Quantity": "Số lượng",
+        "Price": "Giá",
+        "TotalPrice": "Thành tiền"
+      }
     },
     "Discount" : {
       "Title": "Khuyến mãi",

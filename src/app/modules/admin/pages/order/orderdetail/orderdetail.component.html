@@ -1,0 +1,72 @@
+<section class="content mt-[50px]">
+  <div class="flex flex-row items-center px-6 h-20 min-h-20 text-white bg-primary">
+    <mat-icon class="icon-size-7 text-current" [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+    <div class="ml-3 text-2xl font-semibold tracking-tight">
+      {{ data.title | translate }}
+    </div>
+    <button class="ml-auto" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+    </button>
+  </div>
+  <!-- Default box -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Chi tiết đơn hàng</h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Mã đơn hàng</label>
+            <p class="form-control">{{ order.orderCode }}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Họ tên khách hàng</label>
+            <p class="form-control">{{ order.address.recipientName }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Tổng tiền</label>
+            <p class="form-control">{{ order.totalAmount }}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Số điện thoại</label>
+            <p class="form-control">{{ order.address.phoneNumber }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Ngày tạo</label>
+            <p class="form-control">{{ order.createdAt }}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Trạng thái</label>
+            <!-- <p class="form-control">{{ order.typePayment === 1 ? 'Chưa thanh toán' : 'Đã thanh toán' }}</p> -->
+            <p class="form-control">Chưa thanh toán</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <h2>Danh sách sản phẩm</h2>
+        </div>
+        <div class="col-12">
+          <app-orderitems [productItems]="lstItem"></app-orderitems>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer"></div>
+  </div>
+</section>

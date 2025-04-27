@@ -71,7 +71,7 @@ export class ChangePassComponent implements OnInit {
           this.processResponse(res);
           this.authService.logout();
           this.router.navigate(['/login']);
-        } else {
+        } else if (res.content.success === false || res.code === 500) {
           this.processResponse(false);
         }
       },
@@ -84,10 +84,10 @@ export class ChangePassComponent implements OnInit {
     const transForm = res
       ? msg
         ? msg
-        : this.translate.instant('Message.DeleteSuccess')
+        : this.translate.instant('User.Profile.ChangePassSuccess')
       : msg
         ? msg
-        : this.translate.instant('Message.DeleteFail');
+        : this.translate.instant('User.Profile.ChangePassFail');
     this.snackBar.open(transForm, 'OK', {
       verticalPosition: 'bottom',
       duration: 2000

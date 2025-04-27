@@ -2,7 +2,7 @@
   <div class="overlay">
     <div class="dialog">
       <h2 class="title">{{ data.title | translate }}</h2>
-  
+
       <div class="row">
         <input
           type="text"
@@ -17,7 +17,7 @@
           formControlName="phoneNumber"
         />
       </div>
-  
+
       <div class="row">
         <div class="col">
           <select
@@ -53,31 +53,31 @@
           </select>
         </div>
       </div>
-  
+
       <input
         type="text"
         placeholder="Địa chỉ cụ thể"
         formControlName="addressLine"
         class="input-field mt-2"
       />
-  
+
       <!-- <div class="location-box mt-2">
         <button class="location-btn">+ Thêm vị trí</button>
       </div> -->
-  
+
       <!-- <div class="address-type mt-3">
         <span>Loại địa chỉ:</span>
         <button class="type-btn">Nhà Riêng</button>
         <button class="type-btn">Văn Phòng</button>
       </div> -->
-  
+
       <div class="default-address mt-2">
-        <input type="checkbox" id="default" formControlName="isDefault"  />
+        <input type="checkbox" id="default" formControlName="isDefault" />
         <label for="default" class="mt-2">Đặt làm địa chỉ mặc định</label>
       </div>
-  
+
       <div class="border-t mt-3"></div>
-  
+
       <div class="dialog-actions mt-3">
         <button (click)="dialogRef.close()" class="cancel-btn">Trở lại</button>
         <button class="confirm-btn" (click)="save()">Hoàn thành</button>

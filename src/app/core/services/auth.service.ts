@@ -66,7 +66,7 @@ export class AuthService {
     return this.http.post(url, data, { headers: headers, withCredentials: true });
   }
   forgotPassword(email: string): Observable<any> {
-    const host = window.location.origin ;
+    const host = window.location.origin;
     return this.http.post(`${this.baseUrl}api/account/ForgotPassword`, { email, host });
   }
 

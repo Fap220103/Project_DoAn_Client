@@ -1,25 +1,5 @@
 ﻿$(document).ready(function () {
-    showcount();
-    $('body').on('click', '.btnAddToCart', function (e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-        var quantity = 1;
-        var tQuantity = $('#quantity_value').text();
-        if (tQuantity != '') {
-            quantity = parseInt(tQuantity);
-        }         
-        $.ajax({
-            url: '/shoppingcart/addtocart',
-            type: 'POST',
-            data: { id: id, quantity: quantity },
-            success: function (rs) {
-                if (rs.Success) {
-                    $('#checkout_items').html(rs.Count);
-                    alert(rs.msg);
-                }
-            }
-        });
-    });
+   
     $('body').on('click', '.btnDelete', function (e) {
         e.preventDefault();
         var id = $(this).data('id');
@@ -55,16 +35,7 @@
     });
 });
 
-function showcount() {
-    
-    $.ajax({
-        url: '/shoppingcart/Show_Count',
-        type: 'GET',
-        success: function (rs) {
-            $('#checkout_items').html(rs.Count);
-        }
-    });
-}
+
 function DeleteAll() {
     $.ajax({
         url: '/shoppingcart/DeleteAll',

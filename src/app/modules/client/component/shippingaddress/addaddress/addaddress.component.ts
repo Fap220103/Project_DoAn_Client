@@ -49,10 +49,16 @@ export class AddAddressComponent implements OnInit {
         this.item?.addressLine,
         Validators.compose([Validators.required])
       ),
-      province: new FormControl(this.item?.province, Validators.compose([Validators.required])),
-      district: new FormControl(this.item?.district, Validators.compose([Validators.required])),
-      ward: new FormControl(this.item?.ward, Validators.compose([Validators.required])),
-      isDefault: new FormControl(this.item?.isDefault, Validators.compose([Validators.required]))
+      province: new FormControl(
+        this.item?.provinceCode || '',
+        Validators.compose([Validators.required])
+      ),
+      district: new FormControl(
+        this.item?.districtCode || '',
+        Validators.compose([Validators.required])
+      ),
+      ward: new FormControl(this.item?.wardCode || '', Validators.compose([Validators.required])),
+      isDefault: new FormControl(this.item?.isDefault)
     });
   }
 
@@ -64,8 +70,28 @@ export class AddAddressComponent implements OnInit {
       }
     });
     this.loadProvinces();
-  }
 
+    if (this.isEdit) {
+      this.loadDistrictsAndWards();
+    }
+  }
+  loadDistrictsAndWards() {
+    const selectedProvinceCode = this.item?.provinceCode;
+    if (selectedProvinceCode) {
+      this.http.get<any>(`/api/p/${selectedProvinceCode}?depth=2`).subscribe((data) => {
+        this.districts = data.districts || [];
+        const selectedDistrictCode = this.item?.districtCode;
+        if (selectedDistrictCode) {
+          this.form.patchValue({ district: selectedDistrictCode });
+
+          this.http.get<any>(`/api/d/${selectedDistrictCode}?depth=2`).subscribe((districtData) => {
+            this.wards = districtData.wards || [];
+            this.form.patchValue({ ward: this.item?.wardCode });
+          });
+        }
+      });
+    }
+  }
   loadProvinces() {
     this.http.get<any[]>('/api/p/').subscribe((data) => {
       this.provinces = data;
@@ -104,6 +130,14 @@ export class AddAddressComponent implements OnInit {
     }
     const formValue = this.form.value;
 
+    const selectedProvince = this.provinces.find((p) => p.code == formValue.province);
+    const selectedDistrict = this.districts.find((d) => d.code == formValue.district);
+    const selectedWard = this.wards.find((w) => w.code == formValue.ward);
+
+    const provinceName = selectedProvince ? selectedProvince.name : '';
+    const districtName = selectedDistrict ? selectedDistrict.name : '';
+    const wardName = selectedWard ? selectedWard.name : '';
+
     if (this.isEdit) {
       const updateItem = {
         userId: this.item.userId,
@@ -111,38 +145,50 @@ export class AddAddressComponent implements OnInit {
         recipientName: formValue.recipientName,
         phoneNumber: formValue.phoneNumber,
         addressLine: formValue.addressLine,
-        province: formValue.province,
-        district: formValue.district,
-        ward: formValue.ward,
+        province: provinceName,
+        district: districtName,
+        ward: wardName,
+        provinceCode: formValue.province,
+        districtCode: formValue.district,
+        wardCode: formValue.ward,
         isDefault: formValue.isDefault
       };
       console.log('edit address: ', updateItem);
-      // this.settingService.post(updateItem).subscribe({
-      //   next: (res) => this.processResponse(res),
-      //   error: () => this.processResponse(false)
-      // });
+      this.addressService.updateShippingAddress(updateItem).subscribe({
+        next: (res) => {
+          if (res.code === 200) {
+            this.processResponse(res);
+          } else {
+            this.processResponse(false);
+          }
+        },
+        error: () => this.processResponse(false)
+      });
     } else {
       const addItem = {
-        userId: this.item.userId,
+        userId: this.data.userId,
         recipientName: formValue.recipientName,
         phoneNumber: formValue.phoneNumber,
         addressLine: formValue.addressLine,
-        province: formValue.province,
-        district: formValue.district,
-        ward: formValue.ward,
-        isDefault: formValue.isDefault
+        province: provinceName,
+        district: districtName,
+        ward: wardName,
+        provinceCode: formValue.province,
+        districtCode: formValue.district,
+        wardCode: formValue.ward,
+        isDefault: formValue.isDefault ?? false
       };
       console.log('add address: ', addItem);
-      // this.settingService.post(addItem).subscribe({
-      //   next: (res) => {
-      //     if (res.code === 200) {
-      //       this.processResponse(res);
-      //     } else {
-      //       this.processResponse(false);
-      //     }
-      //   },
-      //   error: () => this.processResponse(false)
-      // });
+      this.addressService.post(addItem).subscribe({
+        next: (res) => {
+          if (res.code === 200) {
+            this.processResponse(res);
+          } else {
+            this.processResponse(false);
+          }
+        },
+        error: () => this.processResponse(false)
+      });
     }
   }
 

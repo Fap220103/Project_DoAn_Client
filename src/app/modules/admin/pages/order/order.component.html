@@ -49,6 +49,7 @@
             <th>{{ 'Common.No' | translate }}</th>
             <th>{{ 'Order.Code' | translate }}</th>
             <th>{{ 'Order.CustomerName' | translate }}</th>
+            <th>{{ 'Order.CreatedDate' | translate }}</th>
             <th>{{ 'Order.Quantity' | translate }}</th>
             <th>{{ 'Order.TotalAmount' | translate }}</th>
             <th>{{ 'Order.Status' | translate }}</th>
@@ -62,21 +63,28 @@
               <span matTooltip="{{ item.orderCode }}">{{ item.orderCode }}</span>
             </td>
             <td>
-              <span matTooltip="{{ item.customerId }}">{{ item.customerId }}</span>
+              <span matTooltip="{{ item.address.recipientName }}">{{
+                item.address.recipientName
+              }}</span>
+            </td>
+            <td>
+              <span matTooltip="{{ item.createdDate }}">{{ item.createdDate }}</span>
             </td>
             <td>
               <span matTooltip="{{ item.totalQuantity }}">{{ item.totalQuantity }}</span>
             </td>
             <td>
-              <span matTooltip="{{ item.totalAmount }}">{{ item.totalAmount }}</span>
+              <span matTooltip="{{ item.totalAmount | number: '1.0-0' }}"
+                >{{ item.totalAmount | number: '1.0-0' }} VND</span
+              >
             </td>
             <td>
-              <span matTooltip="{{ item.status }}">{{ item.status }}</span>
+              <span matTooltip="{{ item.displayStatus }}">{{ item.displayStatus }}</span>
             </td>
             <td>
               <button
                 mat-icon-button
-                (click)="detail(item)"
+                (click)="detail(item.orderId)"
                 matTooltip="{{ 'Common.Read' | translate }}"
               >
                 <mat-icon>visibility</mat-icon>

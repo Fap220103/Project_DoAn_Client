@@ -35,10 +35,10 @@ export class ShippingAddressComponent implements OnInit {
     this.getData();
   }
   getData() {
-    this.addressService.get({userId: this.authService.getUserId()},1,10).subscribe((rs) => {
+    this.addressService.get({ userId: this.authService.getUserId() }, 1, 10).subscribe((rs) => {
       this.lstAddress = rs.content.data.items;
       this.lstAddress = this.lstAddress.map((x, index) => {
-        x.addressOrder =`${x.ward}, ${x.district}, ${x.province}`;
+        x.addressOrder = `${x.ward}, ${x.district}, ${x.province}`;
         return x;
       });
     });
@@ -46,6 +46,7 @@ export class ShippingAddressComponent implements OnInit {
 
   edit(item: any) {
     this.selectedItem = item;
+    console.log('selected item: ', this.selectedItem);
     const dialogRef = this.dialog.open(AddAddressComponent, {
       position: {
         right: '0'
@@ -63,17 +64,19 @@ export class ShippingAddressComponent implements OnInit {
       }
     });
   }
-  delete(settingId: string) {
+  delete(Id: string) {
     Swal.fire({
       title: this.translate.instant('Common.DeleteConfirm'),
       text: this.translate.instant('Common.DeleteTitle'),
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: this.translate.instant('Common.Delete'),
-      cancelButtonText: this.translate.instant('Common.Cancel')
+      cancelButtonText: this.translate.instant('Common.Cancel'),
+      backdrop: true,
+      position: 'center'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.addressService.delete(settingId).subscribe({
+        this.addressService.delete(Id).subscribe({
           next: (res) => {
             if (res.code === 200) {
               this.getData();
@@ -111,7 +114,7 @@ export class ShippingAddressComponent implements OnInit {
       data: {
         title: 'ShippingAddress.AddTitle',
         isEdit: false,
-        userId: this.selectedItem.userId,
+        userId: this.authService.getUserId()
       }
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -120,7 +123,21 @@ export class ShippingAddressComponent implements OnInit {
       }
     });
   }
-  changeDefault(item: string){
-
+  changeDefault(id: string) {
+    const itemDefault = {
+      id: id,
+      customerId: this.authService.getUserId()
+    };
+    this.addressService.put(itemDefault).subscribe({
+      next: (res) => {
+        if (res.code === 200) {
+          this.getData();
+          this.processResponse(res, 'Thiết lập mặc định thành công');
+        } else {
+          this.processResponse(false, 'Thiết lập mặc định thất bại');
+        }
+      },
+      error: () => this.processResponse(false, 'Thiết lập mặc định thất bại')
+    });
   }
 }

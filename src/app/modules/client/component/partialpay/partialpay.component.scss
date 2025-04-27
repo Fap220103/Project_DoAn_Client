@@ -1,11 +1,17 @@
 .cart-container {
-  max-width: 800px;
+  padding: 10px;
   margin: auto;
+  background-color: #f8f9fa;
 }
 
 .cart-title {
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 1rem;
+}
+
+.cart-header {
+  font-size: 14px;
+  color: #6c757d;
 }
 
 .product-img {
@@ -19,6 +25,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  font-size: 14px;
 }
 
 .product-info {
