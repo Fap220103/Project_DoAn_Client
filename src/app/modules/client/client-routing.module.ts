@@ -15,6 +15,7 @@ import { ChangeProfileComponent } from './component/changeprofile/changeprofile.
 import { MyOrderComponent } from './component/myorder/myorder.component';
 import { ForgotPassComponent } from './pages/profile/forgotpass/forgotpass.component';
 import { ResetPassComponent } from './pages/profile/resetpass/resetpass.component';
+import { DiscountComponent } from './pages/discount/discount.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,7 @@ const routes: Routes = [
       { path: 'register', component: RegisterComponent },
       { path: 'forgotpass', component: ForgotPassComponent },
       { path: 'resetpass', component: ResetPassComponent },
+      { path: 'discount', component: DiscountComponent }
     ]
   }
 ];

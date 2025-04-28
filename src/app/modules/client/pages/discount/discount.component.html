@@ -1,0 +1,25 @@
+<link rel="stylesheet" type="text/css" href="/assets/Content/assets/styles/categories_styles.css" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/assets/Content/assets/styles/categories_responsive.css"
+/>
+<section class="coupon-section">
+  <div class="coupon-grid">
+    <div class="coupon-card" *ngFor="let coupon of lstDiscount">
+      <div class="coupon-content">
+        <h3>{{ coupon.title }}</h3>
+        <p class="coupon-min-order">{{ coupon.code }}</p>
+        <p class="coupon-min-order">giảm giá lên tới {{ coupon.displayValue }}</p>
+        <p class="coupon-min-order">Hiệu lực đến ngày {{ coupon.endDate | date: 'dd/MM/yyyy' }}</p>
+        <p class="coupon-status"><span class="coupon-condition"></span></p>
+      </div>
+      <button class="coupon-button" (click)="save(coupon)" *ngIf="!coupon.isSaved; else ShopNow">
+        Lưu
+      </button>
+      <ng-template #ShopNow>
+        <button class="coupon-button" routerLink="/product">Mua ngay</button>
+      </ng-template>
+    </div>
+  </div>
+</section>

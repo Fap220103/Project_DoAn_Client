@@ -28,3 +28,7 @@ export const orderStatus = [
     display: 'Đã thanh toán '
   }
 ];
+export const discountType = [
+  { value: '0', display: '%' },
+  { value: '1', display: 'VND' }
+];

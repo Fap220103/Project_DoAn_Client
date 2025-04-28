@@ -8,11 +8,13 @@
   <div *ngIf="!submitted" class="form-group">
     <form [formGroup]="forgotPasswordForm">
       <label>Email:</label>
-      <input type="email" formControlName="email" class="form-control"/>
-      <button type="submit" class="btn btn-primary mt-3" (click)="save()">Gửi liên kết đặt lại mật khẩu</button>
+      <input type="email" formControlName="email" class="form-control" />
+      <button type="submit" class="btn btn-primary mt-3" (click)="save()">
+        Gửi liên kết đặt lại mật khẩu
+      </button>
     </form>
   </div>
-  
+
   <div *ngIf="submitted">
     <p>{{ message }}</p>
   </div>

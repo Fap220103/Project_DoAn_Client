@@ -8,23 +8,55 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th>#</th>
-        <th>Mã đơn hàng</th>
-        <th>Tổng tiền</th>
-        <th>Trạng thái</th>
-        <th>Ngày tạo</th>
-        <th></th>
+        <th>{{ 'Common.No' | translate }}</th>
+        <th>{{ 'Order.Code' | translate }}</th>
+        <th>{{ 'Order.CreatedDate' | translate }}</th>
+        <th>{{ 'Order.Quantity' | translate }}</th>
+        <th>{{ 'Order.TotalAmount' | translate }}</th>
+        <th>{{ 'Order.Status' | translate }}</th>
+        <th style="width: 150px">{{ 'Common.Action' | translate }}</th>
       </tr>
     </thead>
     <tbody *ngIf="lstOrder.length > 0; else noData">
       <tr *ngFor="let item of lstOrder; let i = index">
-        <td>(i + 1)</td>
-        <td>item.Code</td>
-        <td>ShoppingOnline.Helpers.Common.FormatNumber(item.TotalAmount, 0)</td>
-        <td>(item.TypePayment == 1 ? "Chờ thanh toán:" : "Đã thanh toán")</td>
-        <td>item.CreatedDate.ToString("dd/MM/yyyy")</td>
+        <td>{{ item.position }}</td>
+        <td>
+          <span matTooltip="{{ item.orderCode }}">{{ item.orderCode }}</span>
+        </td>
+
+        <td>
+          <span matTooltip="{{ item.createdDate }}">{{ item.createdDate }}</span>
+        </td>
+        <td>
+          <span matTooltip="{{ item.totalQuantity }}">{{ item.totalQuantity }}</span>
+        </td>
+        <td>
+          <span matTooltip="{{ item.totalAmount | number: '1.0-0' }}"
+            >{{ item.totalAmount | number: '1.0-0' }} VND</span
+          >
+        </td>
+        <td>
+          <span matTooltip="{{ item.displayStatus }}">{{ item.displayStatus }}</span>
+        </td>
+        <td>
+          <button
+            mat-icon-button
+            (click)="detail(item.orderId)"
+            matTooltip="{{ 'Common.Read' | translate }}"
+          >
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            (click)="delete(item)"
+            matTooltip="{{ 'Order.EditStatus' | translate }}"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
       </tr>
     </tbody>
+    <!-- Hiển thị khi không có dữ liệu -->
     <ng-template #noData>
       <tr>
         <td colspan="5" class="text-center">{{ 'Common.NoData' | translate }}</td>

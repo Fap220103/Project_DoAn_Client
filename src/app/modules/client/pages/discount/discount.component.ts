@@ -6,8 +6,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { orderStatus } from '../../../../core/constants/common';
 import { DiscountService } from '../../../../core/services/discount.service';
-import { AddDiscountComponent } from './addDiscount/addDiscount.component';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-discount',
@@ -18,23 +18,23 @@ export class DiscountComponent implements OnInit {
   lstStatus = orderStatus;
   lstDiscount: any[] = [];
   discountType = discountType;
-  expandedRows: { [key: number]: boolean } = {};
+  isDisable: boolean = false;
   searchString: string = '';
   status!: number;
   selectedItem: any = {};
   params: any = {};
   totalCount = 0;
   pageIndex = 0;
-  pageSize = 10;
-  pageSizeOptions = [5, 10, 25, 100];
-
+  pageSize = 20;
+  pageSizeOptions = [5, 10, 20, 100];
+  savedDiscounts: Set<string> = new Set();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private discountService: DiscountService,
     private translate: TranslateService,
-    public snackBar: MatSnackBar,
-    public dialog: MatDialog
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -46,83 +46,37 @@ export class DiscountComponent implements OnInit {
       this.lstDiscount = this.lstDiscount.map((x, index) => {
         x.position = this.pageIndex * this.pageSize + index + 1;
         x.displayType = this.discountType.find((item) => item.value == x.discountType)?.display;
+        const formattedValue = new Intl.NumberFormat('vi-VN').format(x.discountValue);
+        x.displayValue = x.discountType == 0 ? `${formattedValue} %` : `${formattedValue} VND`;
+        x.isSaved = this.savedDiscounts.has(x.id);
         return x;
       });
       this.totalCount = rs.content.data.totalRecords;
     });
   }
-  toggleRow(index: number) {
-    this.expandedRows[index] = !this.expandedRows[index];
-  }
+
   onChangePage(event: any) {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.getData();
   }
-  edit(item: any) {
-    this.selectedItem = item;
-    const dialogRef = this.dialog.open(AddDiscountComponent, {
-      minWidth: '50%',
-      height: '100%',
-      panelClass: 'custom-dialog-right',
-      position: {
-        right: '0'
+  save(coupon: any) {
+    const addItem = {
+      userId: this.authService.getUserId(),
+      discountId: coupon.id
+    };
+    this.discountService.addUserDiscount(addItem).subscribe({
+      next: (res: any) => {
+        if (res.content === 200) {
+          this.savedDiscounts.add(coupon.id); // Đánh dấu coupon là đã lưu
+          coupon.isSaved = true;
+          this.processResponse(res, 'Đã lưu mã khuyến mãi thành công');
+        } else {
+          this.processResponse(false, 'Lưu mã khuyến mãi thất bại');
+        }
       },
-      data: {
-        title: 'Discount.EditTitle',
-        item: this.selectedItem,
-        isEdit: true
-      }
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.getData();
-      }
-    });
-  }
-
-  add() {
-    const dialogRef = this.dialog.open(AddDiscountComponent, {
-      minWidth: '50%',
-      height: '100%',
-      panelClass: 'custom-dialog-right',
-      position: {
-        right: '0'
-      },
-      data: {
-        title: 'Discount.AddTitle',
-        isEdit: false
-      }
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.getData();
-      }
-    });
-  }
-  delete(discountId: string) {
-    Swal.fire({
-      title: this.translate.instant('Common.DeleteConfirm'),
-      text: this.translate.instant('Common.DeleteTitle'),
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: this.translate.instant('Common.Delete'),
-      cancelButtonText: this.translate.instant('Common.Cancel')
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.discountService.delete(discountId).subscribe({
-          next: (res) => {
-            if (res.code === 200) {
-              this.getData();
-              this.processResponse(res);
-            } else {
-              this.processResponse(false);
-            }
-          },
-          error: (err) => {
-            this.processResponse(false);
-          }
-        });
+      error: () => {
+        this.processResponse(false, 'Lưu mã khuyến mãi thất bại');
       }
     });
   }
@@ -154,15 +108,6 @@ export class DiscountComponent implements OnInit {
 
   handleClearSearchInput() {
     this.searchString = '';
-    this.params = {
-      status: this.status,
-      search: this.searchString
-    };
-    this.getData();
-  }
-
-  handleChangeStatus(event: any) {
-    this.status = event;
     this.params = {
       status: this.status,
       search: this.searchString

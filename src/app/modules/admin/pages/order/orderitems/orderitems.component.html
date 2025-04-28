@@ -28,10 +28,14 @@
           <span matTooltip="{{ item.quantity }}">{{ item.quantity }}</span>
         </td>
         <td>
-          <span matTooltip="{{ item.price }}">{{ item.price }}</span>
+          <span matTooltip="{{ item.price | number: '1.0-0' }}">{{
+            item.price | number: '1.0-0'
+          }}</span>
         </td>
         <td>
-          <span matTooltip="{{ item.totalPrice }}">{{ item.totalPrice }}</span>
+          <span matTooltip="{{ item.totalPrice | number: '1.0-0' }}">{{
+            item.totalPrice | number: '1.0-0'
+          }}</span>
         </td>
       </tr>
     </tbody>

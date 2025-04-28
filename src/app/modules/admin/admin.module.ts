@@ -37,6 +37,8 @@ import { OrderComponent } from './pages/order/order.component';
 import { DiscountComponent } from './pages/discount/discount.component';
 import { OrderItemsComponent } from './pages/order/orderitems/orderitems.component';
 import { OrderDetailComponent } from './pages/order/orderdetail/orderdetail.component';
+import { AddDiscountComponent } from './pages/discount/addDiscount/addDiscount.component';
+import { ChangeOrderStatusComponent } from './pages/order/changestatus/changestatus.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import { OrderDetailComponent } from './pages/order/orderdetail/orderdetail.comp
     OrderComponent,
     DiscountComponent,
     OrderItemsComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    AddDiscountComponent,
+    ChangeOrderStatusComponent
   ],
   imports: [
     CommonModule,

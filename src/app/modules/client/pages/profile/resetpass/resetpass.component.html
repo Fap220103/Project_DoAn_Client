@@ -24,14 +24,12 @@
         ></i>
         <div
           class="text-danger"
-          *ngIf="
-            form.get('newPassword')?.touched && form.get('newPassword')?.invalid
-          "
+          *ngIf="form.get('newPassword')?.touched && form.get('newPassword')?.invalid"
         >
           Mật khẩu mới phải ít nhất 6 ký tự
         </div>
       </div>
-    
+
       <div class="form-group">
         <label for="confirmPassword">Xác nhận mật khẩu</label>
         <input
@@ -47,13 +45,21 @@
           (click)="showConfirmPassword = !showConfirmPassword"
           style="position: absolute; top: 38px; right: 15px; cursor: pointer"
         ></i>
-        <div class="text-danger" *ngIf="confirmPassword.touched && confirmPassword.errors?.['mismatch']">Mật khẩu không khớp.</div>
+        <div
+          class="text-danger"
+          *ngIf="confirmPassword.touched && confirmPassword.errors?.['mismatch']"
+        >
+          Mật khẩu không khớp.
+        </div>
       </div>
-      <button type="submit" [disabled]="form.invalid" (click)="save()" class="btn btn-primary mt-3">Reset Password</button>
+      <button type="submit" [disabled]="form.invalid" (click)="save()" class="btn btn-primary mt-3">
+        Reset Password
+      </button>
     </form>
   </div>
-  
-  <p *ngIf="isSuccess">Password has been reset successfully. You can now <a routerLink="/login">login</a>.</p>
-  <p *ngIf="errorMessage" style="color:red;">{{ errorMessage }}</p>
-  
+
+  <p *ngIf="isSuccess">
+    Password has been reset successfully. You can now <a routerLink="/login">login</a>.
+  </p>
+  <p *ngIf="errorMessage" style="color: red">{{ errorMessage }}</p>
 </div>

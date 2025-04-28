@@ -84,8 +84,16 @@
             <div class="voucher-label">
               <span class="voucher-icon"></span>
               <span>Mã giảm giá</span>
+              <span *ngIf="discount && discount.code" class="choose-discount ml-2">{{
+                discount.code
+              }}</span>
+              |
+              <span *ngIf="discount && discount.code" class="choose-discount ml-2"
+                >-{{ discount.displayValue }}</span
+              >
             </div>
-            <a href="#" class="voucher-link">Chọn Voucher</a>
+
+            <a (click)="chooseDiscount()" class="voucher-link cursor-pointer">Chọn Voucher</a>
           </div>
         </div>
       </div>
@@ -144,18 +152,23 @@
               </div>
             </div>
             <hr />
-            <!-- <div class="summary-row">
+            <div class="summary-row">
               <span class="summary-label">Tổng tiền hàng</span>
-              <span class="summary-value">đ879.000</span>
+              <span class="summary-value">{{ this.totalAmount | number: '1.0-0' }} VND</span>
             </div>
             <div class="summary-row">
               <span class="summary-label">Khuyến mãi</span>
-              <span class="summary-value">đ00.00</span>
-            </div> -->
+              <span class="summary-value">
+                {{ discount && discount.discountValue ? discount.displayValue : '0 VND' }}
+              </span>
+            </div>
             <div class="summary-row">
               <span class="summary-label">Tổng thanh toán</span>
               <span class="summary-value total-value"
-                >{{ this.totalAmount | number: '1.0-0' }} VND</span
+                >{{
+                  (totalAmountDiscount > 0 ? totalAmountDiscount : totalAmount) | number: '1.0-0'
+                }}
+                VND</span
               >
             </div>
             <div class="note">

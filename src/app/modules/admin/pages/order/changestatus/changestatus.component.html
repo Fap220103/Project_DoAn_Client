@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Chọn trạng thái đơn hàng</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Trạng thái đơn hàng</mat-label>
+    <mat-select [(value)]="selectedStatus" [(ngModel)]="selectedStatus">
+      <mat-option *ngFor="let status of lstStatus" [value]="status.id">
+        {{ status.display }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Hủy</button>
+  <button mat-button color="primary" (click)="updateStatus()">Cập nhật</button>
+</div>

@@ -16,4 +16,9 @@ export class OrderService extends BaseService<any> {
     const url = `${this.svUrl}/GetOrderById?orderId=${orderId}`;
     return this.http.get(url, { headers: headers, withCredentials: true });
   }
+
+  changeOrderStatus(model: any): Observable<any> {
+    const url = `${this.svUrl}/UpdateOrderStatus`;
+    return this.put(model, url);
+  }
 }

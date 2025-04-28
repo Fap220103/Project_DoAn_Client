@@ -45,10 +45,7 @@ export class AddAddressComponent implements OnInit {
         this.item?.phoneNumber,
         Validators.compose([Validators.required])
       ),
-      addressLine: new FormControl(
-        this.item?.addressLine,
-        Validators.compose([Validators.required])
-      ),
+      addressLine: new FormControl(this.item?.addressLine),
       province: new FormControl(
         this.item?.provinceCode || '',
         Validators.compose([Validators.required])
@@ -169,7 +166,7 @@ export class AddAddressComponent implements OnInit {
         userId: this.data.userId,
         recipientName: formValue.recipientName,
         phoneNumber: formValue.phoneNumber,
-        addressLine: formValue.addressLine,
+        addressLine: formValue.addressLine ?? '',
         province: provinceName,
         district: districtName,
         ward: wardName,

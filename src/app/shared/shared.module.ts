@@ -8,8 +8,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AraAutocompleteComponent } from './components/AraAutocomplete/AraAutocomplete.component';
-import { MatOptionModule, MatPseudoCheckboxModule } from '@angular/material/core';
+import {
+  MatOptionModule,
+  MatPseudoCheckboxModule,
+  provideNativeDateAdapter
+} from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { IconsModule } from './icon.module';
@@ -43,7 +48,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatPseudoCheckboxModule,
     CKEditorModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDatepickerModule
   ],
   exports: [
     TranslateModule,
@@ -64,8 +70,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatPseudoCheckboxModule,
     CKEditorModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDatepickerModule
   ],
-  providers: [DatePipe]
+  providers: [DatePipe, provideNativeDateAdapter()]
 })
 export class SharedModule {}

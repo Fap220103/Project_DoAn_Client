@@ -201,7 +201,9 @@
       "StartDate" : "Ngày bắt đầu",
       "EndDate" : "Ngày kết thúc",
       "UsageLimit" : "Số lượng",
-      "UsageCount" : "Đã dùng"
+      "UsedCount" : "Đã dùng",
+      "IsActive" : "Kích hoạt"
+
     },
     "ShippingAddress" : {
       "Title": "Địa chỉ",

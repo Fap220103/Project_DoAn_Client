@@ -1,3 +1,4 @@
+import { discountType } from './../../../../core/constants/common';
 import { Component, OnInit } from '@angular/core';
 import { Cart } from '../../../../core/models/cart.model';
 import { CartService } from '../../../../core/services/cart.service';
@@ -11,6 +12,7 @@ import { ChangeAddressComponent } from './changeaddress/changeaddress.component'
 import { MatDialog } from '@angular/material/dialog';
 import { OrderService } from '../../../../core/services/order.service';
 import { AddAddressComponent } from '../../component/shippingaddress/addaddress/addaddress.component';
+import { ChooseDiscountComponent } from './chooseDiscount/chooseDiscount.component';
 
 @Component({
   selector: 'app-checkout',
@@ -20,12 +22,13 @@ import { AddAddressComponent } from '../../component/shippingaddress/addaddress/
 export class CheckoutComponent implements OnInit {
   cartItems: any[] = [];
   totalAmount: number = 0;
+  totalAmountDiscount: number = 0;
   isLoggedIn: any;
   cart!: Cart;
   userId!: string;
   addressDefault: any;
   paymentMethod = '1';
-
+  discount: any;
   constructor(
     private cartService: CartService,
     private authService: AuthService,
@@ -95,8 +98,12 @@ export class CheckoutComponent implements OnInit {
       CustomerId: this.authService.getUserId(),
       TypePayment: this.paymentMethod,
       ShippingAddressId: this.addressDefault.id,
-      Items: this.cartItems
+      Items: this.cartItems,
+      discountId: this.discount.discountId ?? '',
+      discountType: this.discount.discountType ?? 0,
+      discountValue: this.discount.discountValue ?? 0
     };
+    console.log('add order: ', addItem);
     this.orderService.post(addItem).subscribe({
       next: (res) => {
         if (res.code === 200) {
@@ -112,9 +119,6 @@ export class CheckoutComponent implements OnInit {
   }
   updateAddress() {
     const dialogRef = this.dialog.open(AddAddressComponent, {
-      position: {
-        right: '0'
-      },
       data: {
         title: 'ShippingAddress.AddTitle',
         isEdit: false,
@@ -126,5 +130,32 @@ export class CheckoutComponent implements OnInit {
         this.getAddress();
       }
     });
+  }
+  chooseDiscount() {
+    const dialogRef = this.dialog.open(ChooseDiscountComponent, {
+      data: {
+        title: 'ShippingAddress.AddTitle',
+        isEdit: false,
+        userId: this.authService.getUserId()
+      }
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.discount = result; // result cần có trường 'code'
+        this.calculateTotalAmountDiscount();
+        console.log('discount: ', this.discount);
+      } else {
+        this.discount = null; // Nếu không có kết quả, gán discount là null
+        this.totalAmountDiscount = 0;
+      }
+    });
+  }
+  calculateTotalAmountDiscount() {
+    if (this.discount.discountType == 0) {
+      this.totalAmountDiscount =
+        this.totalAmount - (this.totalAmount * this.discount.discountValue) / 100;
+    } else {
+      this.totalAmountDiscount = this.totalAmount - this.discount.discountValue;
+    }
   }
 }

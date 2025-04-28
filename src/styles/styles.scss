@@ -4,3 +4,8 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import "tailwindcss";
 @import "custom_style";
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: inherit !important;
+}
+

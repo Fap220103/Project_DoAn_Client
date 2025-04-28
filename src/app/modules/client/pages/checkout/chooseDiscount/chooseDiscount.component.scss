@@ -1,0 +1,104 @@
+/* Container chính */
+.container-box-dialog {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px; /* Đảm bảo không quá rộng */
+  margin: 0 auto; /* Căn giữa */
+}
+
+/* Tiêu đề */
+.section-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Mỗi item trong danh sách giảm giá */
+.address-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 10px;
+}
+
+.address-item:last-child {
+  border-bottom: none; /* Không có border dưới phần tử cuối cùng */
+}
+
+/* Phần nội dung của coupon */
+.coupon-content {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.coupon-content h3 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.coupon-min-order {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 5px 0;
+}
+
+.coupon-status {
+  font-size: 0.9rem;
+  color: #ff4500;
+  font-weight: bold;
+}
+
+.coupon-condition {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* Nút lựa chọn radio */
+input[type='radio'] {
+  margin-right: 10px;
+  margin-top: 3px;
+}
+
+/* Nút hủy và xác nhận */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.cancel-button,
+.confirm-button {
+  padding: 8px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  color: #333;
+}
+
+.confirm-button {
+  background-color: #ff4500;
+  border: none;
+  color: white;
+  font-weight: bold;
+}
+
+.confirm-button:hover {
+  background-color: #e03e00;
+}
+
+.cancel-button:hover {
+  background-color: #f0f0f0;
+}

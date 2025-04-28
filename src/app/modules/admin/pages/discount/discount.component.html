@@ -1,6 +1,5 @@
 <!-- Main content -->
 <section class="content mt-3">
-  <!-- Default box -->
   <div class="card">
     <div class="flex justify-between">
       <div class="flex justify-start items-center"></div>
@@ -29,6 +28,15 @@
               <mat-icon class="w-4 h-4 text-gray-500" [svgIcon]="'heroicons_solid:x'"> </mat-icon>
             </button>
           </mat-form-field>
+          <button
+            mat-flat-button
+            [color]="'primary'"
+            class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
+            (click)="add()"
+          >
+            <mat-icon class="md:text-base sm:text-base xs:text-xs">add</mat-icon>
+            <span>{{ 'Common.Add' | translate }}</span>
+          </button>
         </div>
       </div>
     </div>
@@ -38,53 +46,78 @@
           <tr>
             <th>{{ 'Common.No' | translate }}</th>
             <th>{{ 'Discount.Code' | translate }}</th>
-            <th>{{ 'Discount.CustomerName' | translate }}</th>
-            <th>{{ 'Discount.Quantity' | translate }}</th>
-            <th>{{ 'Discount.TotalAmount' | translate }}</th>
-            <th>{{ 'Discount.Status' | translate }}</th>
+            <th>{{ 'Discount.Title' | translate }}</th>
             <th style="width: 200px">{{ 'Common.Action' | translate }}</th>
           </tr>
         </thead>
         <tbody *ngIf="lstDiscount.length > 0; else noData">
-          <tr *ngFor="let item of lstDiscount; let i = index">
-            <td>{{ item.position }}</td>
-            <td>
-              <span matTooltip="{{ item.orderCode }}">{{ item.orderCode }}</span>
-            </td>
-            <td>
-              <span matTooltip="{{ item.customerId }}">{{ item.customerId }}</span>
-            </td>
-            <td>
-              <span matTooltip="{{ item.totalQuantity }}">{{ item.totalQuantity }}</span>
-            </td>
-            <td>
-              <span matTooltip="{{ item.totalAmount }}">{{ item.totalAmount }}</span>
-            </td>
-            <td>
-              <span matTooltip="{{ item.status }}">{{ item.status }}</span>
-            </td>
-            <td>
-              <button
-                mat-icon-button
-                (click)="detail(item)"
-                matTooltip="{{ 'Common.Read' | translate }}"
-              >
-                <mat-icon>visibility</mat-icon>
-              </button>
-              <button
-                mat-icon-button
-                (click)="edit(item)"
-                matTooltip="{{ 'Order.EditStatus' | translate }}"
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
-            </td>
-          </tr>
+          <ng-container *ngFor="let item of lstDiscount; let i = index">
+            <!-- Hàng chính (chỉ hiển thị thông tin cơ bản) -->
+            <tr (click)="toggleRow(i)" style="cursor: pointer">
+              <td>{{ item.position }}</td>
+              <td>
+                <span matTooltip="{{ item.code }}">{{ item.code }}</span>
+              </td>
+              <td>
+                <span matTooltip="{{ item.title }}">{{ item.title }}</span>
+              </td>
+              <td>
+                <button
+                  mat-icon-button
+                  (click)="edit(item); $event.stopPropagation()"
+                  matTooltip="{{ 'Common.Edit' | translate }}"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  (click)="delete(item.id); $event.stopPropagation()"
+                  matTooltip="{{ 'Common.Delete' | translate }}"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </tr>
+            <!-- Hàng chi tiết (hiển thị khi mở rộng) -->
+            <tr *ngIf="expandedRows[i]">
+              <td colspan="4">
+                <div class="p-4 bg-gray-100">
+                  <p>
+                    <strong>{{ 'Discount.Description' | translate }}:</strong>
+                    {{ item.description }}
+                  </p>
+                  <p>
+                    <strong>{{ 'Discount.DiscountType' | translate }}:</strong>
+                    {{ item.displayType }}
+                  </p>
+                  <p>
+                    <strong>{{ 'Discount.DiscountValue' | translate }}:</strong>
+                    {{ item.discountValue }}
+                  </p>
+                  <p>
+                    <strong>{{ 'Discount.StartDate' | translate }}:</strong> {{ item.startDate }}
+                  </p>
+                  <p>
+                    <strong>{{ 'Discount.EndDate' | translate }}:</strong> {{ item.endDate }}
+                  </p>
+                  <p>
+                    <strong>{{ 'Discount.IsActive' | translate }}:</strong> {{ item.isActive }}
+                  </p>
+                  <p>
+                    <strong>{{ 'Discount.UsageLimit' | translate }}:</strong> {{ item.usageLimit }}
+                  </p>
+                  <p>
+                    <strong>{{ 'Discount.UsedCount' | translate }}:</strong> {{ item.usedCount }}
+                  </p>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
         </tbody>
         <!-- Hiển thị khi không có dữ liệu -->
         <ng-template #noData>
           <tr>
-            <td colspan="5" class="text-center">{{ 'Common.NoData' | translate }}</td>
+            <td colspan="4" class="text-center">{{ 'Common.NoData' | translate }}</td>
           </tr>
         </ng-template>
       </table>

@@ -1,0 +1,103 @@
+<div class="dialog-content-wrapper mt-[50px]">
+  <!-- Header -->
+  <div class="flex flex-row items-center px-6 h-20 min-h-20 text-white bg-primary">
+    <mat-icon
+      class="icon-size-7 text-current"
+      [svgIcon]="isEdit ? 'heroicons_solid:pencil-alt' : 'heroicons_solid:plus-circle'"
+    ></mat-icon>
+    <div class="ml-3 text-2xl font-semibold tracking-tight">
+      {{ data.title | translate }}
+    </div>
+    <button class="ml-auto" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+    </button>
+  </div>
+  <div class="wrap-body mt-[50px]">
+    <form [formGroup]="form">
+      <div class="grid grid-cols-2 gap-4">
+        <mat-form-field class="w-full">
+          <mat-label>Mã khuyến mãi</mat-label>
+          <input matInput formControlName="code" placeholder="Nhập mã khuyến mãi" />
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>Khuyến mãi</mat-label>
+          <input matInput formControlName="title" placeholder="Nhập tên khuyến mãi" />
+        </mat-form-field>
+      </div>
+
+      <div class="mt-4">
+        <mat-form-field class="w-full">
+          <mat-label>Mô tả</mat-label>
+          <textarea
+            matInput
+            rows="3"
+            formControlName="description"
+            placeholder="Nhập mô tả khuyến mãi"
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 mt-4">
+        <mat-form-field class="w-full">
+          <mat-label>Loại khuyến mãi</mat-label>
+          <mat-select formControlName="discountType">
+            <mat-option [value]="1">Giảm giá cố định</mat-option>
+            <mat-option [value]="0">Giảm theo phần trăm</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>Giá trị khuyến mãi</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="discountValue"
+            placeholder="Nhập giá trị"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 mt-4">
+        <mat-form-field class="w-full">
+          <mat-label>Ngày kết thúc</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="endDate"
+            placeholder="Chọn ngày kết thúc"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>Số lượng</mat-label>
+          <input matInput type="number" formControlName="usageLimit" placeholder="Nhập số lượng" />
+        </mat-form-field>
+
+        <mat-checkbox *ngIf="isEdit" formControlName="isActive"
+          >{{ 'Category.IsActive' | translate }}
+        </mat-checkbox>
+      </div>
+    </form>
+  </div>
+
+  <div class="border-t"></div>
+  <!-- Actions -->
+  <div mat-dialog-actions class="pl-5 pr-5 flex items-center justify-center">
+    <button mat-dialog-close mat-stroked-button type="button">
+      {{ 'Common.Cancel' | translate }}
+    </button>
+    <button
+      (click)="save()"
+      [disabled]="!form.valid"
+      class="ml-4"
+      mat-flat-button
+      type="button"
+      [color]="'primary'"
+    >
+      {{ 'Common.Save' | translate }}
+    </button>
+  </div>
+</div>

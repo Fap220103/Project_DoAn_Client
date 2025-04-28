@@ -34,6 +34,8 @@ import { ForgotPassComponent } from './pages/profile/forgotpass/forgotpass.compo
 import { ResetPassComponent } from './pages/profile/resetpass/resetpass.component';
 import { AddAddressComponent } from './component/shippingaddress/addaddress/addaddress.component';
 import { ChangeAddressComponent } from './pages/checkout/changeaddress/changeaddress.component';
+import { DiscountComponent } from './pages/discount/discount.component';
+import { ChooseDiscountComponent } from './pages/checkout/chooseDiscount/chooseDiscount.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { ChangeAddressComponent } from './pages/checkout/changeaddress/changeadd
     ForgotPassComponent,
     ResetPassComponent,
     AddAddressComponent,
-    ChangeAddressComponent
+    ChangeAddressComponent,
+    DiscountComponent,
+    ChooseDiscountComponent
   ],
   imports: [
     CommonModule,

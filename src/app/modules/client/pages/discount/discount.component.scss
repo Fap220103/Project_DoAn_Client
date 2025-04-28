@@ -1,0 +1,88 @@
+.coupon-section {
+  padding: 20px;
+  margin-top: 200px;
+}
+
+.coupon-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Mỗi hàng 4 cột */
+  gap: 20px; /* Khoảng cách giữa các mã khuyến mãi */
+}
+
+.coupon-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.coupon-card:hover {
+  transform: translateY(-3px);
+}
+
+.coupon-content {
+  flex: 1;
+}
+
+.coupon-content h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+  color: #333;
+}
+
+.coupon-min-order {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 5px 0;
+}
+
+.coupon-status {
+  font-size: 12px;
+  color: #888;
+  margin: 0;
+}
+
+.coupon-condition {
+  color: #007bff;
+  cursor: pointer;
+}
+
+.coupon-button {
+  background-color: #00c4b4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.coupon-button:hover {
+  background-color: #00a89a;
+}
+
+/* Responsive: Điều chỉnh cho màn hình nhỏ */
+@media (max-width: 1024px) {
+  .coupon-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 cột trên tablet */
+  }
+}
+
+@media (max-width: 768px) {
+  .coupon-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cột trên điện thoại */
+  }
+}
+
+@media (max-width: 480px) {
+  .coupon-grid {
+    grid-template-columns: 1fr; /* 1 cột trên màn hình rất nhỏ */
+  }
+}

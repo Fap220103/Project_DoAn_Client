@@ -1,7 +1,7 @@
 .container-box {
   background-color: #f8f9fa;
   padding: 15px;
-  border-radius: 8px;
+  border-radius: 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 .location-icon::before {
@@ -146,4 +146,10 @@
 .payment-methods .form-check img {
   height: 25px;
   width: auto;
+}
+
+.choose-discount {
+  color: #ff4500;
+  text-decoration: none;
+  font-weight: bold;
 }

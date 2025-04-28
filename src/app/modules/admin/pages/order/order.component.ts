@@ -9,6 +9,7 @@ import { OrderService } from '../../../../core/services/order.service';
 import { orderStatus } from '../../../../core/constants/common';
 import { DatePipe } from '@angular/common';
 import { OrderDetailComponent } from './orderdetail/orderdetail.component';
+import { ChangeOrderStatusComponent } from './changestatus/changestatus.component';
 
 @Component({
   selector: 'app-order',
@@ -62,24 +63,36 @@ export class OrderComponent implements OnInit {
     this.pageSize = event.pageSize;
     this.getData();
   }
-  edit(item: any) {
+
+  updateStatus(item: any) {
     this.selectedItem = item;
-    const dialogRef = this.dialog.open(AddSettingComponent, {
-      minWidth: '30%',
-      height: '100%',
-      panelClass: 'custom-dialog-right',
-      position: {
-        right: '0'
-      },
+    const dialogRef = this.dialog.open(ChangeOrderStatusComponent, {
+      width: '400px',
       data: {
-        title: 'Setting.EditTitle',
-        item: this.selectedItem,
-        isEdit: true
+        item: this.selectedItem
       }
     });
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.getData();
+        const updateItem = {
+          orderId: item.orderId,
+          status: result
+        };
+        this.orderService.changeOrderStatus(updateItem).subscribe({
+          next: (res) => {
+            if (res.code === 200) {
+              this.getData();
+              this.processResponse(res);
+            } else {
+              this.processResponse(false);
+            }
+          },
+          error: (err) => {
+            this.processResponse(false);
+          }
+        });
+        //this.updateOrderStatus(result); // Cập nhật trạng thái mới cho đơn hàng
       }
     });
   }
