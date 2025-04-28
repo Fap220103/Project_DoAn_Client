@@ -13,6 +13,7 @@ import { UserProfileComponent } from './pages/userprofile/userprofile.component'
 import { ProductVariantComponent } from './pages/productvariant/productvariant.component';
 import { InventoryComponent } from './pages/inventory/inventory.component';
 import { OrderComponent } from './pages/order/order.component';
+import { DiscountComponent } from './pages/discount/discount.component';
 
 const routes: Routes = [
   {
@@ -74,6 +75,12 @@ const routes: Routes = [
         component: OrderComponent,
         canActivate: [adminGuard],
         data: { title: 'Order.Title' }
+      },
+      {
+        path: 'discount',
+        component: DiscountComponent,
+        canActivate: [adminGuard],
+        data: { title: 'Discount.Title' }
       }
     ]
   }

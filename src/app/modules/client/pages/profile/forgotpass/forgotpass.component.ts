@@ -35,7 +35,7 @@ export class ForgotPassComponent implements OnInit {
           this.submitted = true;
           this.message = 'Một email đã được gửi để đặt lại mật khẩu!';
         } else {
-          this.processResponse(false,res.message);
+          this.processResponse(false, res.message);
         }
       },
       error: () => {

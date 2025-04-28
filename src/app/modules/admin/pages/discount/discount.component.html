@@ -38,10 +38,15 @@
           <tr>
             <th>{{ 'Common.No' | translate }}</th>
             <th>{{ 'Discount.Code' | translate }}</th>
-            <th>{{ 'Discount.CustomerName' | translate }}</th>
-            <th>{{ 'Discount.Quantity' | translate }}</th>
-            <th>{{ 'Discount.TotalAmount' | translate }}</th>
-            <th>{{ 'Discount.Status' | translate }}</th>
+            <th>{{ 'Discount.Title' | translate }}</th>
+            <th>{{ 'Discount.Description' | translate }}</th>
+            <th>{{ 'Discount.DiscountType' | translate }}</th>
+            <th>{{ 'Discount.DiscountValue' | translate }}</th>
+            <th>{{ 'Discount.StartDate' | translate }}</th>
+            <th>{{ 'Discount.EndDate' | translate }}</th>
+            <th>{{ 'Discount.IsActive' | translate }}</th>
+            <th>{{ 'Discount.UsageLimit' | translate }}</th>
+            <th>{{ 'Discount.UsedCount' | translate }}</th>
             <th style="width: 200px">{{ 'Common.Action' | translate }}</th>
           </tr>
         </thead>
@@ -49,20 +54,36 @@
           <tr *ngFor="let item of lstDiscount; let i = index">
             <td>{{ item.position }}</td>
             <td>
-              <span matTooltip="{{ item.orderCode }}">{{ item.orderCode }}</span>
+              <span matTooltip="{{ item.code }}">{{ item.code }}</span>
             </td>
             <td>
-              <span matTooltip="{{ item.customerId }}">{{ item.customerId }}</span>
+              <span matTooltip="{{ item.title }}">{{ item.title }}</span>
             </td>
             <td>
-              <span matTooltip="{{ item.totalQuantity }}">{{ item.totalQuantity }}</span>
+              <span matTooltip="{{ item.description }}">{{ item.description }}</span>
             </td>
             <td>
-              <span matTooltip="{{ item.totalAmount }}">{{ item.totalAmount }}</span>
+              <span matTooltip="{{ item.discountType }}">{{ item.discountType }}</span>
             </td>
             <td>
-              <span matTooltip="{{ item.status }}">{{ item.status }}</span>
+              <span matTooltip="{{ item.discountValue }}">{{ item.discountValue }}</span>
             </td>
+            <td>
+              <span matTooltip="{{ item.startDate }}">{{ item.startDate }}</span>
+            </td>
+            <td>
+              <span matTooltip="{{ item.endDate }}">{{ item.endDate }}</span>
+            </td>
+            <td>
+              <span matTooltip="{{ item.isActive }}">{{ item.isActive }}</span>
+            </td>
+            <td>
+              <span matTooltip="{{ item.usageLimit }}">{{ item.usageLimit }}</span>
+            </td>
+            <td>
+              <span matTooltip="{{ item.usedCount }}">{{ item.usedCount }}</span>
+            </td>
+
             <td>
               <button
                 mat-icon-button

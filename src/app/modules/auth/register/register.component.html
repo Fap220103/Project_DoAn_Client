@@ -52,11 +52,11 @@
             [type]="showConfirmPassword ? 'text' : 'password'"
           />
           <i
-          class="fa"
-          [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"
-          (click)="showConfirmPassword = !showConfirmPassword"
-          style="position: absolute; top: 38px; right: 15px; cursor: pointer"
-        ></i>
+            class="fa"
+            [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"
+            (click)="showConfirmPassword = !showConfirmPassword"
+            style="position: absolute; top: 38px; right: 15px; cursor: pointer"
+          ></i>
           <div
             *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)"
             class="text-danger"
