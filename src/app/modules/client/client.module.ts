@@ -36,6 +36,7 @@ import { AddAddressComponent } from './component/shippingaddress/addaddress/adda
 import { ChangeAddressComponent } from './pages/checkout/changeaddress/changeaddress.component';
 import { DiscountComponent } from './pages/discount/discount.component';
 import { ChooseDiscountComponent } from './pages/checkout/chooseDiscount/chooseDiscount.component';
+import { ProductReviewComponent } from './pages/product/productreview/productreview.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { ChooseDiscountComponent } from './pages/checkout/chooseDiscount/chooseD
     AddAddressComponent,
     ChangeAddressComponent,
     DiscountComponent,
-    ChooseDiscountComponent
+    ChooseDiscountComponent,
+    ProductReviewComponent
   ],
   imports: [
     CommonModule,

@@ -139,7 +139,7 @@
               <span>Description</span>
             </li>
             <li class="tab" [class.active]="activeTab === 'tab_3'" (click)="activeTab = 'tab_3'">
-              <span>Reviews ({{ reviewCount }})</span>
+              <span>Reviews</span>
             </li>
           </ul>
         </div>
@@ -153,30 +153,16 @@
         </div>
 
         <!-- Tab Reviews -->
-        <div id="tab_3" class="tab_container" *ngIf="activeTab === 'tab_3'">
-          <div class="row" id="userReview">
-            <!-- User Reviews -->
+        <div id="tab_3" class="tab_container active" *ngIf="activeTab === 'tab_3'">
+          <app-productreview [productId]="productId"></app-productreview>
+          <!-- <div class="row" id="userReview">
+  
             <div class="col-lg-6 reviews_col">
-              <app-partialreview></app-partialreview>
+              <app-partialreview [productId]="productId"></app-partialreview>
             </div>
-            <!-- Add Review -->
+ 
             <div class="col-lg-6 reviews_col">
               <form>
-                <div>
-                  <h1>Add Review</h1>
-                  <input class="form_input input_name" placeholder="Name" />
-                  <input class="form_input input_email" placeholder="Email" />
-                  <input type="hidden" />
-
-                  <input
-                    type="text"
-                    id="txtRate"
-                    name="Rate"
-                    value="4"
-                    style="visibility: hidden"
-                  />
-                </div>
-
                 <div>
                   <h1>Your Rating:</h1>
                   <ul class="user_star_rating">
@@ -206,7 +192,7 @@
                 </div>
               </form>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

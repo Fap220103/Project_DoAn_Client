@@ -99,9 +99,9 @@ export class CheckoutComponent implements OnInit {
       TypePayment: this.paymentMethod,
       ShippingAddressId: this.addressDefault.id,
       Items: this.cartItems,
-      discountId: this.discount.discountId ?? '',
-      discountType: this.discount.discountType ?? 0,
-      discountValue: this.discount.discountValue ?? 0
+      discountId: this.discount?.discountId || '',
+      discountType: this.discount?.discountType || 0,
+      discountValue: this.discount?.discountValue || 0
     };
     console.log('add order: ', addItem);
     this.orderService.post(addItem).subscribe({

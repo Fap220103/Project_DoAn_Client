@@ -1,0 +1,105 @@
+.reviews-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.header h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.rating-summary {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.average-rating {
+  font-size: 32px;
+  margin-right: 10px;
+}
+
+.stars i {
+  color: #f5c518;
+  margin-right: 5px;
+}
+
+.total-reviews {
+  margin-left: 10px;
+  color: #666;
+}
+
+.search-filter {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.search-filter input {
+  padding: 10px;
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.search-filter select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.reviews-content {
+  display: flex;
+}
+
+.filter-section {
+  width: 250px;
+  margin-right: 20px;
+}
+
+.star-filter label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.star-filter i {
+  color: #f5c518;
+}
+
+.additional-filter p {
+  color: #007bff;
+  margin: 10px 0;
+}
+
+.reviews-list {
+  flex: 1;
+}
+
+.review {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.reviewer-name {
+  font-weight: bold;
+}
+
+.review-date {
+  color: #666;
+}
+
+.review-rating i {
+  color: #f5c518;
+}
+
+.review-comment {
+  margin-top: 5px;
+}

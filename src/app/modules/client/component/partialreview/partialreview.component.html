@@ -1,15 +1,19 @@
-<div class="user_review_container d-flex flex-column flex-sm-row">
+<div class="user_review_container d-flex flex-column flex-sm-row" *ngFor="let item of lstReview">
   <div class="user">
     <div class="user_pic"></div>
     <div class="user_rating">
       <ul class="star_rating">
-        Html.Raw(ShoppingOnline.Helpers.Common.HtmlRate(item.Rate))
+        <span class="stars">
+          <ng-container *ngFor="let star of getStarArray(item.rate)">
+            <i class="fa fa-star text-warning"></i>
+          </ng-container>
+        </span>
       </ul>
     </div>
   </div>
   <div class="review">
-    <div class="review_date">item.CreatedDate.ToString("dd/MM/yyyy")</div>
-    <div class="user_name">item.FullName</div>
-    <p>item.Content</p>
+    <div class="review_date">{{ item.createdDate }}</div>
+    <div class="user_name">{{ item.customerName }}</div>
+    <p>{{ item.content }}</p>
   </div>
 </div>

@@ -47,8 +47,9 @@
           </button>
           <button
             mat-icon-button
-            (click)="delete(item)"
+            (click)="delete(item.orderId)"
             matTooltip="{{ 'Order.EditStatus' | translate }}"
+            *ngIf="item.status === 1"
           >
             <mat-icon>delete</mat-icon>
           </button>

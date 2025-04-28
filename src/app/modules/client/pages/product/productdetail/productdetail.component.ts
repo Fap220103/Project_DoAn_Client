@@ -19,7 +19,6 @@ export class ProductDetailComponent implements OnInit {
   params: any = {};
   currentUserId!: string;
   productId!: string;
-  reviewCount = 3;
   quantity = 1;
   lstColor: any[] = [];
   lstSize: any[] = [];

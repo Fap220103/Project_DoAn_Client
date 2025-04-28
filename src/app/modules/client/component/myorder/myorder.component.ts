@@ -8,6 +8,7 @@ import { orderStatus } from '../../../../core/constants/common';
 import { DatePipe } from '@angular/common';
 import { OrderDetailComponent } from '../../../admin/pages/order/orderdetail/orderdetail.component';
 import { AuthService } from '../../../../core/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-myorder',
@@ -63,26 +64,33 @@ export class MyOrderComponent implements OnInit {
     this.pageSize = event.pageSize;
     this.getData();
   }
-  delete(item: any) {
-    // this.selectedItem = item;
-    // const dialogRef = this.dialog.open(AddSettingComponent, {
-    //   minWidth: '30%',
-    //   height: '100%',
-    //   panelClass: 'custom-dialog-right',
-    //   position: {
-    //     right: '0'
-    //   },
-    //   data: {
-    //     title: 'Setting.EditTitle',
-    //     item: this.selectedItem,
-    //     isEdit: true
-    //   }
-    // });
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   if (result) {
-    //     this.getData();
-    //   }
-    // });
+  delete(orderId: string) {
+    Swal.fire({
+      title: this.translate.instant('Common.DeleteConfirm'),
+      text: this.translate.instant('Common.DeleteTitle'),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: this.translate.instant('Common.Delete'),
+      cancelButtonText: this.translate.instant('Common.Cancel'),
+      backdrop: true,
+      position: 'center'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.orderService.cancelOrder({ orderId: orderId }).subscribe({
+          next: (res) => {
+            if (res.code === 200) {
+              this.getData();
+              this.processResponse(res);
+            } else {
+              this.processResponse(false);
+            }
+          },
+          error: (err) => {
+            this.processResponse(false);
+          }
+        });
+      }
+    });
   }
   detail(orderId: any) {
     const dialogRef = this.dialog.open(OrderDetailComponent, {

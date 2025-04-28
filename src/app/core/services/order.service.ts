@@ -21,4 +21,9 @@ export class OrderService extends BaseService<any> {
     const url = `${this.svUrl}/UpdateOrderStatus`;
     return this.put(model, url);
   }
+
+  cancelOrder(model: any): Observable<any> {
+    const url = `${this.svUrl}/CancelOrder`;
+    return this.post(model, url);
+  }
 }

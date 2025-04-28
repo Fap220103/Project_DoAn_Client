@@ -1,0 +1,85 @@
+<div class="reviews-container">
+  <form #reviewForm="ngForm">
+    <div>
+      <h2>Your Rating:</h2>
+      <ul class="user_star_rating">
+        <li *ngFor="let star of [1, 2, 3, 4, 5]; let i = index" (click)="selectRating(star)">
+          <i
+            class="fa"
+            [ngClass]="{
+              'fa-star': star <= selectedRating,
+              'fa-star-o': star > selectedRating
+            }"
+            aria-hidden="true"
+          ></i>
+        </li>
+      </ul>
+
+      <textarea
+        [(ngModel)]="content"
+        name="content"
+        class="input_review"
+        rows="4"
+        placeholder="Your Review"
+        required
+      ></textarea>
+    </div>
+
+    <div class="text-left text-sm-right">
+      <button (click)="save()" class="red_button review_submit_btn trans_300">Submit</button>
+    </div>
+  </form>
+  <!-- Tiêu đề và điểm trung bình -->
+  <div class="">
+    <div class="rating-summary">
+      <span class="average-rating">{{ averageRating }}</span>
+      <span class="stars">
+        <i class="fas fa-star" *ngFor="let star of getStarArray(averageRating)"></i>
+      </span>
+      <span class="total-reviews"
+        >Được trên {{ totalReviews }} đánh giá trực tiếp từ khách hàng</span
+      >
+    </div>
+  </div>
+
+  <!-- Thanh tìm kiếm -->
+  <!-- <div class="search-filter">
+    <input
+      type="text"
+      placeholder="Tìm kiếm đánh giá"
+      [(ngModel)]="searchText"
+      (input)="filterReviews()"
+    />
+  </div> -->
+
+  <!-- Bộ lọc và danh sách đánh giá -->
+  <div class="reviews-content">
+    <!-- Bộ lọc theo số sao -->
+    <div class="filter-section">
+      <h3>Hiện thị đánh giá 1-10</h3>
+      <div class="star-filter">
+        <label *ngFor="let star of [5, 4, 3, 2, 1]">
+          <input type="checkbox" [value]="star" (change)="filterByStars(star)" />
+          {{ star }} <i class="fas fa-star" *ngFor="let s of [].constructor(star)"></i>
+        </label>
+      </div>
+      <div class="additional-filter">
+        <p>Các review được tính từ khách hàng đã mua hàng tại CloShop</p>
+      </div>
+    </div>
+
+    <!-- Danh sách đánh giá -->
+    <div class="reviews-list">
+      <div class="review" *ngFor="let review of filteredReviews">
+        <div class="review-header">
+          <span class="reviewer-name">{{ review.customerName }}</span>
+          <span class="review-date">{{ review.createDate | date: 'dd/MM/yyyy' }}</span>
+        </div>
+        <div class="review-rating">
+          <i class="fas fa-star" *ngFor="let star of getStarArray(review.rate)"></i>
+        </div>
+        <p class="review-comment">{{ review.content }}</p>
+      </div>
+    </div>
+  </div>
+</div>

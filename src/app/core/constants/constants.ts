@@ -35,5 +35,8 @@ export const Constants = {
   },
   ShippingAddress: {
     Resource: 'api/AddressOrder'
+  },
+  Review: {
+    Resource: 'api/ReviewProduct'
   }
 };
