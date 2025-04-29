@@ -24,14 +24,41 @@ export class ProductService extends BaseService<any> {
     return this.http.get(url, { headers: headers, withCredentials: true });
   }
 
-  getProductByCategory(ids: string[], page?: number, limit?: number): Observable<any> {
+  // getProductByCategory(ids: string[], page?: number, limit?: number): Observable<any> {
+  //   const headers: HttpHeaders = new HttpHeaders();
+  //   const xLimit = limit ? limit : 10;
+  //   const xPage = page ? page : 1;
+  //   const idsParam = ids.join(',');
+  //   let url = `${this.svUrl}/GetByCategoryId?categoryId=${idsParam}`;
+  //   url += '&page=' + xPage + '&limit=' + xLimit;
+
+  //   return this.http.get(url, { headers: headers, withCredentials: true });
+  // }
+
+  getProductByCategory(
+    params?: any,
+    page?: number,
+    limit?: number,
+    orderby?: any
+  ): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders();
+    let url = `${this.svUrl}/GetByCategoryId`;
     const xLimit = limit ? limit : 10;
     const xPage = page ? page : 1;
-    const idsParam = ids.join(',');
-    let url = `${this.svUrl}/GetByCategoryId?categoryId=${idsParam}`;
-    url += '&page=' + xPage + '&limit=' + xLimit;
+    url += '?page=' + xPage + '&limit=' + xLimit;
 
+    if (params && Object.keys(params).length > 0) {
+      for (const key of Object.keys(params)) {
+        if (params[key] != null && params[key] != undefined)
+          url += '&' + key + '=' + encodeURIComponent(params[key]);
+      }
+    }
+    if (orderby && Object.keys(orderby).length > 0) {
+      for (const key of Object.keys(orderby)) {
+        if (orderby[key] != null && orderby[key] != undefined)
+          url += '&ORDER=' + key + '|' + encodeURIComponent(orderby[key]);
+      }
+    }
     return this.http.get(url, { headers: headers, withCredentials: true });
   }
 }

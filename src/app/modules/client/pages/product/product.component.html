@@ -20,30 +20,24 @@
       <!-- Sidebar -->
 
       <div class="sidebar">
-        <div class="sidebar_section">
-          <div class="sidebar_title">
-            <h5>Product Category</h5>
-          </div>
-          <app-menuleft></app-menuleft>
-        </div>
-
         <!-- Price Range Filtering -->
         <div class="sidebar_section">
           <div class="sidebar_title">
             <h5>Filter by Price</h5>
           </div>
-          <p>
-            <input
-              type="text"
-              id="amount"
-              readonly
-              style="border: 0; color: #f6931f; font-weight: bold"
-            />
-            <input type="hidden" id="FromAmount" />
-            <input type="hidden" id="ToAmount" />
-          </p>
-          <div id="slider-range"></div>
-          <div class="filter_button"><span>filter</span></div>
+
+          <div class="input-range-container">
+            <div class="input-group">
+              <input type="text" placeholder="TỪ" class="text-sm" [(ngModel)]="price_min" />
+            </div>
+            <span class="dash">–</span>
+            <div class="input-group">
+              <input type="text" placeholder="ĐẾN" class="text-sm" [(ngModel)]="price_max" />
+            </div>
+          </div>
+          <div class="filter_button" (click)="onFilterByPrice()">
+            <span>Filter</span>
+          </div>
           <hr />
         </div>
 
@@ -53,35 +47,34 @@
             <h5>Sizes</h5>
           </div>
           <ul class="checkboxes">
-            <li><i class="fa fa-square-o" aria-hidden="true"></i><span>S</span></li>
-            <li class="active"><i class="fa fa-square" aria-hidden="true"></i><span>M</span></li>
-            <li><i class="fa fa-square-o" aria-hidden="true"></i><span>L</span></li>
-            <li><i class="fa fa-square-o" aria-hidden="true"></i><span>XL</span></li>
-            <li><i class="fa fa-square-o" aria-hidden="true"></i><span>XXL</span></li>
+            <li *ngFor="let size of sizes" (click)="toggleSize(size)">
+              <i
+                class="fa"
+                [class.fa-square]="selectedSizes.includes(size)"
+                [class.fa-square-o]="!selectedSizes.includes(size)"
+                aria-hidden="true"
+              ></i>
+              <span>{{ size }}</span>
+            </li>
           </ul>
         </div>
 
-        <!-- Color -->
+        <!-- Colors -->
         <div class="sidebar_section">
           <div class="sidebar_title">
-            <h5>Color</h5>
+            <h5>Colors</h5>
           </div>
           <ul class="checkboxes">
-            <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Black</span></li>
-            <li class="active"><i class="fa fa-square" aria-hidden="true"></i><span>Pink</span></li>
-            <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
-            <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
-            <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
-            <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
-            <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
-            <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
-            <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
-            <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
-            <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
+            <li *ngFor="let color of colors" (click)="toggleColor(color)">
+              <i
+                class="fa"
+                [class.fa-square]="selectedColors.includes(color)"
+                [class.fa-square-o]="!selectedColors.includes(color)"
+                aria-hidden="true"
+              ></i>
+              <span>{{ color }}</span>
+            </li>
           </ul>
-          <div class="show_more">
-            <span><span>+</span>Show More</span>
-          </div>
         </div>
       </div>
 
@@ -96,49 +89,29 @@
               <!-- Product Sorting -->
 
               <div class="product_sorting_container product_sorting_container_top">
-                <ul class="product_sorting">
-                  <li>
-                    <span class="type_sorting_text">Default Sorting</span>
-                    <i class="fa fa-angle-down"></i>
-                    <ul class="sorting_type">
-                      <li
-                        class="type_sorting_btn"
-                        data-isotope-option='{ "sortBy": "original-order" }'
-                      >
-                        <span>Default Sorting</span>
-                      </li>
-                      <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'>
-                        <span>Price</span>
-                      </li>
-                      <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'>
-                        <span>Product Name</span>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <span>Show</span>
-                    <span class="num_sorting_text">6</span>
-                    <i class="fa fa-angle-down"></i>
-                    <ul class="sorting_num">
-                      <li class="num_sorting_btn"><span>6</span></li>
-                      <li class="num_sorting_btn"><span>12</span></li>
-                      <li class="num_sorting_btn"><span>24</span></li>
-                    </ul>
-                  </li>
-                </ul>
-                <div class="pages d-flex flex-row align-items-center">
-                  <div class="page_current">
-                    <span>1</span>
-                    <ul class="page_selection">
-                      <li><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                    </ul>
-                  </div>
-                  <div class="page_total"><span>of</span> 3</div>
-                  <div id="next_page" class="page_next">
-                    <a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                  </div>
+                <div class="filter-bar">
+                  <label>Sắp xếp theo</label>
+                  <button
+                    [class.active]="activeSort === 'newest'"
+                    [(ngModel)]="orderBy"
+                    (click)="onSort()"
+                  >
+                    Mới Nhất
+                  </button>
+
+                  <button
+                    [class.active]="activeSort === 'bestseller'"
+                    [(ngModel)]="orderBy"
+                    (click)="onSort()"
+                  >
+                    Bán Chạy
+                  </button>
+
+                  <select [value]="activeSort" (change)="onSort()" [(ngModel)]="orderBy">
+                    <option value="">Giá</option>
+                    <option value="price|asc">Giá: Thấp đến Cao</option>
+                    <option value="price|desc">Giá: Cao đến Thấp</option>
+                  </select>
                 </div>
               </div>
 
@@ -180,12 +153,20 @@
                     </div>
                   </div>
                   <div class="product-meta">
-                    <span class="sold">Đã bán 2000</span>
+                    <span class="sold">Đã bán {{ item.totalSold }}</span>
                     <span class="stars">
-                      <ng-container *ngFor="let star of getStarArray(4.5)">
-                        <i class="fa fa-star text-warning"></i>
+                      <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                        <i
+                          class="fa"
+                          [ngClass]="{
+                            'fa-star text-warning': star <= item.avgRate,
+                            'fa-star-o text-muted': star > item.avgRate
+                          }"
+                          aria-hidden="true"
+                        >
+                        </i>
                       </ng-container>
-                      (1000)
+                      ({{ item.totalRate }})
                     </span>
                   </div>
                 </div>

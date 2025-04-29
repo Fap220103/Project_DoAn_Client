@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavigationItem } from '../../../../core/models/navigation.model';
 import { Observable, take } from 'rxjs';
-import { User } from '../../../../core/models/user.model';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Router } from '@angular/router';
 

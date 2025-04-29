@@ -43,10 +43,7 @@
                 {{ addressDefault.district }}, {{ addressDefault.province }}</span
               >
               <span class="default-label">Mặc Định</span>
-              <button
-                class="change-link cursor-pointer"
-                (click)="changeAddress(addressDefault)"
-              >
+              <button class="change-link cursor-pointer" (click)="changeAddress(addressDefault)">
                 Thay Đổi
               </button>
             </div>
@@ -93,7 +90,9 @@
               >
             </div>
 
-            <button (click)="chooseDiscount()" class="change-link cursor-pointer">Chọn Voucher</button>
+            <button (click)="chooseDiscount()" class="change-link cursor-pointer">
+              Chọn Voucher
+            </button>
           </div>
         </div>
       </div>

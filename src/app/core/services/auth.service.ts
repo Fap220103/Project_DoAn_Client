@@ -1,9 +1,7 @@
-import { Content } from '../models/response.model';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable, ReplaySubject, catchError, map, tap, throwError } from 'rxjs';
-import { LoginModel } from '../models/login.model';
-import { User } from '../models/user.model';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Constants } from '../constants/constants';

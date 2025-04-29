@@ -35,10 +35,12 @@ export class ProductReviewComponent implements OnInit {
     this.checkHasOrdered();
   }
 
-  checkHasOrdered(){
-    this.orderService.getStatusUserOrder(this.authService.getUserId(),this.productId).subscribe((rs) =>{
-      this.checkStatusUserOrder = rs.content.data;
-    })
+  checkHasOrdered() {
+    this.orderService
+      .getStatusUserOrder(this.authService.getUserId(), this.productId)
+      .subscribe((rs) => {
+        this.checkStatusUserOrder = rs.content.data;
+      });
   }
   getData() {
     this.reviewService.get({ productId: this.productId }, 1, 100).subscribe((rs) => {

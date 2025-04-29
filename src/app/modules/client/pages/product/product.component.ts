@@ -2,15 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { take } from 'rxjs';
 import { AuthService } from '../../../../core/services/auth.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { ToastrService } from 'ngx-toastr';
-import { UserService } from '../../../../core/services/user.service';
-import { MatDialog } from '@angular/material/dialog';
 import { ProductService } from '../../../../core/services/product.service';
-import Swal from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductcategoryService } from '../../../../core/services/productcategory.service';
+import { ColorService } from '../../../../core/services/color.service';
+import { SizeService } from '../../../../core/services/size.service';
 
 @Component({
   selector: 'app-product',
@@ -31,13 +29,27 @@ export class ProductComponent implements OnInit {
   lstCategory1: any[] = [];
   lstCategory2: any[] = [];
   lstCategory3: any[] = [];
+  sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+  colors = ['Trắng', 'Hồng', 'Đen', 'Đỏ', 'Cam'];
+  lstSize: any[] = [];
+  lstColor: any[] = [];
+  selectedSizes: string[] = [];
+  selectedColors: string[] = [];
 
+  categoryId: any;
+  price_min!: number;
+  price_max!: number;
+
+  activeSort: string = '';
+  orderBy: string = '';
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private productService: ProductService,
     private productCategoryService: ProductcategoryService,
     private authService: AuthService,
+    private colorService: ColorService,
+    private sizeService: SizeService,
     public snackBar: MatSnackBar,
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -46,21 +58,48 @@ export class ProductComponent implements OnInit {
     this.currentUserId = authService.getUserId();
   }
 
+  onFilterByPrice() {
+    this.buildParams();
+    this.getData();
+  }
   async ngOnInit(): Promise<void> {
     await this.loadAllCategories();
     this.activatedRoute.queryParams.subscribe((params) => {
       const categoryId = params['categoryId'];
       if (!categoryId) {
-        this.getData();
+        this.loadProductsByCategoryIds([]);
       }
       this.loadCategoriesAndProducts(categoryId);
     });
   }
-  getData() {
-    this.productService.get(this.params, this.pageIndex + 1, this.pageSize).subscribe((rs) => {
-      this.lstProduct = rs.content.data.items;
-      this.totalCount = rs.content.data.totalRecords;
-    });
+  // get sản phẩm
+  getData(orderby?: any) {
+    this.productService
+      .getProductByCategory(this.params, this.pageIndex + 1, this.pageSize, orderby)
+      .subscribe((rs) => {
+        this.lstProduct = rs.content.data.items;
+        this.totalCount = rs.content.data.totalRecords;
+      });
+  }
+  onSort() {
+    // Cập nhật activeSort khi có thay đổi trong orderBy
+    this.activeSort = this.orderBy;
+
+    let orderby: any = null;
+
+    if (this.orderBy === 'newest') {
+      orderby = null;
+    } else if (this.orderBy === 'bestseller') {
+      orderby = { sortBy: 'bestseller' }; //
+    } else if (this.orderBy === 'price|asc') {
+      orderby = { sortBy: 'price', order: 'asc' };
+    } else if (this.orderBy === 'price|desc') {
+      orderby = { sortBy: 'price', order: 'desc' };
+    }
+
+    // Gọi các hàm để xây dựng tham số và lấy dữ liệu
+    this.buildParams();
+    this.getData(orderby);
   }
   loadCategoriesAndProducts(categoryId: string) {
     const c1 = this.lstCategory1.find((c) => c.id === categoryId);
@@ -107,12 +146,11 @@ export class ProductComponent implements OnInit {
     }
   }
   loadProductsByCategoryIds(ids: string[]) {
-    this.productService
-      .getProductByCategory(ids, this.pageIndex + 1, this.pageSize)
-      .subscribe((rs) => {
-        this.lstProduct = rs.content.data.items;
-        this.totalCount = rs.content.data.totalRecords;
-      });
+    this.categoryId = ids.join(',');
+    this.params = {
+      categoryId: this.categoryId
+    };
+    this.getData();
   }
 
   // load danh muc lv 1 2 3
@@ -136,9 +174,7 @@ export class ProductComponent implements OnInit {
 
   handleChangeSearchInput(event: any) {
     if (event.key === 'Enter') {
-      this.params = {
-        search: this.searchString
-      };
+      this.buildParams();
       this.getData();
     } else {
       this.searchString = (event.target.value ?? '').trim();
@@ -147,13 +183,20 @@ export class ProductComponent implements OnInit {
 
   handleClearSearchInput() {
     this.searchString = '';
-    this.params = {
-      search: this.searchString
-    };
+    this.buildParams();
     this.getData();
   }
+  buildParams() {
+    this.params = {
+      search: this.searchString,
+      colors: this.selectedColors,
+      sizes: this.selectedSizes,
+      priceMin: this.price_min,
+      priceMax: this.price_max,
+      categoryId: this.categoryId
+    };
+  }
 
-  addToCart(id: any) {}
   getProductImage(item: any): string {
     return item.imageDefault || 'assets/Content/img/SanPham/h0.png';
   }
@@ -163,5 +206,25 @@ export class ProductComponent implements OnInit {
   }
   goToDetail(id: number) {
     this.router.navigate(['/product', id]);
+  }
+  toggleSize(size: string) {
+    const index = this.selectedSizes.indexOf(size);
+    if (index > -1) this.selectedSizes.splice(index, 1);
+    else this.selectedSizes.push(size);
+    this.params.sizes = this.selectedSizes.join(','); // convert thành chuỗi
+    this.buildParams();
+    this.getData();
+  }
+  toggleColor(color: string) {
+    const index = this.selectedColors.indexOf(color);
+    if (index > -1) this.selectedColors.splice(index, 1);
+    else this.selectedColors.push(color);
+    this.params.colors = this.selectedColors.join(','); // convert thành chuỗi
+    this.buildParams();
+    this.getData();
+  }
+  getSelectValue(event: Event): string {
+    const target = event.target as HTMLSelectElement;
+    return target.value;
   }
 }

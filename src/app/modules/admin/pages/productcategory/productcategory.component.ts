@@ -1,9 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Category,
-  ChildCategory,
-  ChildCategory2
-} from '../../../../core/models/productcategory.model';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 

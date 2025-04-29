@@ -26,3 +26,68 @@
 .product_name {
   font-size: 16px;
 }
+
+.input-range-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 80px;
+}
+
+.dash {
+  color: #999;
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #e8ecef;
+  padding: 10px;
+  border-radius: 5px;
+}
+.filter-bar label {
+  margin-top: 3px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+}
+.filter-bar button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.filter-bar button.active {
+  background-color: #ff4d4d;
+  color: white;
+}
+.filter-bar button:not(.active) {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+}
+.filter-bar button:hover:not(.active) {
+  background-color: #f0f0f0;
+}
+.filter-bar select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+}
