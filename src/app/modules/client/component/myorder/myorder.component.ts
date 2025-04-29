@@ -94,7 +94,8 @@ export class MyOrderComponent implements OnInit {
   }
   detail(orderId: any) {
     const dialogRef = this.dialog.open(OrderDetailComponent, {
-      minWidth: '70%',
+      width: '70vw', 
+      maxWidth: '100vw',
       height: '100%',
       panelClass: 'custom-dialog-right',
       position: {

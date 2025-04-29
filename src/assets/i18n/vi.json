@@ -15,7 +15,8 @@
       "NoData": "Không có bản ghi nào",
       "NotEmpty": "Không được để trống",
       "TitleNotEmpty": "Tiêu đề không được để trống",
-      "Home": "Trang chủ"
+      "Home": "Trang chủ",
+      "Exit": "Thoát"
     },
     "Message" : {
       "DeleteSuccess": "Xóa thành công",

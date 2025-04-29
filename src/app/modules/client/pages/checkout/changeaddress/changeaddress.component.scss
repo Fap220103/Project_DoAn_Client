@@ -1,82 +1,100 @@
 .container-box-dialog {
-  background-color: #f8f9fa;
-  padding: 15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  border-radius: 5px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  z-index: 1000;
 }
+
 .section-title {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: bold;
   color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.dialog-body {
+  overflow-y: auto;
+  flex-grow: 1;
+  padding-right: 10px;
   margin-bottom: 15px;
 }
+
 .address-item {
   display: flex;
   align-items: flex-start;
   padding: 10px 0;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #eee;
 }
-.address-item:last-child {
-  border-bottom: none;
-}
+
 .address-details {
   flex: 1;
   margin-left: 10px;
 }
-.address-name {
-  font-size: 1rem;
-  font-weight: bold;
+
+.address-name,
+.address-phone {
+  font-weight: 500;
   color: #333;
 }
-.address-phone {
-  color: #ff4500;
-  font-weight: bold;
-}
+
 .address-text {
-  font-size: 0.9rem;
-  color: #a8a5a5;
-  margin: 5px 0;
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 3px;
 }
+
 .default-label {
+  display: inline-block;
+  margin-top: 5px;
   background-color: #ff4500;
   color: white;
-  padding: 2px 8px;
-  border-radius: 3px;
+  padding: 2px 6px;
+  border-radius: 4px;
   font-size: 0.8rem;
-  margin-right: 8px;
 }
-.edit-link,
-.set-default-link {
-  color: #007bff;
-  text-decoration: none;
-  font-size: 0.85rem;
-  margin-right: 8px;
-}
-.edit-link:hover,
-.set-default-link:hover {
-  text-decoration: underline;
-}
+
 .button-group {
   display: flex;
   justify-content: flex-end;
-  margin-top: 15px;
+  gap: 10px;
 }
+
 .cancel-button,
 .confirm-button {
   padding: 8px 20px;
   border-radius: 5px;
   font-size: 1rem;
-  margin-left: 10px;
+  cursor: pointer;
 }
+
 .cancel-button {
-  background-color: #fff;
+  background-color: #f1f1f1;
   border: 1px solid #ccc;
   color: #333;
 }
+
+.cancel-button:hover {
+  background-color: #e0e0e0;
+}
+
 .confirm-button {
   background-color: #ff4500;
   border: none;
-  color: white;
+  color: #fff;
   font-weight: bold;
 }
+
 .confirm-button:hover {
-  background-color: #e03e00;
+  background-color: #d93c00;
 }

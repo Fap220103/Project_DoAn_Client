@@ -17,6 +17,12 @@ export class DiscountService extends BaseService<any> {
     return this.http.get(url, { headers: headers, withCredentials: true });
   }
 
+  getStatusUserDiscount(userId: string, discountId: string): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders();
+    const url = `${this.svUrl}/GetStatusUserDiscount?UserId=${userId}&DiscountId=${discountId}`;
+    return this.http.get(url, { headers: headers, withCredentials: true });
+  }
+
   addUserDiscount(model: any): Observable<any> {
     const url = `${this.svUrl}/AddUserDiscount`;
     return this.post(model, url);

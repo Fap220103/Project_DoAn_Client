@@ -1,16 +1,25 @@
 <div class="container-box-dialog">
   <div class="section-title">Địa Chỉ Của Tôi</div>
-  <div class="address-item" *ngFor="let item of lstAddress">
-    <input type="radio" name="address" [value]="item" [(ngModel)]="selectedAddress" class="mt-2" />
-    <div class="address-details">
-      <div>
-        <span class="address-name">{{ item.recipientName }}</span> |
-        <span class="address-phone">{{ item.phoneNumber }}</span>
-      </div>
-      <div class="address-text line">{{ item.addressLine }}</div>
-      <div class="address-text line">{{ item.addressOrder }}</div>
-      <div>
-        <span class="default-label" *ngIf="item.isDefault">Mặc định</span>
+
+  <div class="dialog-body">
+    <div class="address-item" *ngFor="let item of lstAddress">
+      <input
+        type="radio"
+        name="address"
+        [value]="item"
+        [(ngModel)]="selectedAddress"
+        class="mt-2"
+      />
+      <div class="address-details">
+        <div>
+          <span class="address-name">{{ item.recipientName }}</span> |
+          <span class="address-phone">{{ item.phoneNumber }}</span>
+        </div>
+        <div class="address-text line">{{ item.addressLine }}</div>
+        <div class="address-text line">{{ item.addressOrder }}</div>
+        <div>
+          <span class="default-label" *ngIf="item.isDefault">Mặc định</span>
+        </div>
       </div>
     </div>
   </div>

@@ -1,19 +1,25 @@
 <div class="container-box-dialog">
-  <div class="section-title">Voucher Của Tôi</div>
-  <div class="address-item" *ngFor="let item of lstDiscount">
-    <input
-      type="radio"
-      name="discount"
-      [value]="item"
-      [(ngModel)]="selectedDiscount"
-      class="mt-4"
-    />
-    <div class="coupon-content">
-      <h3>{{ item.title }}</h3>
-      <p class="coupon-min-order">{{ item.code }}</p>
-      <p class="coupon-min-order">giảm giá lên tới {{ item.displayValue }}</p>
-      <p class="coupon-min-order">Hiệu lực đến ngày {{ item.endDate | date: 'dd/MM/yyyy' }}</p>
-      <p class="coupon-status"><span class="coupon-condition"></span></p>
+  <div class="dialog-header">
+    <div class="section-title">Voucher Của Tôi</div>
+  </div>
+
+  <div class="dialog-body">
+    <div class="address-item" *ngFor="let item of lstDiscount">
+      <input
+        type="radio"
+        name="discount"
+        [value]="item"
+        [(ngModel)]="selectedDiscount"
+        class="mt-4"
+      />
+      <div class="coupon-content">
+        <h3>{{ item.title }}</h3>
+        <p class="coupon-min-order">{{ item.code }}</p>
+        <p class="coupon-min-order">giảm giá lên tới {{ item.displayValue }}</p>
+        <p class="coupon-min-order">
+          Hiệu lực đến ngày {{ item.endDate | date: 'dd/MM/yyyy' }}
+        </p>
+      </div>
     </div>
   </div>
 

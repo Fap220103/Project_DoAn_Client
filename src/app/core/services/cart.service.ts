@@ -71,7 +71,7 @@ export class CartService extends BaseService<any> {
           return this.addToCartApi(item, quantity);
         } else {
           localStorage.setItem(this.CART_KEY, JSON.stringify(cart));
-          return of();
+          return of(undefined);
         }
       }),
       mergeMap((result) => result)

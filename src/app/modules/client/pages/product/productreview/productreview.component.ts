@@ -1,3 +1,4 @@
+import { OrderService } from './../../../../../core/services/order.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ReviewService } from '../../../../../core/services/review.service';
 import { AuthService } from '../../../../../core/services/auth.service';
@@ -9,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./productreview.component.scss']
 })
 export class ProductReviewComponent implements OnInit {
+  checkStatusUserOrder: boolean = false;
   lstReview: any[] = [];
   filteredReviews: any[] = [];
   selectedRating: number = 0;
@@ -23,14 +25,21 @@ export class ProductReviewComponent implements OnInit {
 
   constructor(
     private reviewService: ReviewService,
+    private orderService: OrderService,
     private authService: AuthService,
     public snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
     this.getData();
+    this.checkHasOrdered();
   }
 
+  checkHasOrdered(){
+    this.orderService.getStatusUserOrder(this.authService.getUserId(),this.productId).subscribe((rs) =>{
+      this.checkStatusUserOrder = rs.content.data;
+    })
+  }
   getData() {
     this.reviewService.get({ productId: this.productId }, 1, 100).subscribe((rs) => {
       this.lstReview = rs.content.data.items;

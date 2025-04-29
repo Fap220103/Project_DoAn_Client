@@ -1,5 +1,5 @@
 <div class="reviews-container">
-  <form #reviewForm="ngForm">
+  <form #reviewForm="ngForm" *ngIf="checkStatusUserOrder">
     <div>
       <h2>Your Rating:</h2>
       <ul class="user_star_rating">

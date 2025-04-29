@@ -14,12 +14,13 @@
         <p class="coupon-min-order">Hiệu lực đến ngày {{ coupon.endDate | date: 'dd/MM/yyyy' }}</p>
         <p class="coupon-status"><span class="coupon-condition"></span></p>
       </div>
-      <button class="coupon-button" (click)="save(coupon)" *ngIf="!coupon.isSaved; else ShopNow">
+      <button class="coupon-button" (click)="save(coupon)" *ngIf="!coupon.hasSaved; else ShopNow">
         Lưu
       </button>
       <ng-template #ShopNow>
-        <button class="coupon-button" routerLink="/product">Mua ngay</button>
+        <button class="btn btn-outline-success" routerLink="/product">Mua ngay</button>
       </ng-template>
+ 
     </div>
   </div>
 </section>

@@ -17,6 +17,12 @@ export class OrderService extends BaseService<any> {
     return this.http.get(url, { headers: headers, withCredentials: true });
   }
 
+  getStatusUserOrder(userId: string, productId: string): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders();
+    const url = `${this.svUrl}/GetStatusUserOrder?UserId=${userId}&ProductId=${productId}`;
+    return this.http.get(url, { headers: headers, withCredentials: true });
+  }
+
   changeOrderStatus(model: any): Observable<any> {
     const url = `${this.svUrl}/UpdateOrderStatus`;
     return this.put(model, url);

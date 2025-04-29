@@ -18,7 +18,6 @@ export class DiscountComponent implements OnInit {
   lstStatus = orderStatus;
   lstDiscount: any[] = [];
   discountType = discountType;
-  isDisable: boolean = false;
   searchString: string = '';
   status!: number;
   selectedItem: any = {};
@@ -27,7 +26,6 @@ export class DiscountComponent implements OnInit {
   pageIndex = 0;
   pageSize = 20;
   pageSizeOptions = [5, 10, 20, 100];
-  savedDiscounts: Set<string> = new Set();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
@@ -40,20 +38,37 @@ export class DiscountComponent implements OnInit {
   ngOnInit(): void {
     this.getData();
   }
+  checkHasSavedDiscount(discountId: string){
+    this.discountService.getStatusUserDiscount(this.authService.getUserId(),discountId).subscribe((rs) =>{
+      return rs.content.data;
+    })
+  }
   getData() {
     this.discountService.get(this.params, this.pageIndex + 1, this.pageSize).subscribe((rs) => {
-      this.lstDiscount = rs.content.data.items;
-      this.lstDiscount = this.lstDiscount.map((x, index) => {
-        x.position = this.pageIndex * this.pageSize + index + 1;
+      const rawDiscounts = rs.content.data.items;
+      this.totalCount = rs.content.data.totalRecords;
+  
+      // Duyệt từng coupon để format và check trạng thái đã lưu
+      const userId = this.authService.getUserId();
+  
+      const checkDiscounts = rawDiscounts.map(async (x: any, index: number) => {
         x.displayType = this.discountType.find((item) => item.value == x.discountType)?.display;
         const formattedValue = new Intl.NumberFormat('vi-VN').format(x.discountValue);
         x.displayValue = x.discountType == 0 ? `${formattedValue} %` : `${formattedValue} VND`;
-        x.isSaved = this.savedDiscounts.has(x.id);
+  
+        // Gọi API kiểm tra trạng thái đã lưu
+        const result = await this.discountService.getStatusUserDiscount(userId, x.id).toPromise();
+        x.hasSaved = result.content.data;
         return x;
       });
-      this.totalCount = rs.content.data.totalRecords;
+  
+      // Chờ tất cả async xong
+      Promise.all(checkDiscounts).then((result) => {
+        this.lstDiscount = result;
+      });
     });
   }
+  
 
   onChangePage(event: any) {
     this.pageIndex = event.pageIndex;
@@ -67,12 +82,14 @@ export class DiscountComponent implements OnInit {
     };
     this.discountService.addUserDiscount(addItem).subscribe({
       next: (res: any) => {
-        if (res.content === 200) {
-          this.savedDiscounts.add(coupon.id); // Đánh dấu coupon là đã lưu
-          coupon.isSaved = true;
+        if (res.code === 200) {
+       
+            coupon.hasSaved = true;
+          
+          
           this.processResponse(res, 'Đã lưu mã khuyến mãi thành công');
         } else {
-          this.processResponse(false, 'Lưu mã khuyến mãi thất bại');
+          this.processResponse(false, 'Bạn đã lưu mã khuyến mãi này rồi');
         }
       },
       error: () => {

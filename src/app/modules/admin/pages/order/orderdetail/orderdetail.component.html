@@ -1,6 +1,10 @@
-<section class="content mt-[50px]">
+<div class="dialog-content-wrapper mt-[50px]">
+  <!-- Header -->
   <div class="flex flex-row items-center px-6 h-20 min-h-20 text-white bg-primary">
-    <mat-icon class="icon-size-7 text-current" [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+    <mat-icon
+      class="icon-size-7 text-current"
+      [svgIcon]="'heroicons_solid:plus-circle'"
+    ></mat-icon>
     <div class="ml-3 text-2xl font-semibold tracking-tight">
       {{ data.title | translate }}
     </div>
@@ -9,10 +13,8 @@
     </button>
   </div>
   <!-- Default box -->
-  <div class="card">
-    <div class="card-header">
-      <h3 class="card-title">Chi tiết đơn hàng</h3>
-    </div>
+  <div class="card wrap-body">
+   
     <div class="card-body">
       <div class="row">
         <div class="col-md-6">
@@ -46,7 +48,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label>Ngày tạo</label>
-            <p class="form-control">{{ order.createdAt }}</p>
+            <p class="form-control">{{ order.createdAt | date: 'dd/MM/yyyy' }}</p>
           </div>
         </div>
         <div class="col-md-6">
@@ -67,6 +69,13 @@
         </div>
       </div>
     </div>
-    <div class="card-footer"></div>
+    <div class="border-t"></div>
+  <!-- Actions -->
+  <div mat-dialog-actions class="pl-5 pr-5 flex items-center justify-center">
+    <button mat-dialog-close mat-stroked-button type="button">
+      {{ 'Common.Exit' | translate }}
+    </button>
+    
   </div>
-</section>
+  </div>
+</div>
