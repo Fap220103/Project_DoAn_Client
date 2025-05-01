@@ -91,23 +91,18 @@
               <div class="product_sorting_container product_sorting_container_top">
                 <div class="filter-bar">
                   <label>Sắp xếp theo</label>
-                  <button
-                    [class.active]="activeSort === 'newest'"
-                    [(ngModel)]="orderBy"
-                    (click)="onSort()"
-                  >
+                  <button [class.active]="activeSort === 'newest'" (click)="changeSort('newest')">
                     Mới Nhất
                   </button>
 
                   <button
                     [class.active]="activeSort === 'bestseller'"
-                    [(ngModel)]="orderBy"
-                    (click)="onSort()"
+                    (click)="changeSort('bestseller')"
                   >
                     Bán Chạy
                   </button>
 
-                  <select [value]="activeSort" (change)="onSort()" [(ngModel)]="orderBy">
+                  <select [value]="priceSort" (change)="changeSort($event)">
                     <option value="">Giá</option>
                     <option value="price|asc">Giá: Thấp đến Cao</option>
                     <option value="price|desc">Giá: Cao đến Thấp</option>

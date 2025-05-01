@@ -107,14 +107,22 @@ export class CheckoutComponent implements OnInit {
     this.orderService.post(addItem).subscribe({
       next: (res) => {
         if (res.code === 200) {
-          this.cartService.clearCart();
-          this.router.navigate(['/checkoutsuccess']);
-          this.processResponse(res);
+          const paymentUrl = res.content?.paymentUrl;
+
+          if (paymentUrl) {
+            // Nếu là thanh toán qua VNPAY → chuyển hướng
+            window.location.href = paymentUrl;
+          } else {
+            // Thanh toán COD hoặc thành công nội bộ
+            this.cartService.clearCart();
+            this.router.navigate(['/checkoutsuccess']);
+            this.processResponse(res, 'Thanh toán thành công');
+          }
         } else {
-          this.processResponse(false);
+          this.processResponse(false, 'Thanh toán thất bại');
         }
       },
-      error: () => this.processResponse(false)
+      error: () => this.processResponse(false, 'Thanh toán thất bại')
     });
   }
   updateAddress() {

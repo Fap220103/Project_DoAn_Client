@@ -16,7 +16,7 @@
         <mat-label>{{ 'ProductVariant.ProductName' | translate }}</mat-label>
         <mat-select formControlName="productId">
           <mat-option *ngFor="let product of lstProduct" [value]="product.id">
-            {{ product.name }} ({{ product.code }})
+            ({{ product.code }})
           </mat-option>
         </mat-select>
       </mat-form-field>

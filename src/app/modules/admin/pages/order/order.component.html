@@ -52,6 +52,7 @@
             <th>{{ 'Order.CreatedDate' | translate }}</th>
             <th>{{ 'Order.Quantity' | translate }}</th>
             <th>{{ 'Order.TotalAmount' | translate }}</th>
+            <th>{{ 'Order.TypePayment' | translate }}</th>
             <th>{{ 'Order.Status' | translate }}</th>
             <th style="width: 200px">{{ 'Common.Action' | translate }}</th>
           </tr>
@@ -79,7 +80,36 @@
               >
             </td>
             <td>
-              <span matTooltip="{{ item.displayStatus }}">{{ item.displayStatus }}</span>
+              <span matTooltip="{{ item.displayPayment }}">{{ item.displayPayment }}</span>
+            </td>
+            <td>
+              <div class="flex items-center justify-center" matTooltip="{{ item.displayStatus }}">
+                <span
+                  *ngIf="item.status === 1"
+                  class="rounded-full px-3 py-0.5 text-sm font-semibold bg-yellow-100 text-yellow-600 ng-star-inserted"
+                  >{{ item.displayStatus }}</span
+                >
+                <span
+                  *ngIf="item.status === 2"
+                  class="rounded-full px-3 py-0.5 text-sm font-semibold bg-blue-100 text-blue-600 ng-star-inserted"
+                  >{{ item.displayStatus }}</span
+                >
+                <span
+                  *ngIf="item.status === 3"
+                  class="rounded-full px-3 py-0.5 text-sm font-semibold bg-purple-100 text-purple-600 ng-star-inserted"
+                  >{{ item.displayStatus }}</span
+                >
+                <span
+                  *ngIf="item.status === 4"
+                  class="rounded-full px-3 py-0.5 text-sm font-semibold bg-red-100 text-red-600 ng-star-inserted"
+                  >{{ item.displayStatus }}</span
+                >
+                <span
+                  *ngIf="item.status === 5"
+                  class="rounded-full px-3 py-0.5 text-sm font-semibold bg-green-100 text-green-600 ng-star-inserted"
+                  >{{ item.displayStatus }}</span
+                >
+              </div>
             </td>
             <td>
               <button

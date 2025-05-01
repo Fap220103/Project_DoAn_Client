@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../../../auth/register/register.component';
 import { ProductcategoryService } from '../../../../core/services/productcategory.service';
 import { Router } from '@angular/router';
+import { SearchInputComponent } from '../searchinput/searchinput.component';
+import { CartService } from '../../../../core/services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +14,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  isSearchOpen = false;
+  cartItemCount = 0;
+  products = [
+    { image: 'assets/product1.jpg', name: 'Áo thun nam thể thao' },
+    { image: 'assets/product2.jpg', name: 'Áo sơ mi Modal' },
+    { image: 'assets/product3.jpg', name: 'Áo sơ mi cổ tàu Poplin' }
+  ];
   isLoggedIn: boolean = false;
   lstCategory1: any[] = [];
   lstCategory2: any[] = [];
@@ -19,11 +28,15 @@ export class NavbarComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private productCategoryService: ProductcategoryService,
+    private cartService: CartService,
     public dialog: MatDialog,
     public router: Router
   ) {
     this.authService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
+    });
+    this.cartService.cartCount$.subscribe((count) => {
+      this.cartItemCount = count;
     });
   }
 
@@ -62,6 +75,16 @@ export class NavbarComponent implements OnInit {
   onCategoryClick(categoryId: number) {
     this.router.navigate(['/product'], {
       queryParams: { categoryId }
+    });
+  }
+
+  openSearchDialog(): void {
+    this.dialog.open(SearchInputComponent, {
+      width: '100vw',
+      height: '100vh',
+      panelClass: 'full-screen-dialog',
+      hasBackdrop: true,
+      backdropClass: 'transparent-backdrop'
     });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { take } from 'rxjs';
 import { AuthService } from '../../../../core/services/auth.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -12,6 +12,8 @@ import { AddProductComponent } from './addproduct/addproduct.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EditImageProductComponent } from './editimageproduct/editimageproduct.component';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { Constants } from '../../../../core/constants/constants';
 
 @Component({
   selector: 'app-product',
@@ -19,6 +21,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   pageTitle: string = 'Sản phẩm';
   lstProduct: any[] = [];
   searchString: string = '';
@@ -34,6 +37,7 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+    private http: HttpClient,
     private authService: AuthService,
     public snackBar: MatSnackBar,
     private translate: TranslateService,
@@ -50,6 +54,8 @@ export class ProductComponent implements OnInit {
       this.lstProduct = rs.content.data.items;
       this.lstProduct = this.lstProduct.map((x, index) => {
         x.position = this.pageIndex * this.pageSize + index + 1;
+        x.imageDefault = x.imageDefault || '/assets/Content/img/SanPham/h0.png';
+
         return x;
       });
       this.totalCount = rs.content.data.totalRecords;
@@ -199,5 +205,41 @@ export class ProductComponent implements OnInit {
       search: this.searchString
     };
     this.getData();
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if (file) {
+      this.importExcel(file);
+      input.value = '';
+    }
+  }
+
+  importExcel(file: File) {
+    if (!file) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', file); // key 'file' phải trùng với tên tham số trong API
+
+    this.http.post(`${Constants.ApiResources}api/product/import`, formData).subscribe({
+      next: (res: any) => {
+        const msg = res?.message || 'Import thành công';
+        this.snackBar.open(msg, 'OK', { duration: 2000 });
+        this.getData();
+      },
+      error: (err) => {
+        console.error(err);
+        const msg = err?.error?.file?.[0] || 'Import thất bại';
+        this.snackBar.open(msg, 'OK', { duration: 3000 });
+      }
+    });
+  }
+
+  exportExcel() {
+    this.productService.exportToExcel();
   }
 }

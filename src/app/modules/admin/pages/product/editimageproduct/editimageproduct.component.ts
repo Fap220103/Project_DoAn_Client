@@ -56,6 +56,7 @@ export class EditImageProductComponent implements OnInit {
       });
     }
   }
+
   deleteImage(id: string) {
     Swal.fire({
       title: this.translate.instant('Common.DeleteConfirm'),
@@ -105,6 +106,7 @@ export class EditImageProductComponent implements OnInit {
       }
     });
   }
+
   deleteAllImages() {
     Swal.fire({
       title: this.translate.instant('Common.DeleteConfirm'),
@@ -149,6 +151,5 @@ export class EditImageProductComponent implements OnInit {
       verticalPosition: 'bottom',
       duration: 2000
     });
-    if (!isClose && res) this.dialogRef.close(res);
   }
 }

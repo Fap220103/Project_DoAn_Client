@@ -129,7 +129,7 @@ export class ProductVariantComponent implements OnInit {
         right: '0'
       },
       data: {
-        title: 'ProductVatiant.AddTitle',
+        title: 'ProductVariant.AddTitle',
         isEdit: false
       }
     });

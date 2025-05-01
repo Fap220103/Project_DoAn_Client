@@ -70,6 +70,7 @@ export class CartComponent implements OnInit {
     this.cartService.removeFromCart(productVariantId).subscribe(() => {
       this.cartItems = this.cartItems.filter((item) => item.productVariantId !== productVariantId);
       this.calculateTotalAmount();
+      this.cartService.saveCart(this.cartItems);
     });
   }
 

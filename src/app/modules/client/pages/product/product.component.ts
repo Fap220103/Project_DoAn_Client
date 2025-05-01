@@ -24,7 +24,7 @@ export class ProductComponent implements OnInit {
   totalCount = 0;
   pageIndex = 0;
   pageSize = 20;
-  pageSizeOptions = [5, 10, 25, 100];
+  pageSizeOptions = [5, 10, 20, 100];
   currentUserId!: string;
   lstCategory1: any[] = [];
   lstCategory2: any[] = [];
@@ -42,6 +42,7 @@ export class ProductComponent implements OnInit {
 
   activeSort: string = '';
   orderBy: string = '';
+  priceSort: string = '';
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
@@ -90,7 +91,7 @@ export class ProductComponent implements OnInit {
     if (this.orderBy === 'newest') {
       orderby = null;
     } else if (this.orderBy === 'bestseller') {
-      orderby = { sortBy: 'bestseller' }; //
+      orderby = { sortBy: 'bestseller' };
     } else if (this.orderBy === 'price|asc') {
       orderby = { sortBy: 'price', order: 'asc' };
     } else if (this.orderBy === 'price|desc') {
@@ -226,5 +227,27 @@ export class ProductComponent implements OnInit {
   getSelectValue(event: Event): string {
     const target = event.target as HTMLSelectElement;
     return target.value;
+  }
+  changeSort(value: string | Event): void {
+    let selectedValue: string;
+
+    if (typeof value === 'string') {
+      selectedValue = value;
+    } else {
+      const selectElement = value.target as HTMLSelectElement;
+      selectedValue = selectElement.value;
+    }
+
+    this.orderBy = selectedValue;
+    this.activeSort = selectedValue;
+
+    // Cập nhật priceSort chỉ nếu là các tùy chọn giá
+    if (selectedValue === 'price|asc' || selectedValue === 'price|desc' || selectedValue === '') {
+      this.priceSort = selectedValue;
+    } else {
+      this.priceSort = '';
+    }
+
+    this.onSort();
   }
 }

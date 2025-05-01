@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { AddSettingComponent } from '../setting/addSetting/addSetting.component';
 import { OrderService } from '../../../../core/services/order.service';
-import { orderStatus } from '../../../../core/constants/common';
+import { orderStatus, paymentType } from '../../../../core/constants/common';
 import { DatePipe } from '@angular/common';
 import { OrderDetailComponent } from './orderdetail/orderdetail.component';
 import { ChangeOrderStatusComponent } from './changestatus/changestatus.component';
@@ -19,6 +19,7 @@ import { ChangeOrderStatusComponent } from './changestatus/changestatus.componen
 })
 export class OrderComponent implements OnInit {
   lstStatus = orderStatus;
+  lstPayment = paymentType;
   lstOrder: any[] = [];
   addressOrder: any;
   orderDetail: any[] = [];
@@ -52,7 +53,9 @@ export class OrderComponent implements OnInit {
       this.lstOrder = this.lstOrder.map((x, index) => {
         x.position = this.pageIndex * this.pageSize + index + 1;
         x.displayStatus = this.lstStatus.find((item) => item.id == x.status)?.display;
-        x.createdDate = this.datePipe.transform(x.createdAt, 'dd/MM/yyyy, HH:mm:ss', 'UTC+7');
+        const createdAt = new Date(x.createdAt + 'Z');
+        x.createdDate = this.datePipe.transform(createdAt, 'dd/MM/yyyy, HH:mm:ss', '+0700');
+        x.displayPayment = this.lstPayment.find((item) => item.value == x.typePayment)?.display;
         return x;
       });
       this.totalCount = rs.content.data.totalRecords;
@@ -83,13 +86,13 @@ export class OrderComponent implements OnInit {
           next: (res) => {
             if (res.code === 200) {
               this.getData();
-              this.processResponse(res);
+              this.processResponse(res, 'Cập nhật trạng thái thành công');
             } else {
-              this.processResponse(false);
+              this.processResponse(false, 'Cập nhật trạng thái thất bại');
             }
           },
           error: (err) => {
-            this.processResponse(false);
+            this.processResponse(false, 'Cập nhật trạng thái thất bại');
           }
         });
         //this.updateOrderStatus(result); // Cập nhật trạng thái mới cho đơn hàng

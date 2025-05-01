@@ -51,28 +51,7 @@ export class SizeComponent implements OnInit {
     this.pageSize = event.pageSize;
     this.getData();
   }
-  edit(item: any) {
-    console.log(item);
-    this.selectedItem = item;
-    const dialogRef = this.dialog.open(SizeAddComponent, {
-      minWidth: '70%',
-      height: '100%',
-      panelClass: 'custom-dialog-right',
-      position: {
-        right: '0'
-      },
-      data: {
-        title: 'Size.EditTitle',
-        item: this.selectedItem,
-        isEdit: true
-      }
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.getData();
-      }
-    });
-  }
+
   delete(id: string) {
     Swal.fire({
       title: this.translate.instant('Common.DeleteConfirm'),
@@ -114,7 +93,7 @@ export class SizeComponent implements OnInit {
   }
   add() {
     const dialogRef = this.dialog.open(SizeAddComponent, {
-      minWidth: '70%',
+      minWidth: '30%',
       height: '100%',
       panelClass: 'custom-dialog-right',
       position: {

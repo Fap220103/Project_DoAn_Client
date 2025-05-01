@@ -37,6 +37,9 @@ import { ChangeAddressComponent } from './pages/checkout/changeaddress/changeadd
 import { DiscountComponent } from './pages/discount/discount.component';
 import { ChooseDiscountComponent } from './pages/checkout/chooseDiscount/chooseDiscount.component';
 import { ProductReviewComponent } from './pages/product/productreview/productreview.component';
+import { SearchInputComponent } from './component/searchinput/searchinput.component';
+import { PaymentSuccessComponent } from './pages/checkout/payment-success/payment-success.component';
+import { PaymentFailureComponent } from './pages/checkout/payment-failure/payment-failure.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +74,10 @@ import { ProductReviewComponent } from './pages/product/productreview/productrev
     ChangeAddressComponent,
     DiscountComponent,
     ChooseDiscountComponent,
-    ProductReviewComponent
+    ProductReviewComponent,
+    SearchInputComponent,
+    PaymentSuccessComponent,
+    PaymentFailureComponent
   ],
   imports: [
     CommonModule,

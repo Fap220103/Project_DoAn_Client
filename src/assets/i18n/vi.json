@@ -5,6 +5,8 @@
       "Edit": "Sửa",
       "Delete": "Xóa",
       "Add": "Thêm",
+      "Import": "Nhập",
+      "Export": "Xuất",
       "Cancel": "Hủy",
       "Save": "Lưu",
       "Action": "Thao tác",
@@ -155,7 +157,10 @@
       "ProductCode": "Mã sản phẩm",
       "ColorName":"Màu",
       "SizeName": "Kích cỡ",
-      "Quantity": "Số lượng"
+      "Quantity": "Số lượng",
+      "SearchColor": "--Màu sắc--",
+      "SearchSize": "--Kích cỡ--",
+      "SearchTitle": "Tìm kiếm theo tên hoặc mã sản phẩm"
     },
     "Inventory" : {
       "Title": "Tồn kho",
@@ -175,11 +180,13 @@
       "SizeName": "Kích cỡ",
       "Quantity": "Số lượng",
       "TotalAmount": "Tổng tiền",
+      "TypePayment": "Loại thanh toán",
       "Code": "Mã đơn hàng",
       "Status": "Tình trạng đơn hàng",
       "CustomerName": "Khách hàng",
       "EditStatus": "Cập nhật trạng thái",
       "CreatedDate": "Ngày đặt",
+      "SearchTitle": "Tìm kiếm theo mã đơn hàng hoặc tên khách hàng",
       "OrderItem" : {
         "Title": "Sản phẩm",
         "ProductName": "Tên sản phẩm",

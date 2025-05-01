@@ -52,16 +52,28 @@ export class SizeAddComponent implements OnInit {
       };
       console.log('update:', updateItem);
       this.sizeService.post(updateItem).subscribe({
-        next: (res) => this.processResponse(res),
+        next: (res) => {
+          if (res.code === 200) {
+            this.processResponse(res);
+          } else {
+            this.processResponse(false);
+          }
+        },
         error: () => this.processResponse(false)
       });
     } else {
       const addItem = {
-        sizeName: formValue.sizeName
+        Name: formValue.sizeName
       };
       console.log('add: ', addItem);
       this.sizeService.post(addItem).subscribe({
-        next: (res) => this.processResponse(res),
+        next: (res) => {
+          if (res.code === 200) {
+            this.processResponse(res);
+          } else {
+            this.processResponse(false);
+          }
+        },
         error: () => this.processResponse(false)
       });
     }

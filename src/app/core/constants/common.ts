@@ -32,3 +32,8 @@ export const discountType = [
   { value: '0', display: '%' },
   { value: '1', display: 'VND' }
 ];
+
+export const paymentType = [
+  { value: '1', display: 'COD' },
+  { value: '2', display: 'VNPAY' }
+];

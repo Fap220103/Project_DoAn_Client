@@ -23,8 +23,10 @@
       <!-- Main Content -->
       <div class="row">
         <div class="col-md-12" id="load_data">
-          <h2>Bạn đã đặt hàng thành công</h2>
-          <a routerLink="/product">Tiếp tục mua hàng!</a>
+          <h2>Thanh toán thành công!</h2>
+          <p>Đơn hàng: {{ orderId }}</p>
+          <p>Tổng tiền: {{ amount }}</p>
+          <p>Thông báo: {{ message }}</p>
         </div>
       </div>
     </div>

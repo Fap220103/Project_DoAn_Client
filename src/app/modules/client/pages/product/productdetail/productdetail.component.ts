@@ -22,8 +22,8 @@ export class ProductDetailComponent implements OnInit {
   quantity = 1;
   lstColor: any[] = [];
   lstSize: any[] = [];
-  selectedColorIndex: number = 1;
-  selectedSizeIndex: number = 1;
+  selectedColorIndex: number = 0;
+  selectedSizeIndex: number = 0;
 
   constructor(
     private productService: ProductService,
@@ -99,7 +99,7 @@ export class ProductDetailComponent implements OnInit {
             sizeName: size.name,
             colorName: color.name,
             quantity: this.quantity,
-            image: this.item.image,
+            image: this.selectedImage,
             price: price,
             totalPrice: price * this.quantity
           };

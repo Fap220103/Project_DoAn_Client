@@ -1,7 +1,7 @@
 // cart.service.ts
 import { Injectable, Injector } from '@angular/core';
 import { CartItem } from '../models/cart.model';
-import { Observable, map, mergeMap, of } from 'rxjs';
+import { BehaviorSubject, Observable, map, mergeMap, of } from 'rxjs';
 import { Constants } from '../constants/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseService } from './base.service';
@@ -13,6 +13,8 @@ import { AuthService } from './auth.service';
 export class CartService extends BaseService<any> {
   isLoggedIn: boolean = false;
   userId!: string;
+  private cartCount = new BehaviorSubject<number>(0);
+  cartCount$ = this.cartCount.asObservable();
   constructor(
     http: HttpClient,
     injector: Injector,
@@ -22,6 +24,7 @@ export class CartService extends BaseService<any> {
     this.authService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
     });
+    this.updateCartCount();
   }
   private readonly CART_KEY = 'local_cart';
 
@@ -34,12 +37,25 @@ export class CartService extends BaseService<any> {
           headers,
           withCredentials: true
         })
-        .pipe(map((res) => res.content.data.items));
+        .pipe(
+          map((res) => {
+            const items = res.content.data.items;
+            this.cartCount.next(items.length);
+            return items;
+          })
+        );
     } else {
       const cart = localStorage.getItem(this.CART_KEY);
       const parsedCart = cart ? JSON.parse(cart) : [];
+      this.cartCount.next(parsedCart.length);
       return of(parsedCart as CartItem[]);
     }
+  }
+
+  private updateCartCount() {
+    this.getCart().subscribe((cart) => {
+      this.cartCount.next(cart.length);
+    });
   }
 
   saveCart(cart: CartItem[]) {
@@ -49,9 +65,12 @@ export class CartService extends BaseService<any> {
         items: cart,
         userId: userId
       };
-      this.http.post(`${this.svUrl}/SaveCart`, params, { withCredentials: true }).subscribe();
+      this.http.post(`${this.svUrl}/SaveCart`, params, { withCredentials: true }).subscribe(() => {
+        this.cartCount.next(cart.length);
+      });
     } else {
       localStorage.setItem(this.CART_KEY, JSON.stringify(cart));
+      this.cartCount.next(cart.length);
     }
   }
 
@@ -67,6 +86,7 @@ export class CartService extends BaseService<any> {
           item.totalPrice = item.price * quantity;
           cart.push(item);
         }
+        this.saveCart(cart);
         if (this.isLoggedIn) {
           return this.addToCartApi(item, quantity);
         } else {
@@ -93,6 +113,7 @@ export class CartService extends BaseService<any> {
       return this.getCart().pipe(
         map((cart: CartItem[]) => {
           const updatedCart = cart.filter((x) => x.productVariantId !== productVariantId);
+
           this.saveCart(updatedCart);
           return;
         })
@@ -109,6 +130,7 @@ export class CartService extends BaseService<any> {
           item.totalPrice = quantity * item.price;
           this.saveCart(cart);
         }
+        return;
       })
     );
   }
@@ -116,12 +138,15 @@ export class CartService extends BaseService<any> {
   clearCart() {
     if (this.isLoggedIn) {
       this.http
-        .delete(`${this.svUrl}/DeleteCart?userId=${this.userId}`, {
+        .delete(`${this.svUrl}/DeleteCart?userId=${this.authService.getUserId()}`, {
           withCredentials: true
         })
-        .subscribe();
+        .subscribe(() => {
+          this.cartCount.next(0);
+        });
     } else {
       localStorage.removeItem(this.CART_KEY);
+      this.cartCount.next(0);
     }
   }
 

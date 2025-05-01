@@ -7,7 +7,7 @@
       <div class="relative hedear flex flex-col sm:flex-row flex-0 sm:items-center sm:px-6 xs:py-4">
         <div class="flex shrink-0 gap-2 items-center mt-6 sm:mt-0 sm:ml-4">
           <app-AraAutocomplete
-            [placeholder]="'User.TypeSearchRole' | translate"
+            [placeholder]="'ProductVariant.SearchSize' | translate"
             [displayField]="['name']"
             [items]="lstSize"
             [valueField]="'id'"
@@ -17,7 +17,7 @@
           >
           </app-AraAutocomplete>
           <app-AraAutocomplete
-            [placeholder]="'User.TypeSearchRole' | translate"
+            [placeholder]="'ProductVariant.SearchColor' | translate"
             [displayField]="['name']"
             [items]="lstColor"
             [valueField]="'id'"
@@ -35,7 +35,7 @@
               matInput
               #inputSearch
               [value]="searchString"
-              placeholder="{{ 'User.SearchTitle' | translate }}"
+              placeholder="{{ 'ProductVariant.SearchTitle' | translate }}"
               (keyup)="handleChangeSearchInput($event)"
               trim
             />

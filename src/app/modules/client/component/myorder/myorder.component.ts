@@ -53,7 +53,8 @@ export class MyOrderComponent implements OnInit {
         this.lstOrder = this.lstOrder.map((x, index) => {
           x.position = this.pageIndex * this.pageSize + index + 1;
           x.displayStatus = this.lstStatus.find((item) => item.id == x.status)?.display;
-          x.createdDate = this.datePipe.transform(x.createdAt, 'dd/MM/yyyy, HH:mm:ss', 'UTC+7');
+          const createdAt = new Date(x.createdAt + 'Z');
+          x.createdDate = this.datePipe.transform(createdAt, 'dd/MM/yyyy, HH:mm:ss', '+0700');
           return x;
         });
         this.totalCount = rs.content.data.totalRecords;
@@ -94,8 +95,7 @@ export class MyOrderComponent implements OnInit {
   }
   detail(orderId: any) {
     const dialogRef = this.dialog.open(OrderDetailComponent, {
-      width: '70vw',
-      maxWidth: '100vw',
+      maxWidth: '70vw',
       height: '100%',
       panelClass: 'custom-dialog-right',
       position: {

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductService } from '../../../../../core/services/product.service';
@@ -55,10 +55,10 @@ export class AddProductComponent implements OnInit {
   ) {
     dialogRef.disableClose = true;
     this.form = this.fb.group({
-      title: [''],
+      title: ['', Validators.required],
       alias: [''],
-      productCode: [''],
-      productCategoryId: [''],
+      productCode: ['', Validators.required],
+      productCategoryId: ['', Validators.required],
       description: [''],
       detail: [''],
       price: [0],

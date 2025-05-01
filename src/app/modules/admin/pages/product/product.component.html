@@ -28,6 +28,26 @@
               <mat-icon class="w-4 h-4 text-gray-500" [svgIcon]="'heroicons_solid:x'"> </mat-icon>
             </button>
           </mat-form-field>
+          <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
+          <button
+            mat-flat-button
+            [color]="'primary'"
+            class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
+            (click)="fileInput.click()"
+          >
+            <mat-icon class="md:text-base sm:text-base xs:text-xs">upload</mat-icon>
+            <span>{{ 'Common.Import' | translate }}</span>
+          </button>
+
+          <button
+            mat-flat-button
+            [color]="'primary'"
+            class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
+            (click)="exportExcel()"
+          >
+            <mat-icon class="md:text-base sm:text-base xs:text-xs">add</mat-icon>
+            <span>{{ 'Common.Export' | translate }}</span>
+          </button>
 
           <button
             mat-flat-button

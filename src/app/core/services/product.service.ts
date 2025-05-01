@@ -3,12 +3,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseService } from './base.service';
 import { Constants } from '../constants/constants';
 import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService extends BaseService<any> {
-  constructor(http: HttpClient, injector: Injector) {
+  constructor(
+    http: HttpClient,
+    injector: Injector,
+    public snackBar: MatSnackBar
+  ) {
     super(http, Constants.Product.Resource, injector);
   }
 
@@ -54,11 +59,29 @@ export class ProductService extends BaseService<any> {
       }
     }
     if (orderby && Object.keys(orderby).length > 0) {
-      for (const key of Object.keys(orderby)) {
-        if (orderby[key] != null && orderby[key] != undefined)
-          url += '&ORDER=' + key + '|' + encodeURIComponent(orderby[key]);
-      }
+      let orderValue = '';
+      if (orderby.sortBy) orderValue += orderby.sortBy;
+      if (orderby.order) orderValue += '|' + orderby.order;
+
+      url += '&ORDER=' + encodeURIComponent(orderValue);
     }
+
     return this.http.get(url, { headers: headers, withCredentials: true });
+  }
+
+  exportToExcel() {
+    this.http.get(`${this.svUrl}/export`, { responseType: 'blob' }).subscribe({
+      next: (response) => {
+        const blob = response as Blob;
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'products.xlsx';
+        link.click();
+        this.snackBar.open('Export successful!', 'OK', { duration: 2000 });
+      },
+      error: (error) => {
+        this.snackBar.open('Error exporting file.', 'OK', { duration: 2000 });
+      }
+    });
   }
 }

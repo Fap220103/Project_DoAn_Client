@@ -87,7 +87,7 @@
             </tbody>
           </table>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12" *ngIf="cartItems.length > 0">
           <div class="text-right" style="text-align: right">
             <button type="button" class="btn btn-danger mr-2" (click)="deleteAll()">Xóa All</button>
             <button (click)="goToCheckOut()" class="btn btn-success">Đặt hàng</button>

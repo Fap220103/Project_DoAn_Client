@@ -16,6 +16,8 @@ import { MyOrderComponent } from './component/myorder/myorder.component';
 import { ForgotPassComponent } from './pages/profile/forgotpass/forgotpass.component';
 import { ResetPassComponent } from './pages/profile/resetpass/resetpass.component';
 import { DiscountComponent } from './pages/discount/discount.component';
+import { PaymentSuccessComponent } from './pages/checkout/payment-success/payment-success.component';
+import { PaymentFailureComponent } from './pages/checkout/payment-failure/payment-failure.component';
 
 const routes: Routes = [
   {
@@ -33,6 +35,8 @@ const routes: Routes = [
       },
       { path: 'checkout', component: CheckoutComponent },
       { path: 'checkoutsuccess', component: CheckoutSuccessComponent },
+      { path: 'payment-success', component: PaymentSuccessComponent },
+      { path: 'payment-failure', component: PaymentFailureComponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'forgotpass', component: ForgotPassComponent },

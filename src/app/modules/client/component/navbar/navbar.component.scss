@@ -207,3 +207,18 @@
 .custom-submenu-col ul li a:hover {
   color: #007bff;
 }
+
+.full-screen-dialog {
+  max-width: 100vw !important;
+  width: 100vw !important;
+  max-height: 100vh !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.transparent-backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  width: 100vw !important;
+  height: 100vh !important;
+}
