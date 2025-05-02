@@ -7,13 +7,13 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SettingService extends BaseService<any> {
+export class NewsService extends BaseService<any> {
   constructor(http: HttpClient, injector: Injector) {
-    super(http, Constants.Setting.Resource, injector);
+    super(http, Constants.News.Resource, injector);
   }
-  getGeneralSetting(): Observable<any> {
+  getNewsById(Id: string): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders();
-    const url = `${this.svUrl}/GetGeneralSetting`;
+    const url = `${this.svUrl}/GetNewsById?id=${Id}`;
     return this.http.get(url, { headers: headers, withCredentials: true });
   }
 }

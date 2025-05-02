@@ -10,14 +10,13 @@ import { CheckoutSuccessComponent } from './pages/checkout/checkoutsuccess/check
 import { LoginComponent } from '../auth/login/login.component';
 import { RegisterComponent } from '../auth/register/register.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { ChangePassComponent } from './component/changepass/changepass.component';
-import { ChangeProfileComponent } from './component/changeprofile/changeprofile.component';
-import { MyOrderComponent } from './component/myorder/myorder.component';
 import { ForgotPassComponent } from './pages/profile/forgotpass/forgotpass.component';
 import { ResetPassComponent } from './pages/profile/resetpass/resetpass.component';
 import { DiscountComponent } from './pages/discount/discount.component';
 import { PaymentSuccessComponent } from './pages/checkout/payment-success/payment-success.component';
 import { PaymentFailureComponent } from './pages/checkout/payment-failure/payment-failure.component';
+import { NewsComponent } from './pages/news/news.component';
+import { PostComponent } from './pages/news/post/post.component';
 
 const routes: Routes = [
   {
@@ -41,7 +40,9 @@ const routes: Routes = [
       { path: 'register', component: RegisterComponent },
       { path: 'forgotpass', component: ForgotPassComponent },
       { path: 'resetpass', component: ResetPassComponent },
-      { path: 'discount', component: DiscountComponent }
+      { path: 'discount', component: DiscountComponent },
+      { path: 'post', component: PostComponent },
+      { path: 'news/:id', component: NewsComponent }
     ]
   }
 ];

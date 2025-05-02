@@ -99,7 +99,7 @@ export class MyOrderComponent implements OnInit {
       height: '100%',
       panelClass: 'custom-dialog-right',
       position: {
-        right: '0'
+        left: '0'
       },
       data: {
         title: 'Setting.EditTitle',

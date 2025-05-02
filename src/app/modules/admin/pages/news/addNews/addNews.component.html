@@ -1,0 +1,113 @@
+<section class="content mt-[50px]">
+  <div class="card">
+    <div class="flex flex-row items-center px-6 h-20 min-h-20 text-white bg-primary">
+      <mat-icon
+        class="icon-size-7 text-current"
+        [svgIcon]="'heroicons_solid:plus-circle'"
+      ></mat-icon>
+      <div class="ml-3 text-2xl font-semibold tracking-tight">
+        {{ data.title | translate }}
+      </div>
+      <button class="ml-auto" mat-icon-button (click)="dialogRef.close()">
+        <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+      </button>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <div>
+                  <!-- Thông tin chung -->
+                  <div class="form-group">
+                    <label>{{ 'News.Title' | translate }}</label>
+                    <input
+                      formControlName="title"
+                      class="form-control"
+                      placeholder="{{ 'News.Title' | translate }}"
+                    />
+                    <div
+                      class="text-danger"
+                      *ngIf="form.get('title')?.invalid && form.get('title')?.touched"
+                    >
+                      {{ 'Vui lòng nhập tiêu đề' }}
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>{{ 'News.Description' | translate }}</label>
+                    <input
+                      formControlName="description"
+                      class="form-control"
+                      placeholder="{{ 'News.Description' | translate }}"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label>{{ 'News.Link' | translate }}</label>
+                    <input
+                      formControlName="link"
+                      class="form-control"
+                      placeholder="{{ 'News.Link' | translate }}"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label>{{ 'News.Type' | translate }}</label>
+                    <input
+                      formControlName="type"
+                      class="form-control"
+                      placeholder="{{ 'News.Type' | translate }}"
+                    />
+                  </div>
+
+                  <div class="row mt-3">
+                    <div class="col-md-12 text-left">
+                      <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
+                      <button class="btn btn-primary" (click)="fileInput.click()">
+                        {{ 'News.Image' | translate }}
+                      </button>
+                    </div>
+                    <div *ngIf="imagePreview" class="mt-4">
+                      <img [src]="imagePreview" class="w-[100px] h-[100px] object-cover mb-2" />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>{{ 'News.Detail' | translate }}</label>
+                    <ckeditor [editor]="Editor" formControlName="detail" [config]="editorConfig">
+                    </ckeditor>
+                  </div>
+
+                  <div class="form-group">
+                    <button mat-dialog-close mat-stroked-button type="button">
+                      {{ 'Common.Cancel' | translate }}
+                    </button>
+                    <button
+                      (click)="save()"
+                      class="ml-4"
+                      mat-flat-button
+                      type="button"
+                      [color]="'primary'"
+                    >
+                      {{ 'Common.Save' | translate }}
+                    </button>
+                  </div>
+                </div>
+                <!-- đóng phần thông tin -->
+              </div>
+              <!-- đóng card-body -->
+            </div>
+            <!-- đóng card -->
+          </div>
+          <!-- đóng col-md-12 -->
+        </div>
+        <!-- đóng row -->
+      </form>
+      <!-- form đóng đúng chỗ -->
+    </div>
+    <!-- đóng card-body -->
+  </div>
+  <!-- đóng card -->
+</section>

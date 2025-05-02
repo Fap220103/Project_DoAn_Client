@@ -38,5 +38,8 @@ export const Constants = {
   },
   Review: {
     Resource: 'api/ReviewProduct'
+  },
+  News: {
+    Resource: 'api/News'
   }
 };

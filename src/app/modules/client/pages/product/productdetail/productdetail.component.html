@@ -155,46 +155,9 @@
         <!-- Tab Reviews -->
         <div id="tab_3" class="tab_container active" *ngIf="activeTab === 'tab_3'">
           <app-productreview [productId]="productId"></app-productreview>
-          <!-- <div class="row" id="userReview">
-  
-            <div class="col-lg-6 reviews_col">
-              <app-partialreview [productId]="productId"></app-partialreview>
-            </div>
- 
-            <div class="col-lg-6 reviews_col">
-              <form>
-                <div>
-                  <h1>Your Rating:</h1>
-                  <ul class="user_star_rating">
-                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                  </ul>
-                  <textarea
-                    asp-for="Content"
-                    class="input_review"
-                    rows="4"
-                    placeholder="Your Review"
-                    required
-                  ></textarea>
-                </div>
-
-                <div class="text-left text-sm-right">
-                  <button
-                    id="review_submit"
-                    type="submit"
-                    class="red_button review_submit_btn trans_300"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div> -->
         </div>
       </div>
     </div>
   </div>
 </div>
+<app-recommentproduct [productId]="item.id"></app-recommentproduct>

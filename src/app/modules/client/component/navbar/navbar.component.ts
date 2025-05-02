@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from '../../../../core/services/auth.service';
 import { LoginComponent } from '../../../auth/login/login.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,6 +7,8 @@ import { ProductcategoryService } from '../../../../core/services/productcategor
 import { Router } from '@angular/router';
 import { SearchInputComponent } from '../searchinput/searchinput.component';
 import { CartService } from '../../../../core/services/cart.service';
+import { SettingService } from '../../../../core/services/setting.service';
+import { GeneralSetting } from '../../../../core/models/setting.model';
 
 @Component({
   selector: 'app-navbar',
@@ -16,19 +18,27 @@ import { CartService } from '../../../../core/services/cart.service';
 export class NavbarComponent implements OnInit {
   isSearchOpen = false;
   cartItemCount = 0;
-  products = [
-    { image: 'assets/product1.jpg', name: 'Áo thun nam thể thao' },
-    { image: 'assets/product2.jpg', name: 'Áo sơ mi Modal' },
-    { image: 'assets/product3.jpg', name: 'Áo sơ mi cổ tàu Poplin' }
-  ];
+  generalSetting: GeneralSetting | null = null;
+  previousScrollPosition = 0;
+  isHidden = false;
   isLoggedIn: boolean = false;
   lstCategory1: any[] = [];
   lstCategory2: any[] = [];
   lstCategory3: any[] = [];
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    this.isHidden = currentScroll > this.lastScrollTop;
+    this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  }
+
+  private lastScrollTop = 0;
   constructor(
     private authService: AuthService,
     private productCategoryService: ProductcategoryService,
     private cartService: CartService,
+    private settingService: SettingService,
     public dialog: MatDialog,
     public router: Router
   ) {
@@ -44,6 +54,12 @@ export class NavbarComponent implements OnInit {
     this.getLstCategory1();
     this.getLstCategory2();
     this.getLstCategory3();
+    this.getGeneralSetting();
+  }
+  getGeneralSetting() {
+    this.settingService.getGeneralSetting().subscribe((data) => {
+      this.generalSetting = data;
+    });
   }
   getLstCategory1() {
     this.productCategoryService.get({ level: 1 }, 1, 4).subscribe((rs) => {

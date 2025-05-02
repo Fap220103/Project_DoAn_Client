@@ -1,12 +1,13 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProductService } from '../../../../core/services/product.service';
 
 @Component({
-  selector: 'app-productsales',
-  templateUrl: './productsales.component.html',
-  styleUrls: ['./productsales.component.scss']
+  selector: 'app-recommentproduct',
+  templateUrl: './recommentproduct.component.html',
+  styleUrls: ['./recommentproduct.component.scss']
 })
-export class ProductSalesComponent implements OnInit {
+export class RecommentProductComponent implements OnInit {
+  @Input() productId!: string;
   currentIndex = 0;
   slideWidth = 300; // Adjust based on your product card width
   currentSlide = 0;
@@ -18,9 +19,8 @@ export class ProductSalesComponent implements OnInit {
     this.getLstProduct();
   }
   getLstProduct() {
-    this.productService.get({}, 1, 8, { salePercent: 'desc' }).subscribe((rs) => {
-      this.lstProduct = rs.content.data.items;
-      console.log(this.lstProduct);
+    this.productService.getRsProduct(this.productId).subscribe((rs) => {
+      this.lstProduct = rs.content.data;
     });
   }
   getStarArray(rating: number): number[] {

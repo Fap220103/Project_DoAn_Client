@@ -1,55 +1,29 @@
 <!-- Top Navigation -->
-<div class="top_nav">
+<div class="top_nav" [class.hide]="isHidden">
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <div class="top_nav_left">HOTLINE: 0833220103</div>
+        <div class="top_nav_left">
+          <span class="mr-2 cursor-pointer" routerLink="/post"
+            >Về {{ generalSetting?.siteName }}</span
+          >
+          |
+          <span>HOTLINE: {{ generalSetting?.hotline }}</span>
+        </div>
       </div>
       <div class="col-md-6 text-right">
         <div class="top_nav_right">
           <ul class="top_nav_menu">
-            <!-- <li class="currency">
-              <a href="#">
-                usd
-                <i class="fa fa-angle-down"></i>
-              </a>
-              <ul class="currency_selection">
-                <li><a href="#">cad</a></li>
-                <li><a href="#">aud</a></li>
-                <li><a href="#">eur</a></li>
-                <li><a href="#">gbp</a></li>
-              </ul>
-            </li> -->
             <li class="language">
               <a href="#">
-                VietNam
+                Vietnam
                 <i class="fa fa-angle-down"></i>
               </a>
               <ul class="language_selection">
                 <li><a href="#">English</a></li>
                 <li><a href="#">Italian</a></li>
-                <li><a href="#">German</a></li>
-                <li><a href="#">Spanish</a></li>
               </ul>
             </li>
-            <!-- <li class="account" style="width: 150px">
-              <a href="#">
-                My Account
-                <i class="fa fa-angle-down"></i>
-              </a>
-              <ul class="account_selection">
-                <li>
-                  <a href="/account/login"
-                    ><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a
-                  >
-                </li>
-                <li>
-                  <a asp-controller="Account" asp-action="Register"
-                    ><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a
-                  >
-                </li>
-              </ul>
-            </li> -->
           </ul>
         </div>
       </div>
@@ -58,12 +32,12 @@
 </div>
 
 <!-- Main Navigation -->
-<div class="main_nav_container">
+<div class="main_nav_container" [class.no-top-nav]="isHidden">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-right">
         <div class="logo_container ml-5">
-          <a href="/">clo<span>shop</span></a>
+          <a href="/">{{ generalSetting?.siteName }}</a>
         </div>
         <nav class="navbar">
           <ul class="custom-navbar">

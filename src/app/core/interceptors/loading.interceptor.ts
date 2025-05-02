@@ -7,7 +7,8 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   const busyService = inject(BusyService);
   const loadingEndpoints = [
     { urlPart: '/api/product', method: 'POST' },
-    { urlPart: '/api/order', method: 'POST' }
+    { urlPart: '/api/order', method: 'POST' },
+    { urlPart: '/api/news', method: 'POST' }
   ];
 
   const shouldApplyLoading = loadingEndpoints.some(

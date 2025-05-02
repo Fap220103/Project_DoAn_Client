@@ -42,6 +42,13 @@ export class ProductDetailComponent implements OnInit {
     });
     this.getData();
     this.fetchProductData();
+    this.addViewCount();
+  }
+  addViewCount() {
+    const addItem = {
+      productId: this.productId
+    };
+    this.productService.addViewCount(addItem).subscribe((rs) => {});
   }
   fetchProductData(): void {
     this.variantService.getCZByProductId(this.productId).subscribe((rs) => {

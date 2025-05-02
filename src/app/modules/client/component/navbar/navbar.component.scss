@@ -1,3 +1,25 @@
+.top_nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  transition: transform 0.3s ease;
+}
+
+.top_nav.hide {
+  transform: translateY(-100%);
+}
+
+.main_nav_container {
+  position: relative;
+  top: 50px; /* bằng đúng chiều cao .top_nav */
+  transition: top 0.3s ease;
+}
+
+.main_nav_container.no-top-nav {
+  top: 0;
+}
+
 .auth-links {
   margin-right: 8px;
 }

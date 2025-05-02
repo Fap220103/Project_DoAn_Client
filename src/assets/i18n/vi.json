@@ -217,6 +217,16 @@
       "Title": "Địa chỉ",
       "AddTitle" : "Thêm địa chỉ",
       "EditTitle" : "Cập nhật địa chỉ"
+    },
+    "News" : {
+      "Title": "Tin tức",
+      "AddTitle" : "Thêm mới tin tức",
+      "EditTitle" : "Cập nhật tin tức",
+      "Link": "Đường dẫn",
+      "Type": "Loại",
+      "Image": "Ảnh",
+      "Detail": "Chi tiết",
+      "Description": "Mô tả"
     
     }
 }

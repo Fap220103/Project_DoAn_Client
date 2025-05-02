@@ -35,7 +35,7 @@
     >
       <div class="product-grid d-flex flex-wrap">
         <div *ngFor="let item of lstProduct" class="product-item">
-          <div class="product discount product_filter">
+          <div class="product discount product_filter custom-sale-percent">
             <div class="product_image">
               <img [src]="item.imageDefault" height="200" [alt]="item.title" />
             </div>
@@ -70,12 +70,20 @@
             </div>
           </div>
           <div class="product-meta">
-            <span class="sold">Đã bán 2000</span>
+            <span class="sold">Đã bán {{ item.totalSold }}</span>
             <span class="stars">
-              <ng-container *ngFor="let star of getStarArray(4.5)">
-                <i class="fa fa-star text-warning"></i>
+              <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                <i
+                  class="fa"
+                  [ngClass]="{
+                    'fa-star text-warning': star <= item.avgRate,
+                    'fa-star-o text-muted': star > item.avgRate
+                  }"
+                  aria-hidden="true"
+                >
+                </i>
               </ng-container>
-              (1000)
+              ({{ item.totalRate }})
             </span>
           </div>
         </div>

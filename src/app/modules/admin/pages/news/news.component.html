@@ -1,0 +1,87 @@
+<!-- Main content -->
+<section class="content mt-3">
+  <!-- Default box -->
+  <div class="card">
+    <div class="flex justify-between">
+      <div class="flex justify-start items-center"></div>
+      <div class="relative hedear flex flex-col sm:flex-row flex-0 sm:items-center sm:px-6 xs:py-4">
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+          <button
+            mat-flat-button
+            [color]="'primary'"
+            class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
+            (click)="add()"
+          >
+            <mat-icon class="md:text-base sm:text-base xs:text-xs">add</mat-icon>
+            <span>{{ 'Common.Add' | translate }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>{{ 'Common.No' | translate }}</th>
+            <th>{{ 'News.Title' | translate }}</th>
+            <th>{{ 'News.Link' | translate }}</th>
+            <th>{{ 'News.Type' | translate }}</th>
+            <th>{{ 'News.Image' | translate }}</th>
+            <th style="width: 200px">{{ 'Common.Action' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="lstNews.length > 0; else noData">
+          <tr *ngFor="let item of lstNews; let i = index">
+            <td>{{ item.position }}</td>
+            <td>
+              <span matTooltip="{{ item.title }}">{{ item.title }}</span>
+            </td>
+            <td>
+              <span matTooltip="{{ item.link }}">{{ item.link }}</span>
+            </td>
+            <td>
+              <span matTooltip="{{ item.type }}">{{ item.type }}</span>
+            </td>
+            <td>
+              <img [src]="item.image" class="w-[100px] h-[100px] object-cover mb-2" />
+            </td>
+
+            <td>
+              <button
+                mat-icon-button
+                (click)="edit(item)"
+                matTooltip="{{ 'Common.Edit' | translate }}"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                (click)="delete(item.id)"
+                matTooltip="{{ 'Common.Delete' | translate }}"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <!-- Hiển thị khi không có dữ liệu -->
+        <ng-template #noData>
+          <tr>
+            <td colspan="5" class="text-center">{{ 'Common.NoData' | translate }}</td>
+          </tr>
+        </ng-template>
+      </table>
+    </div>
+  </div>
+</section>
+<!-- /.content -->
+<mat-paginator
+  class="absolute inset-x-0 bottom-0 border-b border-t z-10 bg-gray-50 dark:bg-transparent md:text-base sm:text-base xs:text-xs"
+  [pageSizeOptions]="pageSizeOptions"
+  [length]="totalCount"
+  [pageIndex]="pageIndex"
+  [pageSize]="pageSize"
+  (page)="onChangePage($event)"
+  showFirstLastButtons
+>
+</mat-paginator>

@@ -14,6 +14,7 @@ import { ProductVariantComponent } from './pages/productvariant/productvariant.c
 import { InventoryComponent } from './pages/inventory/inventory.component';
 import { OrderComponent } from './pages/order/order.component';
 import { DiscountComponent } from './pages/discount/discount.component';
+import { NewsComponent } from './pages/news/news.component';
 
 const routes: Routes = [
   {
@@ -77,7 +78,6 @@ const routes: Routes = [
       {
         path: 'order',
         component: OrderComponent,
-        canActivate: [adminGuard],
         data: { title: 'Order.Title' }
       },
       {
@@ -85,6 +85,12 @@ const routes: Routes = [
         component: DiscountComponent,
         canActivate: [adminGuard],
         data: { title: 'Discount.Title' }
+      },
+      {
+        path: 'news',
+        component: NewsComponent,
+        canActivate: [adminGuard],
+        data: { title: 'News.Title' }
       }
     ]
   }

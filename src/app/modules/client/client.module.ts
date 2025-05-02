@@ -40,6 +40,9 @@ import { ProductReviewComponent } from './pages/product/productreview/productrev
 import { SearchInputComponent } from './component/searchinput/searchinput.component';
 import { PaymentSuccessComponent } from './pages/checkout/payment-success/payment-success.component';
 import { PaymentFailureComponent } from './pages/checkout/payment-failure/payment-failure.component';
+import { NewsComponent } from './pages/news/news.component';
+import { PostComponent } from './pages/news/post/post.component';
+import { RecommentProductComponent } from './component/recommentproduct/recommentproduct.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +80,10 @@ import { PaymentFailureComponent } from './pages/checkout/payment-failure/paymen
     ProductReviewComponent,
     SearchInputComponent,
     PaymentSuccessComponent,
-    PaymentFailureComponent
+    PaymentFailureComponent,
+    NewsComponent,
+    PostComponent,
+    RecommentProductComponent
   ],
   imports: [
     CommonModule,

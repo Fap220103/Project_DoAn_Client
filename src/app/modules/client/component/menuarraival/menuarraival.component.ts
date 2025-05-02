@@ -17,7 +17,7 @@ export class MenuArraivalComponent implements OnInit {
     this.getLstProduct();
   }
   getLstProduct() {
-    this.productService.get({}, 1, 10).subscribe((rs) => {
+    this.productService.getProductByCategory({}, 1, 10).subscribe((rs) => {
       this.lstProduct = rs.content.data.items;
     });
   }

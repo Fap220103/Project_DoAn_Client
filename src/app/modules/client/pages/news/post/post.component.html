@@ -1,0 +1,17 @@
+<link rel="stylesheet" type="text/css" href="/assets/Content/assets/styles/main_styles.css" />
+
+<div class="container news_section_container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="title-news">{{ post.title }}</h1>
+      <p class="text-muted">{{ post.createdAt | date: 'dd/MM/yyyy' }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <strong>{{ post.description }}</strong>
+    </div>
+    <div class="col-md-12" [innerHTML]="post.detail"></div>
+  </div>
+</div>

@@ -29,6 +29,16 @@ export class ProductService extends BaseService<any> {
     return this.http.get(url, { headers: headers, withCredentials: true });
   }
 
+  getRsProduct(productId: string): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders();
+    const url = `${this.svUrl}/getRsProduct?productId=${productId}`;
+    return this.http.get(url, { headers: headers, withCredentials: true });
+  }
+
+  addViewCount(model: any): Observable<any> {
+    const url = `${this.svUrl}/AddViewCount`;
+    return this.post(model, url);
+  }
   // getProductByCategory(ids: string[], page?: number, limit?: number): Observable<any> {
   //   const headers: HttpHeaders = new HttpHeaders();
   //   const xLimit = limit ? limit : 10;
