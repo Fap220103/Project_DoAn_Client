@@ -1,0 +1,70 @@
+<section class="content">
+  <!-- Default box -->
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-3">
+          <p>Từ ngày</p>
+          <input type="date" value="" class="form-control" [(ngModel)]="fromDate" />
+        </div>
+        <div class="col-md-3">
+          <p>Đến ngày</p>
+          <input type="date" value="" class="form-control" [(ngModel)]="toDate" />
+        </div>
+        <div class="col-md-3">
+          <p></p>
+          <button
+            class="btn btn-sm btn-success btnLoc"
+            style="cursor: pointer"
+            (click)="loadData()"
+          >
+            Lọc
+          </button>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="chart">
+            <canvas id="barChart" style="height: 250px; min-height: 250px; width: 100%"></canvas>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Ngày</th>
+                <th>Doanh thu</th>
+                <th>Lợi nhuận</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of tableData; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.date }}</td>
+                <td>{{ item.doanhThu | currency }}</td>
+                <td>{{ item.loiNhuan | currency }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="container">
+      <div>
+        <label for="fromDate">Từ ngày:</label>
+        <input type="date" id="fromDate" [(ngModel)]="fromDate" />
+      </div>
+      <div>
+        <label for="toDate">Đến ngày:</label>
+        <input type="date" id="toDate" [(ngModel)]="toDate" />
+      </div>
+      <button (click)="loadData()">Lọc</button>
+
+      <canvas id="barChart" style="height: 250px; min-height: 250px; width: 100%"></canvas>
+    </div> -->
+  </div>
+</section>

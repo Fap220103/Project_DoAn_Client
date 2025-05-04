@@ -1,16 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
-import {
-  BehaviorSubject,
-  EMPTY,
-  Observable,
-  catchError,
-  from,
-  map,
-  switchMap,
-  tap,
-  throwError
-} from 'rxjs';
+import { BehaviorSubject, Observable, catchError, from, switchMap, tap, throwError } from 'rxjs';
 import {
   SocialAuthService,
   GoogleLoginProvider,
@@ -55,23 +44,37 @@ export class AuthService {
       );
   }
 
-  loginWithGoogle(): Observable<any> {
-    return from(this.authServiceExtend.signIn(GoogleLoginProvider.PROVIDER_ID)).pipe(
-      switchMap((user: SocialUser) => {
-        return this.http.post(`${this.baseUrl}api/Account/external-login`, {
-          idToken: user.idToken
-        });
-      }),
-      tap((rs: any) => {
-        if (rs.code === 200) {
-          this.saveTokens(rs.content.accessToken, rs.content.expires_in_second);
-          this.setCurrentUser(rs.content);
+  // loginWithGoogle(): Observable<any> {
+  //   return from(this.authServiceExtend.signIn(GoogleLoginProvider.PROVIDER_ID)).pipe(
+  //     switchMap((user: SocialUser) => {
+  //       return this.http.post(`${this.baseUrl}api/Account/external-login`, {
+  //         idToken: user.idToken
+  //       });
+  //     }),
+  //     tap((rs: any) => {
+  //       if (rs.code === 200) {
+  //         this.saveTokens(rs.content.accessToken, rs.content.expires_in_second);
+  //         this.setCurrentUser(rs.content);
+  //         this.updateLoginStatus(true);
+  //       }
+  //     })
+  //   );
+  // }
+  loginWithGoogle(idToken: any): Observable<any> {
+    return this.http
+      .post<any>(
+        `${this.baseUrl}api/Account/external-login`,
+        { idToken: idToken },
+        { withCredentials: true }
+      )
+      .pipe(
+        tap((response) => {
+          this.saveTokens(response.content.accessToken, response.content.expires_in_second);
+          this.setCurrentUser(response);
           this.updateLoginStatus(true);
-        }
-      })
-    );
+        })
+      );
   }
-
   // Đăng xuất admin
   logout(type?: any): void {
     const userId = this.getUserId();

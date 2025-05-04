@@ -130,3 +130,13 @@ body {
 .google-btn i {
   color: #db4437; /* Màu đỏ của Google */
 }
+
+.google-signin {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+#googleSignInButton {
+  cursor: pointer;
+  z-index: 9999;
+}

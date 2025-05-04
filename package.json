@@ -30,6 +30,7 @@
     "admin-lte": "^4.0.0-beta3",
     "angular-split": "^19.0.0",
     "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.9",
     "ckeditor4-angular": "^2.4.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.7.1",

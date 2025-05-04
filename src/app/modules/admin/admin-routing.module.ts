@@ -15,6 +15,7 @@ import { InventoryComponent } from './pages/inventory/inventory.component';
 import { OrderComponent } from './pages/order/order.component';
 import { DiscountComponent } from './pages/discount/discount.component';
 import { NewsComponent } from './pages/news/news.component';
+import { ReportComponent } from './pages/report/report.component';
 
 const routes: Routes = [
   {
@@ -90,6 +91,12 @@ const routes: Routes = [
         component: NewsComponent,
         canActivate: [adminGuard],
         data: { title: 'News.Title' }
+      },
+      {
+        path: 'report',
+        component: ReportComponent,
+        canActivate: [adminGuard],
+        data: { title: 'Report.Title' }
       }
     ]
   }

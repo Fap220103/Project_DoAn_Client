@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AuthRoutingModule } from './auth-routing.module';
@@ -20,12 +20,16 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '954120995122-5ed2tl4mf4pn0jl4o9ns64jmi7ttn4pg.apps.googleusercontent.com'
+              '844092088565-2t5ova2mof86otbptvm6loqoibenmpek.apps.googleusercontent.com'
             )
           }
-        ]
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
       } as SocialAuthServiceConfig
     }
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AuthModule {}

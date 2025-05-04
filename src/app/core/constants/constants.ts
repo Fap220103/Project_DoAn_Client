@@ -41,5 +41,8 @@ export const Constants = {
   },
   News: {
     Resource: 'api/News'
+  },
+  Report: {
+    Resource: 'api/Report'
   }
 };
