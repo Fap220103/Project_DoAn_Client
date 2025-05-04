@@ -187,6 +187,7 @@
       "EditStatus": "Cập nhật trạng thái",
       "CreatedDate": "Ngày đặt",
       "SearchTitle": "Tìm kiếm theo mã đơn hàng hoặc tên khách hàng",
+      "Detail": "Chi tiết đơn hàng",
       "OrderItem" : {
         "Title": "Sản phẩm",
         "ProductName": "Tên sản phẩm",

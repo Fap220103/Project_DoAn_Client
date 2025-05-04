@@ -66,7 +66,6 @@ const routes: Routes = [
       {
         path: 'productvariant',
         component: ProductVariantComponent,
-        canActivate: [adminGuard],
         data: { title: 'ProductVariant.Title' }
       },
       {

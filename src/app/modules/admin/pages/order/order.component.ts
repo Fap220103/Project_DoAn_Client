@@ -108,7 +108,7 @@ export class OrderComponent implements OnInit {
         right: '0'
       },
       data: {
-        title: 'Setting.EditTitle',
+        title: 'Order.Detail',
         orderId: orderId
       }
     });

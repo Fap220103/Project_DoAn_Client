@@ -75,3 +75,18 @@
   border: 1px solid #ccc;
   border-radius: 50%;
 }
+.hidden-scrollbar {
+  overflow-y: scroll;
+  max-height: 550px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hidden-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

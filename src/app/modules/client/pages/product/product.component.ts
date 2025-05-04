@@ -67,10 +67,18 @@ export class ProductComponent implements OnInit {
     await this.loadAllCategories();
     this.activatedRoute.queryParams.subscribe((params) => {
       const categoryId = params['categoryId'];
-      if (!categoryId) {
-        this.loadProductsByCategoryIds([]);
+      const keyword = params['keyword'];
+      if (!keyword) {
+        if (!categoryId) {
+          this.loadProductsByCategoryIds([]);
+        }
+        this.loadCategoriesAndProducts(categoryId);
+      } else {
+        this.params = {
+          search: keyword
+        };
+        this.getData();
       }
-      this.loadCategoriesAndProducts(categoryId);
     });
   }
   // get sản phẩm
@@ -173,20 +181,6 @@ export class ProductComponent implements OnInit {
     this.getData();
   }
 
-  handleChangeSearchInput(event: any) {
-    if (event.key === 'Enter') {
-      this.buildParams();
-      this.getData();
-    } else {
-      this.searchString = (event.target.value ?? '').trim();
-    }
-  }
-
-  handleClearSearchInput() {
-    this.searchString = '';
-    this.buildParams();
-    this.getData();
-  }
   buildParams() {
     this.params = {
       search: this.searchString,

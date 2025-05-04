@@ -35,6 +35,11 @@ export class ProductService extends BaseService<any> {
     return this.http.get(url, { headers: headers, withCredentials: true });
   }
 
+  getSuggestions(keyword: string, page?: number, limit?: number): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders();
+    const url = `${this.svUrl}/GetSuggestProduct?keyword=${keyword}&page=${page}&limit=${limit}`;
+    return this.http.get(url, { headers: headers, withCredentials: true });
+  }
   addViewCount(model: any): Observable<any> {
     const url = `${this.svUrl}/AddViewCount`;
     return this.post(model, url);

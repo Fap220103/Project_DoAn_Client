@@ -13,7 +13,7 @@ import { AuthService } from './auth.service';
 export class CartService extends BaseService<any> {
   isLoggedIn: boolean = false;
   userId!: string;
-  private cartCount = new BehaviorSubject<number>(0);
+  public cartCount = new BehaviorSubject<number>(0);
   cartCount$ = this.cartCount.asObservable();
   constructor(
     http: HttpClient,
@@ -86,11 +86,13 @@ export class CartService extends BaseService<any> {
           item.totalPrice = item.price * quantity;
           cart.push(item);
         }
-        this.saveCart(cart);
+        //this.saveCart(cart);
+        this.cartCount.next(cart.length);
         if (this.isLoggedIn) {
           return this.addToCartApi(item, quantity);
         } else {
           localStorage.setItem(this.CART_KEY, JSON.stringify(cart));
+
           return of(undefined);
         }
       }),

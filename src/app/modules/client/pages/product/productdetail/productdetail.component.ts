@@ -39,10 +39,13 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.productId = params.get('id')!;
+      this.productId = params.get('id')!;
+      this.getData(); // Gọi lại khi productId thay đổi
+      this.fetchProductData();
+      this.addViewCount();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-    this.getData();
-    this.fetchProductData();
-    this.addViewCount();
   }
   addViewCount() {
     const addItem = {

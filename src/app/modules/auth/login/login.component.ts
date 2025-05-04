@@ -4,7 +4,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../../../core/services/cart.service';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private toastr: ToastrService,
-    private cartService: CartService
+    private cartService: CartService,
+    private http: HttpClient
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -30,13 +31,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    // Lấy danh sách các nhà cung cấp đăng nhập bên ngoài từ backend
-    // this.authService.getExternalProviders().subscribe({
-    //   next: (providers) => this.externalProviders = providers,
-    //   error: (err) => console.error('Lỗi khi lấy danh sách nhà cung cấp:', err)
-    // });
-  }
+  ngOnInit() {}
 
   save() {
     this.authService.login(this.loginForm.value).subscribe({
@@ -52,10 +47,15 @@ export class LoginComponent implements OnInit {
             userId: userId
           };
           this.cartService.syncCartWithServer(cartSync).subscribe({
-            next: () => {
-              localStorage.removeItem('local_cart');
-              const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
-              this.router.navigate([returnUrl]);
+            next: (rs) => {
+              if (rs.code === 200) {
+                localStorage.removeItem('local_cart');
+                this.cartService.cartCount.next(rs.data.countCart);
+                const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+                this.router.navigate([returnUrl]);
+              } else {
+                this.toastr.error('Đồng bộ giỏ hàng thất bại', 'Lỗi');
+              }
             },
             error: () => {
               this.toastr.error('Đồng bộ giỏ hàng thất bại', 'Lỗi');
@@ -72,7 +72,19 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  externalLogin(provider: string) {
-    // this.authService.externalLogin(provider);
+  loginWithGoogle() {
+    this.authService.loginWithGoogle().subscribe({
+      next: (rs: any) => {
+        if (rs.code === 200) {
+          this.toastr.success('Đăng nhập Google thành công', 'Thành công');
+          this.router.navigate(['/home']);
+        } else {
+          this.toastr.error('Đăng nhập Google thất bại', 'Lỗi');
+        }
+      },
+      error: () => {
+        this.toastr.error('Lỗi khi đăng nhập bằng Google', 'Lỗi');
+      }
+    });
   }
 }

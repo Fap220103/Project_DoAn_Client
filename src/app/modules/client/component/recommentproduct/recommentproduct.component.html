@@ -24,10 +24,7 @@
               </div>
 
               <div class="product_info">
-                <h6
-                  class="product_name short-line cursor-pointer"
-                  [routerLink]="['/product', item.id]"
-                >
+                <h6 class="product_name short-line cursor-pointer" (click)="goToProduct(item.id)">
                   <a>{{ item.title }}</a>
                 </h6>
 

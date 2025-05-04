@@ -1,9 +1,26 @@
 <div class="search-bar">
   <div class="search-container">
-    <input type="text" class="search-input" placeholder="Tìm kiếm sản phẩm..." />
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Tìm kiếm sản phẩm..."
+      [(ngModel)]="searchString"
+      (ngModelChange)="onSearchInputChange($event)"
+      (keydown.enter)="searchProduct()"
+    />
     <div class="search-actions">
-      <button class="search-button">🔍</button>
-      <button class="clear-button">✖</button>
+      <button class="search-button" (click)="searchProduct()">🔍</button>
+      <button class="clear-button" (click)="dialogRef.close()">✖</button>
+    </div>
+    <div class="suggestion-grid" *ngIf="suggestedProducts.length > 0">
+      <div
+        class="suggestion-item"
+        *ngFor="let product of suggestedProducts"
+        (click)="goToDetail(product.id)"
+      >
+        <img [src]="product.imageDefault" alt="{{ product.title }}" />
+        <p>{{ product.title }}</p>
+      </div>
     </div>
   </div>
 </div>

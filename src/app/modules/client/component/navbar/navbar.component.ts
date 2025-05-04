@@ -85,6 +85,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
+    this.cartService.cartCount.next(0);
     this.authService.logout('client');
   }
 
@@ -96,11 +97,9 @@ export class NavbarComponent implements OnInit {
 
   openSearchDialog(): void {
     this.dialog.open(SearchInputComponent, {
-      width: '100vw',
-      height: '100vh',
-      panelClass: 'full-screen-dialog',
       hasBackdrop: true,
-      backdropClass: 'transparent-backdrop'
+      backdropClass: 'blur-backdrop', // đổi tên để dễ hiểu
+      panelClass: 'custom-search-panel'
     });
   }
 }

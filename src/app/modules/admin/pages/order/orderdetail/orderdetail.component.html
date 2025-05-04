@@ -55,7 +55,17 @@
           </div>
         </div>
       </div>
-
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Địa chỉ giao hàng</label>
+            <p class="form-control">
+              {{ addressOrder.addressLine }}, {{ addressOrder.ward }}, {{ addressOrder.district }},
+              {{ addressOrder.province }}
+            </p>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="form-group">
           <h2>Danh sách sản phẩm</h2>
@@ -67,10 +77,10 @@
     </div>
     <div class="border-t"></div>
     <!-- Actions -->
-    <div mat-dialog-actions class="pl-5 pr-5 flex flex-start items-center justify-center">
+    <!-- <div mat-dialog-actions class="pl-5 pr-5 flex flex-start items-center justify-center">
       <button mat-dialog-close mat-stroked-button type="button">
         {{ 'Common.Exit' | translate }}
       </button>
-    </div>
+    </div> -->
   </div>
 </div>
