@@ -8,6 +8,7 @@ import { orderStatus } from '../../../../core/constants/common';
 import { DiscountService } from '../../../../core/services/discount.service';
 import { AddDiscountComponent } from './addDiscount/addDiscount.component';
 import Swal from 'sweetalert2';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-discount',
@@ -34,6 +35,7 @@ export class DiscountComponent implements OnInit {
     private discountService: DiscountService,
     private translate: TranslateService,
     public snackBar: MatSnackBar,
+    public datePipe: DatePipe,
     public dialog: MatDialog
   ) {}
 
@@ -41,15 +43,21 @@ export class DiscountComponent implements OnInit {
     this.getData();
   }
   getData() {
-    this.discountService.get(this.params, this.pageIndex + 1, this.pageSize).subscribe((rs) => {
-      this.lstDiscount = rs.content.data.items;
-      this.lstDiscount = this.lstDiscount.map((x, index) => {
-        x.position = this.pageIndex * this.pageSize + index + 1;
-        x.displayType = this.discountType.find((item) => item.value == x.discountType)?.display;
-        return x;
+    this.discountService
+      .getDiscountAdmin(this.params, this.pageIndex + 1, this.pageSize)
+      .subscribe((rs) => {
+        this.lstDiscount = rs.content.data.items;
+        this.lstDiscount = this.lstDiscount.map((x, index) => {
+          x.position = this.pageIndex * this.pageSize + index + 1;
+          x.displayType = this.discountType.find((item) => item.value == x.discountType)?.display;
+          const startDate = new Date(x.startDate + 'Z');
+          x.startDate = this.datePipe.transform(startDate, 'dd/MM/yyyy, HH:mm:ss', '+0700');
+          const endDate = new Date(x.endDate + 'Z');
+          x.endDate = this.datePipe.transform(endDate, 'dd/MM/yyyy, HH:mm:ss', '+0700');
+          return x;
+        });
+        this.totalCount = rs.content.data.totalRecords;
       });
-      this.totalCount = rs.content.data.totalRecords;
-    });
   }
   toggleRow(index: number) {
     this.expandedRows[index] = !this.expandedRows[index];
