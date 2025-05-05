@@ -10,6 +10,7 @@ import { orderStatus, paymentType } from '../../../../core/constants/common';
 import { DatePipe } from '@angular/common';
 import { OrderDetailComponent } from './orderdetail/orderdetail.component';
 import { ChangeOrderStatusComponent } from './changestatus/changestatus.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -31,6 +32,8 @@ export class OrderComponent implements OnInit {
   pageIndex = 0;
   pageSize = 10;
   pageSizeOptions = [5, 10, 25, 100];
+  fromDate: string = '';
+  toDate: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -39,6 +42,7 @@ export class OrderComponent implements OnInit {
     private translate: TranslateService,
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
+    public router: Router,
     private datePipe: DatePipe
   ) {}
 
@@ -137,7 +141,9 @@ export class OrderComponent implements OnInit {
     if (event.key === 'Enter') {
       this.params = {
         status: this.status,
-        search: this.searchString
+        search: this.searchString,
+        fromDate: this.fromDate,
+        toDate: this.toDate
       };
       this.getData();
     } else {
@@ -149,7 +155,9 @@ export class OrderComponent implements OnInit {
     this.searchString = '';
     this.params = {
       status: this.status,
-      search: this.searchString
+      search: this.searchString,
+      fromDate: this.fromDate,
+      toDate: this.toDate
     };
     this.getData();
   }
@@ -158,7 +166,21 @@ export class OrderComponent implements OnInit {
     this.status = event;
     this.params = {
       status: this.status,
-      search: this.searchString
+      search: this.searchString,
+      fromDate: this.fromDate,
+      toDate: this.toDate
+    };
+    this.getData();
+  }
+  goToInvoice(orderId: string) {
+    this.router.navigate(['/admin/invoice', orderId]);
+  }
+  handleChangeDate() {
+    this.params = {
+      status: this.status,
+      search: this.searchString,
+      fromDate: this.fromDate,
+      toDate: this.toDate
     };
     this.getData();
   }

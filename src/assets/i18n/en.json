@@ -108,9 +108,9 @@
     "ReadTitle": "Read Deatil Product",
     "Name": "Product Name",
     "Description": "Description",
-      "Detail": "Detail",
-      "Alias": "Alias",
-      "Code": "Code",
+    "Detail": "Detail",
+    "Alias": "Alias",
+    "Code": "Code",
     "Image": "Image",
     "DefaultImage": "Default Image",
     "SelectCategory": "--PRODUCT CATEGORY--",
@@ -121,7 +121,7 @@
     "SalePercent": "Sale Percent",
     "PriceSale": "PriceSale",
     "Category": "Category",
-    "UploadImage":"Upload Image"
+    "UploadImage": "Upload Image"
   },
   "ProductImage": {
     "Message": {
@@ -143,7 +143,10 @@
     "ProductCode": "Product Code",
     "ColorName": "Color",
     "SizeName": "Size",
-    "Quantity": "Quantity"
+    "Quantity": "Quantity",
+    "SearchColor": "--Size--",
+    "SearchSize": "--Color--",
+    "SearchTitle": "Find by product name or product code"
   },
   "Inventory": {
     "Title": "Inventory",
@@ -154,16 +157,62 @@
     "SizeName": "Size",
     "Quantity": "Quantity"
   },
-  "Order" : {
+
+  "Order": {
     "Title": "Order",
-    "AddTitle" : "Add Order",
+    "AddTitle": "Add Order",
     "ProductName": "Product Name",
     "ProductCode": "Product Code",
-    "ColorName":"Color",
+    "ColorName": "Color",
     "SizeName": "Size",
     "Quantity": "Quantity",
     "TotalAmount": "Total Amount",
+    "TypePayment": "Payment Type",
     "Code": "Order Code",
-    "Status": "Status"
+    "Status": "Order Status",
+    "CustomerName": "Customer",
+    "EditStatus": "Update Status",
+    "CreatedDate": "Order Date",
+    "SearchTitle": "Search by order code or customer name",
+    "Detail": "Order Details",
+    "OrderItem": {
+      "Title": "Product",
+      "ProductName": "Product Name",
+      "ProductCode": "Product Code",
+      "ColorName": "Color",
+      "SizeName": "Size",
+      "Quantity": "Quantity",
+      "Price": "Price",
+      "TotalPrice": "Total Price"
+    }
+  },
+  "Discount": {
+    "Title": "Promotion",
+    "AddTitle": "Add Promotion",
+    "Code": "Promotion Code",
+    "Name": "Program Name",
+    "Description": "Description",
+    "DiscountType": "Promotion Type",
+    "DiscountValue": "Discount Value",
+    "StartDate": "Start Date",
+    "EndDate": "End Date",
+    "UsageLimit": "Usage Limit",
+    "UsedCount": "Used Count",
+    "IsActive": "Activate"
+  },
+  "ShippingAddress": {
+    "Title": "Address",
+    "AddTitle": "Add Address",
+    "EditTitle": "Update Address"
+  },
+  "News": {
+    "Title": "News",
+    "AddTitle": "Add News",
+    "EditTitle": "Edit News",
+    "Link": "Link",
+    "Type": "Type",
+    "Image": "Image",
+    "Detail": "Details",
+    "Description": "Description"
   }
 }

@@ -8,7 +8,8 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   const loadingEndpoints = [
     { urlPart: '/api/product', method: 'POST' },
     { urlPart: '/api/order', method: 'POST' },
-    { urlPart: '/api/news', method: 'POST' }
+    { urlPart: '/api/news', method: 'POST' },
+    { urlPart: '/api/UserProfile', method: 'PUT' }
   ];
 
   const shouldApplyLoading = loadingEndpoints.some(

@@ -15,7 +15,7 @@ import {
   MatPseudoCheckboxModule,
   provideNativeDateAdapter
 } from '@angular/material/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { IconsModule } from './icon.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -49,7 +49,8 @@ import { MatSelectModule } from '@angular/material/select';
     CKEditorModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    FormsModule
   ],
   exports: [
     TranslateModule,

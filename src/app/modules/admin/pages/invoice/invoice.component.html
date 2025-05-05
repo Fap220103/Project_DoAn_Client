@@ -1,0 +1,71 @@
+<!-- Nút xuất PDF -->
+<button class="btn btn-danger" (click)="exportToPDF()">Xuất hóa đơn PDF</button>
+<div #invoiceElement id="invoice">
+  <div class="invoice-header">
+    <h1>HÓA ĐƠN BÁN HÀNG</h1>
+    <div class="shop-info">
+      <p><strong>Cửa hàng:</strong> CLOSHOP</p>
+      <p>
+        <strong>Địa chỉ:</strong> Tầng 3 - The Garden Shopping Center, Đường Mễ Trì, P. Mỹ Đình 1,
+        Q. Nam Từ Liêm, TP. Hà Nội
+      </p>
+      <p><strong>Điện thoại:</strong> 0833220102</p>
+    </div>
+  </div>
+
+  <div class="invoice-info">
+    <p><strong>Mã hóa đơn:</strong> {{ invoice?.invoiceNumber }}</p>
+    <p><strong>Ngày lập:</strong> {{ invoice?.createdDate | date: 'dd/MM/yyyy' }}</p>
+    <p><strong>Khách hàng:</strong> {{ invoice?.customerName }}</p>
+  </div>
+
+  <table class="invoice-table">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Tên sản phẩm</th>
+        <th>Màu</th>
+        <th>Size</th>
+        <th>Số lượng</th>
+        <th>Đơn giá</th>
+        <th>Thành tiền</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of invoice?.items; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td class="left-align">{{ item.productName }}</td>
+        <td>{{ item.colorName }}</td>
+        <td>{{ item.sizeName }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.unitPrice | currency: 'VND' : 'symbol' : '1.0-0' }}</td>
+        <td>{{ item.total | currency: 'VND' : 'symbol' : '1.0-0' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="invoice-total">
+    <p>
+      <strong>Tổng tiền hàng:</strong>
+      {{ invoice?.totalAmount | currency: 'VND' : 'symbol' : '1.0-0' }}
+    </p>
+    <p>
+      <strong>Khuyến mãi:</strong>
+      {{ invoice?.totalDiscount | currency: 'VND' : 'symbol' : '1.0-0' }}
+    </p>
+    <p class="grand-total">
+      <strong>Tổng cộng:</strong> {{ invoice?.total | currency: 'VND' : 'symbol' : '1.0-0' }}
+    </p>
+  </div>
+
+  <div class="invoice-footer">
+    <div class="sign">
+      <p><strong>Người lập hóa đơn</strong></p>
+      <p>(Ký và ghi rõ họ tên)</p>
+    </div>
+    <div class="sign">
+      <p><strong>Khách hàng</strong></p>
+      <p>(Ký và ghi rõ họ tên)</p>
+    </div>
+  </div>
+</div>

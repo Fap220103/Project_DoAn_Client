@@ -1,7 +1,7 @@
 mat-form-field {
   width: 100%;
+  color: inherit;
 
-  // Đảm bảo input không bị co khi suffix xuất hiện
   .mat-form-field-infix {
     display: flex;
     align-items: center;
@@ -10,11 +10,28 @@ mat-form-field {
   input.mat-input-element {
     flex: 1;
     min-width: 0;
+    color: inherit;
+  }
+
+  .mat-form-field-label {
+    color: inherit !important;
+  }
+
+  .mat-form-field-underline,
+  .mat-form-field-ripple {
+    background-color: inherit !important;
   }
 
   button.mat-icon-button {
-    // Đặt kích thước cố định
     width: 40px;
     height: 40px;
+    color: inherit;
   }
+
+  mat-icon {
+    color: inherit;
+  }
+}
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: inherit !important;
 }

@@ -97,7 +97,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
             next: (rs) => {
               if (rs.code === 200) {
                 localStorage.removeItem('local_cart');
-                this.cartService.cartCount.next(rs.data.countCart);
+                this.cartService.cartCount.next(rs.content.countCart);
                 const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
                 this.router.navigate([returnUrl]);
               } else {
@@ -114,7 +114,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         }
       },
       error: (err) => {
-        this.toastr.error('Đăng nhập thất bại', 'Lỗi');
+        this.toastr.error('Email hoặc mật khẩu không chính xác!', 'Lỗi');
       }
     });
   }

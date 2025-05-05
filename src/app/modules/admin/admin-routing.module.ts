@@ -16,6 +16,7 @@ import { OrderComponent } from './pages/order/order.component';
 import { DiscountComponent } from './pages/discount/discount.component';
 import { NewsComponent } from './pages/news/news.component';
 import { ReportComponent } from './pages/report/report.component';
+import { InvoiceComponent } from './pages/invoice/invoice.component';
 
 const routes: Routes = [
   {
@@ -97,6 +98,11 @@ const routes: Routes = [
         component: ReportComponent,
         canActivate: [adminGuard],
         data: { title: 'Report.Title' }
+      },
+      {
+        path: 'invoice/:orderId',
+        component: InvoiceComponent,
+        data: { title: 'Invoice.Title' }
       }
     ]
   }

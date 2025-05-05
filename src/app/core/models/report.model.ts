@@ -3,3 +3,8 @@ export interface RevenueDto {
   doanhThu: number;
   loiNhuan: number;
 }
+
+export interface BestSellingProduct {
+  productName: string;
+  quantitySold: number;
+}

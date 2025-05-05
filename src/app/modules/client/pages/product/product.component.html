@@ -112,59 +112,66 @@
 
               <!-- Product Grid -->
               <div class="product-grid d-flex flex-wrap">
-                <div *ngFor="let item of lstProduct" class="product-item">
-                  <div class="product discount product_filter">
-                    <div class="product_image">
-                      <img [src]="item.imageDefault" height="200" [alt]="item.title" />
+                <ng-container *ngIf="lstProduct.length > 0; else noProduct">
+                  <div *ngFor="let item of lstProduct" class="product-item">
+                    <div class="product discount product_filter">
+                      <div class="product_image">
+                        <img [src]="item.imageDefault" height="200" [alt]="item.title" />
+                      </div>
+
+                      <div
+                        *ngIf="item.salePercent > 0"
+                        class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"
+                      >
+                        <span>-{{ item.salePercent }}%</span>
+                      </div>
+
+                      <div class="product_info">
+                        <h6 class="product_name short-line">
+                          <a [routerLink]="['/product', item.id]">{{ item.title }}</a>
+                        </h6>
+
+                        <ng-container *ngIf="item.salePercent > 0; else noSale">
+                          <div class="product_price">
+                            {{ item.priceSale | number: '1.0-0' }} VND
+                            <span>{{ item.price | number: '1.0-0' }} VND</span>
+                          </div>
+                          <div style="display: none" class="in_product_price">
+                            {{ item.priceSale | number: '1.0-0' }} VND
+                          </div>
+                        </ng-container>
+                        <ng-template #noSale>
+                          <div class="product_price">{{ item.price | number: '1.0-0' }} VND</div>
+                          <div style="display: none" class="in_product_price">
+                            {{ item.price | number: '1.0-0' }} VND
+                          </div>
+                        </ng-template>
+                      </div>
                     </div>
-
-                    <div
-                      *ngIf="item.salePercent > 0"
-                      class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"
-                    >
-                      <span>-{{ item.salePercent }}%</span>
-                    </div>
-
-                    <div class="product_info">
-                      <h6 class="product_name short-line">
-                        <a [routerLink]="['/product', item.id]">{{ item.title }}</a>
-                      </h6>
-
-                      <ng-container *ngIf="item.salePercent > 0; else noSale">
-                        <div class="product_price">
-                          {{ item.priceSale | number: '1.0-0' }} VND
-                          <span>{{ item.price | number: '1.0-0' }} VND</span>
-                        </div>
-                        <div style="display: none" class="in_product_price">
-                          {{ item.priceSale | number: '1.0-0' }} VND
-                        </div>
-                      </ng-container>
-                      <ng-template #noSale>
-                        <div class="product_price">{{ item.price | number: '1.0-0' }} VND</div>
-                        <div style="display: none" class="in_product_price">
-                          {{ item.price | number: '1.0-0' }} VND
-                        </div>
-                      </ng-template>
+                    <div class="product-meta">
+                      <span class="sold">Đã bán {{ item.totalSold }}</span>
+                      <span class="stars">
+                        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                          <i
+                            class="fa"
+                            [ngClass]="{
+                              'fa-star text-warning': star <= item.avgRate,
+                              'fa-star-o text-muted': star > item.avgRate
+                            }"
+                            aria-hidden="true"
+                          >
+                          </i>
+                        </ng-container>
+                        ({{ item.totalRate }})
+                      </span>
                     </div>
                   </div>
-                  <div class="product-meta">
-                    <span class="sold">Đã bán {{ item.totalSold }}</span>
-                    <span class="stars">
-                      <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
-                        <i
-                          class="fa"
-                          [ngClass]="{
-                            'fa-star text-warning': star <= item.avgRate,
-                            'fa-star-o text-muted': star > item.avgRate
-                          }"
-                          aria-hidden="true"
-                        >
-                        </i>
-                      </ng-container>
-                      ({{ item.totalRate }})
-                    </span>
+                </ng-container>
+                <ng-template #noProduct>
+                  <div class="w-100 text-center text-muted py-5">
+                    <h5>Không có sản phẩm nào phù hợp</h5>
                   </div>
-                </div>
+                </ng-template>
               </div>
 
               <div class="row pagination-container mt-3">

@@ -44,22 +44,6 @@ export class AuthService {
       );
   }
 
-  // loginWithGoogle(): Observable<any> {
-  //   return from(this.authServiceExtend.signIn(GoogleLoginProvider.PROVIDER_ID)).pipe(
-  //     switchMap((user: SocialUser) => {
-  //       return this.http.post(`${this.baseUrl}api/Account/external-login`, {
-  //         idToken: user.idToken
-  //       });
-  //     }),
-  //     tap((rs: any) => {
-  //       if (rs.code === 200) {
-  //         this.saveTokens(rs.content.accessToken, rs.content.expires_in_second);
-  //         this.setCurrentUser(rs.content);
-  //         this.updateLoginStatus(true);
-  //       }
-  //     })
-  //   );
-  // }
   loginWithGoogle(idToken: any): Observable<any> {
     return this.http
       .post<any>(

@@ -32,4 +32,10 @@ export class OrderService extends BaseService<any> {
     const url = `${this.svUrl}/CancelOrder`;
     return this.post(model, url);
   }
+
+  getInvoice(orderId: string): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders();
+    const url = `${this.svUrl}/GetInvoice?orderId=${orderId}`;
+    return this.http.get(url, { headers: headers, withCredentials: true });
+  }
 }

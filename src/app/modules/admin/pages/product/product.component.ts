@@ -189,14 +189,10 @@ export class ProductComponent implements OnInit {
     });
   }
   handleChangeSearchInput(event: any) {
-    if (event.key === 'Enter') {
-      this.params = {
-        search: this.searchString
-      };
-      this.getData();
-    } else {
-      this.searchString = (event.target.value ?? '').trim();
-    }
+    this.params = {
+      search: this.searchString
+    };
+    this.getData();
   }
 
   handleClearSearchInput() {

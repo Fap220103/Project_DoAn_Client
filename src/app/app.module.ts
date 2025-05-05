@@ -20,6 +20,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { tokenInterceptor } from './core/interceptors/token.interceptor';
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
 // Hàm tải file JSON từ thư mục assets/i18n
 export function HttpLoaderFactory(http: HttpClient) {
@@ -48,7 +50,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    SocialLoginModule
   ],
 
   providers: [
@@ -57,7 +60,24 @@ export function HttpLoaderFactory(http: HttpClient) {
       withInterceptors([loadingInterceptor]),
       withInterceptors([tokenInterceptor])
     ),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '844092088565-2t5ova2mof86otbptvm6loqoibenmpek.apps.googleusercontent.com'
+            )
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig
+    }
   ]
 })
 export class AppModule {}

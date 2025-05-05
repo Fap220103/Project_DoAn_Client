@@ -56,12 +56,20 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div class="form-group">
             <label>Địa chỉ giao hàng</label>
             <p class="form-control">
               {{ addressOrder.addressLine }}, {{ addressOrder.ward }}, {{ addressOrder.district }},
               {{ addressOrder.province }}
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Giảm giá</label>
+            <p class="form-control">
+              {{ order.totalDiscount | number: '1.0-0' }}
             </p>
           </div>
         </div>

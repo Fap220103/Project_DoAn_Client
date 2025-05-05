@@ -94,6 +94,14 @@ export class CheckoutComponent implements OnInit {
     });
   }
   submit() {
+    if (!this.addressDefault || !this.addressDefault.id) {
+      this.snackBar.open('Vui lòng chọn địa chỉ giao hàng trước khi đặt hàng.', 'OK', {
+        verticalPosition: 'bottom',
+        duration: 3000
+      });
+      return; // Dừng thực thi nếu chưa có địa chỉ
+    }
+
     const addItem = {
       CustomerId: this.authService.getUserId(),
       TypePayment: this.paymentMethod,

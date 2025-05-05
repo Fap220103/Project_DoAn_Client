@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseService } from './base.service';
 import { Constants } from '../constants/constants';
 import { Observable } from 'rxjs';
-import { RevenueDto } from '../models/report.model';
+import { BestSellingProduct, RevenueDto } from '../models/report.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +15,15 @@ export class ReportService extends BaseService<any> {
 
   getStatisticalData(fromDate?: string, toDate?: string): Observable<any> {
     const params: any = {};
-
     if (fromDate) {
       params.FromDate = fromDate; // đã là string rồi, không cần toISOString
     }
-
     if (toDate) {
       params.ToDate = toDate;
     }
-
     return this.http.get<RevenueDto[]>(`${this.svUrl}/GetRevenue`, { params });
+  }
+  getBestSellingProducts(): Observable<BestSellingProduct[]> {
+    return this.http.get<BestSellingProduct[]>(`${this.svUrl}/BestSeller`);
   }
 }

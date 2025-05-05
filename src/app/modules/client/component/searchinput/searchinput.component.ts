@@ -4,6 +4,7 @@ import { ProductService } from '../../../../core/services/product.service';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-searchinput',
@@ -19,6 +20,7 @@ export class SearchInputComponent implements OnInit, OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<SearchInputComponent>,
     private router: Router,
+    public toastr: ToastrService,
     public productService: ProductService
   ) {}
 
@@ -37,9 +39,16 @@ export class SearchInputComponent implements OnInit, OnDestroy {
     this.searchSubject.next(value); // đẩy giá trị vào Subject
   }
 
+  isValidSearchKeyword(keyword: string): boolean {
+    // Loại bỏ khoảng trắng đầu cuối, kiểm tra nếu chỉ toàn ký tự đặc biệt
+    return /^[a-zA-Z0-9À-ỹ\s]+$/.test(keyword.trim());
+  }
+
   fetchSuggestions(keyword: string) {
-    if (!keyword.trim()) {
-      this.suggestedProducts = [];
+    keyword = keyword.trim();
+
+    if (!keyword || !this.isValidSearchKeyword(keyword)) {
+      this.suggestedProducts = []; // Xóa gợi ý nếu không hợp lệ
       return;
     }
 
@@ -50,6 +59,11 @@ export class SearchInputComponent implements OnInit, OnDestroy {
   }
 
   searchProduct() {
+    if (!this.isValidSearchKeyword(this.searchString)) {
+      this.toastr.error('Vui lòng nhập từ khóa hợp lệ', 'Lỗi');
+      return;
+    }
+
     this.router.navigate(['/product'], {
       queryParams: { keyword: this.searchString }
     });

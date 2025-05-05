@@ -3,7 +3,7 @@ import { ReportService } from '../../../../core/services/report.service';
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
-import { RevenueDto } from '../../../../core/models/report.model';
+import { BestSellingProduct, RevenueDto } from '../../../../core/models/report.model';
 
 @Component({
   selector: 'app-report',
@@ -25,6 +25,8 @@ export class ReportComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // Sử dụng ngAfterViewInit nếu cần
     this.loadData();
+
+    this.loadBestSellingProducts();
   }
 
   loadData(): void {
@@ -88,6 +90,31 @@ export class ReportComponent implements OnInit, AfterViewInit {
         responsive: true,
         maintainAspectRatio: false
       }
+    });
+  }
+  loadBestSellingProducts(): void {
+    this.reportService.getBestSellingProducts().subscribe((rs: any) => {
+      const labels = rs.content.data.map((item: any) => item.productName);
+      const data = rs.content.data.map((item: any) => item.quantitySold); // hoặc item.labels nếu đó là số lượng
+      const ctx = document.getElementById('donutChart') as HTMLCanvasElement;
+      if (!ctx) return;
+
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              data: data,
+              backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc']
+            }
+          ]
+        },
+        options: {
+          maintainAspectRatio: false,
+          responsive: true
+        }
+      });
     });
   }
 }

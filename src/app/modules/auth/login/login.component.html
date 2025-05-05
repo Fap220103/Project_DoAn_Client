@@ -2,7 +2,8 @@
 <div class="container">
   <div class="partleft">
     <!-- Thêm logo công ty -->
-    <img src="/assets/images/logo/ara-logo-bg-256.png" alt="Logo Công Ty" />
+    <!-- <img src="/assets/images/logo/ara-logo-bg-256.png" alt="Logo Công Ty" /> -->
+    <p class="text-white">CloShop</p>
     <p class="text-white">Nền tảng thương mại điện tử<br />yêu thích ở Đông Nam Á & Đài Loan</p>
   </div>
   <div class="partright">
@@ -12,7 +13,15 @@
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" id="email" placeholder="Nhập email của bạn" formControlName="email" />
-          <div class="text-danger" style="display: none">Email không hợp lệ</div>
+          <div
+            class="text-danger"
+            *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors"
+          >
+            <span *ngIf="loginForm.get('email')!.errors?.['required']"
+              >Email không được để trống</span
+            >
+            <span *ngIf="loginForm.get('email')!.errors?.['email']">Email không hợp lệ</span>
+          </div>
         </div>
 
         <div class="form-group">
@@ -23,7 +32,14 @@
             placeholder="Nhập mật khẩu"
             formControlName="password"
           />
-          <div class="text-danger" style="display: none">Mật khẩu không được để trống</div>
+          <div
+            class="text-danger"
+            *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors"
+          >
+            <span *ngIf="loginForm.get('password')!.errors?.['required']"
+              >Mật khẩu không được để trống</span
+            >
+          </div>
         </div>
 
         <div class="form-group d-md-flex">
@@ -36,7 +52,7 @@
         </div>
 
         <div class="form-group">
-          <button type="submit" (click)="save()">Đăng Nhập</button>
+          <button type="submit" (click)="save()" [disabled]="loginForm.invalid">Đăng Nhập</button>
         </div>
 
         <div class="form-group">

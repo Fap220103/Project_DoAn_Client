@@ -6,6 +6,26 @@
       <div class="flex justify-start items-center"></div>
       <div class="relative hedear flex flex-col sm:flex-row flex-0 sm:items-center sm:px-6 xs:py-4">
         <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+          <div class="filterDate mr-3 flex flex-row">
+            <div class="col">
+              <p>Từ ngày</p>
+              <input type="date" value="" class="form-control" [(ngModel)]="fromDate" />
+            </div>
+            <div class="col">
+              <p>Đến ngày</p>
+              <input type="date" value="" class="form-control" [(ngModel)]="toDate" />
+            </div>
+            <div class="col mt-4">
+              <p></p>
+              <button
+                class="btn btn-sm btn-success btnLoc"
+                style="cursor: pointer"
+                (click)="handleChangeDate()"
+              >
+                Lọc
+              </button>
+            </div>
+          </div>
           <app-AraAutocomplete
             [placeholder]="'Order.Status' | translate"
             [displayField]="['display']"
@@ -16,29 +36,33 @@
             (onChange)="handleChangeStatus($event)"
           >
           </app-AraAutocomplete>
-          <mat-form-field
-            class="ml-3 mt-1 w-[500px] pr-2 md:min-w-64 xs:min-w-50 md:mr-[10px] sm:mr-[10px] xs:mr-[5px] md:text-base sm:text-base xs:text-xs"
-            [subscriptSizing]="'dynamic'"
-          >
+
+          <div class="search-container ml-3">
             <input
-              matInput
-              #inputSearch
-              [value]="searchString"
+              type="text"
+              class="search-input"
               placeholder="{{ 'Order.SearchTitle' | translate }}"
-              (keyup)="handleChangeSearchInput($event)"
-              trim
+              [(ngModel)]="searchString"
+              (keydown.enter)="handleChangeSearchInput($event)"
             />
-            <button
-              class="btn-close !w-6 !h-6 min-w-0 p-0 mr-3"
-              *ngIf="inputSearch.value !== ''"
-              matSuffix
-              mat-icon-button
-              type="button"
-              (click)="handleClearSearchInput()"
-            >
-              <mat-icon class="w-4 h-4 text-gray-500" [svgIcon]="'heroicons_solid:x'"> </mat-icon>
-            </button>
-          </mat-form-field>
+            <div class="search-actions">
+              <button
+                class="search-button"
+                (click)="handleChangeSearchInput($event)"
+                aria-label="Search"
+              >
+                🔍
+              </button>
+              <button
+                class="clear-button"
+                *ngIf="searchString"
+                (click)="handleClearSearchInput()"
+                aria-label="Clear search"
+              >
+                ✖
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -112,6 +136,13 @@
               </div>
             </td>
             <td>
+              <button
+                mat-icon-button
+                (click)="goToInvoice(item.orderId)"
+                matTooltip="{{ 'Common.ReadInvoice' | translate }}"
+              >
+                <mat-icon>receipt_long</mat-icon>
+              </button>
               <button
                 mat-icon-button
                 (click)="detail(item.orderId)"

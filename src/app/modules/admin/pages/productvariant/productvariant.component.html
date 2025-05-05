@@ -27,29 +27,32 @@
           >
           </app-AraAutocomplete>
 
-          <mat-form-field
-            class="ml-3 mt-1 w-[500px] pr-2 md:min-w-64 xs:min-w-50 md:mr-[10px] sm:mr-[10px] xs:mr-[5px] md:text-base sm:text-base xs:text-xs"
-            [subscriptSizing]="'dynamic'"
-          >
+          <div class="search-container">
             <input
-              matInput
-              #inputSearch
-              [value]="searchString"
+              type="text"
+              class="search-input"
               placeholder="{{ 'ProductVariant.SearchTitle' | translate }}"
-              (keyup)="handleChangeSearchInput($event)"
-              trim
+              [(ngModel)]="searchString"
+              (keydown.enter)="handleChangeSearchInput($event)"
             />
-            <button
-              class="btn-close !w-6 !h-6 min-w-0 p-0 mr-3"
-              *ngIf="inputSearch.value !== ''"
-              matSuffix
-              mat-icon-button
-              type="button"
-              (click)="handleClearSearchInput()"
-            >
-              <mat-icon class="w-4 h-4 text-gray-500" [svgIcon]="'heroicons_solid:x'"> </mat-icon>
-            </button>
-          </mat-form-field>
+            <div class="search-actions">
+              <button
+                class="search-button"
+                (click)="handleChangeSearchInput($event)"
+                aria-label="Search"
+              >
+                🔍
+              </button>
+              <button
+                class="clear-button"
+                *ngIf="searchString"
+                (click)="handleClearSearchInput()"
+                aria-label="Clear search"
+              >
+                ✖
+              </button>
+            </div>
+          </div>
 
           <button
             mat-flat-button
