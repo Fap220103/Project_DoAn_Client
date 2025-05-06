@@ -9,6 +9,7 @@ import { SearchInputComponent } from '../searchinput/searchinput.component';
 import { CartService } from '../../../../core/services/cart.service';
 import { SettingService } from '../../../../core/services/setting.service';
 import { GeneralSetting } from '../../../../core/models/setting.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
@@ -25,6 +26,7 @@ export class NavbarComponent implements OnInit {
   lstCategory1: any[] = [];
   lstCategory2: any[] = [];
   lstCategory3: any[] = [];
+  currentLang = 'vi';
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
@@ -40,7 +42,9 @@ export class NavbarComponent implements OnInit {
     private cartService: CartService,
     private settingService: SettingService,
     public dialog: MatDialog,
-    public router: Router
+    public router: Router,
+    public translate: TranslateService
+    
   ) {
     this.authService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
@@ -48,6 +52,12 @@ export class NavbarComponent implements OnInit {
     this.cartService.cartCount$.subscribe((count) => {
       this.cartItemCount = count;
     });
+    translate.addLangs(['en', 'vi']);
+    translate.setDefaultLang('vi');
+
+    const browserLang = translate.getBrowserLang() ?? 'vi';
+    const lang = localStorage.getItem('lang') ?? browserLang;
+    translate.use(/en|vi/.test(lang) ? lang : 'vi');
   }
 
   ngOnInit() {
@@ -55,6 +65,11 @@ export class NavbarComponent implements OnInit {
     this.getLstCategory2();
     this.getLstCategory3();
     this.getGeneralSetting();
+  }
+  switchLang(lang: string) {
+    this.translate.use(lang);
+    this.currentLang = lang;
+    localStorage.setItem('lang', lang);
   }
   getGeneralSetting() {
     this.settingService.getGeneralSetting().subscribe((data) => {

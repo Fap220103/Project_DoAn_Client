@@ -30,7 +30,12 @@
       "EditFail": "Cập nhật thất bại"
     },
     "Dashboard" : {
-      "Title": "Tổng quan"
+      "Title": "Tổng quan",
+      "Order": "Đơn hàng",
+      "Product": "Sản phẩm",
+      "User": "Người dùng",
+      "Inventory": "Số sản phẩm sắp hết hàng",
+      "More": "Xem thêm"
     },
     
     "Color" : {
@@ -229,7 +234,16 @@
       "Image": "Ảnh",
       "Detail": "Chi tiết",
       "Description": "Mô tả"
-    
+    },
+    "Client" : {
+      "Navbar":{
+        "Login": "Đăng nhập",
+        "Registry": "Đăng ký",
+        "About": "Về"
+      }
+
     }
+  
+   
 }
   

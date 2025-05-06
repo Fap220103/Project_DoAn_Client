@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, from, switchMap, tap, throwError } from 'rxjs';
-import {
-  SocialAuthService,
-  GoogleLoginProvider,
-  SocialUser
-} from '@abacritt/angularx-social-login';
+import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Constants } from '../constants/constants';
@@ -27,7 +22,6 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private authServiceExtend: SocialAuthService,
     public toastr: ToastrService
   ) {}
 

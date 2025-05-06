@@ -1,2 +1,70 @@
-<p>dashboard works!</p>
-<h1>dsadsadsdas</h1>
+<div class="row mt-3">
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-info">
+      <div class="inner">
+        <h3>{{ infoDashboard.totalOrder }}</h3>
+
+        <p>{{ 'Dashboard.Order' | translate }}</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-bag"></i>
+      </div>
+      <a routerLink="/admin/order" class="small-box-footer"
+        >{{ 'Dashboard.More' | translate }}<i class="fas fa-arrow-circle-right"></i
+      ></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-success">
+      <div class="inner">
+        <h3>{{ infoDashboard.totalProduct }}</h3>
+
+        <p>{{ 'Dashboard.Product' | translate }}</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-stats-bars"></i>
+      </div>
+      <a routerLink="/admin/product" class="small-box-footer"
+        >{{ 'Dashboard.More' | translate }}<i class="fas fa-arrow-circle-right"></i
+      ></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-warning">
+      <div class="inner">
+        <h3>{{ infoDashboard.totalUser }}</h3>
+
+        <p>{{ 'Dashboard.User' | translate }}</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-person-add"></i>
+      </div>
+      <a routerLink="/admin/userprofile" class="small-box-footer"
+        >{{ 'Dashboard.More' | translate }}<i class="fas fa-arrow-circle-right"></i
+      ></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-danger">
+      <div class="inner">
+        <h3>{{ infoDashboard.totalInventory }}</h3>
+
+        <p>{{ 'Dashboard.Inventory' | translate }}</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-pie-graph"></i>
+      </div>
+      <a routerLink="/admin/productvariant" class="small-box-footer"
+        >{{ 'Dashboard.More' | translate }}<i class="fas fa-arrow-circle-right"></i
+      ></a>
+    </div>
+  </div>
+  <!-- ./col -->
+</div>

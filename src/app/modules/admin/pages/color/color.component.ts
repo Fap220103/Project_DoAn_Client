@@ -25,7 +25,6 @@ export class ColorComponent implements OnInit {
   pageSize = 10;
   pageSizeOptions = [5, 10, 25, 100];
   displayedColumns: string[] = ['position', 'name', 'hexCode', 'actions'];
-  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
@@ -46,7 +45,6 @@ export class ColorComponent implements OnInit {
         return x;
       });
       this.totalCount = rs.content.data.totalRecords;
-      this.dataSource.data = this.lstColor;
     });
   }
   onChangePage(event: any) {

@@ -30,7 +30,6 @@ export class NavbarComponent implements OnInit {
       )
       .subscribe((data) => {
         this.pageTitle = data['title'] || 'Tổng quan';
-        //this.pageAlias = data['alias'] || 'dashboard';
       });
 
     translate.addLangs(['en', 'vi']);

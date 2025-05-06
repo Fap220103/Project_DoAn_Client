@@ -17,6 +17,7 @@ import { DiscountComponent } from './pages/discount/discount.component';
 import { NewsComponent } from './pages/news/news.component';
 import { ReportComponent } from './pages/report/report.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
+import { ExportReportComponent } from './pages/report/exportReport/exportReport.component';
 
 const routes: Routes = [
   {
@@ -102,6 +103,11 @@ const routes: Routes = [
       {
         path: 'invoice/:orderId',
         component: InvoiceComponent,
+        data: { title: 'Invoice.Title' }
+      },
+      {
+        path: 'exportreport',
+        component: ExportReportComponent,
         data: { title: 'Invoice.Title' }
       }
     ]

@@ -26,7 +26,12 @@
     "EditFail": "Edit Failed"
   },
   "Dashboard": {
-    "Title": "Dashboard"
+    "Title": "Dashboard",
+    "Order": "Order",
+    "Product": "Product",
+    "User": "User",
+    "Inventory": "Number of products out of stock",
+    "More": "More Info"
   },
   "Color": {
     "SearchTitle": "Search by color code and color name",
@@ -214,5 +219,13 @@
     "Image": "Image",
     "Detail": "Details",
     "Description": "Description"
-  }
+  },
+  "Client" : {
+      "Navbar":{
+        "Login": "Login",
+        "Registry": "Registry",
+        "About": "About"
+      }
+     
+    }
 }

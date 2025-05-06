@@ -16,7 +16,7 @@ export class ReportService extends BaseService<any> {
   getStatisticalData(fromDate?: string, toDate?: string): Observable<any> {
     const params: any = {};
     if (fromDate) {
-      params.FromDate = fromDate; // đã là string rồi, không cần toISOString
+      params.FromDate = fromDate; 
     }
     if (toDate) {
       params.ToDate = toDate;
@@ -25,5 +25,17 @@ export class ReportService extends BaseService<any> {
   }
   getBestSellingProducts(): Observable<BestSellingProduct[]> {
     return this.http.get<BestSellingProduct[]>(`${this.svUrl}/BestSeller`);
+  }
+
+  getReport(fromDate?: string, toDate?: string, userId?: string): Observable<any> {
+    const params: any = {};
+    if (fromDate) {
+      params.FromDate = fromDate; 
+    }
+    if (toDate) {
+      params.ToDate = toDate;
+    }
+    params.CreatedId = userId;
+    return this.http.get<RevenueDto[]>(`${this.svUrl}`, { params });
   }
 }

@@ -52,7 +52,6 @@ export class ChooseDiscountComponent implements OnInit {
   }
 
   save() {
-    console.log(this.selectedDiscount);
     this.dialogRef.close(this.selectedDiscount);
   }
 

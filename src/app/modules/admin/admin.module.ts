@@ -43,6 +43,7 @@ import { NewsComponent } from './pages/news/news.component';
 import { AddNewsComponent } from './pages/news/addNews/addNews.component';
 import { ReportComponent } from './pages/report/report.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
+import { ExportReportComponent } from './pages/report/exportReport/exportReport.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { InvoiceComponent } from './pages/invoice/invoice.component';
     NewsComponent,
     AddNewsComponent,
     ReportComponent,
-    InvoiceComponent
+    InvoiceComponent,
+    ExportReportComponent
   ],
   imports: [
     CommonModule,

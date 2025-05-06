@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-3">
+    <label>Từ ngày</label>
+    <input type="date" class="form-control" [(ngModel)]="fromDate" />
+  </div>
+  <div class="col-md-3">
+    <label>Đến ngày</label>
+    <input type="date" class="form-control" [(ngModel)]="toDate" />
+  </div>
+  <div class="col-md-3 d-flex align-items-end">
+    <button class="btn btn-sm btn-success" (click)="loadData()">Lọc</button>
+    <button *ngIf="report" class="ml-2 btn btn-sm btn-danger mt-4" (click)="exportToPDF()">Xuất PDF</button>
+  </div>
+</div>
+
+<div *ngIf="report" #reportElement class="report-container p-4 bg-white mt-4">
+  <h2 class="text-center">{{ report.reportTitle }}</h2>
+
+  <p><strong>Thời gian:</strong> {{ report.fromDate | date:'dd/MM/yyyy' }} - {{ report.toDate | date:'dd/MM/yyyy' }}</p>
+  <p><strong>Tổng đơn hàng:</strong> {{ report.totalOrders }}</p>
+  <p><strong>Tổng doanh thu:</strong> {{ report.totalRevenue | currency:'VND' }}</p>
+
+  <h3>Sản phẩm bán chạy</h3>
+  <table class="table table-bordered w-100">
+    <thead>
+      <tr>
+        <th>Tên sản phẩm</th>
+        <th>Số lượng bán</th>
+        <th>Doanh thu</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of report.topProducts">
+        <td>{{ item.productName }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.revenue | currency:'VND' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="mt-5"><em>Ngày tạo báo cáo: {{ report.createdDate | date:'dd/MM/yyyy' }}</em></p>
+  <p><em>Người tạo: {{ report.createBy }}</em></p>
+</div>
+
+

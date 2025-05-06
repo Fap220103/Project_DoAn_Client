@@ -44,5 +44,8 @@ export const Constants = {
   },
   Report: {
     Resource: 'api/Report'
+  },
+  Dashboard: {
+    Resource: 'api/Dashboard'
   }
 };
