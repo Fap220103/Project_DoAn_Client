@@ -16,7 +16,7 @@ export class ReportService extends BaseService<any> {
   getStatisticalData(fromDate?: string, toDate?: string): Observable<any> {
     const params: any = {};
     if (fromDate) {
-      params.FromDate = fromDate; 
+      params.FromDate = fromDate;
     }
     if (toDate) {
       params.ToDate = toDate;
@@ -30,7 +30,7 @@ export class ReportService extends BaseService<any> {
   getReport(fromDate?: string, toDate?: string, userId?: string): Observable<any> {
     const params: any = {};
     if (fromDate) {
-      params.FromDate = fromDate; 
+      params.FromDate = fromDate;
     }
     if (toDate) {
       params.ToDate = toDate;

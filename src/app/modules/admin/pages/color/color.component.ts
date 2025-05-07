@@ -52,28 +52,7 @@ export class ColorComponent implements OnInit {
     this.pageSize = event.pageSize;
     this.getData();
   }
-  edit(item: any) {
-    console.log(item);
-    this.selectedItem = item;
-    const dialogRef = this.dialog.open(ColorAddComponent, {
-      minWidth: '70%',
-      height: '100%',
-      panelClass: 'custom-dialog-right',
-      position: {
-        right: '0'
-      },
-      data: {
-        title: 'Color.EditTitle',
-        item: this.selectedItem,
-        isEdit: true
-      }
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.getData();
-      }
-    });
-  }
+
   delete(colorId: string) {
     Swal.fire({
       title: this.translate.instant('Common.DeleteConfirm'),
@@ -115,7 +94,7 @@ export class ColorComponent implements OnInit {
   }
   add() {
     const dialogRef = this.dialog.open(ColorAddComponent, {
-      minWidth: '70%',
+      minWidth: '30%',
       height: '100%',
       panelClass: 'custom-dialog-right',
       position: {

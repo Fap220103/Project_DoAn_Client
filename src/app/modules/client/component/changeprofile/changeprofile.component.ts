@@ -52,9 +52,39 @@ export class ChangeProfileComponent implements OnInit {
         this.profile.profilePictureName ?? '/assets/Content/img/SanPham/h0.png';
     });
   }
+  // onFileSelected(event: Event): void {
+  //   const file = (event.target as HTMLInputElement).files?.[0];
+  //   if (file) {
+  //     this.selectedFile = file;
+
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       this.previewImageUrl = reader.result;
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // }
   onFileSelected(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0];
+
     if (file) {
+      const allowedTypes = ['image/jpeg', 'image/png'];
+      const maxSize = 1 * 1024 * 1024; // 1MB
+
+      if (!allowedTypes.includes(file.type)) {
+        this.snackBar.open('Chỉ chấp nhận định dạng ảnh JPEG hoặc PNG.', 'OK', {
+          duration: 2000
+        });
+        return;
+      }
+
+      if (file.size > maxSize) {
+        this.snackBar.open('Dung lượng ảnh tối đa là 1MB.', 'OK', {
+          duration: 2000
+        });
+        return;
+      }
+
       this.selectedFile = file;
 
       const reader = new FileReader();

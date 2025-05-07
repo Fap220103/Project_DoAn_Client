@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router, NavigationEnd } from '@angular/router';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -31,7 +30,7 @@ export class AppComponent implements OnInit {
       }
     });
   }
-  
+
   loadTawkScript(): void {
     if (document.getElementById('tawk-script')) return;
 

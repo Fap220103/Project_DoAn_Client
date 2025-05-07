@@ -44,7 +44,6 @@ export class NavbarComponent implements OnInit {
     public dialog: MatDialog,
     public router: Router,
     public translate: TranslateService
-    
   ) {
     this.authService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;

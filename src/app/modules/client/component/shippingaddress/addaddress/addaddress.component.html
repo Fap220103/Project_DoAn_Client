@@ -4,18 +4,45 @@
       <h2 class="title">{{ data.title | translate }}</h2>
 
       <div class="row">
-        <input
-          type="text"
-          placeholder="Họ và tên"
-          class="input-field"
-          formControlName="recipientName"
-        />
-        <input
-          type="text"
-          placeholder="Số điện thoại"
-          class="input-field"
-          formControlName="phoneNumber"
-        />
+        <div class="col">
+          <input
+            type="text"
+            placeholder="Họ và tên"
+            class="input-field w-100"
+            formControlName="recipientName"
+          />
+          <div
+            *ngIf="form.get('recipientName')?.invalid && form.get('recipientName')?.touched"
+            class="text-danger"
+          >
+            <div *ngIf="form.get('recipientName')?.errors?.['required']">
+              Vui lòng đầy đủ thông tin
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input
+            type="text"
+            placeholder="Số điện thoại"
+            class="input-field w-100"
+            formControlName="phoneNumber"
+            maxlength="10"
+            (keypress)="allowOnlyNumbers($event)"
+          />
+          <div
+            *ngIf="form.get('phoneNumber')?.invalid && form.get('phoneNumber')?.touched"
+            class="text-danger"
+          >
+            <div *ngIf="form.get('phoneNumber')?.errors?.['required']">
+              Vui lòng nhập số điện thoại
+            </div>
+            <div *ngIf="form.get('phoneNumber')?.errors?.['pattern']">
+              Số điện thoại không hợp lệ (chỉ 10 số)
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="row">
@@ -58,18 +85,8 @@
         type="text"
         placeholder="Địa chỉ cụ thể"
         formControlName="addressLine"
-        class="input-field mt-2"
+        class="input-field mt-2 w-100"
       />
-
-      <!-- <div class="location-box mt-2">
-        <button class="location-btn">+ Thêm vị trí</button>
-      </div> -->
-
-      <!-- <div class="address-type mt-3">
-        <span>Loại địa chỉ:</span>
-        <button class="type-btn">Nhà Riêng</button>
-        <button class="type-btn">Văn Phòng</button>
-      </div> -->
 
       <div class="default-address mt-2">
         <input type="checkbox" id="default" formControlName="isDefault" />

@@ -43,7 +43,7 @@ export class AddAddressComponent implements OnInit {
       ),
       phoneNumber: new FormControl(
         this.item?.phoneNumber,
-        Validators.compose([Validators.required])
+        Validators.compose([Validators.required, Validators.pattern('^[0-9]{0,10}$')])
       ),
       addressLine: new FormControl(this.item?.addressLine),
       province: new FormControl(
@@ -210,5 +210,12 @@ export class AddAddressComponent implements OnInit {
       duration: 2000
     });
     if (!isClose && res) this.dialogRef.close(res);
+  }
+  allowOnlyNumbers(event: KeyboardEvent) {
+    const charCode = event.which ? event.which : event.keyCode;
+    // Cho phép chỉ từ 0 đến 9
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+    }
   }
 }

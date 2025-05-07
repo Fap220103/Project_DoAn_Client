@@ -168,25 +168,7 @@ export class AddProductComponent implements OnInit {
     });
     if (!isClose && res) this.dialogRef.close(res);
   }
-  // format số tiền | chỉ cho nhập số | không quá 16 số
-  // validateNumber(event: any): void {
-  //   let value = event.target.value;
 
-  //   value = value.replace(/[^0-9]/g, '');
-
-  //   if (value.length > 16) {
-  //     value = value.slice(0, 16);
-  //   }
-
-  //   if (value) {
-  //     const formattedValue = Number(value).toLocaleString('en-US');
-  //     this.displayAdvanceAmount = formattedValue;
-  //     this.item.advanceAmount = Number(value);
-  //   } else {
-  //     this.displayAdvanceAmount = '';
-  //     this.item.advanceAmount = 0;
-  //   }
-  // }
   formatCurrency(controlName: string) {
     let value = this.form.get(controlName)?.value;
     if (value) {

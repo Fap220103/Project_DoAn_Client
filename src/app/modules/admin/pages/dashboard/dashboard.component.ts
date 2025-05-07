@@ -9,13 +9,13 @@ import { DashboardService } from '../../../../core/services/dashboard.service';
 export class DashboardComponent implements OnInit {
   infoDashboard: any;
   constructor(private dashboardSevice: DashboardService) {}
-  
+
   ngOnInit() {
     this.getData();
   }
   getData() {
     this.dashboardSevice.get().subscribe((rs) => {
-      this.infoDashboard = rs.content.data;   
+      this.infoDashboard = rs.content.data;
     });
   }
 }

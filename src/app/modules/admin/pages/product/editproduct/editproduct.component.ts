@@ -16,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./editproduct.component.scss']
 })
 export class EditProductComponent implements OnInit {
+  rawValues: { [key: string]: string } = {};
   form: FormGroup;
   activeTab = 'info';
   images: { url: string; file?: File; isDefault: boolean }[] = [];
@@ -80,10 +81,18 @@ export class EditProductComponent implements OnInit {
       seoDescription: [this.item.seoDescription],
       seoKeywords: [this.item.seoKeywords]
     });
+
+    ['price', 'originalPrice'].forEach((field) => {
+      const value = this.item[field];
+      if (value) {
+        this.rawValues[field] = value.toString();
+        const formatted = Number(value).toLocaleString('en-US');
+        this.form.get(field)?.setValue(formatted, { emitEvent: false });
+      }
+    });
   }
   ngOnInit() {
     this.getLstProductCategories();
-    console.log('list category: ', this.productCategories);
   }
 
   getLstProductCategories() {
@@ -150,5 +159,20 @@ export class EditProductComponent implements OnInit {
       duration: 2000
     });
     if (!isClose && res) this.dialogRef.close(res);
+  }
+  formatCurrency(controlName: string) {
+    let value = this.form.get(controlName)?.value;
+    if (value) {
+      value = value.replace(/[^0-9]/g, '');
+      this.rawValues[controlName] = value; // lưu giá trị gốc
+      const formatted = Number(value).toLocaleString('en-US');
+      this.form.get(controlName)?.setValue(formatted, { emitEvent: false });
+    }
+  }
+
+  removeFormat(controlName: string) {
+    const raw =
+      this.rawValues[controlName] || this.form.get(controlName)?.value?.replace(/[^0-9]/g, '');
+    this.form.get(controlName)?.setValue(raw, { emitEvent: false });
   }
 }

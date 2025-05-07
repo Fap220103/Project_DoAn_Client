@@ -21,10 +21,7 @@ export class ColorAddComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     dialogRef.disableClose = true;
-    if (data.isEdit) {
-      this.item = { ...data.item };
-    }
-    data.isEdit ? (this.isEdit = true) : (this.isEdit = false);
+
     this.form = this.formBuilder.group({
       colorName: new FormControl(
         this.item?.colorName,
@@ -45,29 +42,15 @@ export class ColorAddComponent implements OnInit {
 
   save() {
     const formValue = this.form.value;
-
-    if (this.isEdit) {
-      const updateItem = {
-        id: this.item.id,
-        colorName: formValue.colorName,
-        colorCode: formValue.colorCode
-      };
-      console.log('update:', updateItem);
-      this.colorService.post(updateItem).subscribe({
-        next: (res) => this.processResponse(res),
-        error: () => this.processResponse(false)
-      });
-    } else {
-      const addItem = {
-        colorName: formValue.colorName,
-        colorCode: formValue.colorCode
-      };
-      console.log('add: ', addItem);
-      this.colorService.post(addItem).subscribe({
-        next: (res) => this.processResponse(res),
-        error: () => this.processResponse(false)
-      });
-    }
+    const addItem = {
+      Name: formValue.colorName,
+      hexCode: formValue.colorCode
+    };
+    console.log('add: ', addItem);
+    this.colorService.post(addItem).subscribe({
+      next: (res) => this.processResponse(res),
+      error: () => this.processResponse(false)
+    });
   }
 
   processResponse(res: any, msg?: string, isClose?: boolean) {

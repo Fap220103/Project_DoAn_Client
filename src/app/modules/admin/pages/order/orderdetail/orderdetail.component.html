@@ -16,13 +16,13 @@
         <div class="col-md-6">
           <div class="form-group">
             <label>Mã đơn hàng</label>
-            <p class="form-control">{{ order.orderCode }}</p>
+            <p class="form-control text-custom">{{ order.orderCode }}</p>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label>Họ tên khách hàng</label>
-            <p class="form-control">{{ order.address.recipientName }}</p>
+            <p class="form-control text-custom">{{ order.address.recipientName }}</p>
           </div>
         </div>
       </div>
@@ -30,13 +30,13 @@
         <div class="col-md-6">
           <div class="form-group">
             <label>Tổng tiền</label>
-            <p class="form-control">{{ order.totalAmount }}</p>
+            <p class="form-control text-custom">{{ order.totalAmount | number: '1.0-0' }} VND</p>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label>Số điện thoại</label>
-            <p class="form-control">{{ order.address.phoneNumber }}</p>
+            <p class="form-control text-custom">{{ order.address.phoneNumber }}</p>
           </div>
         </div>
       </div>
@@ -44,14 +44,14 @@
         <div class="col-md-6">
           <div class="form-group">
             <label>Ngày tạo</label>
-            <p class="form-control">{{ order.createdAt | date: 'dd/MM/yyyy' }}</p>
+            <p class="form-control text-custom">{{ order.createdAt | date: 'dd/MM/yyyy' }}</p>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label>Trạng thái</label>
             <!-- <p class="form-control">{{ order.typePayment === 1 ? 'Chưa thanh toán' : 'Đã thanh toán' }}</p> -->
-            <p class="form-control">Chưa thanh toán</p>
+            <p class="form-control text-custom">Chưa thanh toán</p>
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label>Địa chỉ giao hàng</label>
-            <p class="form-control">
+            <p class="form-control text-custom">
               {{ addressOrder.addressLine }}, {{ addressOrder.ward }}, {{ addressOrder.district }},
               {{ addressOrder.province }}
             </p>
@@ -68,7 +68,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label>Giảm giá</label>
-            <p class="form-control">
+            <p class="form-control text-custom">
               {{ order.totalDiscount | number: '1.0-0' }}
             </p>
           </div>
