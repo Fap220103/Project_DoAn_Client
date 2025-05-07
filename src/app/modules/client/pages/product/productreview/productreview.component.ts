@@ -22,6 +22,8 @@ export class ProductReviewComponent implements OnInit {
 
   totalReviews: number = 0;
   averageRating: number = 0;
+  currentPage = 1;
+  totalItems = 100;
 
   constructor(
     private reviewService: ReviewService,
@@ -34,7 +36,10 @@ export class ProductReviewComponent implements OnInit {
     this.getData();
     this.checkHasOrdered();
   }
-
+  onPageChange(newPage: number) {
+    this.currentPage = newPage;
+    //this.loadProducts();
+  }
   checkHasOrdered() {
     this.orderService
       .getStatusUserOrder(this.authService.getUserId(), this.productId)

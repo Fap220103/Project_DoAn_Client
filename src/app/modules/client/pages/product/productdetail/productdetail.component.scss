@@ -90,3 +90,17 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+.stars i {
+  color: #f5c518;
+  margin-right: 5px;
+}
+.rating-summary {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.average-rating {
+  font-size: 32px;
+  margin-right: 10px;
+}

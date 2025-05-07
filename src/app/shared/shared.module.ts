@@ -24,9 +24,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MatSelectModule } from '@angular/material/select';
+import { PaginationComponent } from './components/Pagination/Pagination.component';
 
 @NgModule({
-  declarations: [AraAutocompleteComponent],
+  declarations: [AraAutocompleteComponent, PaginationComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -72,7 +73,8 @@ import { MatSelectModule } from '@angular/material/select';
     CKEditorModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    PaginationComponent
   ],
   providers: [DatePipe, provideNativeDateAdapter()]
 })

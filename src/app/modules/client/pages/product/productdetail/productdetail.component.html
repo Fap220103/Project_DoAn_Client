@@ -58,9 +58,28 @@
           <p>
             Lượt xem: <b>{{ item.viewCount }}</b>
           </p>
+          <div class="rating-summary">
+            <span class="stars">
+              <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                <i
+                  class="fa"
+                  [ngClass]="{
+                    'fa-star text-warning': star <= averageRating,
+                    'fa-star-o text-muted': star > averageRating
+                  }"
+                  aria-hidden="true"
+                >
+                </i>
+              </ng-container>
+              ({{ totalReviews }})
+            </span>
+          </div>
         </div>
-        <div class="free_delivery d-flex flex-row align-items-center justify-content-center">
+        <!-- <div class="free_delivery d-flex flex-row align-items-center justify-content-center">
           <span class="ti-truck"></span><span>free delivery</span>
+        </div> -->
+        <div *ngIf="generalReview !== null">
+          <span>Đánh giá chung: {{ generalReview.suggest }}</span>
         </div>
         <ng-container *ngIf="item.salePercent > 0; else normalPrice">
           <div class="original_price">{{ item.price | number: '1.0-0' }} VND</div>

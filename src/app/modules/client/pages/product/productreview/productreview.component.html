@@ -81,5 +81,12 @@
         <p class="review-comment">{{ review.content }}</p>
       </div>
     </div>
+    <app-pagination
+      [totalItems]="lstReview.length"
+      [itemsPerPage]="10"
+      [currentPage]="currentPage"
+      (pageChange)="onPageChange($event)"
+    >
+    </app-pagination>
   </div>
 </div>

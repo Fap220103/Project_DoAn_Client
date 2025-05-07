@@ -40,6 +40,12 @@ export class ProductService extends BaseService<any> {
     const url = `${this.svUrl}/GetSuggestProduct?keyword=${keyword}&page=${page}&limit=${limit}`;
     return this.http.get(url, { headers: headers, withCredentials: true });
   }
+
+  getGeneralReview(productId: string): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders();
+    const url = `${this.svUrl}/GetGeneralReview?productId=${productId}`;
+    return this.http.get(url, { headers: headers, withCredentials: true });
+  }
   addViewCount(model: any): Observable<any> {
     const url = `${this.svUrl}/AddViewCount`;
     return this.post(model, url);
