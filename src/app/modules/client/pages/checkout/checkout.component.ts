@@ -151,17 +151,17 @@ export class CheckoutComponent implements OnInit {
     const dialogRef = this.dialog.open(ChooseDiscountComponent, {
       data: {
         title: 'ShippingAddress.AddTitle',
-        isEdit: false,
+        totalAmount: this.totalAmount,
         userId: this.authService.getUserId()
       }
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.discount = result; // result cần có trường 'code'
+        this.discount = result;
         this.calculateTotalAmountDiscount();
         console.log('discount: ', this.discount);
       } else {
-        this.discount = null; // Nếu không có kết quả, gán discount là null
+        this.discount = null;
         this.totalAmountDiscount = 0;
       }
     });

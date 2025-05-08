@@ -4,20 +4,23 @@
   </div>
 
   <div class="dialog-body">
-    <div class="address-item" *ngFor="let item of lstDiscount">
-      <input
-        type="radio"
-        name="discount"
-        [value]="item"
-        [(ngModel)]="selectedDiscount"
-        class="mt-4"
-      />
-      <div class="coupon-content">
-        <h3>{{ item.title }}</h3>
-        <p class="coupon-min-order">{{ item.code }}</p>
-        <p class="coupon-min-order">giảm giá lên tới {{ item.displayValue }}</p>
-        <p class="coupon-min-order">Hiệu lực đến ngày {{ item.endDate | date: 'dd/MM/yyyy' }}</p>
-      </div>
+    <div class="voucher-box" *ngFor="let item of lstDiscount" [class.disabled]="item.isDisabled">
+      <label class="voucher-wrapper">
+        <input
+          type="radio"
+          name="discount"
+          [value]="item"
+          [(ngModel)]="selectedDiscount"
+          [disabled]="item.isDisabled"
+        />
+        <div class="coupon-content">
+          <h3>{{ item.title }}</h3>
+          <p class="coupon-min-order">{{ item.code }}</p>
+          <p class="coupon-min-order">Giảm giá lên tới {{ item.displayValue }}</p>
+          <p class="coupon-min-order">Hiệu lực đến ngày {{ item.endDate | date: 'dd/MM/yyyy' }}</p>
+          <p *ngIf="item.isDisabled" class="coupon-warning">* Voucher không hợp lệ</p>
+        </div>
+      </label>
     </div>
   </div>
 

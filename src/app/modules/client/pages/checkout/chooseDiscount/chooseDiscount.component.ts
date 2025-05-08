@@ -17,6 +17,7 @@ export class ChooseDiscountComponent implements OnInit {
   item: any = {};
   lstDiscount: any[] = [];
   selectedDiscount: any;
+  totalAmount: any;
   constructor(
     public snackBar: MatSnackBar,
     private translate: TranslateService,
@@ -26,6 +27,7 @@ export class ChooseDiscountComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     dialogRef.disableClose = true;
+    this.totalAmount = data.totalAmount;
   }
 
   ngOnInit() {
@@ -46,6 +48,13 @@ export class ChooseDiscountComponent implements OnInit {
           x.discountValue
         );
         x.displayValue = x.discountType == 0 ? `${formattedValue}%` : `${formattedValue} VND`;
+
+        if (x.discountType === 1 && x.discountValue > this.totalAmount) {
+          x.isDisabled = true;
+        } else {
+          x.isDisabled = false;
+        }
+
         return x;
       });
     });

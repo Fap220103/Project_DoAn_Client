@@ -23,7 +23,7 @@ export class ProductReviewComponent implements OnInit {
   totalReviews: number = 0;
   averageRating: number = 0;
   currentPage = 1;
-  totalItems = 100;
+  totalItems!: number;
 
   constructor(
     private reviewService: ReviewService,
@@ -38,7 +38,7 @@ export class ProductReviewComponent implements OnInit {
   }
   onPageChange(newPage: number) {
     this.currentPage = newPage;
-    //this.loadProducts();
+    this.getData();
   }
   checkHasOrdered() {
     this.orderService
@@ -48,9 +48,10 @@ export class ProductReviewComponent implements OnInit {
       });
   }
   getData() {
-    this.reviewService.get({ productId: this.productId }, 1, 100).subscribe((rs) => {
+    this.reviewService.get({ productId: this.productId }, this.currentPage, 5).subscribe((rs) => {
       this.lstReview = rs.content.data.items;
-      this.filteredReviews = [...this.lstReview]; // phải gán sau khi load dữ liệu
+      this.totalItems = rs.content.data.totalRecords;
+      this.filteredReviews = [...this.lstReview];
       this.calculateReviewStats();
       console.log(this.filteredReviews);
     });

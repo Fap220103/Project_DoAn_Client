@@ -89,4 +89,11 @@
       </tr>
     </ng-template>
   </table>
+  <app-pagination
+    [totalItems]="totalCount"
+    [itemsPerPage]="5"
+    [currentPage]="currentPage"
+    (pageChange)="onPageChange($event)"
+  >
+  </app-pagination>
 </div>

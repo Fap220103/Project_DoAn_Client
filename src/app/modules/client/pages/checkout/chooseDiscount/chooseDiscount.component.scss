@@ -98,3 +98,45 @@ input[type='radio'] {
 .confirm-button:hover {
   background-color: #d93c00;
 }
+.voucher-box {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  padding: 12px;
+  transition: all 0.2s;
+}
+
+.voucher-wrapper {
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.voucher-box.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+input[type='radio'] {
+  margin-right: 12px;
+  margin-top: 5px;
+}
+
+.coupon-content h3 {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.coupon-min-order {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 2px 0;
+}
+
+.coupon-warning {
+  font-size: 0.85rem;
+  color: red;
+  margin-top: 4px;
+  font-style: italic;
+}

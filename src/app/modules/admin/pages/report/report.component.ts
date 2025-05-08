@@ -95,8 +95,33 @@ export class ReportComponent implements OnInit, AfterViewInit {
   loadBestSellingProducts(): void {
     this.reportService.getBestSellingProducts().subscribe((rs: any) => {
       const labels = rs.content.data.map((item: any) => item.productName);
-      const data = rs.content.data.map((item: any) => item.quantitySold); // hoặc item.labels nếu đó là số lượng
+      const data = rs.content.data.map((item: any) => item.quantitySold);
       const ctx = document.getElementById('donutChart') as HTMLCanvasElement;
+      if (!ctx) return;
+
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              data: data,
+              backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc']
+            }
+          ]
+        },
+        options: {
+          maintainAspectRatio: false,
+          responsive: true
+        }
+      });
+    });
+  }
+  loadBadProducts(): void {
+    this.reportService.getBadProducts().subscribe((rs: any) => {
+      const labels = rs.content.data.map((item: any) => item.productName);
+      const data = rs.content.data.map((item: any) => item.negativePercent);
+      const ctx = document.getElementById('donutChart2') as HTMLCanvasElement;
       if (!ctx) return;
 
       new Chart(ctx, {

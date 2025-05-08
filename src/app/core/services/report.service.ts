@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseService } from './base.service';
 import { Constants } from '../constants/constants';
 import { Observable } from 'rxjs';
-import { BestSellingProduct, RevenueDto } from '../models/report.model';
+import { BestBadProduct, BestSellingProduct, RevenueDto } from '../models/report.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,10 @@ export class ReportService extends BaseService<any> {
   }
   getBestSellingProducts(): Observable<BestSellingProduct[]> {
     return this.http.get<BestSellingProduct[]>(`${this.svUrl}/BestSeller`);
+  }
+
+  getBadProducts(): Observable<BestBadProduct[]> {
+    return this.http.get<BestBadProduct[]>(`${this.svUrl}/BadProduct`);
   }
 
   getReport(fromDate?: string, toDate?: string, userId?: string): Observable<any> {

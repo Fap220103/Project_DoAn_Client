@@ -17,7 +17,25 @@ export class PaginationComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
-    this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    this.pages = this.getVisiblePages(this.currentPage, this.totalPages);
+  }
+
+  getVisiblePages(currentPage: number, totalPages: number): number[] {
+    const visiblePages = 5;
+    let startPage = Math.max(1, currentPage - Math.floor(visiblePages / 2));
+    let endPage = startPage + visiblePages - 1;
+
+    // Nếu vượt quá số trang, lùi lại để đủ visiblePages
+    if (endPage > totalPages) {
+      endPage = totalPages;
+      startPage = Math.max(1, endPage - visiblePages + 1);
+    }
+
+    const pages = [];
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+    return pages;
   }
 
   goToPage(page: number): void {

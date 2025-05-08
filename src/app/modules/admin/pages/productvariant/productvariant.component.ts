@@ -29,6 +29,7 @@ export class ProductVariantComponent implements OnInit {
   pageIndex = 0;
   pageSize = 10;
   pageSizeOptions = [5, 10, 25, 100];
+  isOutOfStock: boolean = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -168,11 +169,7 @@ export class ProductVariantComponent implements OnInit {
   }
   handleChangeSearchInput(event: any) {
     if (event.key === 'Enter') {
-      this.params = {
-        colorId: this.color,
-        search: this.searchString,
-        sizeId: this.size
-      };
+      this.buildParams();
       this.getData();
     } else {
       this.searchString = (event.target.value ?? '').trim();
@@ -181,30 +178,31 @@ export class ProductVariantComponent implements OnInit {
 
   handleClearSearchInput() {
     this.searchString = '';
-    this.params = {
-      colorId: this.color,
-      search: this.searchString,
-      sizeId: this.size
-    };
+    this.buildParams();
     this.getData();
   }
 
   handleChangeColor(event: any) {
     this.color = event;
-    this.params = {
-      colorId: this.color,
-      search: this.searchString,
-      sizeId: this.size
-    };
+    this.buildParams();
     this.getData();
   }
   handleChangeSize(event: any) {
     this.size = event;
+    this.buildParams();
+    this.getData();
+  }
+  buildParams() {
     this.params = {
       colorId: this.color,
       search: this.searchString,
-      sizeId: this.size
+      sizeId: this.size,
+      isOutOfStock: this.isOutOfStock
     };
+  }
+  outOfStock() {
+    this.isOutOfStock = !this.isOutOfStock;
+    this.buildParams();
     this.getData();
   }
 }

@@ -1,6 +1,4 @@
 <mat-form-field class="w-full mt-4">
-  <mat-label *ngIf="placeholder">{{ placeholder }}</mat-label>
-
   <input
     type="text"
     matInput
@@ -38,6 +36,7 @@
   <!-- Ví dụ button clear -->
   <button
     type="button"
+    class="mb-2"
     mat-icon-button
     matSuffix
     (click)="clear()"

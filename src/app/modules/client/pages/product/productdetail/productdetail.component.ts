@@ -113,7 +113,7 @@ export class ProductDetailComponent implements OnInit {
     if (this.totalReviews > 0) {
       const totalRating = this.lstReview.reduce((sum, review) => sum + review.rate, 0);
       const avg = totalRating / this.totalReviews;
-      this.averageRating = Math.ceil(avg);
+      this.averageRating = Math.round(avg);
     } else {
       this.averageRating = 0;
     }

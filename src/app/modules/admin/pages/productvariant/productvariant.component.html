@@ -2,10 +2,14 @@
 <section class="content mt-3">
   <!-- Default box -->
   <div class="card">
-    <div class="flex justify-between">
-      <div class="flex justify-start items-center"></div>
-      <div class="relative hedear flex flex-col sm:flex-row flex-0 sm:items-center sm:px-6 xs:py-4">
-        <div class="flex shrink-0 gap-2 items-center mt-6 sm:mt-0 sm:ml-4">
+    <div class="flex justify-end">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:px-6 xs:py-4 w-full">
+        <div class="flex flex-wrap justify-end gap-2 flex-grow items-center">
+          <div class="filter-bar">
+            <button [class.active]="isOutOfStock" (click)="outOfStock()">
+              Sản phẩm sắp hết hàng
+            </button>
+          </div>
           <app-AraAutocomplete
             [placeholder]="'ProductVariant.SearchSize' | translate"
             [displayField]="['name']"

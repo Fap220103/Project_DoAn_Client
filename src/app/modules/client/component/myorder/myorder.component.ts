@@ -25,9 +25,8 @@ export class MyOrderComponent implements OnInit {
   selectedItem: any = {};
   params: any = {};
   totalCount = 0;
-  pageIndex = 0;
+  currentPage = 1;
   pageSize = 10;
-  pageSizeOptions = [5, 10, 25, 100];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -45,13 +44,13 @@ export class MyOrderComponent implements OnInit {
   }
   getData() {
     this.orderService
-      .get({ userId: this.authService.getUserId() }, this.pageIndex + 1, this.pageSize)
+      .get({ userId: this.authService.getUserId() }, this.currentPage, this.pageSize)
       .subscribe((rs) => {
         this.lstOrder = rs.content.data.items;
         this.addressOrder = rs.content.data.items.address;
         this.orderDetail = rs.content.data.items.items;
         this.lstOrder = this.lstOrder.map((x, index) => {
-          x.position = this.pageIndex * this.pageSize + index + 1;
+          x.position = this.currentPage * this.pageSize + index;
           x.displayStatus = this.lstStatus.find((item) => item.id == x.status)?.display;
           const createdAt = new Date(x.createdAt + 'Z');
           x.createdDate = this.datePipe.transform(createdAt, 'dd/MM/yyyy, HH:mm:ss', '+0700');
@@ -60,9 +59,8 @@ export class MyOrderComponent implements OnInit {
         this.totalCount = rs.content.data.totalRecords;
       });
   }
-  onChangePage(event: any) {
-    this.pageIndex = event.pageIndex;
-    this.pageSize = event.pageSize;
+  onPageChange(newPage: number) {
+    this.currentPage = newPage;
     this.getData();
   }
   delete(orderId: string) {

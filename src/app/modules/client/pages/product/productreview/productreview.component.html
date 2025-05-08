@@ -80,13 +80,13 @@
         </div>
         <p class="review-comment">{{ review.content }}</p>
       </div>
+      <app-pagination
+        [totalItems]="totalItems"
+        [itemsPerPage]="5"
+        [currentPage]="currentPage"
+        (pageChange)="onPageChange($event)"
+      >
+      </app-pagination>
     </div>
-    <app-pagination
-      [totalItems]="lstReview.length"
-      [itemsPerPage]="10"
-      [currentPage]="currentPage"
-      (pageChange)="onPageChange($event)"
-    >
-    </app-pagination>
   </div>
 </div>
