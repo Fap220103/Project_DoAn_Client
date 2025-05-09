@@ -22,6 +22,9 @@
   z-index: 1000;
   padding: 0 !important;
 }
+::ng-deep .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(.mat-mdc-option-multiple) {
+    background-color: #EEEEEE	 !important;
+}
 mat-form-field {
   width: 100%;
 
