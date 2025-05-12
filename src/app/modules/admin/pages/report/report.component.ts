@@ -27,6 +27,7 @@ export class ReportComponent implements OnInit, AfterViewInit {
     this.loadData();
 
     this.loadBestSellingProducts();
+    this.loadBadProducts();
   }
 
   loadData(): void {

@@ -89,7 +89,11 @@ export class ProductDetailComponent implements OnInit {
   getGeneralReview(): Promise<void> {
     return new Promise((resolve) => {
       this.productService.getGeneralReview(this.productId).subscribe((rs) => {
-        this.generalReview = rs.content.data;
+        if (rs.code === 200) {
+          this.generalReview = rs.content.data;
+        } else {
+          this.generalReview = null;
+        }
         resolve();
       });
     });

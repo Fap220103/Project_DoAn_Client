@@ -24,7 +24,7 @@ export class MyOrderComponent implements OnInit {
   status!: number;
   selectedItem: any = {};
   params: any = {};
-  totalCount = 0;
+  totalCount!: number;
   currentPage = 1;
   pageSize = 10;
 
@@ -50,7 +50,7 @@ export class MyOrderComponent implements OnInit {
         this.addressOrder = rs.content.data.items.address;
         this.orderDetail = rs.content.data.items.items;
         this.lstOrder = this.lstOrder.map((x, index) => {
-          x.position = this.currentPage * this.pageSize + index;
+          x.position = (this.currentPage - 1) * this.pageSize + index + 1;
           x.displayStatus = this.lstStatus.find((item) => item.id == x.status)?.display;
           const createdAt = new Date(x.createdAt + 'Z');
           x.createdDate = this.datePipe.transform(createdAt, 'dd/MM/yyyy, HH:mm:ss', '+0700');
