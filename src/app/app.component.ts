@@ -24,7 +24,10 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        if (!event.urlAfterRedirects.startsWith('/admin') || !event.urlAfterRedirects.startsWith('/auth')) {
+        if (
+          !event.urlAfterRedirects.startsWith('/admin') ||
+          !event.urlAfterRedirects.startsWith('/auth')
+        ) {
           this.loadTawkScript();
         }
       }
