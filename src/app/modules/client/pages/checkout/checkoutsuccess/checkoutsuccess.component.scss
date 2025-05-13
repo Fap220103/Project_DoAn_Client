@@ -1,0 +1,86 @@
+.wrap-body {
+  margin-top: 200px;
+}
+.order-success {
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.order-header .icon {
+  font-size: 40px;
+  color: #29b02e;
+}
+
+.order-header h2 {
+  margin: 10px 0;
+  color: #29b02e;
+}
+
+.order-header .blue {
+  color: #2e6fc1;
+}
+
+.order-info-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.order-info,
+.account-info {
+  width: 48%;
+}
+
+.order-info h4,
+.account-info h4 {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+.paid {
+  color: red;
+  font-weight: bold;
+}
+
+.service-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.service-table th,
+.service-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.summary {
+  text-align: right;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.summary .total {
+  font-size: 16px;
+  color: #d9534f;
+  font-weight: bold;
+}
+
+.note {
+  font-size: 14px;
+  color: #333;
+  border-top: 1px dashed #ccc;
+  padding-top: 10px;
+}

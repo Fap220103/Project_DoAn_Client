@@ -99,7 +99,7 @@ export class CheckoutComponent implements OnInit {
         verticalPosition: 'bottom',
         duration: 3000
       });
-      return; // Dừng thực thi nếu chưa có địa chỉ
+      return;
     }
 
     const addItem = {
@@ -123,14 +123,18 @@ export class CheckoutComponent implements OnInit {
           } else {
             // Thanh toán COD hoặc thành công nội bộ
             this.cartService.clearCart();
-            this.router.navigate(['/checkoutsuccess']);
+            this.router.navigate(['/checkoutsuccess', res.content.id]);
             this.processResponse(res, 'Thanh toán thành công');
           }
         } else {
           this.processResponse(false, 'Thanh toán thất bại');
+          this.router.navigate(['/payment-failure']);
         }
       },
-      error: () => this.processResponse(false, 'Thanh toán thất bại')
+      error: () => {
+        this.processResponse(false, 'Thanh toán thất bại');
+        this.router.navigate(['/payment-failure']);
+      }
     });
   }
   updateAddress() {

@@ -5,28 +5,81 @@
   href="/assets/Content/assets/styles/categories_responsive.css"
 />
 
-<div class="container product_section_container">
-  <div class="row">
-    <div class="col product_section clearfix">
-      <!-- Breadcrumbs -->
+<div class="wrap-body">
+  <div class="order-success">
+    <div class="order-header">
+      <div class="icon">&#10003;</div>
+      <h2>Tuyệt vời!</h2>
+      <p>
+        Quý khách đã đặt hàng thành công.<br />Cảm ơn Quý khách đã lựa chọn
+        <span class="blue">CloShop</span>
+      </p>
+    </div>
 
-      <div class="breadcrumbs d-flex flex-row align-items-center">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li class="active">
-            <a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Giỏ hàng</a>
-          </li>
-        </ul>
+    <div class="order-info-container">
+      <div class="order-info">
+        <h4>THÔNG TIN ĐƠN HÀNG</h4>
+        <p><strong>Mã đơn hàng:</strong> {{ order.orderCode }}</p>
+        <p><strong>Ngày đặt hàng:</strong> {{ order.createdDate }}</p>
+        <p><strong>Phương thức thanh toán:</strong> {{ order.displayPayment }}</p>
+        <p>
+          <strong>Tình trạng thanh toán:</strong>
+          <span class="paid"> {{ order.displayStatus }}</span>
+        </p>
       </div>
 
-      <!-- Sidebar -->
-      <!-- Main Content -->
-      <div class="row">
-        <div class="col-md-12" id="load_data">
-          <h2>Bạn đã đặt hàng thành công</h2>
-          <a routerLink="/product">Tiếp tục mua hàng!</a>
-        </div>
+      <div class="account-info">
+        <h4>THÔNG TIN TÀI KHOẢN</h4>
+        <p><strong>Tên khách hàng:</strong> {{ addressOrder.recipientName }}</p>
+        <p><strong>Số điện thoại:</strong> {{ addressOrder.phoneNumber }}</p>
+        <p>
+          <strong>Địa chỉ:</strong> {{ addressOrder.addressLine }}, {{ addressOrder.ward }},
+          {{ addressOrder.district }}, {{ addressOrder.province }}
+        </p>
       </div>
+    </div>
+
+    <table class="service-table">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Tên sản phẩm</th>
+          <th>Màu</th>
+          <th>Size</th>
+          <th>Số lượng</th>
+          <th>Đơn giá</th>
+          <th>Thành tiền</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of lstItem; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td class="left-align">{{ item.productName }}</td>
+          <td>{{ item.colorName }}</td>
+          <td>{{ item.sizeName }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price | currency: 'VND' : 'symbol' : '1.0-0' }}</td>
+          <td>{{ item.quantity * item.price | currency: 'VND' : 'symbol' : '1.0-0' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="summary">
+      <p>
+        <strong>Tổng tiền hàng:</strong>
+        {{ order.total | currency: 'VND' : 'symbol' : '1.0-0' }}
+      </p>
+      <p>
+        <strong>Khuyến mãi:</strong>
+        {{ order.totalDiscount | currency: 'VND' : 'symbol' : '1.0-0' }}
+      </p>
+      <p class="total">Tổng cộng: {{ order.totalAmount | currency: 'VND' : 'symbol' : '1.0-0' }}</p>
+    </div>
+
+    <div class="note">
+      <p>
+        ✔ Nhân viên CloShop sẽ liên hệ với Quý khách để xác nhận đơn hàng trong thời gian sớm nhất
+      </p>
     </div>
   </div>
 </div>

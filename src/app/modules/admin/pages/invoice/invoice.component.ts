@@ -12,7 +12,7 @@ import { OrderService } from '../../../../core/services/order.service';
 })
 export class InvoiceComponent implements OnInit {
   invoice: any;
-
+  addressOrder: any;
   @ViewChild('invoiceElement') invoiceElement!: ElementRef;
 
   constructor(
@@ -25,6 +25,7 @@ export class InvoiceComponent implements OnInit {
     const orderId = this.route.snapshot.params['orderId'];
     this.orderService.getInvoice(orderId).subscribe((rs) => {
       this.invoice = rs.content.data;
+      this.addressOrder = rs.content.data.address;
     });
   }
 

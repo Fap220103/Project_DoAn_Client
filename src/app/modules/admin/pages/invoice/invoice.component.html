@@ -16,7 +16,14 @@
   <div class="invoice-info">
     <p><strong>Mã hóa đơn:</strong> {{ invoice?.invoiceNumber }}</p>
     <p><strong>Ngày lập:</strong> {{ invoice?.createdDate | date: 'dd/MM/yyyy' }}</p>
-    <p><strong>Khách hàng:</strong> {{ invoice?.customerName }}</p>
+    <div class="info-row">
+      <span><strong>Khách hàng:</strong> {{ invoice?.customerName }}</span>
+      <span><strong>Điện thoại:</strong> {{ addressOrder.phoneNumber }}</span>
+    </div>
+    <p>
+      <strong>Địa chỉ:</strong> {{ addressOrder.addressLine }}, {{ addressOrder.ward }},
+      {{ addressOrder.district }}, {{ addressOrder.province }}
+    </p>
   </div>
 
   <table class="invoice-table">
