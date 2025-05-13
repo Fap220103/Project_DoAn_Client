@@ -150,7 +150,6 @@ export class AddAddressComponent implements OnInit {
         wardCode: formValue.ward,
         isDefault: formValue.isDefault
       };
-      console.log('edit address: ', updateItem);
       this.addressService.updateShippingAddress(updateItem).subscribe({
         next: (res) => {
           if (res.code === 200) {
@@ -175,7 +174,6 @@ export class AddAddressComponent implements OnInit {
         wardCode: formValue.ward,
         isDefault: formValue.isDefault ?? false
       };
-      console.log('add address: ', addItem);
       this.addressService.post(addItem).subscribe({
         next: (res) => {
           if (res.code === 200) {

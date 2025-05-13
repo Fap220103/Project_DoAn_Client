@@ -25,6 +25,7 @@ const routes: Routes = [
     component: AdminComponent,
     canActivate: [authGuard],
     children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
         path: 'dashboard',
         component: DashboardComponent,
@@ -70,12 +71,6 @@ const routes: Routes = [
         path: 'productvariant',
         component: ProductVariantComponent,
         data: { title: 'ProductVariant.Title' }
-      },
-      {
-        path: 'inventory',
-        component: InventoryComponent,
-        canActivate: [adminGuard],
-        data: { title: 'Inventory.Title' }
       },
       {
         path: 'order',

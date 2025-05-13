@@ -34,6 +34,7 @@
     "ckeditor4-angular": "^2.4.0",
     "font-awesome": "^4.7.0",
     "html2canvas": "^1.4.1",
+    "html2pdf.js": "^0.10.3",
     "jquery": "^3.7.1",
     "jspdf": "^3.0.1",
     "ngx-spinner": "^18.0.0",
