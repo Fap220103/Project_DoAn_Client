@@ -142,7 +142,7 @@
     }
   },
   "ProductVariant": {
-    "Title": "ProductVariant",
+    "Title": "Inventory",
     "AddTitle": "Add Variant",
     "ProductName": "Product Name",
     "ProductCode": "Product Code",

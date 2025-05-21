@@ -32,19 +32,23 @@
             </div>
           </div>
 
-          <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
-          <button
-            mat-flat-button
-            [color]="'primary'"
-            class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
-            (click)="fileInput.click()"
-          >
-            <mat-icon class="md:text-base sm:text-base xs:text-xs">upload</mat-icon>
-            <span>{{ 'Common.Import' | translate }}</span>
-          </button>
+
+            <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
+            <button
+              mat-flat-button
+                 [disabled]="!isAdmin"
+              [color]="'primary'"
+              class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
+              (click)="fileInput.click()"
+            >
+              <mat-icon class="md:text-base sm:text-base xs:text-xs">upload</mat-icon>
+              <span>{{ 'Common.Import' | translate }}</span>
+            </button>
+
 
           <button
             mat-flat-button
+            [disabled]="!isAdmin"
             [color]="'primary'"
             class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
             (click)="exportExcel()"
@@ -55,6 +59,7 @@
 
           <button
             mat-flat-button
+            [disabled]="!isAdmin"
             [color]="'primary'"
             class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
             (click)="add()"
@@ -128,6 +133,7 @@
               </button>
               <button
                 mat-icon-button
+                [disabled]="!isAdmin"
                 (click)="edit(item)"
                 matTooltip="{{ 'Common.Edit' | translate }}"
               >
@@ -135,7 +141,7 @@
               </button>
               <button
                 mat-icon-button
-                *ngIf="this.currentUserId !== item.id"
+                [disabled]="!isAdmin"
                 (click)="delete(item.id)"
                 matTooltip="{{ 'Common.Delete' | translate }}"
               >

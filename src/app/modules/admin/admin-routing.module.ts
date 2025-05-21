@@ -34,7 +34,6 @@ const routes: Routes = [
       {
         path: 'product',
         component: ProductComponent,
-        canActivate: [adminGuard],
         data: { title: 'Product.Title' }
       },
       {

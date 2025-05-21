@@ -33,6 +33,7 @@ export class ProductComponent implements OnInit {
   pageSize = 10;
   pageSizeOptions = [5, 10, 25, 100];
   currentUserId!: string;
+  isAdmin: boolean = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
@@ -44,6 +45,7 @@ export class ProductComponent implements OnInit {
     public dialog: MatDialog
   ) {
     this.currentUserId = authService.getUserId();
+    this.isAdmin = authService.isAdmin();
   }
 
   ngOnInit(): void {

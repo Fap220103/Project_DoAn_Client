@@ -98,7 +98,7 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    const roles = this.getUserRole(); // trả về mảng string[]
+    const roles = this.getUserRole(); 
     return roles.includes('Admin');
   }
 

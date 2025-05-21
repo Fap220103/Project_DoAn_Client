@@ -157,7 +157,7 @@
       }
     },
     "ProductVariant" : {
-      "Title": "Biến thể",
+      "Title": "Tồn kho",
       "AddTitle" : "Thêm mới biến thể",
       "ProductName": "Tên sản phẩm",
       "ProductCode": "Mã sản phẩm",
