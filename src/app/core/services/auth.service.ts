@@ -98,11 +98,11 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    const roles = this.getUserRole(); 
+    const roles = this.getUserRole();
     return roles.includes('Admin');
   }
-   isManager(): boolean {
-    const roles = this.getUserRole(); 
+  isManager(): boolean {
+    const roles = this.getUserRole();
     return roles.includes('Manager');
   }
 

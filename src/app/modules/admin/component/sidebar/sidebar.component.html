@@ -8,7 +8,7 @@
       class="brand-image img-circle elevation-3"
       style="opacity: 0.8"
     />
-    <span class="brand-text font-weight-light">{{role}}</span>
+    <span class="brand-text font-weight-light">{{ role }}</span>
   </a>
 
   <!-- Sidebar -->
@@ -16,15 +16,18 @@
     <!-- Sidebar user (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-       <img
-  [src]="userInfo.profilePictureName ? userInfo.profilePictureName : '/assets/Content/img/SanPham/h0.png'"
-  class="img-circle elevation-2"
-  alt="User Image"
-/>
-
+        <img
+          [src]="
+            userInfo.profilePictureName
+              ? userInfo.profilePictureName
+              : '/assets/Content/img/SanPham/h0.png'
+          "
+          class="img-circle elevation-2"
+          alt="User Image"
+        />
       </div>
       <div class="info">
-        <a href="/admin/dashboard" class="d-block">{{userInfo.userName}}</a>
+        <a href="/admin/dashboard" class="d-block">{{ userInfo.userName }}</a>
       </div>
     </div>
 

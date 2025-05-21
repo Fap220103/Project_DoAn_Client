@@ -32,19 +32,17 @@
             </div>
           </div>
 
-
-            <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
-            <button
-              mat-flat-button
-                 [disabled]="!isManager"
-              [color]="'primary'"
-              class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
-              (click)="fileInput.click()"
-            >
-              <mat-icon class="md:text-base sm:text-base xs:text-xs">upload</mat-icon>
-              <span>{{ 'Common.Import' | translate }}</span>
-            </button>
-
+          <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
+          <button
+            mat-flat-button
+            [disabled]="!isManager"
+            [color]="'primary'"
+            class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
+            (click)="fileInput.click()"
+          >
+            <mat-icon class="md:text-base sm:text-base xs:text-xs">upload</mat-icon>
+            <span>{{ 'Common.Import' | translate }}</span>
+          </button>
 
           <button
             mat-flat-button

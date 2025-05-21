@@ -15,7 +15,10 @@ export class SidebarComponent implements OnInit {
   isLoggedIn: boolean = false;
   userInfo: any;
   role: any;
-  constructor(private authService: AuthService, private userService: UserService) {}
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
     this.mainNavigations = this.authService.getMenu();
@@ -27,10 +30,10 @@ export class SidebarComponent implements OnInit {
     this.getUserInfo();
   }
 
-  getUserInfo(){
-    this.userService.getProfile(this.authService.getUserId()).subscribe((rs) =>{
+  getUserInfo() {
+    this.userService.getProfile(this.authService.getUserId()).subscribe((rs) => {
       this.userInfo = rs.content.data;
-    })
+    });
   }
   isDropdown(item: NavigationItem): boolean {
     return item.children.length > 1;
