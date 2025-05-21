@@ -101,6 +101,10 @@ export class AuthService {
     const roles = this.getUserRole(); 
     return roles.includes('Admin');
   }
+   isManager(): boolean {
+    const roles = this.getUserRole(); 
+    return roles.includes('Manager');
+  }
 
   saveTokens(accessToken: string, expiresInSeconds: number): void {
     const expiresAt = Date.now() + expiresInSeconds * 1000;

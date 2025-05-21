@@ -58,3 +58,31 @@ mat-form-field {
     color: #aeb0b4;
   }
 }
+
+::ng-deep .mat-mdc-autocomplete-panel {
+  max-height: 200px !important;
+  overflow-y: auto !important;
+}
+
+/* Tuỳ chỉnh scrollbar trong dropdown autocomplete */
+::ng-deep .mat-mdc-autocomplete-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+::ng-deep .mat-mdc-autocomplete-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::ng-deep .mat-mdc-autocomplete-panel::-webkit-scrollbar-thumb {
+  background-color: #aeb0b4;
+  border-radius: 10px;
+}
+
+::ng-deep .mat-mdc-autocomplete-panel::-webkit-scrollbar-thumb:hover {
+  background-color: #aeb0b4;
+}
+
+::ng-deep .mat-mdc-autocomplete-panel::-webkit-scrollbar-button {
+  display: none;
+}
+

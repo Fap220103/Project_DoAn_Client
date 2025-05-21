@@ -8,7 +8,7 @@ export const adminGuard: CanActivateFn = (route, state) => {
   const toastrService = inject(ToastrService);
   const router = inject(Router);
 
-  if (authService.isAdmin()) {
+  if (authService.isManager()) {
     return true;
   } else {
     router.navigate(['/not-found']);

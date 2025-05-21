@@ -1,18 +1,18 @@
 export const RoleType = [
   {
-    value: 'basic',
-    display: 'Basic'
+    value: 'customer',
+    display: 'Customer'
   },
   {
     value: 'staff',
     display: 'Staff'
   },
   {
-    value: 'admin',
-    display: 'Admin'
+    value: 'manager',
+    display: 'Manager'
   }
 ];
-export const RolesObj = ['Admin', 'Staff', 'Basic'];
+export const RolesObj = ['Manager', 'Staff', 'Customer'];
 
 export const StatusUser = [
   {

@@ -36,7 +36,7 @@
             <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
             <button
               mat-flat-button
-                 [disabled]="!isAdmin"
+                 [disabled]="!isManager"
               [color]="'primary'"
               class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
               (click)="fileInput.click()"
@@ -48,7 +48,7 @@
 
           <button
             mat-flat-button
-            [disabled]="!isAdmin"
+            [disabled]="!isManager"
             [color]="'primary'"
             class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
             (click)="exportExcel()"
@@ -59,7 +59,7 @@
 
           <button
             mat-flat-button
-            [disabled]="!isAdmin"
+            [disabled]="!isManager"
             [color]="'primary'"
             class="add-product-button mat-white-bg md:text-base sm:text-base xs:text-xs ml-2"
             (click)="add()"
@@ -133,7 +133,7 @@
               </button>
               <button
                 mat-icon-button
-                [disabled]="!isAdmin"
+                [disabled]="!isManager"
                 (click)="edit(item)"
                 matTooltip="{{ 'Common.Edit' | translate }}"
               >
@@ -141,7 +141,7 @@
               </button>
               <button
                 mat-icon-button
-                [disabled]="!isAdmin"
+                [disabled]="!isManager"
                 (click)="delete(item.id)"
                 matTooltip="{{ 'Common.Delete' | translate }}"
               >

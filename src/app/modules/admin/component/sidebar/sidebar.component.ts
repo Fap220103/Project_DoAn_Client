@@ -3,6 +3,7 @@ import { NavigationItem } from '../../../../core/models/navigation.model';
 import { Observable, take } from 'rxjs';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { UserService } from '../../../../core/services/user.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,7 +13,9 @@ import { Router } from '@angular/router';
 export class SidebarComponent implements OnInit {
   mainNavigations: NavigationItem[] = [];
   isLoggedIn: boolean = false;
-  constructor(private authService: AuthService) {}
+  userInfo: any;
+  role: any;
+  constructor(private authService: AuthService, private userService: UserService) {}
 
   ngOnInit() {
     this.mainNavigations = this.authService.getMenu();
@@ -20,8 +23,15 @@ export class SidebarComponent implements OnInit {
     this.mainNavigations.forEach((item) => {
       item.expanded = false;
     });
+    this.role = this.authService.getUserRole();
+    this.getUserInfo();
   }
 
+  getUserInfo(){
+    this.userService.getProfile(this.authService.getUserId()).subscribe((rs) =>{
+      this.userInfo = rs.content.data;
+    })
+  }
   isDropdown(item: NavigationItem): boolean {
     return item.children.length > 1;
   }
