@@ -18,6 +18,8 @@ import { NewsComponent } from './pages/news/news.component';
 import { ReportComponent } from './pages/report/report.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { ExportReportComponent } from './pages/report/exportReport/exportReport.component';
+import { managerGuard } from '../../core/guards/manager.guard';
+import { staffGuard } from '../../core/guards/staff.guard';
 
 const routes: Routes = [
   {
@@ -34,74 +36,79 @@ const routes: Routes = [
       {
         path: 'product',
         component: ProductComponent,
+        canActivate: [staffGuard],
         data: { title: 'Product.Title' }
       },
       {
         path: 'productcategory',
-        canActivate: [adminGuard],
         component: ProductcategoryComponent,
+        canActivate: [staffGuard],
         data: { title: 'Category.Title' }
       },
       {
         path: 'color',
         component: ColorComponent,
-        canActivate: [adminGuard],
+        canActivate: [staffGuard],
         data: { title: 'Color.Title' }
       },
       {
         path: 'size',
         component: SizeComponent,
-        canActivate: [adminGuard],
+        canActivate: [staffGuard],
         data: { title: 'Size.Title' }
       },
       {
         path: 'setting',
         component: SettingComponent,
-        canActivate: [adminGuard],
+        canActivate: [staffGuard],
         data: { title: 'Setting.Title' }
       },
       {
         path: 'userprofile',
         component: UserProfileComponent,
-        canActivate: [adminGuard],
+        canActivate: [managerGuard],
         data: { title: 'User.Title' }
       },
       {
         path: 'productvariant',
         component: ProductVariantComponent,
+        canActivate: [staffGuard],
         data: { title: 'ProductVariant.Title' }
       },
       {
         path: 'order',
         component: OrderComponent,
+        canActivate: [staffGuard],
         data: { title: 'Order.Title' }
       },
       {
         path: 'discount',
         component: DiscountComponent,
-        canActivate: [adminGuard],
+        canActivate: [staffGuard],
         data: { title: 'Discount.Title' }
       },
       {
         path: 'news',
         component: NewsComponent,
-        canActivate: [adminGuard],
+        canActivate: [staffGuard],
         data: { title: 'News.Title' }
       },
       {
         path: 'report',
         component: ReportComponent,
-        canActivate: [adminGuard],
+        canActivate: [managerGuard],
         data: { title: 'Report.Title' }
       },
       {
         path: 'invoice/:orderId',
         component: InvoiceComponent,
+        canActivate: [staffGuard],
         data: { title: 'Invoice.Title' }
       },
       {
         path: 'exportreport',
         component: ExportReportComponent,
+        canActivate: [managerGuard],
         data: { title: 'Invoice.Title' }
       }
     ]

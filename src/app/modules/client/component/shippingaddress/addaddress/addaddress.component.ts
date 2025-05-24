@@ -210,9 +210,17 @@ export class AddAddressComponent implements OnInit {
     if (!isClose && res) this.dialogRef.close(res);
   }
   allowOnlyNumbers(event: KeyboardEvent) {
+    const input = event.target as HTMLInputElement;
     const charCode = event.which ? event.which : event.keyCode;
-    // Cho phép chỉ từ 0 đến 9
+
+    // Chỉ cho nhập số
     if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+      return;
+    }
+
+    // Ngăn không cho nhập quá 10 số
+    if (input.value.length >= 10) {
       event.preventDefault();
     }
   }

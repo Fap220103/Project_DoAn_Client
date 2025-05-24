@@ -20,6 +20,7 @@ export class AddNewsComponent implements OnInit {
   selectedFile!: File;
   imagePreview!: string;
   userId!: string;
+  isEdit: boolean;
   public Editor = ClassicEditor;
   public editorConfig = {
     toolbar: [
@@ -50,12 +51,17 @@ export class AddNewsComponent implements OnInit {
   ) {
     dialogRef.disableClose = true;
     this.userId = authService.getUserId();
+    if (data.isEdit) {
+      this.item = { ...data.item };
+    }
+    data.isEdit ? (this.isEdit = true) : (this.isEdit = false);
+
     this.form = this.formBuilder.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      detail: ['', Validators.required],
-      link: [''],
-      type: ['', Validators.required]
+      title: [this.item.title, Validators.required],
+      description: [this.item.description, Validators.required],
+      detail: [this.item.detail, Validators.required],
+      link: [this.item.link],
+      type: [this.item.type, Validators.required]
     });
   }
 
@@ -66,6 +72,9 @@ export class AddNewsComponent implements OnInit {
         return;
       }
     });
+    if (this.isEdit && this.item.image) {
+      this.imagePreview = this.item.image;
+    }
   }
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];

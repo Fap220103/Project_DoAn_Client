@@ -55,16 +55,35 @@ export class NewsComponent implements OnInit {
   edit(item: any) {
     this.selectedItem = item;
     const dialogRef = this.dialog.open(AddNewsComponent, {
-      minWidth: '̀50%',
+      minWidth: '50%',
       height: '100%',
       panelClass: 'custom-dialog-right',
       position: {
         right: '0'
       },
       data: {
-        title: 'Setting.EditTitle',
+        title: 'News.EditTitle',
         item: this.selectedItem,
         isEdit: true
+      }
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getData();
+      }
+    });
+  }
+  add() {
+    const dialogRef = this.dialog.open(AddNewsComponent, {
+      minWidth: '50%',
+      height: '100%',
+      panelClass: 'custom-dialog-right',
+      position: {
+        right: '0'
+      },
+      data: {
+        title: 'News.AddTitle',
+        isEdit: false
       }
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -111,25 +130,6 @@ export class NewsComponent implements OnInit {
     this.snackBar.open(transForm, 'OK', {
       verticalPosition: 'bottom',
       duration: 2000
-    });
-  }
-  add() {
-    const dialogRef = this.dialog.open(AddNewsComponent, {
-      minWidth: '50%',
-      height: '100%',
-      panelClass: 'custom-dialog-right',
-      position: {
-        right: '0'
-      },
-      data: {
-        title: 'Setting.AddTitle',
-        isEdit: false
-      }
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.getData();
-      }
     });
   }
 }

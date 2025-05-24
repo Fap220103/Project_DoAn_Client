@@ -25,9 +25,10 @@ import { MatTableModule } from '@angular/material/table';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MatSelectModule } from '@angular/material/select';
 import { PaginationComponent } from './components/Pagination/Pagination.component';
+import { NotFoundComponent } from './layouts/not-found/not-found.component';
 
 @NgModule({
-  declarations: [AraAutocompleteComponent, PaginationComponent],
+  declarations: [AraAutocompleteComponent, PaginationComponent, NotFoundComponent],
   imports: [
     CommonModule,
     RouterModule,
