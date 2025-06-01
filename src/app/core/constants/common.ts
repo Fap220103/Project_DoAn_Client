@@ -22,10 +22,20 @@ export const orderStatus = [
   {
     id: '4',
     display: 'Đã hủy'
+  }
+];
+export const statusPayment = [
+  {
+    id: '1',
+    display: 'Chưa thanh toán'
   },
   {
-    id: '5',
-    display: 'Đã thanh toán '
+    id: '2',
+    display: 'Đã thanh toán'
+  },
+  {
+    id: '3',
+    display: 'Hoàn tiền'
   }
 ];
 export const discountType = [

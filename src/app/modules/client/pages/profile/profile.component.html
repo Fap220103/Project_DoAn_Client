@@ -5,9 +5,9 @@
 />
 <link href="/assets/myprofile/listprofile.css" type="text/css" rel="stylesheet" />
 
-<div class="container news_section_container">
-  <div class="row">
-    <div class="col-md-3">
+<div class="container-custom news_section_container">
+  <div class="row-custom">
+    <div class="col-custom-left">
       <div class="myProfile">
         <div class="topProfile">
           <img [src]="image" class="rounded-circle p-1 no-border" width="100" height="100" />
@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <div class="col-md-9 form-container">
+    <div class="col-custom-right form-container">
       <app-changeprofile
         *ngIf="currentView === 'profile'"
         (updated)="getData()"

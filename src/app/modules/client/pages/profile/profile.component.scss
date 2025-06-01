@@ -1,5 +1,5 @@
 .news_section_container {
-  margin-top: 180px;
+  margin-top: 200px;
 }
 
 .form-container {
@@ -10,4 +10,27 @@
   max-width: 100%;
   margin: 0 auto;
   margin-top: 20px;
+}
+.topProfile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container-custom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.row-custom {
+  width: 1300px;
+  display: flex;
+  justify-content: center;
+  //align-items: center;
+}
+.col-custom-left {
+  width: 300px;
+}
+.col-custom-right {
+  width: 100%;
 }

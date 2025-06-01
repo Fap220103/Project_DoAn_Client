@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { OrderService } from '../../../../core/services/order.service';
-import { orderStatus } from '../../../../core/constants/common';
+import { orderStatus, statusPayment } from '../../../../core/constants/common';
 import { DatePipe } from '@angular/common';
 import { OrderDetailComponent } from '../../../admin/pages/order/orderdetail/orderdetail.component';
 import { AuthService } from '../../../../core/services/auth.service';
@@ -17,6 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class MyOrderComponent implements OnInit {
   lstStatus = orderStatus;
+  lstStatusPayment = statusPayment;
   lstOrder: any[] = [];
   addressOrder: any;
   orderDetail: any[] = [];
@@ -52,6 +53,9 @@ export class MyOrderComponent implements OnInit {
         this.lstOrder = this.lstOrder.map((x, index) => {
           x.position = (this.currentPage - 1) * this.pageSize + index + 1;
           x.displayStatus = this.lstStatus.find((item) => item.id == x.status)?.display;
+          x.displayStatusPayment = this.lstStatusPayment.find(
+            (item) => item.id == x.statusPayment
+          )?.display;
           const createdAt = new Date(x.createdAt + 'Z');
           x.createdDate = this.datePipe.transform(createdAt, 'dd/MM/yyyy, HH:mm:ss', '+0700');
           return x;

@@ -6,7 +6,7 @@
       <div class="flex justify-start items-center"></div>
       <div class="relative hedear flex flex-col sm:flex-row flex-0 sm:items-center sm:px-6 xs:py-4">
         <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
-          <div class="filterDate mr-3 flex flex-row">
+          <div class="filterDate mr-3 flex flex-row gap-2">
             <div class="col">
               <p>Từ ngày</p>
               <input type="date" value="" class="form-control" [(ngModel)]="fromDate" />
@@ -34,6 +34,17 @@
             [isUseForm]="false"
             [isFirstLoad]="false"
             (onChange)="handleChangeStatus($event)"
+          >
+          </app-AraAutocomplete>
+
+          <app-AraAutocomplete
+            [placeholder]="'Order.StatusPayment' | translate"
+            [displayField]="['display']"
+            [items]="lstStatusPayment"
+            [valueField]="'id'"
+            [isUseForm]="false"
+            [isFirstLoad]="false"
+            (onChange)="handleChangeStatusPayment($event)"
           >
           </app-AraAutocomplete>
 
@@ -77,17 +88,18 @@
             <th>{{ 'Order.Quantity' | translate }}</th>
             <th>{{ 'Order.TotalAmount' | translate }}</th>
             <th>{{ 'Order.TypePayment' | translate }}</th>
-            <th>{{ 'Order.Status' | translate }}</th>
-            <th style="width: 200px">{{ 'Common.Action' | translate }}</th>
+            <th class="text-center">{{ 'Order.Status' | translate }}</th>
+            <th class="text-center">{{ 'Order.StatusPayment' | translate }}</th>
+            <th style="width: 150px">{{ 'Common.Action' | translate }}</th>
           </tr>
         </thead>
         <tbody *ngIf="lstOrder.length > 0; else noData">
           <tr *ngFor="let item of lstOrder; let i = index">
             <td>{{ item.position }}</td>
-            <td>
+            <td class="w-[200px]">
               <span matTooltip="{{ item.orderCode }}">{{ item.orderCode }}</span>
             </td>
-            <td>
+            <td class="w-[200px]">
               <span matTooltip="{{ item.address.recipientName }}">{{
                 item.address.recipientName
               }}</span>
@@ -103,10 +115,10 @@
                 >{{ item.totalAmount | number: '1.0-0' }} VND</span
               >
             </td>
-            <td>
+            <td class="w-[150px]">
               <span matTooltip="{{ item.displayPayment }}">{{ item.displayPayment }}</span>
             </td>
-            <td>
+            <td class="w-[200px]">
               <div class="flex items-center justify-center" matTooltip="{{ item.displayStatus }}">
                 <span
                   *ngIf="item.status === 1"
@@ -128,11 +140,39 @@
                   class="rounded-full px-3 py-0.5 text-sm font-semibold bg-red-100 text-red-600 ng-star-inserted"
                   >{{ item.displayStatus }}</span
                 >
+              </div>
+            </td>
+            <td class="w-[200px]">
+              <div
+                class="flex items-center justify-center"
+                matTooltip="{{ item.displayStatusPayment }}"
+                (click)="changeStatusPayment(item)"
+              >
+                <span
+                  *ngIf="item.statusPayment === 1"
+                  class="rounded-full px-3 py-0.5 text-sm font-semibold bg-yellow-100 text-yellow-600 ng-star-inserted"
+                  >{{ item.displayStatusPayment }}</span
+                >
+                <span
+                  *ngIf="item.statusPayment === 2"
+                  class="rounded-full px-3 py-0.5 text-sm font-semibold bg-green-100 text-green-600 ng-star-inserted"
+                  >{{ item.displayStatusPayment }}</span
+                >
+                <span
+                  *ngIf="item.statusPayment === 3"
+                  class="rounded-full px-3 py-0.5 text-sm font-semibold bg-purple-100 text-purple-600 ng-star-inserted"
+                  >{{ item.displayStatusPayment }}</span
+                >
+                <!-- <span
+                  *ngIf="item.status === 4"
+                  class="rounded-full px-3 py-0.5 text-sm font-semibold bg-red-100 text-red-600 ng-star-inserted"
+                  >{{ item.displayStatus }}</span
+                >
                 <span
                   *ngIf="item.status === 5"
                   class="rounded-full px-3 py-0.5 text-sm font-semibold bg-green-100 text-green-600 ng-star-inserted"
                   >{{ item.displayStatus }}</span
-                >
+                > -->
               </div>
             </td>
             <td>

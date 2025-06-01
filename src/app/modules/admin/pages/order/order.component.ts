@@ -6,11 +6,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { AddSettingComponent } from '../setting/addSetting/addSetting.component';
 import { OrderService } from '../../../../core/services/order.service';
-import { orderStatus, paymentType } from '../../../../core/constants/common';
+import { orderStatus, paymentType, statusPayment } from '../../../../core/constants/common';
 import { DatePipe } from '@angular/common';
 import { OrderDetailComponent } from './orderdetail/orderdetail.component';
 import { ChangeOrderStatusComponent } from './changestatus/changestatus.component';
 import { Router } from '@angular/router';
+import { ChangeStatusPaymentComponent } from './changeStatusPayment/changeStatusPayment.component';
 
 @Component({
   selector: 'app-order',
@@ -20,12 +21,14 @@ import { Router } from '@angular/router';
 })
 export class OrderComponent implements OnInit {
   lstStatus = orderStatus;
+  lstStatusPayment = statusPayment;
   lstPayment = paymentType;
   lstOrder: any[] = [];
   addressOrder: any;
   orderDetail: any[] = [];
   searchString: string = '';
   status!: number;
+  statusPayment!: number;
   selectedItem: any = {};
   params: any = {};
   totalCount = 0;
@@ -57,6 +60,9 @@ export class OrderComponent implements OnInit {
       this.lstOrder = this.lstOrder.map((x, index) => {
         x.position = this.pageIndex * this.pageSize + index + 1;
         x.displayStatus = this.lstStatus.find((item) => item.id == x.status)?.display;
+        x.displayStatusPayment = this.lstStatusPayment.find(
+          (item) => item.id == x.statusPayment
+        )?.display;
         const createdAt = new Date(x.createdAt + 'Z');
         x.createdDate = this.datePipe.transform(createdAt, 'dd/MM/yyyy, HH:mm:ss', '+0700');
         x.displayPayment = this.lstPayment.find((item) => item.value == x.typePayment)?.display;
@@ -84,7 +90,7 @@ export class OrderComponent implements OnInit {
       if (result) {
         const updateItem = {
           orderId: item.orderId,
-          status: result
+          status: +result
         };
         this.orderService.changeOrderStatus(updateItem).subscribe({
           next: (res) => {
@@ -100,6 +106,37 @@ export class OrderComponent implements OnInit {
           }
         });
         //this.updateOrderStatus(result); // Cập nhật trạng thái mới cho đơn hàng
+      }
+    });
+  }
+  changeStatusPayment(item: any) {
+    this.selectedItem = item;
+    const dialogRef = this.dialog.open(ChangeStatusPaymentComponent, {
+      width: '400px',
+      data: {
+        item: this.selectedItem
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        const updateItem = {
+          orderId: item.orderId,
+          status: +result
+        };
+        this.orderService.changeStatusPayment(updateItem).subscribe({
+          next: (res) => {
+            if (res.code === 200) {
+              this.getData();
+              this.processResponse(res, 'Cập nhật trạng thái thành công');
+            } else {
+              this.processResponse(false, 'Cập nhật trạng thái thất bại');
+            }
+          },
+          error: (err) => {
+            this.processResponse(false, 'Cập nhật trạng thái thất bại');
+          }
+        });
       }
     });
   }
@@ -139,12 +176,7 @@ export class OrderComponent implements OnInit {
   }
   handleChangeSearchInput(event: any) {
     if (event.key === 'Enter') {
-      this.params = {
-        status: this.status,
-        search: this.searchString,
-        fromDate: this.fromDate,
-        toDate: this.toDate
-      };
+      this.buildParams();
       this.getData();
     } else {
       this.searchString = (event.target.value ?? '').trim();
@@ -153,35 +185,34 @@ export class OrderComponent implements OnInit {
 
   handleClearSearchInput() {
     this.searchString = '';
-    this.params = {
-      status: this.status,
-      search: this.searchString,
-      fromDate: this.fromDate,
-      toDate: this.toDate
-    };
+    this.buildParams();
     this.getData();
   }
 
   handleChangeStatus(event: any) {
     this.status = event;
+    this.buildParams();
+    this.getData();
+  }
+  handleChangeStatusPayment(event: any) {
+    this.statusPayment = event;
+    this.buildParams();
+    this.getData();
+  }
+  buildParams() {
     this.params = {
       status: this.status,
       search: this.searchString,
       fromDate: this.fromDate,
-      toDate: this.toDate
+      toDate: this.toDate,
+      statusPayment: this.statusPayment
     };
-    this.getData();
   }
   goToInvoice(orderId: string) {
     this.router.navigate(['/admin/invoice', orderId]);
   }
   handleChangeDate() {
-    this.params = {
-      status: this.status,
-      search: this.searchString,
-      fromDate: this.fromDate,
-      toDate: this.toDate
-    };
+    this.buildParams();
     this.getData();
   }
 }

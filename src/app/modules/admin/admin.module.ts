@@ -44,6 +44,7 @@ import { AddNewsComponent } from './pages/news/addNews/addNews.component';
 import { ReportComponent } from './pages/report/report.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { ExportReportComponent } from './pages/report/exportReport/exportReport.component';
+import { ChangeStatusPaymentComponent } from './pages/order/changeStatusPayment/changeStatusPayment.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { ExportReportComponent } from './pages/report/exportReport/exportReport.
     AddNewsComponent,
     ReportComponent,
     InvoiceComponent,
-    ExportReportComponent
+    ExportReportComponent,
+    ChangeStatusPaymentComponent
   ],
   imports: [
     CommonModule,
