@@ -114,7 +114,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         }
       },
       error: (err) => {
-        this.toastr.error('Email hoặc mật khẩu không chính xác!', 'Lỗi');
+        this.toastr.error('Đăng nhập thất bại', 'Lỗi');
       }
     });
   }

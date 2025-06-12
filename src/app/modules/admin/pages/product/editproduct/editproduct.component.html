@@ -97,21 +97,45 @@
                   </div>
 
                   <div class="row">
-                    <div class="col-3" *ngFor="let field of priceFields">
+                    <div class="col-3">
                       <div class="form-group">
-                        <label>{{ field.label | translate }}</label>
+                        <label>{{ 'Product.OriginalPrice' | translate }}</label>
                         <input
                           type="text"
                           class="form-control"
-                          [formControlName]="field.name"
-                          (input)="formatCurrency(field.name)"
-                          (focus)="removeFormat(field.name)"
-                          (blur)="formatCurrency(field.name)"
+                          formControlName="originalPrice"
+                          (input)="onNumberInput('originalPrice', $event)"
                         />
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="form-group">
+                        <label>{{ 'Product.Price' | translate }}</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="price"
+                          (input)="onNumberInput('price', $event)"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="form-group">
+                        <label>{{ 'Product.SalePercent' | translate }}</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="salePercent"
+                          (input)="onPercentInput($event)"
+                        />
+                        <div class="text-danger" *ngIf="form.get('salePercent')?.errors?.['max']">
+                          Phần trăm giảm giá phải trong khoảng 0 đến 100
+                        </div>
                       </div>
                     </div>
                   </div>
 
+                  <!-- lựa chọn -->
                   <div class="row">
                     <div class="col-3" *ngFor="let opt of optionsCheckbox">
                       <div class="form-group">

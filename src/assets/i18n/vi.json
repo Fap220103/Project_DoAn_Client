@@ -188,6 +188,7 @@
       "TotalAmount": "Tổng tiền",
       "TypePayment": "Loại thanh toán",
       "Code": "Mã đơn hàng",
+      "Cancel": "Huỷ đơn hàng",
       "Status": "Tình trạng",
       "StatusPayment": "Thanh toán",
       "CustomerName": "Khách hàng",

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductService } from '../../../../../core/services/product.service';
@@ -74,7 +74,10 @@ export class EditProductComponent implements OnInit {
       description: [this.item.description],
       detail: [this.item.detail],
       price: [this.item.price],
-      salePercent: [this.item.salePercent],
+      salePercent: [
+        this.item.salePercent,
+        [Validators.required, Validators.min(0), Validators.max(100)]
+      ],
       originalPrice: [this.item.originalPrice],
       isActive: [this.item.isActive],
       seoTitle: [this.item.seoTitle],
@@ -160,19 +163,25 @@ export class EditProductComponent implements OnInit {
     });
     if (!isClose && res) this.dialogRef.close(res);
   }
-  formatCurrency(controlName: string) {
-    let value = this.form.get(controlName)?.value;
-    if (value) {
-      value = value.replace(/[^0-9]/g, '');
-      this.rawValues[controlName] = value; // lưu giá trị gốc
-      const formatted = Number(value).toLocaleString('en-US');
-      this.form.get(controlName)?.setValue(formatted, { emitEvent: false });
-    }
+  // Hàm format số thành chuỗi 100,000
+  formatNumber(value: string): string {
+    const number = parseInt(value.replace(/[^0-9]/g, ''), 10);
+    if (isNaN(number)) return '';
+    return number.toLocaleString('en-US');
   }
 
-  removeFormat(controlName: string) {
-    const raw =
-      this.rawValues[controlName] || this.form.get(controlName)?.value?.replace(/[^0-9]/g, '');
-    this.form.get(controlName)?.setValue(raw, { emitEvent: false });
+  // Xử lý khi người dùng nhập số (ngăn chữ + format tiền)
+  onNumberInput(controlName: 'price' | 'originalPrice', event: Event) {
+    const input = event.target as HTMLInputElement;
+    const rawValue = input.value.replace(/[^0-9]/g, '');
+    const formatted = this.formatNumber(rawValue);
+    this.form.get(controlName)?.setValue(formatted, { emitEvent: false });
+  }
+
+  // Ngăn nhập chữ ở trường salePercent
+  onPercentInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const rawValue = input.value.replace(/[^0-9]/g, '');
+    this.form.get('salePercent')?.setValue(rawValue, { emitEvent: false });
   }
 }
